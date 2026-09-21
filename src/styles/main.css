@@ -1384,16 +1384,17 @@ form textarea {
   background: var(--green);
 }
 .header__cta {
-  border: 1px solid var(--green);
+  background: var(--green);
+  border: 0;
   border-radius: 8px;
-  color: var(--green);
+  color: #fff;
   padding: 10px 15px;
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
 }
 .header__cta:hover {
-  background: var(--green-soft);
+  background: var(--green-dark);
 }
 @media (max-width: 767px) {
   .header__cta {
@@ -3450,10 +3451,11 @@ body {
     width: 157px;
     min-height: 42px;
     margin-left: 14px;
-    padding: 9px 18px;
-    border-radius: 7px;
-    font-size: 15px;
-    font-weight: 400;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
     flex: 0 0 157px;
   }
 }
