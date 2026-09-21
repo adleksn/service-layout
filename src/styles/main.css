@@ -1095,6 +1095,184 @@ form textarea {
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* Footer is a distinct authored composition at each Pen breakpoint.  Keeping
+   these rules at the end prevents old experimental grid declarations from
+   changing its structure on one route only. */
+.footer__mobile { display: none; }
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .footer { padding: 56px 0; background: #2a2a2c; }
+  .footer__desktop { display: block; }
+  .footer__top {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 0;
+    border: 0;
+  }
+  .footer__top > .footer__brand {
+    display: flex;
+    flex: 0 0 340px;
+    width: 340px;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .footer__top > .footer__brand > .brand {
+    display: flex;
+    width: fit-content;
+    min-height: 32px;
+    height: 32px;
+    margin: 0;
+  }
+  .footer__top > .footer__brand > p {
+    display: block;
+    margin: 0;
+    color: #8a8a8a;
+    font-size: 13px;
+    line-height: 19px;
+  }
+  .footer__top > .footer__column {
+    display: grid;
+    flex: 0 0 160px;
+    width: 160px;
+    gap: 14px;
+    align-content: start;
+  }
+  .footer__column strong { color: #fff; font-size: 14px; font-weight: 600; line-height: 22px; }
+  .footer__column a { margin: 0; color: #b5b5b5; font-size: 14px; line-height: 22px; }
+  .footer__top > .footer__cta-group {
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 56px;
+  }
+  .footer .footer__cta-group > .footer__cta {
+    display: inline-flex;
+    box-sizing: border-box;
+    width: auto;
+    height: 42px;
+    min-height: 42px;
+    margin: 0;
+    padding: 11px 18px;
+  }
+  .footer .footer__cta-group > .footer__dzen {
+    display: inline-flex;
+    height: 32px;
+    margin: 0;
+    color: #b5b5b5 !important;
+    font-size: 14px !important;
+    font-weight: 600;
+    line-height: 20px;
+  }
+  .footer__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-height: 64px;
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid #2b2b2b;
+    color: #8a8a8a;
+  }
+  .footer__bottom a,
+  .footer__bottom span { margin: 0; color: #b5b5b5; font-size: 13px; line-height: 18px; }
+  .footer__bottom span { color: #8a8a8a; }
+}
+
+@media (max-width: 767px) {
+  .header__row { min-height: 56px; }
+  .header__row .brand { gap: 9px; }
+  .header__row .brand__mark { width: 32px; height: 32px; }
+  .header__row .brand__text { font-size: 12px; line-height: 14px; letter-spacing: -.1px; }
+  .header .dzen {
+    display: block;
+    width: 28px;
+    height: 28px;
+    margin-left: auto;
+    flex: 0 0 28px;
+  }
+  .header .menu-button {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    margin-left: 10px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    color: #3a3a3a;
+    font-size: 22px;
+  }
+  .footer { padding: 36px 16px; background: #2a2a2c; }
+  .footer__desktop { display: none; }
+  .footer__mobile {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  .footer__mobile-top {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+  }
+  .footer__mobile-top .brand { display: flex; min-height: 32px; gap: 9px; }
+  .footer__mobile-top .brand__mark { width: 32px; height: 32px; }
+  .footer__mobile-top .brand__text { font-size: 12px; line-height: 14px; letter-spacing: -.1px; }
+  .footer__mobile-top .footer__cta {
+    display: inline-flex;
+    width: auto;
+    min-height: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+  .footer__mobile-columns {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .footer__mobile-columns .footer__column {
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .footer__mobile .footer__column strong { width: 100%; color: #fff; font-size: 13px; font-weight: 600; line-height: 19px; }
+  .footer__mobile .footer__column a { width: 100%; margin: 0; color: #b5b5b5; font-size: 13px; line-height: 20px; }
+  .footer__mobile-disclaimer { width: 100%; margin: 0; color: #8a8a8a; font-size: 12px; line-height: 18px; }
+  .footer__mobile-bottom {
+    display: flex;
+    box-sizing: content-box;
+    width: 100%;
+    min-height: 107.5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: -0.5px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid #2b2b2b;
+  }
+  .footer__mobile-bottom .footer__dzen { height: 28px; gap: 6px; color: #b5b5b5 !important; font-size: 13px !important; font-weight: 600; line-height: 19px; }
+  .footer__mobile-bottom .footer__dzen svg { flex-basis: 28px; width: 28px; height: 28px; }
+  .footer__mobile-bottom > a:not(.footer__dzen),
+  .footer__mobile-bottom > span { color: #b5b5b5; font-size: 12px; line-height: 18px; }
+  .footer__mobile-bottom > span { color: #8a8a8a; }
+}
+
 /* Keep the intermediate desktop header on the same 1200px Pen grid.  This is
    intentionally last: older responsive experiments must not reintroduce
    page-dependent offsets at 1280px. */
