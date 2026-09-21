@@ -35,4 +35,16 @@ describe('header CTA fidelity', () => {
 
     expect(css).toContain('.header__row { min-height: 73px; }');
   });
+
+  it('styles semantic service badges with SVG pseudo-elements', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.service-status {\n  grid-column: 1/-1;\n  display: flex;\n  gap: 10px;');
+    expect(css).toContain('.status-badge::before');
+    expect(css).toContain('width: 15px;\n  height: 15px;');
+    expect(css).toContain('.status-badge--verified::before');
+    expect(css).toContain('.status-badge--shopper::before');
+    expect(css).toContain('.status-badge--promo::before');
+    expect(css).toContain('.status-badge--verified,\n.status-badge--shopper {\n  background: #edf7e9;\n  color: #2f8a16;');
+  });
 });

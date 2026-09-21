@@ -91,6 +91,21 @@ export function setupPromo(root = document) {
   });
 }
 
+export function setupServiceStatusBadges(root = document) {
+  const labels = [
+    ['status-badge--verified', 'Подтверждён'],
+    ['status-badge--shopper', 'Был тайный покупатель'],
+    ['status-badge--promo', 'Есть промокод'],
+    ['status-badge--new', 'Новый']
+  ];
+  root.querySelectorAll('.service-status span').forEach((badge, index) => {
+    const [className, label] = labels[index] || [];
+    if (!className) return;
+    badge.className = `status-badge ${className}`;
+    badge.textContent = label;
+  });
+}
+
 export function setupReviewForm(root = document) {
   const form = root.querySelector('[data-review-form]');
   if (!form) return;

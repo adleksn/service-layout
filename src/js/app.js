@@ -1,6 +1,6 @@
 import '../styles/main.css';
 import { cards, filterCatalog, parseFilterState, serializeFilterState, services, sortCatalog } from './catalog.js';
-import { setupDisclosures, setupMobileMenu, setupPromo, setupReviewForm, setupTabs } from './ui.js';
+import { setupDisclosures, setupMobileMenu, setupPromo, setupReviewForm, setupServiceStatusBadges, setupTabs } from './ui.js';
 import { applyExactPenFrame } from './pen-frame.js';
 import { paymentEvidenceMarkup } from './report-content.js';
 import { isCurrentSitePath, resolveSitePaths, sitePath } from './site-paths.js';
@@ -88,6 +88,7 @@ setupContactStubs(app);
 setupFooterStubs(app);
 setupPlaceholderLinks(app);
 setupReviewCardLinks(app);
+setupServiceStatusBadges(app);
 setupTabs(app); setupDisclosures(app); setupMobileMenu(app); setupPromo(app); setupReviewForm(app);
 
 function setupContactStubs(root) {

@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { setupDisclosures, setupMobileMenu, setupReviewForm, setupTabs } from '../src/js/ui.js';
+import { setupDisclosures, setupMobileMenu, setupReviewForm, setupServiceStatusBadges, setupTabs } from '../src/js/ui.js';
 
 const restoreDom = () => {
   vi.unstubAllGlobals();
@@ -83,5 +83,23 @@ describe('semantic page interactions', () => {
     form.elements.text.value = 'Оплата прошла быстро.';
     form.dispatchEvent(new dom.window.Event('submit', { bubbles: true, cancelable: true }));
     expect(form.querySelector('[data-form-status]').textContent).toBe('Спасибо! Отзыв принят на проверку.');
+  });
+
+  it('replaces textual service symbols with the four visual source badges', () => {
+    const dom = new JSDOM(`
+      <div class="service-status">
+        <span>✓ Подтверждён</span><span>◉ Был тайный покупатель</span><span>✦ Есть промокод</span><span>Новый</span>
+      </div>`);
+
+    setupServiceStatusBadges(dom.window.document);
+    const badges = [...dom.window.document.querySelectorAll('.service-status span')];
+
+    expect(badges.map((badge) => badge.className)).toEqual([
+      'status-badge status-badge--verified',
+      'status-badge status-badge--shopper',
+      'status-badge status-badge--promo',
+      'status-badge status-badge--new'
+    ]);
+    expect(badges.map((badge) => badge.textContent)).toEqual(['Подтверждён', 'Был тайный покупатель', 'Есть промокод', 'Новый']);
   });
 });
