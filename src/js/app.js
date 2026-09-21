@@ -3,6 +3,7 @@ import { cards, filterCatalog, parseFilterState, serializeFilterState, services,
 import { setupDisclosures, setupPromo, setupReviewForm, setupTabs } from './ui.js';
 import { applyExactPenFrame } from './pen-frame.js';
 import { paymentEvidenceMarkup } from './report-content.js';
+import { resolveSitePaths, sitePath } from './site-paths.js';
 
 const app = document.querySelector('#app');
 const page = document.body.dataset.page;
@@ -80,6 +81,7 @@ function uiKit() { const states = [['Кнопка основная', 'Обычн
 
 const render = { home, rating: () => catalogPage('rating'), cards: () => catalogPage('cards'), service: () => service(), 'virtual-card': () => service(true), reports, report, methodology, contacts: () => staticPage('contacts'), advertising: () => staticPage('advertising'), agreement: () => staticPage('agreement'), 'not-found': () => staticPage('not-found'), 'ui-kit': uiKit };
 app.innerHTML = render[page]();
+resolveSitePaths(app);
 setupContactStubs(app);
 setupFooterStubs(app);
 setupPlaceholderLinks(app);
@@ -129,7 +131,7 @@ function setupContactStubs(root) {
 
 function setupFooterStubs(root) {
   root.querySelectorAll('.footer a').forEach((link) => {
-    if (link.textContent.trim() === 'Добавить сервис') link.setAttribute('href', '/contacts.html');
+    if (link.textContent.trim() === 'Добавить сервис') link.setAttribute('href', sitePath('contacts.html'));
   });
 }
 
@@ -143,7 +145,7 @@ function setupReviewCardLinks(root) {
   root.querySelectorAll('.reviews-home__grid article header').forEach((header) => {
     const link = document.createElement('a');
     link.className = 'review-card__arrow';
-    link.href = '/service.html';
+    link.href = sitePath('service.html');
     link.setAttribute('aria-label', 'Открыть страницу сервиса Плати Легко!');
     link.setAttribute('title', 'Плати Легко!');
     link.textContent = '→';
@@ -172,7 +174,7 @@ function setupCatalog() {
     syncFilterPanel();
   });
   const search = root.querySelector('[data-search]'); const clear = root.querySelector('[data-clear-search]'); let timer;
-  const draw = () => { const visible = sortCatalog(filterCatalog(data, state), state.sort); const rows = root.querySelector('[data-rows]'); const cardsMode = root.dataset.type === 'cards'; const destination = cardsMode ? '/virtual-card.html' : '/service.html'; rows.innerHTML = visible.map((item) => `<tr><td data-label="Место">${item.rank}</td><td data-label="Сервис"><a href="${destination}"><span class="service-mark service-mark--small">${item.name[0]}</span><span><b>${item.name}</b>${item.tags.includes('promo') ? '<em>PROMO</em>' : ''}<small>${item.domain}</small></span></a></td><td data-label="Оценка">${score(item.rating)}</td>${cardsMode ? `<td data-label="Выпуск">${item.priceLabel}</td><td data-label="Платёжная система">${item.system}</td><td data-label="Валюта">${item.currency}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Тайный покупатель">${item.tags.includes('fresh') ? '<i class="check-icon">✓</i>' : item.tags.includes('old') ? '<i class="stale-icon">◷</i>' : '—'}</td><td data-label="Промокод">${item.tags.includes('promo') ? '<i class="promo-icon">%</i>' : '—'}</td>` : `<td data-label="Комиссия">${item.feeLabel}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Отчёт">${item.reportDate}</td><td data-label="Статус">${item.tags.includes('verified') ? '<i class="check-icon">✓</i>' : '—'}</td><td data-label="Тайный покупатель">${item.tags.includes('fresh') ? '<i class="check-icon">✓</i>' : item.tags.includes('old') ? '<i class="stale-icon">◷</i>' : '—'}</td><td data-label="Промокод">${item.tags.includes('promo') ? '<i class="promo-icon">%</i>' : '—'}</td>`}<td class="row-action"><a class="details-button" href="${destination}" aria-label="Подробнее о ${item.name}">Подробнее</a></td></tr>`).join(''); root.querySelector('[data-count]').textContent = `Найдено: ${visible.length} ${visible.length === 1 ? 'сервис' : 'сервисов'}`; root.querySelector('[data-empty]').hidden = Boolean(visible.length); root.querySelector('thead').hidden = !visible.length; root.querySelector('[data-active-count]').textContent = `(${Object.values(state.filters).flat().filter((v) => v !== 'any').length})`; const query = serializeFilterState(state.filters); history.replaceState(null, '', `${location.pathname}${query ? `?${query}` : ''}`); };
+  const draw = () => { const visible = sortCatalog(filterCatalog(data, state), state.sort); const rows = root.querySelector('[data-rows]'); const cardsMode = root.dataset.type === 'cards'; const destination = cardsMode ? '/virtual-card.html' : '/service.html'; rows.innerHTML = visible.map((item) => `<tr><td data-label="Место">${item.rank}</td><td data-label="Сервис"><a href="${destination}"><span class="service-mark service-mark--small">${item.name[0]}</span><span><b>${item.name}</b>${item.tags.includes('promo') ? '<em>PROMO</em>' : ''}<small>${item.domain}</small></span></a></td><td data-label="Оценка">${score(item.rating)}</td>${cardsMode ? `<td data-label="Выпуск">${item.priceLabel}</td><td data-label="Платёжная система">${item.system}</td><td data-label="Валюта">${item.currency}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Тайный покупатель">${item.tags.includes('fresh') ? '<i class="check-icon">✓</i>' : item.tags.includes('old') ? '<i class="stale-icon">◷</i>' : '—'}</td><td data-label="Промокод">${item.tags.includes('promo') ? '<i class="promo-icon">%</i>' : '—'}</td>` : `<td data-label="Комиссия">${item.feeLabel}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Отчёт">${item.reportDate}</td><td data-label="Статус">${item.tags.includes('verified') ? '<i class="check-icon">✓</i>' : '—'}</td><td data-label="Тайный покупатель">${item.tags.includes('fresh') ? '<i class="check-icon">✓</i>' : item.tags.includes('old') ? '<i class="stale-icon">◷</i>' : '—'}</td><td data-label="Промокод">${item.tags.includes('promo') ? '<i class="promo-icon">%</i>' : '—'}</td>`}<td class="row-action"><a class="details-button" href="${destination}" aria-label="Подробнее о ${item.name}">Подробнее</a></td></tr>`).join(''); resolveSitePaths(root); root.querySelector('[data-count]').textContent = `Найдено: ${visible.length} ${visible.length === 1 ? 'сервис' : 'сервисов'}`; root.querySelector('[data-empty]').hidden = Boolean(visible.length); root.querySelector('thead').hidden = !visible.length; root.querySelector('[data-active-count]').textContent = `(${Object.values(state.filters).flat().filter((v) => v !== 'any').length})`; const query = serializeFilterState(state.filters); history.replaceState(null, '', `${location.pathname}${query ? `?${query}` : ''}`); };
   const syncChips = () => root.querySelectorAll('.chip').forEach((chip) => { const selected = (state.filters[chip.dataset.group] || (chip.dataset.group === 'rating' ? ['any'] : [])).includes(chip.dataset.value); chip.classList.toggle('chip--active', selected); chip.setAttribute('aria-pressed', selected); });
   root.querySelectorAll('.chip').forEach((chip) => chip.addEventListener('click', () => { const group = chip.dataset.group; const value = chip.dataset.value; const current = state.filters[group] || (group === 'rating' ? ['any'] : []); state.filters[group] = group === 'rating' ? [value] : current.includes(value) ? current.filter((v) => v !== value) : [...current, value]; syncChips(); draw(); }));
   search.addEventListener('input', () => { clear.hidden = !search.value; clearTimeout(timer); timer = setTimeout(() => { state.query = search.value; draw(); }, 200); }); clear.addEventListener('click', () => { search.value = ''; state.query = ''; clear.hidden = true; draw(); search.focus(); });
@@ -197,7 +199,7 @@ if (reviewSort) reviewSort.addEventListener('change', () => {
     .forEach((review) => list.append(review));
 });
 
-applyExactPenFrame(app, page, initialRequestUrl).catch(() => {});
+applyExactPenFrame(app, page, initialRequestUrl).then(() => resolveSitePaths(app)).catch(() => {});
 
 // Pen frames are authored at specific control widths, while the semantic
 // implementation owns the intervals between them. Switch representation when
