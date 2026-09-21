@@ -682,7 +682,7 @@ export function enhanceInteractions(frame, page) {
   });
 }
 
-function targetFor(page, width, requestUrl) {
+export function targetFor(page, width, requestUrl) {
   const request = new URL(requestUrl, window.location.origin);
   const query = request.searchParams;
   // The supplied mobile Pen exports are authored at 375px.  At 320px use
@@ -704,9 +704,13 @@ function targetFor(page, width, requestUrl) {
   // fits the 1200px content grid at 1280px and avoids the abbreviated local
   // fallback text at this breakpoint.
   if (['report', 'reports', 'advertising'].includes(page) && width >= 1280) return variants.desktop;
+  // The home page has authored 1024px and 1440px compositions. Selecting the
+  // nearest one across the entire desktop range avoids falling back to a
+  // visually different semantic page at common laptop widths such as 1280px.
+  if (page === 'home' && width >= 1280) return variants.desktop;
   // The tablet export is a fixed 1024px composition. Below 960px its inner
   // rail would be cropped, so the responsive semantic layout owns 768–959px.
-  if (page === 'home' && width >= 960 && width <= 1120) return variants.tablet;
+  if (page === 'home' && width >= 960) return variants.tablet;
   // Desktop Pen frames have a fixed 1440px canvas. Below that width the
   // semantic responsive implementation keeps every table column — including
   // the action — inside the viewport instead of cropping the right edge.
@@ -752,6 +756,24 @@ export async function applyExactPenFrame(root, page, requestUrl = window.locatio
     const match = node.style.backgroundImage.match(/url\(["']?images\/([^"')]+)/);
     if (match) node.style.backgroundImage = `url('${sitePath(`assets/${match[1]}`)}')`;
   });
+  if (page === 'home') {
+    const heroSubtitle = frame.querySelector('[data-pencil-name="Hero Subtitle"]');
+    if (heroSubtitle) {
+      heroSubtitle.innerHTML = 'К сервисам альтернативной оплаты мы относим и посредников, которые оплачивают <br>зарубежные подписки за вас, и сервисы, выпускающие виртуальные зарубежные карты. <br>Проверяем и те, и другие.';
+    }
+    frame.querySelectorAll('[data-pencil-name="Top 10 Section"] [data-pencil-name="Table"]').forEach((table) => {
+      // Pen's export declares the table a non-shrinking flex item. Its rows
+      // also have a 1200px content width plus horizontal padding, which made
+      // the whole table spill 34px past the "Весь рейтинг" rail at 1280px.
+      table.style.minWidth = '0';
+      table.style.maxWidth = '100%';
+      table.style.flexShrink = '1';
+      [...table.children].forEach((row) => {
+        row.style.boxSizing = 'border-box';
+        row.style.width = '100%';
+      });
+    });
+  }
   if (page === 'cards') {
     const emptyState = sources.flatMap((html) => [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('[data-pencil-name]')])
       .find((node) => node.getAttribute('data-pencil-name') === 'Виртуальные карты — ничего не найдено Desktop 1440');

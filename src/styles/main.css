@@ -3515,6 +3515,10 @@ body {
 
 /* Final shared responsive shell. Kept last so page-level legacy declarations
    cannot change the header, footer or two-column behaviour by route. */
+.layout--catalog { display: block; }
+/* The filter card belongs above the rating rows. Keeping the legacy sticky
+   positioning made it cover rows after navigation from the home CTA. */
+.layout--catalog .filters { position: static; }
 .header { position: sticky; top: 0; z-index: 20; min-width: 0; }
 .header__row,
 .footer__top,
@@ -3560,6 +3564,17 @@ body {
     gap: 16px 24px;
   }
   .layout--catalog .filter-groups fieldset { min-width: 0; }
+  /* The report is one column in this range; the supplied evidence should use
+     that column rather than retain the desktop 300px thumbnail width. */
+  .payment-evidence__item {
+    width: 100%;
+    max-width: none;
+  }
+  .payment-evidence__item img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 899px) {

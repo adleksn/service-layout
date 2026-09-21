@@ -2,10 +2,58 @@ import { readFileSync } from 'node:fs';
 import { JSDOM } from 'jsdom';
 import { describe, expect, it, vi } from 'vitest';
 import { bindUnmappedPenControls } from '../src/js/pen-interactions.js';
-import { applyExactPenFrame, enhanceInteractions, penDestination, penSourceUrls } from '../src/js/pen-frame.js';
+import { applyExactPenFrame, enhanceInteractions, penDestination, penSourceUrls, targetFor } from '../src/js/pen-frame.js';
 import { paymentEvidenceMarkup } from '../src/js/report-content.js';
 
 describe('unmapped Pen controls', () => {
+  it('uses the supplied desktop home composition at 1280px instead of a mismatched fallback', () => {
+    const dom = new JSDOM('', { url: 'https://example.test/service-layout/' });
+    vi.stubGlobal('window', dom.window);
+
+    expect(targetFor('home', 1280, dom.window.location.href)).toBe('Главная Desktop 1440');
+    expect(targetFor('home', 1200, dom.window.location.href)).toBe('Главная Tablet 1024');
+
+    vi.unstubAllGlobals();
+  });
+
+  it('keeps the three intended lines in the home hero subtitle', async () => {
+    const source = readFileSync('public/reference/pen-source.html', 'utf8');
+    const dom = new JSDOM('<main id="app"><header class="header"></header></main>', { url: 'http://localhost/' });
+    Object.defineProperty(dom.window, 'innerWidth', { configurable: true, value: 1280 });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('DOMParser', dom.window.DOMParser);
+    vi.stubGlobal('location', dom.window.location);
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, text: async () => source }));
+
+    await applyExactPenFrame(dom.window.document.querySelector('#app'), 'home', dom.window.location.href);
+
+    const subtitle = dom.window.document.querySelector('[data-pencil-name="Hero Subtitle"]');
+    expect(subtitle?.querySelectorAll('br')).toHaveLength(2);
+    expect(subtitle?.textContent.replace(/\s+/g, ' ').trim()).toBe('К сервисам альтернативной оплаты мы относим и посредников, которые оплачивают зарубежные подписки за вас, и сервисы, выпускающие виртуальные зарубежные карты. Проверяем и те, и другие.');
+    vi.unstubAllGlobals();
+  });
+
+  it('keeps the home table inside the same 1200px rail as “Весь рейтинг”', async () => {
+    const source = readFileSync('public/reference/pen-source.html', 'utf8');
+    const dom = new JSDOM('<main id="app"><header class="header"></header></main>', { url: 'http://localhost/' });
+    Object.defineProperty(dom.window, 'innerWidth', { configurable: true, value: 1280 });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('DOMParser', dom.window.DOMParser);
+    vi.stubGlobal('location', dom.window.location);
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, text: async () => source }));
+
+    await applyExactPenFrame(dom.window.document.querySelector('#app'), 'home', dom.window.location.href);
+
+    const table = dom.window.document.querySelector('[data-pencil-name="Top 10 Section"] [data-pencil-name="Table"]');
+    expect(table.style.minWidth).toBe('0');
+    expect(table.style.maxWidth).toBe('100%');
+    expect(table.style.flexShrink).toBe('1');
+    expect([...table.children].every((row) => row.style.boxSizing === 'border-box' && row.style.width === '100%')).toBe(true);
+    vi.unstubAllGlobals();
+  });
+
   it('loads exported Pen frames from the GitHub Pages repository path', () => {
     expect(penSourceUrls('/service-layout/')).toEqual([
       '/service-layout/reference/pen-source.html',
@@ -28,6 +76,14 @@ describe('unmapped Pen controls', () => {
       '/assets/c0aba130d07c243e.png'
     ]);
     expect(screenshots.every((image) => image.getAttribute('loading') === 'lazy')).toBe(true);
+  });
+
+  it('lets the payment screenshots fill the report article on tablet widths', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('@media (min-width: 768px) and (max-width: 1199px)');
+    expect(css).toContain('.payment-evidence__item {\n    width: 100%;\n    max-width: none;');
+    expect(css).toContain('.payment-evidence__item img {\n    width: 100%;\n    height: auto;');
   });
 
   it('makes a visible exported button keyboard-accessible and invokes its fallback action once', () => {
