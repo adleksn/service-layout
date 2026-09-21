@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { filterCatalog, parseFilterState, serializeFilterState, services as ratingServices, sortCatalog } from '../src/js/catalog.js';
 
@@ -27,5 +28,12 @@ describe('catalog filters', () => {
   it('keeps all 51 positions from the rating table in their source order', () => {
     expect(ratingServices).toHaveLength(51);
     expect(sortCatalog(ratingServices, 'rating').map((item) => item.rank)).toEqual(Array.from({ length: 51 }, (_, index) => index + 1));
+  });
+
+  it('renders semantic table status values with SVG badges rather than text glyphs', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.check-icon::before,\n.promo-icon::before,\n.stale-icon::before');
+    expect(css).toContain('data:image/svg+xml');
   });
 });
