@@ -1095,6 +1095,19 @@ form textarea {
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* Keep the intermediate desktop header on the same 1200px Pen grid.  This is
+   intentionally last: older responsive experiments must not reintroduce
+   page-dependent offsets at 1280px. */
+@media (min-width: 1200px) {
+  .header__row { min-height: 60px; gap: 0; }
+  .header__row .brand { width: auto; min-height: 32px; gap: 10px; flex: 1 1 0; }
+  .header__row .brand__mark { width: 32px; height: 32px; }
+  .header__row .brand__text { font-size: 13px; line-height: 15px; letter-spacing: -.1px; }
+  .header__row .nav { margin-left: 0; gap: 26px; font-size: 14px; line-height: 22px; }
+  .header__row .dzen { width: 32px; height: 32px; flex: 0 0 32px; margin-left: auto; }
+  .header__row .header__cta { width: auto; min-height: 42px; flex: 0 0 auto; margin-left: 14px; }
+}
+
 /* Mobile catalog: preserve the immediately useful controls from the Pen
    frame while the long filter chip collection is collapsed. */
 @media (max-width: 767px) {
@@ -3228,14 +3241,18 @@ body {
   transition: background-color .15s ease, border-color .15s ease;
 }
 .report-list > a:hover { background-color: #f9fbf8; border-color: #cfe6c8; }
-.pen-frame [data-pencil-name="Report Card"] { transition: background-color .15s ease, border-color .15s ease; }
-.pen-frame [data-pencil-name="Report Card"]:hover { background-color: #f9fbf8 !important; border-color: #cfe6c8 !important; }
+/* Both report-card variants are used by the exported report-list frames. */
+.pen-frame [data-pencil-name="Report Card"],
+.pen-frame [data-pencil-name="Report Card MS"] { transition: background-color .15s ease, border-color .15s ease; }
+.pen-frame [data-pencil-name="Report Card"]:hover,
+.pen-frame [data-pencil-name="Report Card MS"]:hover { background-color: #f9fbf8 !important; border-color: #cfe6c8 !important; }
+.catalog tbody tr { transition: background-color .15s ease; }
+.catalog tbody tr:hover { background-color: #f9fbf8; }
 .pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "] { transition: background-color .15s ease; }
 .pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }
 .pen-frame [data-pencil-name="Button Primary"],
 .pen-frame [data-pencil-name="Button Dzen"] { cursor: pointer; transition: background-color .15s ease, transform .15s ease; }
 .pen-frame [data-pencil-name="Button Primary"]:hover { background-color: #2f8a16 !important; }
-.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #3a3a3a !important; }
 .pen-frame [data-pencil-name="Button Primary"]:active,
 .pen-frame [data-pencil-name="Button Dzen"]:active { transform: translateY(1px); }
 
@@ -3280,6 +3297,65 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 /* The FAQ answer has rich layout styles; keep the native hidden attribute
    authoritative until its trigger is expanded. */
 .faq [hidden] { display: none !important; }
+
+/* Desktop shell measured from the Pen footer/header components.  The semantic
+   pages use this same layout between the authored 1024px and 1440px frames. */
+@media (min-width: 1200px) {
+  .header__row {
+    min-height: 60px;
+    gap: 0;
+  }
+  .header__row .brand {
+    width: auto;
+    min-height: 32px;
+    gap: 10px;
+    flex: 1 1 0;
+  }
+  .header__row .brand__mark { width: 32px; height: 32px; }
+  .header__row .brand__text { font-size: 13px; line-height: 15px; letter-spacing: -.1px; }
+  .header__row .nav { margin-left: 0; gap: 26px; font-size: 14px; line-height: 22px; }
+  .header__row .dzen { width: 32px; height: 32px; flex: 0 0 32px; margin-left: auto; }
+  .header__row .header__cta { width: auto; min-height: 42px; flex: 0 0 auto; margin-left: 14px; }
+
+  .footer { padding: 56px 0; background: #2a2a2c; }
+  .footer__top {
+    display: flex;
+    align-items: flex-start;
+    gap: 64px;
+    padding: 0;
+    border: 0;
+  }
+  .footer__brand { display: flex; flex: 1 1 0; flex-direction: column; gap: 18px; }
+  .footer__brand .brand { min-height: 32px; gap: 10px; }
+  .footer__brand .brand__mark { width: 32px; height: 32px; }
+  .footer__brand .brand__text { font-size: 13px; line-height: 15px; letter-spacing: -.1px; }
+  .footer__brand p { max-width: none; margin: 0; color: #8a8a8a; font-size: 13px; line-height: 19px; }
+  .footer__top .footer__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 240px);
+    gap: 0;
+    padding: 0;
+  }
+  .footer__grid > div { display: grid; gap: 14px; align-content: start; }
+  .footer__grid strong { color: #fff; font-size: 14px; font-weight: 600; line-height: 22px; }
+  .footer__grid a { margin: 0; color: #b5b5b5; font-size: 14px; line-height: 22px; }
+  .footer__cta-group { display: flex; flex: 0 0 auto; flex-direction: column; align-items: center; gap: 56px; }
+  .footer__cta { align-self: auto; margin: 0; min-height: 42px; }
+  .footer__dzen { margin: 0; color: #b5b5b5 !important; font-size: 14px !important; font-weight: 600; line-height: 20px; }
+  .footer__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-height: 64px;
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid #2b2b2b;
+    color: #8a8a8a;
+  }
+  .footer__bottom a, .footer__bottom span { margin: 0; color: #b5b5b5; font-size: 13px; line-height: 18px; }
+  .footer__bottom span { color: #8a8a8a; }
+}
 @media (max-width: 767px) {
   .faq { gap: 8px; }
   .faq button { min-height: 56px; font-size: 14px; line-height: 21px; }

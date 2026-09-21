@@ -21,8 +21,10 @@ describe('semantic page interactions', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
     expect(css).toContain('.report-list > a:hover { background-color: #f9fbf8; border-color: #cfe6c8; }');
+    expect(css).toContain('.catalog tbody tr:hover { background-color: #f9fbf8; }');
+    expect(css).toContain('[data-pencil-name="Report Card MS"]:hover { background-color: #f9fbf8 !important; border-color: #cfe6c8 !important; }');
     expect(css).toContain('[data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }');
-    expect(css).toContain('.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #3a3a3a !important; }');
+    expect(css).not.toContain('.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #3a3a3a !important; }');
   });
 
   it('opens and closes the semantic mobile menu with the same button', () => {
