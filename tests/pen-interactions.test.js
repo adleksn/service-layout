@@ -86,6 +86,14 @@ describe('unmapped Pen controls', () => {
     expect(css).toContain('.payment-evidence__item img {\n    width: 100%;\n    height: auto;');
   });
 
+  it('matches the mobile Pen report evidence sizing instead of retaining desktop thumbnails', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('@media (max-width: 767px)');
+    expect(css).toContain('.payment-evidence__item {\n    width: 100%;\n    max-width: none;');
+    expect(css).toContain('.payment-evidence__item img {\n    width: 100%;\n    height: 280px;\n    object-fit: fill;');
+  });
+
   it('makes a visible exported button keyboard-accessible and invokes its fallback action once', () => {
     const dom = new JSDOM('<div id="frame"><div data-pencil-name="Button">Открыть</div></div>');
     const action = vi.fn();
