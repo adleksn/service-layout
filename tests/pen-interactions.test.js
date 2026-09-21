@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { JSDOM } from 'jsdom';
 import { describe, expect, it, vi } from 'vitest';
 import { bindUnmappedPenControls } from '../src/js/pen-interactions.js';
-import { applyExactPenFrame, enhanceInteractions, penSourceUrls } from '../src/js/pen-frame.js';
+import { applyExactPenFrame, enhanceInteractions, penDestination, penSourceUrls } from '../src/js/pen-frame.js';
 import { paymentEvidenceMarkup } from '../src/js/report-content.js';
 
 describe('unmapped Pen controls', () => {
@@ -11,6 +11,11 @@ describe('unmapped Pen controls', () => {
       '/service-layout/reference/pen-source.html',
       '/service-layout/reference/pen-states.html'
     ]);
+  });
+
+  it('keeps Pen navigation within the GitHub Pages repository path', () => {
+    expect(penDestination('/service.html', '/service-layout/')).toBe('/service-layout/service.html');
+    expect(penDestination('#reviews', '/service-layout/')).toBe('#reviews');
   });
 
   it('renders all supplied payment screenshots in the responsive report article', () => {

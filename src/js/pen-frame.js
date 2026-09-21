@@ -42,11 +42,15 @@ const activeNavigationLayer = {
   contacts: 'Nav Контакты'
 };
 
+export function penDestination(destination, basePath = import.meta.env.BASE_URL) {
+  return destination.startsWith('/') ? sitePath(destination, basePath) : destination;
+}
+
 function makeInteractive(node, destination) {
   node.setAttribute('role', 'link');
   node.setAttribute('tabindex', '0');
   node.dataset.penLink = destination;
-  const navigate = () => { location.href = destination; };
+  const navigate = () => { location.href = penDestination(destination); };
   node.addEventListener('click', navigate);
   node.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); navigate(); }
