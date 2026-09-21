@@ -3240,12 +3240,12 @@ body {
 .report-list > a {
   transition: background-color .15s ease, border-color .15s ease;
 }
-.report-list > a:hover { background-color: #f9fbf8; border-color: #cfe6c8; }
+.report-list > a:hover { background-color: #f9fbf8; }
 /* Both report-card variants are used by the exported report-list frames. */
 .pen-frame [data-pencil-name="Report Card"],
 .pen-frame [data-pencil-name="Report Card MS"] { transition: background-color .15s ease, border-color .15s ease; }
 .pen-frame [data-pencil-name="Report Card"]:hover,
-.pen-frame [data-pencil-name="Report Card MS"]:hover { background-color: #f9fbf8 !important; border-color: #cfe6c8 !important; }
+.pen-frame [data-pencil-name="Report Card MS"]:hover { background-color: #f9fbf8 !important; }
 .catalog tbody tr { transition: background-color .15s ease; }
 .catalog tbody tr:hover { background-color: #f9fbf8; }
 .pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "] { transition: background-color .15s ease; }
@@ -3493,8 +3493,8 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   line-height: 18px;
 }
 .layout--catalog .chip:hover {
-  border-color: #cfe6c8;
-  background: #f9fbf8;
+  border-color: #45a828;
+  background: #f3faef;
   color: var(--green-dark);
 }
 .layout--catalog .chip--active,
