@@ -3208,6 +3208,36 @@ body {
 /* The complete closed row changes colour, not just the text's hit area. */
 .faq > div:hover > button { background-color: #dedede; }
 .faq button:hover { background-color: #dedede; }
+
+/* Shared interactive states sampled from the Pen component compositions. */
+.button {
+  border-radius: 8px;
+  padding: 11px 18px;
+  font: 600 14px/20px Inter, system-ui, sans-serif;
+  transition: background-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.button:hover { background-color: #2f8a16; }
+.button:active { transform: translateY(1px); }
+.text-link {
+  color: #2f8a16;
+  font: 600 13px/21px Inter, system-ui, sans-serif;
+  transition: color .15s ease, opacity .15s ease;
+}
+.text-link:hover { color: #45a828; }
+.report-list > a {
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.report-list > a:hover { background-color: #f9fbf8; border-color: #cfe6c8; }
+.pen-frame [data-pencil-name="Report Card"] { transition: background-color .15s ease, border-color .15s ease; }
+.pen-frame [data-pencil-name="Report Card"]:hover { background-color: #f9fbf8 !important; border-color: #cfe6c8 !important; }
+.pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "] { transition: background-color .15s ease; }
+.pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }
+.pen-frame [data-pencil-name="Button Primary"],
+.pen-frame [data-pencil-name="Button Dzen"] { cursor: pointer; transition: background-color .15s ease, transform .15s ease; }
+.pen-frame [data-pencil-name="Button Primary"]:hover,
+.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #2f8a16 !important; }
+.pen-frame [data-pencil-name="Button Primary"]:active,
+.pen-frame [data-pencil-name="Button Dzen"]:active { transform: translateY(1px); }
 .faq button:focus-visible {
   position: relative;
   z-index: 1;
@@ -3379,8 +3409,8 @@ body {
   line-height: 18px;
 }
 .layout--catalog .chip:hover {
-  border-color: #a7d99a;
-  background: #f3faef;
+  border-color: #cfe6c8;
+  background: #f9fbf8;
   color: var(--green-dark);
 }
 .layout--catalog .chip--active,

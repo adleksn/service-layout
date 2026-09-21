@@ -805,6 +805,14 @@ export async function applyExactPenFrame(root, page, requestUrl = window.locatio
     const emptyTemplate = emptyState?.querySelector('[data-pencil-name="Not Found Block"]');
     if (emptyTemplate) frame.__penEmptyTemplate = emptyTemplate.cloneNode(true);
   }
+  if (page === 'rating') {
+    // The desktop export retains two report-age annotations that are not part
+    // of the approved rating legend. Remove only those exact label layers;
+    // the three status badges stay untouched.
+    frame.querySelectorAll('[data-pencil-name]').forEach((node) => {
+      if (['Отчёт актуален', 'Требует обновления'].includes(node.textContent.trim())) node.remove();
+    });
+  }
   enhanceInteractions(frame, page);
   root.replaceChildren(...(sharedHeader ? [sharedHeader, frame] : [frame]));
   root.dataset.penExact = target;

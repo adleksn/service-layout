@@ -34,6 +34,17 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('removes report-age labels from the exact desktop rating legend', async () => {
+    const dom = new JSDOM('<div id="app"></div>', { url: 'https://example.test/rating.html' });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+    Object.defineProperty(dom.window, 'innerWidth', { value: 1440, configurable: true });
+    await applyExactPenFrame(dom.window.document.querySelector('#app'), 'rating', dom.window.location.href);
+    expect(dom.window.document.querySelector('#app').textContent).not.toContain('Отчёт актуален');
+    expect(dom.window.document.querySelector('#app').textContent).not.toContain('Требует обновления');
+  });
+
   it('keeps the home table inside the same 1200px rail as “Весь рейтинг”', async () => {
     const source = readFileSync('public/reference/pen-source.html', 'utf8');
     const dom = new JSDOM('<main id="app"><header class="header"></header></main>', { url: 'http://localhost/' });

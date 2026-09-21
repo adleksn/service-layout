@@ -17,6 +17,14 @@ describe('semantic page interactions', () => {
     expect(css).toContain('.pen-frame .pen-faq-item [data-pencil-name="Question Row"]:hover { background-color: #dedede; }');
   });
 
+  it('keeps shared Pen component hover states aligned with the reference palette', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.report-list > a:hover { background-color: #f9fbf8; border-color: #cfe6c8; }');
+    expect(css).toContain('[data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }');
+    expect(css).toContain('.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #2f8a16 !important; }');
+  });
+
   it('opens and closes the semantic mobile menu with the same button', () => {
     const dom = new JSDOM(`
       <header class="header"><button data-mobile-menu aria-expanded="false" aria-controls="mobile-nav">☰</button></header>
