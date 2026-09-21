@@ -3849,6 +3849,18 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   }
 }
 
+/* Final desktop shell authority. Pen's Header has 14px vertical padding
+   around a 32px logo, so the interactive semantic header is exactly 60px. */
+@media (min-width: 1200px) {
+  .header__row { min-height: 60px; gap: 0; }
+  .header__row .brand { width: auto; min-height: 32px; gap: 10px; flex: 1 1 0; }
+  .header__row .brand__mark { width: 32px; height: 32px; }
+  .header__row .brand__text { font-size: 13px; line-height: 15px; letter-spacing: -.1px; }
+  .header__row .nav { margin-left: 0; gap: 26px; font-size: 14px; line-height: 22px; }
+  .header__row .dzen { width: 32px; height: 32px; flex: 0 0 32px; margin-left: auto; }
+  .header__row .header__cta { width: auto; min-height: 42px; flex: 0 0 auto; margin-left: 14px; }
+}
+
 @media (min-width: 768px) and (max-width: 899px) {
   .header__row { min-height: 68px; }
   .header .nav,
