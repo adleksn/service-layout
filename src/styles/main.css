@@ -4240,6 +4240,19 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .footer .footer__mobile-top { height: 42px; }
   .footer .footer__mobile-bottom { height: 107.5px; min-height: 0; }
 }
+@media (min-width: 768px) and (max-width: 1199px) {
+  /* Pen's 1024 frame keeps the desktop navigation rather than a scaled shell. */
+  .header.header .header__row { height: 73px; min-height: 73px; gap: 0; }
+  .header.header .brand { flex: 1 1 0; gap: 10px; }
+  .header.header .brand__mark { width: 32px; height: 32px; }
+  .header.header .brand__text { font-size: 13px; line-height: 15px; letter-spacing: -.1px; }
+  .header.header .nav { flex: 0 0 480px; width: 480px; margin: 0; gap: 0; justify-content: space-between; font-size: 14px; line-height: 22px; }
+  .header.header .nav a { padding: 0; }
+  .header.header .nav a:last-child { display: none; }
+  .header.header .dzen { width: 32px; height: 32px; margin-left: auto; flex: 0 0 32px; }
+  .header.header .header__cta { width: auto; min-height: 40px; height: 40px; margin-left: 14px; padding: 0 16px; font-size: 14px; line-height: 20px; }
+  .footer.footer .footer__top { gap: 32px; padding: 0; border: 0; }
+}
 @media (min-width: 768px) {
   .faq { gap: 10px; }
   .faq > div { display: flex; flex-direction: column; gap: 12px; padding: 18px 16px; }
