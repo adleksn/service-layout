@@ -3234,8 +3234,8 @@ body {
 .pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }
 .pen-frame [data-pencil-name="Button Primary"],
 .pen-frame [data-pencil-name="Button Dzen"] { cursor: pointer; transition: background-color .15s ease, transform .15s ease; }
-.pen-frame [data-pencil-name="Button Primary"]:hover,
-.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #2f8a16 !important; }
+.pen-frame [data-pencil-name="Button Primary"]:hover { background-color: #2f8a16 !important; }
+.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #3a3a3a !important; }
 .pen-frame [data-pencil-name="Button Primary"]:active,
 .pen-frame [data-pencil-name="Button Dzen"]:active { transform: translateY(1px); }
 
