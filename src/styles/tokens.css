@@ -1,0 +1,2 @@
+:root{--ink:#131313;--text:#3a3a3a;--green:#45a828;--green-dark:#2f8a16;--green-soft:#f1f9ee;--paper:#fff;--canvas:#fff;--border:#e6e6e6;--muted:#7a7a7a;--orange:#45a828;--radius:12px;--container:1200px;--shadow:0 4px 16px rgb(0 0 0/.08);--bp-mobile:480px;--bp-compact:767px;--bp-tablet:1023px;--bp-desktop:1200px;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:var(--canvas)}
+@font-face{font-family:Mazzard;src:local("Mazzard M");font-display:swap}@font-face{font-family:Inter;src:local("Inter");font-display:swap}

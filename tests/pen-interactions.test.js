@@ -1,0 +1,282 @@
+import { readFileSync } from 'node:fs';
+import { JSDOM } from 'jsdom';
+import { describe, expect, it, vi } from 'vitest';
+import { bindUnmappedPenControls } from '../src/js/pen-interactions.js';
+import { applyExactPenFrame, enhanceInteractions } from '../src/js/pen-frame.js';
+import { paymentEvidenceMarkup } from '../src/js/report-content.js';
+
+describe('unmapped Pen controls', () => {
+  it('renders all supplied payment screenshots in the responsive report article', () => {
+    const dom = new JSDOM(paymentEvidenceMarkup());
+    const screenshots = [...dom.window.document.querySelectorAll('.payment-evidence img')];
+
+    expect(screenshots.map((image) => image.getAttribute('src'))).toEqual([
+      '/assets/fda0d46096cb5d4a.png',
+      '/assets/8f78b574a99d9a1d.png',
+      '/assets/c0aba130d07c243e.png'
+    ]);
+    expect(screenshots.every((image) => image.getAttribute('loading') === 'lazy')).toBe(true);
+  });
+
+  it('makes a visible exported button keyboard-accessible and invokes its fallback action once', () => {
+    const dom = new JSDOM('<div id="frame"><div data-pencil-name="Button">Открыть</div></div>');
+    const action = vi.fn();
+    const button = dom.window.document.querySelector('[data-pencil-name="Button"]');
+
+    bindUnmappedPenControls(dom.window.document.querySelector('#frame'), action);
+    button.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+
+    expect(button.getAttribute('role')).toBe('button');
+    expect(button.tabIndex).toBe(0);
+    expect(action).toHaveBeenCalledTimes(1);
+  });
+
+  it('also exposes exported report tabs as keyboard controls', () => {
+    const dom = new JSDOM('<div id="frame"><div data-pencil-name="Tab 03.09.2023">03.09.2023</div></div>');
+    const tab = dom.window.document.querySelector('[data-pencil-name^="Tab"]');
+
+    bindUnmappedPenControls(dom.window.document.querySelector('#frame'), vi.fn());
+
+    expect(tab.getAttribute('role')).toBe('button');
+    expect(tab.tabIndex).toBe(0);
+  });
+
+  it('does not create a nested control inside a Pen layer that already has an action', () => {
+    const dom = new JSDOM('<div id="frame"><div role="link"><div data-pencil-name="Button Label">Добавить сервис</div></div></div>');
+    const label = dom.window.document.querySelector('[data-pencil-name="Button Label"]');
+
+    bindUnmappedPenControls(dom.window.document.querySelector('#frame'), vi.fn());
+
+    expect(label.getAttribute('role')).toBeNull();
+  });
+
+  it('binds tabs and actions in the supplied mobile report frame after it replaces the semantic DOM', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/report.html' });
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Отчёт Mobile 375')
+      .cloneNode(true);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    enhanceInteractions(frame, 'report');
+
+    expect(frame.querySelector('[data-pencil-name="Tab 03.09.2023"]')?.getAttribute('role')).toBe('tab');
+    expect(frame.querySelector('[data-pencil-name="Button"]')?.getAttribute('role')).toBe('button');
+    vi.unstubAllGlobals();
+  });
+
+  it('keeps the three payment screenshots when the report Pen frame is mounted', async () => {
+    const source = readFileSync('public/reference/pen-source.html', 'utf8');
+    const dom = new JSDOM('<main id="app"><header class="header"></header></main>', { url: 'http://localhost/report.html' });
+    Object.defineProperty(dom.window, 'innerWidth', { configurable: true, value: 1440 });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('DOMParser', dom.window.DOMParser);
+    vi.stubGlobal('location', dom.window.location);
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, text: async () => source }));
+
+    await applyExactPenFrame(dom.window.document.querySelector('#app'), 'report', dom.window.location.href);
+
+    const paymentImages = [...dom.window.document.querySelectorAll('[data-pencil-name="Image Wrap"] > [data-pencil-name="img"]')]
+      .map((image) => image.style.backgroundImage);
+    expect(paymentImages).toEqual([
+      'url("/assets/fda0d46096cb5d4a.png")',
+      'url("/assets/8f78b574a99d9a1d.png")',
+      'url("/assets/c0aba130d07c243e.png")'
+    ]);
+    vi.unstubAllGlobals();
+  });
+
+  it('makes the virtual-card mobile sort control functional for Pen card rows', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/virtual-cards.html' });
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Виртуальные карты Mobile 375')
+      .cloneNode(true);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    enhanceInteractions(frame, 'cards');
+
+    expect(frame.querySelector('[data-pencil-name="Sort Select"]')?.getAttribute('role')).toBe('button');
+    frame.querySelector('[data-pen-sort="reviews"]')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    frame.querySelector('[data-pen-sort="price"]')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    expect([...frame.querySelectorAll('[data-pencil-name="Service Cards"] > [data-pencil-name^="Service Card "]')]
+      .slice(0, 4)
+      .map((card) => card.querySelector('[data-pencil-name="Service Name"]')?.textContent.trim()))
+      .toEqual(['Плати Легко!', 'FASTPAYTODAY', 'GetPayAll', 'CheatPay']);
+    vi.unstubAllGlobals();
+  });
+
+  it('opens a real filter panel from the virtual-card mobile Pen control', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/virtual-cards.html' });
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Виртуальные карты Mobile 375')
+      .cloneNode(true);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+    dom.window.document.body.append(frame);
+
+    enhanceInteractions(frame, 'cards');
+    frame.querySelector('[data-pencil-name="Filters Button"]')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+
+    expect(frame.querySelector('.pen-card-filter-panel')?.hidden).toBe(false);
+    expect(frame.querySelector('.pen-card-filter-panel')?.previousElementSibling)
+      .toBe(frame.querySelector('[data-pencil-name="Filters Button"]'));
+    expect(frame.querySelector('.pen-card-filter-panel')?.style.position).toBe('fixed');
+    dom.window.document.dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    expect(frame.querySelector('.pen-card-filter-panel')?.hidden).toBe(true);
+    expect(dom.window.document.activeElement).toBe(frame.querySelector('[data-pencil-name="Filters Button"]'));
+    frame.querySelector('[data-pencil-name="Filters Button"]')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    frame.querySelector('[data-value="Apple Pay"]')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    expect(frame.querySelector('.pen-card-mobile-empty')?.hidden).toBe(false);
+    frame.querySelector('.pen-card-filter-reset')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    expect(frame.querySelector('.pen-card-mobile-empty')?.hidden).toBe(true);
+    expect([...frame.querySelectorAll('[data-pencil-name="Service Cards"] > [data-pencil-name^="Service Card "]')]
+      .every((card) => !card.hidden)).toBe(true);
+    vi.unstubAllGlobals();
+  });
+
+  it('sends each mobile table chevron to the same service page as desktop details', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/' });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    for (const [frameName, page, destination] of [
+      ['Рейтинг Mobile 375', 'rating', '/service.html'],
+      ['Виртуальные карты Mobile 375', 'cards', '/virtual-card.html']
+    ]) {
+      const source = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+        .find((node) => node.getAttribute('data-pencil-name') === frameName);
+      const frame = source.cloneNode(true);
+      enhanceInteractions(frame, page);
+      const heads = [...frame.querySelectorAll('[data-pencil-name^="Service Card "] [data-pencil-name="Card Head"]')];
+      expect(heads.length).toBeGreaterThan(0);
+      expect(heads.every((head) => head.dataset.penLink === destination && head.getAttribute('role') === 'link')).toBe(true);
+    }
+
+    const homeSource = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Главная Mobile 375');
+    const homeFrame = homeSource.cloneNode(true);
+    enhanceInteractions(homeFrame, 'home');
+    const homeSections = [...homeFrame.querySelectorAll('[data-pencil-name="Top 10 Section"]')];
+    expect(homeSections[0].querySelector('[data-pencil-name="Card Head"]')?.dataset.penLink).toBe('/service.html');
+    expect(homeSections[1].querySelector('[data-pencil-name="Card Head"]')?.dataset.penLink).toBe('/virtual-card.html');
+    expect(homeSections[0].querySelector('[data-pencil-name="Service Card 1"] [data-pencil-name="Chevron"]')?.closest('[role="link"]')?.dataset.penLink).toBe('/service.html');
+    expect(homeSections[1].querySelector('[data-pencil-name="Service Card 1"] [data-pencil-name="Chevron"]')?.closest('[role="link"]')?.dataset.penLink).toBe('/virtual-card.html');
+    vi.unstubAllGlobals();
+  });
+
+  it('keeps desktop and tablet details actions aligned with their home table', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/' });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    for (const frameName of ['Главная Desktop 1440', 'Главная Tablet 1024']) {
+      const source = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+        .find((node) => node.getAttribute('data-pencil-name') === frameName);
+      const frame = source.cloneNode(true);
+      enhanceInteractions(frame, 'home');
+      const sections = [...frame.querySelectorAll('[data-pencil-name="Top 10 Section"]')];
+      const firstActions = sections[0].querySelectorAll('[data-pencil-name="Action"]');
+      const secondActions = sections[1].querySelectorAll('[data-pencil-name="Action"]');
+      expect([...firstActions].every((node) => node.dataset.penLink === '/service.html')).toBe(true);
+      expect([...secondActions].every((node) => node.dataset.penLink === '/virtual-card.html')).toBe(true);
+      const nestedDetails = sections[1].querySelector('[data-pencil-name="Button Details"]');
+      if (nestedDetails) {
+        expect(nestedDetails.getAttribute('role')).toBeNull();
+        expect(nestedDetails.closest('[role="link"]')).toBe(secondActions[0]);
+      }
+    }
+    vi.unstubAllGlobals();
+  });
+
+  it('opens the service promo code instead of falling through to a placeholder link', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/service.html' });
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Карточка сервиса Mobile 375')
+      .cloneNode(true);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    enhanceInteractions(frame, 'service');
+    frame.querySelector('[data-pencil-name="Promo Code Block (closed)"] [data-pencil-name="Button Get Code"]')
+      ?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+
+    expect(frame.querySelector('[data-pencil-name="Promo Code Block (open)"]')?.hidden).toBe(false);
+    expect(dom.window.location.hash).toBe('');
+    vi.unstubAllGlobals();
+  });
+
+  it('includes the amount field in the Pen review form', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/service.html' });
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Карточка сервиса Mobile 375')
+      .cloneNode(true);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    enhanceInteractions(frame, 'service');
+
+    expect(frame.querySelector('input[name="amount"]')?.type).toBe('number');
+    vi.unstubAllGlobals();
+  });
+
+  it('validates and accepts a complete Pen review form', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/service.html' });
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Карточка сервиса Mobile 375')
+      .cloneNode(true);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    enhanceInteractions(frame, 'service');
+    const submit = frame.querySelector('[data-pencil-name="Submit Button"]');
+    submit?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    expect(frame.querySelector('.pen-review-status')?.textContent).toContain('Заполните');
+    frame.querySelector('input[name="name"]').value = 'Анна';
+    frame.querySelector('input[name="email"]').value = 'anna@example.com';
+    frame.querySelector('input[name="amount"]').value = '1000';
+    frame.querySelector('textarea[name="message"]').value = 'Всё прошло хорошо.';
+    submit?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    expect(frame.querySelector('.pen-review-status')?.textContent).toContain('Спасибо');
+    vi.unstubAllGlobals();
+  });
+
+  it('leaves no supplied desktop or mobile Pen action as a decorative layer', () => {
+    const frames = [
+      ['Главная Desktop 1440', 'home'], ['Главная Mobile 375', 'home'],
+      ['Виртуальные карты Desktop 1440', 'cards'], ['Виртуальные карты Mobile 375', 'cards'],
+      ['Карточка сервиса Desktop 1440', 'service'], ['Карточка сервиса Mobile 375', 'service'],
+      ['Отчёт Desktop 1440', 'report'], ['Отчёт Mobile 375', 'report'],
+      ['Отчеты список Desktop 1440', 'reports'], ['Отчёты список Mobile 375', 'reports'],
+      ['Контакты Desktop 1440', 'contacts'], ['Контакты Mobile 375', 'contacts'],
+      ['Реклама Desktop 1440', 'advertising'], ['Реклама Mobile 375', 'advertising']
+    ];
+    const actionable = /^(?:Button(?: |$)|Action$|Apply Button$|Close Button$|Filters Button$|Legend Button$|Link(?: |$)|Reviews Link$|Domain Link$|Place Link$|Chip Пометка PROMO$|Option Promo$|Tab \d{2}\.\d{2}\.\d{4}$|Page (?:Первая|Последняя|‹|1|2|3|›)$|Sort Select$|Reset Filters$|Load More Button$|Question Row$)/;
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/' });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    frames.forEach(([name, page]) => {
+      const source = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+        .find((node) => node.getAttribute('data-pencil-name') === name);
+      const frame = source.cloneNode(true);
+      enhanceInteractions(frame, page);
+      const unbound = [...frame.querySelectorAll('[data-pencil-name]')].filter((node) => (
+        actionable.test(node.getAttribute('data-pencil-name') || '')
+        && !node.closest('a,[role="button"],[role="link"],[role="tab"],[role="region"],input,textarea')
+      ));
+      expect(unbound, name).toHaveLength(0);
+    });
+    vi.unstubAllGlobals();
+  });
+});
