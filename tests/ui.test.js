@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import { readFileSync } from 'node:fs';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { setupDisclosures, setupMobileMenu, setupReviewForm, setupServiceStatusBadges, setupTabs } from '../src/js/ui.js';
 
@@ -9,6 +10,13 @@ const restoreDom = () => {
 afterEach(restoreDom);
 
 describe('semantic page interactions', () => {
+  it('gives every FAQ question row the documented hover feedback', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.faq > div:hover > button { background-color: #dedede; }');
+    expect(css).toContain('.pen-frame .pen-faq-item [data-pencil-name="Question Row"]:hover { background-color: #dedede; }');
+  });
+
   it('opens and closes the semantic mobile menu with the same button', () => {
     const dom = new JSDOM(`
       <header class="header"><button data-mobile-menu aria-expanded="false" aria-controls="mobile-nav">☰</button></header>

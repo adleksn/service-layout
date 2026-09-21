@@ -1315,7 +1315,7 @@ form textarea {
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"] { cursor: pointer; transition: background-color .15s ease; }
 .pen-frame .pen-faq-item { gap: 0 !important; padding: 0 !important; overflow: hidden; }
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"] { min-height: 60px; padding: 0 16px !important; align-items: center !important; }
-.pen-frame .pen-faq-item [data-pencil-name="Question Row"]:hover { background-color: #ececec; }
+.pen-frame .pen-faq-item [data-pencil-name="Question Row"]:hover { background-color: #dedede; }
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"]:focus-visible { outline: 2px solid #45a828; outline-offset: -2px; }
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"]::after { display: block; flex: 0 0 18px; width: 18px; height: 18px; margin-left: 12px; content: ''; background: center / 18px 18px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='m4.5 6.75 4.5 4.5 4.5-4.5' stroke='%237A7A7A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"][aria-expanded="true"]::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='m4.5 11.25 4.5-4.5 4.5 4.5' stroke='%237A7A7A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
@@ -3205,7 +3205,9 @@ body {
   line-height: 24px;
   transition: background-color .16s ease;
 }
-.faq button:hover { background: #dedede; }
+/* The complete closed row changes colour, not just the text's hit area. */
+.faq > div:hover > button { background-color: #dedede; }
+.faq button:hover { background-color: #dedede; }
 .faq button:focus-visible {
   position: relative;
   z-index: 1;
