@@ -1100,12 +1100,67 @@ form textarea {
    page-dependent offsets at 1280px. */
 @media (min-width: 1200px) {
   .header__row { min-height: 60px; gap: 0; }
-  .header__row .brand { width: auto; min-height: 32px; gap: 10px; flex: 1 1 0; }
+  .header__row .brand { width: auto; min-height: 32px; gap: 10px; flex: 0 0 299px; }
   .header__row .brand__mark { width: 32px; height: 32px; }
   .header__row .brand__text { font-size: 13px; line-height: 15px; letter-spacing: -.1px; }
   .header__row .nav { margin-left: 0; gap: 26px; font-size: 14px; line-height: 22px; }
-  .header__row .dzen { width: 32px; height: 32px; flex: 0 0 32px; margin-left: auto; }
+  /* In Pen the right CTA cell has 97px of free space before its Dzen icon. */
+  .header__row .dzen { width: 32px; height: 32px; flex: 0 0 32px; margin-left: 97px; }
   .header__row .header__cta { width: auto; min-height: 42px; flex: 0 0 auto; margin-left: 14px; }
+
+  /* Scope direct descendants so the legacy generic footer rule cannot turn
+     the brand, columns, and CTA into three unrelated flex rows. */
+  .footer__top > .footer__brand {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: 18px;
+    min-width: 0;
+  }
+  .footer__top > .footer__grid {
+    display: grid;
+    flex: 0 0 480px;
+    width: 480px;
+    grid-template-columns: repeat(2, 240px);
+    gap: 0;
+    padding: 0;
+  }
+  .footer__top > .footer__cta-group {
+    display: flex;
+    flex: 0 0 157px;
+    width: 157px;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
+  }
+  .footer__top > .footer__brand > .brand {
+    display: flex;
+    width: fit-content;
+    min-height: 32px;
+    height: 32px;
+    margin: 0;
+  }
+  .footer__top > .footer__brand > p {
+    display: block;
+    margin: 0;
+    color: #8a8a8a;
+    font-size: 13px;
+    line-height: 19px;
+  }
+  .footer .footer__cta-group > .footer__cta {
+    display: inline-flex;
+    box-sizing: border-box;
+    width: auto;
+    height: 42px;
+    min-height: 42px;
+    margin: 0;
+    padding: 11px 18px;
+  }
+  .footer .footer__cta-group > .footer__dzen {
+    display: inline-flex;
+    height: 32px;
+    margin: 0;
+  }
 }
 
 /* Mobile catalog: preserve the immediately useful controls from the Pen
@@ -3853,12 +3908,28 @@ body small, body label, body legend, body th, body td, body dt, body dd {
    around a 32px logo, so the interactive semantic header is exactly 60px. */
 @media (min-width: 1200px) {
   .header__row { min-height: 60px; gap: 0; }
-  .header__row .brand { width: auto; min-height: 32px; gap: 10px; flex: 1 1 0; }
+  .header__row .brand { width: auto; min-height: 32px; gap: 10px; flex: 0 0 299px; }
   .header__row .brand__mark { width: 32px; height: 32px; }
   .header__row .brand__text { font-size: 13px; line-height: 15px; letter-spacing: -.1px; }
   .header__row .nav { margin-left: 0; gap: 26px; font-size: 14px; line-height: 22px; }
-  .header__row .dzen { width: 32px; height: 32px; flex: 0 0 32px; margin-left: auto; }
+  .header__row .dzen { width: 32px; height: 32px; flex: 0 0 32px; margin-left: 97px; }
   .header__row .header__cta { width: auto; min-height: 42px; flex: 0 0 auto; margin-left: 14px; }
+
+  .footer { padding: 56px 0; background: #2a2a2c; }
+  .footer__top { display: flex; align-items: flex-start; gap: 64px; padding: 0; border: 0; }
+  .footer__top > .footer__brand { display: flex; flex: 1 1 0; flex-direction: column; gap: 18px; min-width: 0; }
+  .footer__top > .footer__brand > .brand { display: flex; width: fit-content; height: 32px; min-height: 32px; margin: 0; }
+  .footer__top > .footer__brand > p { display: block; margin: 0; color: #8a8a8a; font-size: 13px; line-height: 19px; }
+  .footer__top > .footer__grid { display: grid; flex: 0 0 480px; width: 480px; grid-template-columns: repeat(2, 240px); gap: 0; padding: 0; }
+  .footer__grid > div { display: grid; gap: 14px; align-content: start; }
+  .footer__grid strong { color: #fff; font-size: 14px; font-weight: 600; line-height: 22px; }
+  .footer__grid a { margin: 0; color: #b5b5b5; font-size: 14px; line-height: 22px; }
+  .footer__top > .footer__cta-group { display: flex; flex: 0 0 157px; width: 157px; flex-direction: column; align-items: center; gap: 56px; }
+  .footer .footer__cta-group > .footer__cta { display: inline-flex; box-sizing: border-box; flex: 0 0 42px; width: auto; height: 42px; min-height: 42px; margin: 0; padding: 11px 18px; }
+  .footer .footer__cta-group > .footer__dzen { display: inline-flex; height: 32px; margin: 0; color: #b5b5b5 !important; font-size: 14px !important; font-weight: 600; line-height: 20px; }
+  .footer__bottom { display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 64px; margin-top: 36px; padding-top: 20px; border-top: 1px solid #2b2b2b; color: #8a8a8a; }
+  .footer__bottom a, .footer__bottom span { margin: 0; color: #b5b5b5; font-size: 13px; line-height: 18px; }
+  .footer__bottom span { color: #8a8a8a; }
 }
 
 @media (min-width: 768px) and (max-width: 899px) {
