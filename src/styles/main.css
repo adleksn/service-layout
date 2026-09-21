@@ -3238,6 +3238,14 @@ body {
 .pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #2f8a16 !important; }
 .pen-frame [data-pencil-name="Button Primary"]:active,
 .pen-frame [data-pencil-name="Button Dzen"]:active { transform: translateY(1px); }
+
+/* Pen specifies Inter for every visible text layer; avoid a locally installed
+   Mazzard changing metrics on only some machines. */
+body, body button, body input, body textarea, body select, body a,
+body h1, body h2, body h3, body h4, body p, body b, body strong, body span,
+body small, body label, body legend, body th, body td, body dt, body dd {
+  font-family: Inter, system-ui, sans-serif !important;
+}
 .faq button:focus-visible {
   position: relative;
   z-index: 1;
