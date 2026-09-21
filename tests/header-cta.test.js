@@ -14,4 +14,25 @@ describe('header CTA fidelity', () => {
 
     expect(css).toContain('.header__cta {\n    width: 157px;\n    min-height: 42px;\n    margin-left: 14px;\n    padding: 11px 18px;\n    border-radius: 8px;\n    font-size: 14px;\n    font-weight: 600;\n    line-height: 20px;');
   });
+
+  it('uses the source Pen Dzen SVG in the shared header instead of a text glyph', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+
+    expect(app).toContain('viewBox="0 0 168 168.01"');
+    expect(app).toContain('d="M83.665 168.00999');
+    expect(app).not.toContain('aria-label="Мы в Дзене">✦');
+  });
+
+  it('does not draw an additional circular background behind the source Dzen SVG', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toMatch(/\.dzen \{[^}]*background: transparent;[^}]*border-radius: 0;/);
+    expect(css).toContain('.dzen svg,\n.footer__dzen svg { display: block; width: 100%; height: 100%; }');
+  });
+
+  it('keeps the bordered shared header at the 74px Pen outer height', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.header__row { min-height: 73px; }');
+  });
 });

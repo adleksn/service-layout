@@ -3460,6 +3460,21 @@ body {
   }
 }
 
+/* The shared shell deliberately reuses the original Pen SVG marks. The icon
+   itself contains its rounded shape, so it must not receive a second circle. */
+.dzen { background: transparent; border-radius: 0; color: inherit; }
+.dzen svg,
+.footer__dzen svg { display: block; width: 100%; height: 100%; }
+.footer__dzen { display: inline-flex; align-items: center; gap: 8px; }
+.footer__dzen svg { flex: 0 0 32px; width: 32px; height: 32px; }
+.footer__dzen span { margin-left: 0 !important; }
+
+@media (min-width: 1280px) {
+  .header__row { min-height: 73px; }
+  .brand__mark { width: 32px; height: 32px; }
+  .brand__text { font-size: 13px; line-height: 15px; letter-spacing: -0.1px; }
+}
+
 /* Mobile tables become complete labelled cards: no data column is discarded. */
 @media (max-width: 767px) {
   .catalog td:nth-child(n + 4) {
