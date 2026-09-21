@@ -23,6 +23,30 @@ export function setupTabs(root = document) {
   });
 }
 
+export function setupMobileMenu(root = document) {
+  const button = root.querySelector('[data-mobile-menu]');
+  const panel = root.querySelector('#mobile-nav');
+  if (!button || !panel) return;
+
+  const setOpen = (open) => {
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+    button.textContent = open ? '×' : '☰';
+    panel.hidden = !open;
+    root.querySelector('.header')?.classList.toggle('header--menu-open', open);
+  };
+
+  setOpen(false);
+  button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+  panel.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      button.focus();
+    }
+  });
+}
+
 export function setupDisclosures(root = document) {
   const setFaqState = (button, open) => {
     const panel = document.getElementById(button.getAttribute('aria-controls'));

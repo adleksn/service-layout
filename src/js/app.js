@@ -1,9 +1,9 @@
 import '../styles/main.css';
 import { cards, filterCatalog, parseFilterState, serializeFilterState, services, sortCatalog } from './catalog.js';
-import { setupDisclosures, setupPromo, setupReviewForm, setupTabs } from './ui.js';
+import { setupDisclosures, setupMobileMenu, setupPromo, setupReviewForm, setupTabs } from './ui.js';
 import { applyExactPenFrame } from './pen-frame.js';
 import { paymentEvidenceMarkup } from './report-content.js';
-import { resolveSitePaths, sitePath } from './site-paths.js';
+import { isCurrentSitePath, resolveSitePaths, sitePath } from './site-paths.js';
 
 const app = document.querySelector('#app');
 const page = document.body.dataset.page;
@@ -19,7 +19,7 @@ const responsiveRange = (width) => {
 const navigation = [['Оплата сервисов', '#'], ['Виртуальные карты', '/virtual-cards.html'], ['Методика проверки', '/methodology.html'], ['Отчёты', '/reports.html'], ['Контакты', '/contacts.html']];
 const logo = `<span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M3.5 0h6.3l7.7 13.5h-6.3zm25 0h-6.3l-7.7 13.5h6.3z" fill="#2F8A16"/><circle cx="16" cy="21" r="10.5" fill="#45A828"/><path d="m16 14.4 1.68 4.29 4.6.27-3.57 2.92 1.17 4.46L16 23.85l-3.88 2.49 1.17-4.46-3.57-2.92 4.6-.27z" fill="#fff"/></svg></span><span class="brand__text"><span>Сервисы</span><span>Альтернативной</span><span>Оплаты</span></span>`;
 
-const shell = (content) => `<a class="skip-link" href="#main">К содержанию</a><header class="header"><div class="container header__row"><a class="brand" href="/" aria-label="Сервисы альтернативной оплаты">${logo}</a><nav class="nav" aria-label="Основная навигация">${navigation.map(([label, href]) => `<a href="${href}" ${location.pathname === href ? 'aria-current="page"' : ''}>${label}</a>`).join('')}</nav><a class="dzen" href="#" aria-label="Мы в Дзене">✦</a><a class="header__cta" href="/contacts.html">Добавить сервис</a><button class="menu-button" data-mobile-menu aria-expanded="false" aria-controls="mobile-nav" aria-label="Открыть меню">☰</button></div><nav class="mobile-nav" id="mobile-nav" hidden aria-label="Мобильная навигация">${navigation.map(([label, href]) => `<a href="${href}">${label}</a>`).join('')}<a href="/contacts.html">Добавить сервис</a></nav></header><main id="main">${content}</main><footer class="footer"><div class="container footer__top"><div><a class="brand" href="/" aria-label="Сервисы альтернативной оплаты">${logo}</a><p>Сайт носит информационный характер и не является платёжным сервисом. Мы не принимаем платежи и не оказываем финансовых услуг. Оценки отражают мнение редакции и пользователей на дату публикации; условия сервисов могут измениться без предупреждения.</p></div><a class="header__cta footer__cta" href="/contacts.html">Добавить сервис</a></div><div class="container footer__grid"><div><strong>Информация</strong><a href="/methodology.html">Методика проверки</a><a href="/contacts.html">Контакты</a></div><div><strong>Сервисам</strong><a href="/contacts.html">Добавить сервис</a><a href="/advertising.html">Реклама</a></div></div><div class="container footer__bottom"><a href="#">Мы в Дзене</a><a href="/agreement.html">Пользовательское соглашение</a><span>© 2022 — 2026</span></div></footer>`;
+const shell = (content) => `<a class="skip-link" href="#main">К содержанию</a><header class="header"><div class="container header__row"><a class="brand" href="/" aria-label="Сервисы альтернативной оплаты">${logo}</a><nav class="nav" aria-label="Основная навигация">${navigation.map(([label, href]) => `<a href="${href}" ${isCurrentSitePath(href) ? 'aria-current="page"' : ''}>${label}</a>`).join('')}</nav><a class="dzen" href="#" aria-label="Мы в Дзене">✦</a><a class="header__cta" href="/contacts.html">Добавить сервис</a><button class="menu-button" data-mobile-menu aria-expanded="false" aria-controls="mobile-nav" aria-label="Открыть меню">☰</button></div><nav class="mobile-nav" id="mobile-nav" hidden aria-label="Мобильная навигация">${navigation.map(([label, href]) => `<a href="${href}" ${isCurrentSitePath(href) ? 'aria-current="page"' : ''}>${label}</a>`).join('')}<a href="/contacts.html">Добавить сервис</a></nav></header><main id="main">${content}</main><footer class="footer"><div class="container footer__top"><div><a class="brand" href="/" aria-label="Сервисы альтернативной оплаты">${logo}</a><p>Сайт носит информационный характер и не является платёжным сервисом. Мы не принимаем платежи и не оказываем финансовых услуг. Оценки отражают мнение редакции и пользователей на дату публикации; условия сервисов могут измениться без предупреждения.</p></div><a class="header__cta footer__cta" href="/contacts.html">Добавить сервис</a></div><div class="container footer__grid"><div><strong>Информация</strong><a href="/methodology.html">Методика проверки</a><a href="/contacts.html">Контакты</a></div><div><strong>Сервисам</strong><a href="/contacts.html">Добавить сервис</a><a href="/advertising.html">Реклама</a></div></div><div class="container footer__bottom"><a href="#">Мы в Дзене</a><a href="/agreement.html">Пользовательское соглашение</a><span>© 2022 — 2026</span></div></footer>`;
 const ad = () => `<aside class="ad"><span>Реклама</span><img src="/assets/49f300f8117351a3.jpg" width="350" height="610" alt="Плати легко — сервис проведения платежей в Рунете"></aside>`;
 const lead = (eyebrow, title, text) => `<section class="lead container"><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p>${text}</p></section>`;
 const score = (value) => `<span class="score" aria-label="Оценка ${value} из 5">${value}</span>`;
@@ -87,30 +87,6 @@ setupFooterStubs(app);
 setupPlaceholderLinks(app);
 setupReviewCardLinks(app);
 setupTabs(app); setupDisclosures(app); setupMobileMenu(app); setupPromo(app); setupReviewForm(app);
-
-function setupMobileMenu(root) {
-  const button = root.querySelector('[data-mobile-menu]');
-  const panel = root.querySelector('#mobile-nav');
-  if (!button || !panel) return;
-
-  const setOpen = (open) => {
-    button.setAttribute('aria-expanded', String(open));
-    button.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
-    button.textContent = open ? '×' : '☰';
-    panel.hidden = !open;
-    root.querySelector('.header')?.classList.toggle('header--menu-open', open);
-  };
-
-  setOpen(false);
-  button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
-  panel.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
-      setOpen(false);
-      button.focus();
-    }
-  });
-}
 
 function setupContactStubs(root) {
   const section = root.querySelector('.contact-page .faq');

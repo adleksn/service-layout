@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { resolveSitePaths, sitePath } from '../src/js/site-paths.js';
+import { isCurrentSitePath, resolveSitePaths, sitePath } from '../src/js/site-paths.js';
 
 describe('sitePath', () => {
   it('prefixes a page path with the GitHub Pages repository path', () => {
@@ -17,5 +17,11 @@ describe('sitePath', () => {
 
     expect(document.querySelector('a').getAttribute('href')).toBe('/service-layout/contacts.html');
     expect(document.querySelector('img').getAttribute('src')).toBe('/service-layout/assets/hero.png');
+  });
+
+  it('recognises the active navigation page after GitHub Pages adds the repository path', () => {
+    expect(isCurrentSitePath('/methodology.html', '/service-layout/methodology.html')).toBe(true);
+    expect(isCurrentSitePath('/reports.html', '/service-layout/methodology.html')).toBe(false);
+    expect(isCurrentSitePath('#', '/service-layout/methodology.html')).toBe(false);
   });
 });
