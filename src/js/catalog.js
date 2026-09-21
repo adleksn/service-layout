@@ -39,7 +39,12 @@ export function sortCatalog(items, rule = 'rating') {
 
 export function parseFilterState(query = window.location.search) {
   const params = new URLSearchParams(query);
-  return [...params.entries()].reduce((state, [key, value]) => ({ ...state, [key]: value.split(',').filter(Boolean) }), {});
+  const filterGroups = new Set(['fee', 'rating', 'report', 'extra', 'system', 'features', 'currency', 'kyc', 'topup']);
+  return [...params.entries()].reduce((state, [key, value]) => (
+    filterGroups.has(key)
+      ? { ...state, [key]: value.split(',').filter(Boolean) }
+      : state
+  ), {});
 }
 
 export function serializeFilterState(filters) {

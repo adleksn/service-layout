@@ -21,6 +21,10 @@ describe('catalog filters', () => {
     expect(parseFilterState(query)).toEqual(state);
   });
 
+  it('ignores non-filter query parameters when loading a catalog URL', () => {
+    expect(parseFilterState('?rating=4-plus&v=dae984e&utm_source=test')).toEqual({ rating: ['4-plus'] });
+  });
+
   it('sorts visible data by a selected catalog rule', () => {
     expect(sortCatalog(services, 'fee').map((item) => item.id)).toEqual(['two', 'one']);
   });
