@@ -4227,6 +4227,19 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .button--success:hover { background: var(--green-soft); color: var(--green); }
 .layout--catalog .chip { transition: border-color .15s ease, background-color .15s ease, color .15s ease, transform .15s ease; }
 .layout--catalog .chip:hover { transform: translateY(-1px); }
+@media (max-width: 767px) {
+  /* The Pen mobile header is 56px: logo, Dzen and the 40px menu button all
+     remain visible. These selectors deliberately outrank legacy mobile rules. */
+  .header.header .header__row { min-height: 56px; gap: 0; }
+  .header.header .brand { gap: 9px; }
+  .header.header .brand__mark { width: 32px; height: 32px; }
+  .header.header .brand__text { font-size: 12px; line-height: 14px; letter-spacing: -.1px; }
+  .header.header .dzen { display: block; width: 28px; height: 28px; margin-left: auto; flex: 0 0 28px; }
+  .header.header .menu-button { width: 40px; min-width: 40px; height: 40px; min-height: 40px; margin-left: 10px; border-radius: 8px; background: #f5f5f5; color: #3a3a3a; font-size: 22px; }
+  .footer.footer { padding: 36px 16px; }
+  .footer .footer__mobile-top { height: 42px; }
+  .footer .footer__mobile-bottom { height: 107.5px; min-height: 0; }
+}
 @media (min-width: 768px) {
   .faq { gap: 10px; }
   .faq > div { display: flex; flex-direction: column; gap: 12px; padding: 18px 16px; }
