@@ -2,10 +2,17 @@ import { readFileSync } from 'node:fs';
 import { JSDOM } from 'jsdom';
 import { describe, expect, it, vi } from 'vitest';
 import { bindUnmappedPenControls } from '../src/js/pen-interactions.js';
-import { applyExactPenFrame, enhanceInteractions } from '../src/js/pen-frame.js';
+import { applyExactPenFrame, enhanceInteractions, penSourceUrls } from '../src/js/pen-frame.js';
 import { paymentEvidenceMarkup } from '../src/js/report-content.js';
 
 describe('unmapped Pen controls', () => {
+  it('loads exported Pen frames from the GitHub Pages repository path', () => {
+    expect(penSourceUrls('/service-layout/')).toEqual([
+      '/service-layout/reference/pen-source.html',
+      '/service-layout/reference/pen-states.html'
+    ]);
+  });
+
   it('renders all supplied payment screenshots in the responsive report article', () => {
     const dom = new JSDOM(paymentEvidenceMarkup());
     const screenshots = [...dom.window.document.querySelectorAll('.payment-evidence img')];

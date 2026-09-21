@@ -1,4 +1,5 @@
 import { bindUnmappedPenControls } from './pen-interactions.js';
+import { sitePath } from './site-paths.js';
 
 const frames = {
   home: { desktop: 'Главная Desktop 1440', tablet: 'Главная Tablet 1024', mobile: 'Главная Mobile 375' },
@@ -709,6 +710,13 @@ function targetFor(page, width, requestUrl) {
   return null;
 }
 
+export function penSourceUrls(basePath = import.meta.env.BASE_URL) {
+  return [
+    sitePath('reference/pen-source.html', basePath),
+    sitePath('reference/pen-states.html', basePath)
+  ];
+}
+
 export async function applyExactPenFrame(root, page, requestUrl = window.location.href) {
   const target = targetFor(page, window.innerWidth, requestUrl);
   if (!target) return false;
@@ -716,7 +724,7 @@ export async function applyExactPenFrame(root, page, requestUrl = window.locatio
   // per-frame copies of the header with slightly different dimensions; keeping
   // those copies made the navigation visibly jump from page to page.
   const sharedHeader = root.querySelector('.header');
-  const sources = await Promise.all(['/reference/pen-source.html', '/reference/pen-states.html'].map((url) => fetch(url).then((response) => response.ok ? response.text() : '')));
+  const sources = await Promise.all(penSourceUrls().map((url) => fetch(url).then((response) => response.ok ? response.text() : '')));
   const source = sources.flatMap((html) => [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('[data-pencil-name]')]).find((node) => node.getAttribute('data-pencil-name') === target);
   if (!source) return false;
   const frame = source.cloneNode(true);
@@ -731,14 +739,14 @@ export async function applyExactPenFrame(root, page, requestUrl = window.locatio
   // Pen references this banner with a relative export path. Once injected into
   // the app page that URL no longer resolves, so point it to the copied asset.
   frame.querySelectorAll('[data-pencil-name="Ad Banner"]').forEach((banner) => {
-    banner.style.backgroundImage = "url('/assets/49f300f8117351a3.jpg')";
+    banner.style.backgroundImage = `url('${sitePath('assets/49f300f8117351a3.jpg')}')`;
   });
   // Article screenshots in the exported report use paths relative to the
   // reference HTML (`images/...`). Once the frame lives at /report.html,
   // preserve the exact supplied images from the public asset directory.
   frame.querySelectorAll('[style*="images/"]').forEach((node) => {
     const match = node.style.backgroundImage.match(/url\(["']?images\/([^"')]+)/);
-    if (match) node.style.backgroundImage = `url('/assets/${match[1]}')`;
+    if (match) node.style.backgroundImage = `url('${sitePath(`assets/${match[1]}`)}')`;
   });
   if (page === 'cards') {
     const emptyState = sources.flatMap((html) => [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('[data-pencil-name]')])
