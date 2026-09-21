@@ -1095,6 +1095,37 @@ form textarea {
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* Authoritative component states — intentionally last so legacy page rules
+   cannot alter an FAQ, text link, button or filter chip on a single route. */
+.text-link { color: #2f8a16; font: 600 14px/22px Inter, system-ui, sans-serif; }
+.text-link:hover { color: #2f8a16; opacity: .78; }
+.button:not(.button--ghost):not(.button--success):hover {
+  background-color: #2f8a16;
+  box-shadow: 0 4px 12px rgb(69 168 40 / .18);
+}
+.button--ghost:hover { background: rgb(93 207 53 / .12); border-color: #45a828; color: #2f8a16; }
+.button--success:hover { background: var(--green-soft); color: var(--green); }
+.layout--catalog .chip { transition: border-color .15s ease, background-color .15s ease, color .15s ease, transform .15s ease; }
+.layout--catalog .chip:hover { transform: translateY(-1px); }
+
+@media (min-width: 768px) {
+  .faq { gap: 10px; }
+  .faq > div { display: flex; flex-direction: column; gap: 12px; padding: 18px 16px; }
+  .faq > div.is-open { padding: 18px 0 0; }
+  .faq button { display: flex; min-height: 24px; padding: 0; align-items: center; justify-content: space-between; gap: 0; }
+  .faq > div.is-open > button { padding-inline: 16px; }
+  .faq > div > div { box-sizing: content-box; width: 100%; margin: 0 -1px -1px; padding: 14px 16px; }
+}
+
+@media (max-width: 767px) {
+  .faq { gap: 10px; }
+  .faq > div { display: flex; flex-direction: column; gap: 10px; padding: 16px 14px; }
+  .faq > div.is-open { padding: 16px 0 0; }
+  .faq button { display: flex; min-height: 21px; padding: 0; align-items: center; justify-content: space-between; gap: 12px; }
+  .faq > div.is-open > button { padding-inline: 14px; }
+  .faq > div > div { box-sizing: content-box; width: 100%; margin: 0 -1px -1px; padding: 12px 14px; }
+}
+
 /* Footer is a distinct authored composition at each Pen breakpoint.  Keeping
    these rules at the end prevents old experimental grid declarations from
    changing its structure on one route only. */
@@ -1271,6 +1302,85 @@ form textarea {
   .footer__mobile-bottom > a:not(.footer__dzen),
   .footer__mobile-bottom > span { color: #b5b5b5; font-size: 12px; line-height: 18px; }
   .footer__mobile-bottom > span { color: #8a8a8a; }
+}
+
+/* Final interactive calibration from Pen's UI Kit and authored FAQ frames. */
+.text-link {
+  color: #2f8a16;
+  font: 600 14px/22px Inter, system-ui, sans-serif;
+}
+.text-link:hover {
+  color: #2f8a16;
+  opacity: .78;
+}
+.button:not(.button--ghost):not(.button--success):hover {
+  background-color: #2f8a16;
+  box-shadow: 0 4px 12px rgb(69 168 40 / .18);
+}
+.button--ghost:hover {
+  background: rgb(93 207 53 / .12);
+  border-color: #45a828;
+  color: #2f8a16;
+}
+.button--success:hover {
+  background: var(--green-soft);
+  color: var(--green);
+}
+.layout--catalog .chip {
+  transition: border-color .15s ease, background-color .15s ease, color .15s ease, transform .15s ease;
+}
+.layout--catalog .chip:hover { transform: translateY(-1px); }
+
+@media (min-width: 768px) {
+  .faq { gap: 10px; }
+  .faq > div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px 16px;
+  }
+  .faq > div.is-open { padding: 18px 0 0; }
+  .faq button {
+    display: flex;
+    min-height: 24px;
+    padding: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+  .faq > div.is-open > button { padding-inline: 16px; }
+  .faq > div > div {
+    box-sizing: content-box;
+    width: 100%;
+    margin: 0 -1px -1px;
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .faq { gap: 10px; }
+  .faq > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 14px;
+  }
+  .faq > div.is-open { padding: 16px 0 0; }
+  .faq button {
+    display: flex;
+    min-height: 21px;
+    padding: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .faq > div.is-open > button { padding-inline: 14px; }
+  .faq > div > div {
+    box-sizing: content-box;
+    width: 100%;
+    margin: 0 -1px -1px;
+    padding: 12px 14px;
+  }
 }
 
 /* Keep the intermediate desktop header on the same 1200px Pen grid.  This is
@@ -4107,6 +4217,32 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .footer__bottom { display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 64px; margin-top: 36px; padding-top: 20px; border-top: 1px solid #2b2b2b; color: #8a8a8a; }
   .footer__bottom a, .footer__bottom span { margin: 0; color: #b5b5b5; font-size: 13px; line-height: 18px; }
   .footer__bottom span { color: #8a8a8a; }
+}
+
+/* Desktop state authority. */
+.text-link { color: #2f8a16; font: 600 14px/22px Inter, system-ui, sans-serif; }
+.text-link:hover { color: #2f8a16; opacity: .78; }
+.button:not(.button--ghost):not(.button--success):hover { background-color: #2f8a16; box-shadow: 0 4px 12px rgb(69 168 40 / .18); }
+.button--ghost:hover { background: rgb(93 207 53 / .12); border-color: #45a828; color: #2f8a16; }
+.button--success:hover { background: var(--green-soft); color: var(--green); }
+.layout--catalog .chip { transition: border-color .15s ease, background-color .15s ease, color .15s ease, transform .15s ease; }
+.layout--catalog .chip:hover { transform: translateY(-1px); }
+@media (min-width: 768px) {
+  .faq { gap: 10px; }
+  .faq > div { display: flex; flex-direction: column; gap: 12px; padding: 18px 16px; }
+  .faq > div.is-open { padding: 18px 0 0; }
+  .faq button { display: flex; min-height: 24px; padding: 0; align-items: center; justify-content: space-between; gap: 0; }
+  .faq > div.is-open > button { padding-inline: 16px; }
+  .faq > div > div { box-sizing: content-box; width: 100%; margin: 0 -1px -1px; padding: 14px 16px; }
+}
+
+@media (max-width: 767px) {
+  .faq { gap: 10px; }
+  .faq > div { display: flex; flex-direction: column; gap: 10px; padding: 16px 14px; }
+  .faq > div.is-open { padding: 16px 0 0; }
+  .faq button { display: flex; min-height: 21px; padding: 0; align-items: center; justify-content: space-between; gap: 12px; }
+  .faq > div.is-open > button { padding-inline: 14px; }
+  .faq > div > div { box-sizing: content-box; width: 100%; margin: 0 -1px -1px; padding: 12px 14px; }
 }
 
 @media (min-width: 768px) and (max-width: 899px) {
