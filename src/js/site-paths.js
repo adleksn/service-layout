@@ -1,5 +1,6 @@
 export function sitePath(path, basePath = import.meta.env.BASE_URL) {
   const normalizedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
+  if (normalizedBase !== '/' && path.startsWith(normalizedBase)) return path;
   return `${normalizedBase}${path.replace(/^\//, '')}`;
 }
 
