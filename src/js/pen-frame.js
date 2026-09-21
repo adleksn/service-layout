@@ -725,6 +725,31 @@ export function penSourceUrls(basePath = import.meta.env.BASE_URL) {
   ];
 }
 
+export function mountMethodologySignSvgs(root, sourceFrame) {
+  const sourceIcons = [...sourceFrame.querySelectorAll('[data-pencil-name^="Sign "]')]
+    .map((sign) => sign.querySelector('[data-pencil-name="Icon Box"] svg'));
+  root.querySelectorAll('.method-signs i').forEach((target, index) => {
+    const sourceIcon = sourceIcons[index];
+    if (sourceIcon) {
+      const icon = sourceIcon.cloneNode(true);
+      icon.classList.add('method-sign__source-icon');
+      target.replaceChildren(icon);
+    }
+  });
+}
+
+export async function applyPenMethodologySignSvgs(root) {
+  if (!root.querySelector('.method-signs')) return false;
+  const response = await fetch(penSourceUrls()[0]);
+  if (!response.ok) return false;
+  const source = new DOMParser().parseFromString(await response.text(), 'text/html');
+  const sourceFrame = [...source.querySelectorAll('[data-pencil-name]')]
+    .find((node) => node.getAttribute('data-pencil-name') === 'Методика проверки Desktop 1440');
+  if (!sourceFrame) return false;
+  mountMethodologySignSvgs(root, sourceFrame);
+  return true;
+}
+
 export async function applyExactPenFrame(root, page, requestUrl = window.location.href) {
   const target = targetFor(page, window.innerWidth, requestUrl);
   if (!target) return false;

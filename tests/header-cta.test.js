@@ -20,6 +20,7 @@ describe('header CTA fidelity', () => {
 
     expect(app).toContain('viewBox="0 0 168 168.01"');
     expect(app).toContain('d="M83.665 168.00999');
+    expect(app).toContain('transform="translate(20 20)"');
     expect(app).not.toContain('aria-label="Мы в Дзене">✦');
   });
 
@@ -27,6 +28,7 @@ describe('header CTA fidelity', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
     expect(css).toMatch(/\.dzen \{[^}]*background: transparent;[^}]*border-radius: 0;/);
+    expect(css).toMatch(/\.dzen \{[^}]*overflow: hidden;[^}]*position: relative;/);
     expect(css).toContain('.dzen svg,\n.footer__dzen svg { display: block; width: 100%; height: 100%; }');
   });
 

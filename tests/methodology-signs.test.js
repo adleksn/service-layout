@@ -1,5 +1,7 @@
 import { readFileSync } from 'node:fs';
+import { JSDOM } from 'jsdom';
 import { describe, expect, it } from 'vitest';
+import { mountMethodologySignSvgs } from '../src/js/pen-frame.js';
 
 describe('methodology sign fidelity', () => {
   it('keeps the exact Pen sign-list rhythm and source colour tokens', () => {
@@ -9,5 +11,17 @@ describe('methodology sign fidelity', () => {
     expect(css).toContain('.method-signs i {\n  display: grid;\n  width: 24px;\n  height: 24px;\n  place-items: center;\n  border-radius: 6px;\n  background: #edf7e9;');
     expect(css).toContain('.method-signs article:nth-child(2) i {\n  background: #ededed;\n  color: #131313;');
     expect(css).toContain('.method-signs article:nth-child(3) i {\n  background: #f0f0f0;\n  color: #7a7a7a;');
+  });
+
+  it('mounts the source Pen vectors for each methodology sign', () => {
+    const dom = new JSDOM(`
+      <div id="page"><div class="method-signs"><i></i><i></i></div></div>
+      <div id="pen"><div data-pencil-name="Sign Подтверждён"><div data-pencil-name="Icon Box"><svg data-source-icon="confirmed"><path d="source-confirmed" /></svg></div></div><div data-pencil-name="Sign Был тайный покупатель"><div data-pencil-name="Icon Box"><svg data-source-icon="shopper"><path d="source-shopper" /></svg></div></div></div>`);
+
+    mountMethodologySignSvgs(dom.window.document.querySelector('#page'), dom.window.document.querySelector('#pen'));
+
+    expect([...dom.window.document.querySelectorAll('.method-signs svg')].map((svg) => svg.dataset.sourceIcon)).toEqual(['confirmed', 'shopper']);
+    expect([...dom.window.document.querySelectorAll('.method-signs svg')].every((svg) => svg.classList.contains('method-sign__source-icon'))).toBe(true);
+    expect(dom.window.document.querySelector('.method-signs i').textContent).toBe('');
   });
 });

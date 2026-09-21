@@ -43,4 +43,12 @@ describe('catalog filters', () => {
     expect(css).toMatch(/\.catalog__legend \.legend__dot \{[\s\S]*?width: 22px;[\s\S]*?height: 22px;/);
     expect(css).toContain('.catalog__legend .legend__dot::before');
   });
+
+  it('does not render report-age legend entries above the services-rating table', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+    const ratingTable = app.match(/const table = `([\s\S]*?)`;\n {2}const stopped/);
+
+    expect(ratingTable?.[1]).not.toContain('Отчёт актуален');
+    expect(ratingTable?.[1]).not.toContain('Требует обновления');
+  });
 });
