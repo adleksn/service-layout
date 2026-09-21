@@ -36,4 +36,11 @@ describe('catalog filters', () => {
     expect(css).toContain('.check-icon::before,\n.promo-icon::before,\n.stale-icon::before');
     expect(css).toContain('data:image/svg+xml');
   });
+
+  it('uses the Pen-sized SVG icon boxes for catalog legends', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toMatch(/\.catalog__legend \.legend__dot \{[\s\S]*?width: 22px;[\s\S]*?height: 22px;/);
+    expect(css).toContain('.catalog__legend .legend__dot::before');
+  });
 });
