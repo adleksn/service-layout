@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
 import { readFileSync } from 'node:fs';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { setupDisclosures, setupMobileMenu, setupReviewForm, setupServiceStatusBadges, setupTabs } from '../src/js/ui.js';
+import { setupCatalogLegend, setupDisclosures, setupMobileMenu, setupReviewForm, setupServiceStatusBadges, setupTabs } from '../src/js/ui.js';
 
 const restoreDom = () => {
   vi.unstubAllGlobals();
@@ -85,6 +85,29 @@ describe('semantic page interactions', () => {
     expect(dom.window.document.querySelector('#answer-one').hidden).toBe(true);
     expect(second.getAttribute('aria-expanded')).toBe('true');
     expect(dom.window.document.querySelector('#answer-two').hidden).toBe(false);
+  });
+
+  it('keeps the catalog status legend collapsed until its mobile trigger is pressed', () => {
+    const dom = new JSDOM(`
+      <section class="catalog">
+        <div class="catalog__legend catalog__legend--disclosure">
+          <button data-catalog-legend-toggle aria-controls="catalog-status-legend">Статусы</button>
+          <div class="legend" id="catalog-status-legend">Подтверждён Был тайный покупатель Новый</div>
+        </div>
+      </section>`);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('matchMedia', () => ({ matches: true, addEventListener: vi.fn() }));
+
+    setupCatalogLegend(dom.window.document);
+    const button = dom.window.document.querySelector('[data-catalog-legend-toggle]');
+    const panel = dom.window.document.querySelector('#catalog-status-legend');
+    expect(button.getAttribute('aria-expanded')).toBe('false');
+    expect(panel.hidden).toBe(true);
+
+    button.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    expect(button.getAttribute('aria-expanded')).toBe('true');
+    expect(panel.hidden).toBe(false);
   });
 
   it('validates the review amount and accepts a complete local review', () => {

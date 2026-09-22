@@ -47,6 +47,28 @@ export function setupMobileMenu(root = document) {
   });
 }
 
+export function setupCatalogLegend(root = document) {
+  const toggle = root.querySelector('[data-catalog-legend-toggle]');
+  const panel = root.querySelector('#catalog-status-legend');
+  if (!toggle || !panel) return;
+
+  const mobileQuery = globalThis.matchMedia?.('(max-width: 767px)');
+  let open = false;
+  const sync = () => {
+    const compact = mobileQuery?.matches ?? false;
+    toggle.hidden = !compact;
+    panel.hidden = compact && !open;
+    toggle.setAttribute('aria-expanded', String(compact && open));
+  };
+
+  toggle.addEventListener('click', () => {
+    open = !open;
+    sync();
+  });
+  mobileQuery?.addEventListener?.('change', sync);
+  sync();
+}
+
 export function setupDisclosures(root = document) {
   // The authored rating FAQ contains the full answer copy; keeping it here
   // prevents the responsive line count from drifting away from the Pen frame.
