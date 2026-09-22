@@ -32,6 +32,14 @@ describe('header CTA fidelity', () => {
     expect(css).toContain('.dzen svg,\n.footer__dzen svg { display: block; width: 100%; height: 100%; }');
   });
 
+  it('stacks the mobile Dzen icon above its centered label', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.footer__mobile-bottom .footer__dzen { flex-direction: column; align-items: center; text-align: center; }');
+    expect(css).toContain('.footer__mobile-bottom .footer__dzen svg { margin-inline: auto; }');
+    expect(css).toContain('.footer .footer__mobile-bottom { height: auto; min-height: 0; }');
+  });
+
   it('keeps the bordered shared header at the 74px Pen outer height', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 

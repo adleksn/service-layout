@@ -1297,8 +1297,10 @@ form textarea {
     padding-top: 16px;
     border-top: 1px solid #2b2b2b;
   }
-  .footer__mobile-bottom .footer__dzen { height: 28px; gap: 6px; color: #b5b5b5 !important; font-size: 13px !important; font-weight: 600; line-height: 19px; }
+  .footer__mobile-bottom .footer__dzen { flex-direction: column; align-items: center; text-align: center; }
+  .footer__mobile-bottom .footer__dzen { height: auto; gap: 6px; color: #b5b5b5 !important; font-size: 13px !important; font-weight: 600; line-height: 19px; }
   .footer__mobile-bottom .footer__dzen svg { flex-basis: 28px; width: 28px; height: 28px; }
+  .footer__mobile-bottom .footer__dzen svg { margin-inline: auto; }
   .footer__mobile-bottom > a:not(.footer__dzen),
   .footer__mobile-bottom > span { color: #b5b5b5; font-size: 12px; line-height: 18px; }
   .footer__mobile-bottom > span { color: #8a8a8a; }
@@ -4242,7 +4244,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .header.header .menu-button { width: 40px; min-width: 40px; height: 40px; min-height: 40px; margin-left: 10px; border-radius: 8px; background: #f5f5f5; color: #3a3a3a; font-size: 22px; }
   .footer.footer { padding: 36px 16px; }
   .footer .footer__mobile-top { height: 42px; }
-  .footer .footer__mobile-bottom { height: 107.5px; min-height: 0; }
+  .footer .footer__mobile-bottom { height: auto; min-height: 0; }
 }
 @media (min-width: 768px) and (max-width: 1199px) {
   /* Pen's 1024 frame keeps the desktop navigation rather than a scaled shell. */
