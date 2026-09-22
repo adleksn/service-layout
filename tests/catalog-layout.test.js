@@ -17,4 +17,10 @@ describe('rating catalog layout', () => {
   it('restores the filter panel when the viewport grows beyond mobile', () => {
     expect(app).toContain("window.addEventListener('resize', syncFilterPanel)");
   });
+
+  it('uses the Pen mobile service-card treatment rather than a cropped data table', () => {
+    expect(css).toContain('.layout--catalog .catalog tbody tr');
+    expect(css).toContain('.layout--catalog .catalog td:nth-child(6)');
+    expect(css).toContain('content: \'отчёт\';');
+  });
 });

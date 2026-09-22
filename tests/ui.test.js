@@ -91,8 +91,8 @@ describe('semantic page interactions', () => {
     const dom = new JSDOM(`
       <section class="catalog">
         <div class="catalog__legend catalog__legend--disclosure">
-          <button data-catalog-legend-toggle aria-controls="catalog-status-legend">Статусы</button>
-          <div class="legend" id="catalog-status-legend">Подтверждён Был тайный покупатель Новый</div>
+          <button data-catalog-legend-toggle aria-controls="catalog-status-legend">Обозначения</button>
+          <div class="legend" id="catalog-status-legend">Подтверждён Был тайный покупатель Новый Отчёт актуален Требует обновления Отчёта нет</div>
         </div>
       </section>`);
     vi.stubGlobal('window', dom.window);
@@ -104,6 +104,9 @@ describe('semantic page interactions', () => {
     const panel = dom.window.document.querySelector('#catalog-status-legend');
     expect(button.getAttribute('aria-expanded')).toBe('false');
     expect(panel.hidden).toBe(true);
+    expect(panel.textContent).toContain('Отчёт актуален');
+    expect(panel.textContent).toContain('Требует обновления');
+    expect(panel.textContent).toContain('Отчёта нет');
 
     button.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
     expect(button.getAttribute('aria-expanded')).toBe('true');

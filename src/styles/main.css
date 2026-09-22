@@ -1095,6 +1095,144 @@ form textarea {
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* Rating catalogue — direct semantic counterpart of the supplied Pen frames. */
+.catalog__legends { display: flex; align-items: center; gap: 20px; }
+.catalog__legends .legend { margin: 0; padding: 0; }
+.catalog__legends .legend--reports { padding-left: 20px; border-left: 1px solid var(--border); }
+.catalog__legend .legend__dot--fresh,
+.catalog__legend .legend__dot--stale,
+.catalog__legend .legend__dot--none {
+  display: inline-grid;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #45a828;
+  color: #7a7a7a;
+  font: 400 13px/1 Inter, system-ui, sans-serif;
+}
+.catalog__legend .legend__dot--stale { background: #f5c069; }
+.catalog__legend .legend__dot--none { width: auto; background: transparent; }
+.catalog__legend .legend__dot--fresh::before,
+.catalog__legend .legend__dot--stale::before,
+.catalog__legend .legend__dot--none::before { content: none; }
+.legend__trigger-icon { display: none; }
+
+@media (max-width: 767px) {
+  .layout--catalog .catalog__legend--disclosure {
+    display: block;
+    margin: 0 0 16px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  .layout--catalog .catalog__legend--disclosure > button {
+    display: grid;
+    grid-template-columns: 16px 1fr 16px;
+    gap: 10px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #f5f5f5;
+    color: #3a3a3a;
+    font: 600 14px/20px Inter, system-ui, sans-serif;
+    text-align: left;
+  }
+  .legend__trigger-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%237A7A7A' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 3.5h11M2.5 8h11M2.5 12.5h11'/%3E%3C/svg%3E");
+  }
+  .layout--catalog .catalog__legend--disclosure > .catalog__legends {
+    display: grid;
+    gap: 14px;
+    margin-top: 8px;
+    padding: 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #f5f5f5;
+  }
+  .layout--catalog .catalog__legend--disclosure > .catalog__legends[hidden] { display: none; }
+  .catalog__legends .legend,
+  .catalog__legends .legend--reports {
+    display: grid;
+    gap: 10px;
+    padding: 0;
+    border: 0;
+  }
+  .catalog__legends .legend--reports { padding-top: 14px; border-top: 1px solid var(--border); }
+  .catalog__legends .legend span { font-size: 13px; line-height: 18px; }
+
+  .layout--catalog .catalog .table-wrap { overflow: visible; }
+  .layout--catalog .catalog table,
+  .layout--catalog .catalog tbody { display: block; width: 100%; }
+  .layout--catalog .catalog thead { display: none; }
+  .layout--catalog .catalog tbody { display: grid; gap: 12px; }
+  .layout--catalog .catalog tbody tr {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'place service action'
+      'rating reviews fee'
+      'report report report';
+    gap: 8px;
+    width: 100%;
+    min-height: 0;
+    padding: 11px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+  }
+  .layout--catalog .catalog td { display: none; min-width: 0; padding: 0 !important; }
+  .layout--catalog .catalog td:first-child { display: grid; grid-area: place; place-items: center; width: 24px !important; height: 24px; border-radius: 12px; background: #f5f5f5; color: #7a7a7a; font-size: 12px; font-weight: 700; }
+  .layout--catalog .catalog td:nth-child(2) { display: block; grid-area: service; width: auto !important; }
+  .layout--catalog .catalog td:nth-child(2) a { display: block; }
+  .layout--catalog .catalog td:nth-child(2) .service-mark { display: none; }
+  .layout--catalog .catalog td:nth-child(2) b { font-size: 16px; line-height: 22px; }
+  .layout--catalog .catalog td:nth-child(2) small { display: none; }
+  .layout--catalog .catalog td:nth-child(3) { display: block; position: static; grid-area: rating; width: auto !important; }
+  .layout--catalog .catalog td:nth-child(3) .score { font-size: 18px; line-height: 22px; }
+  .layout--catalog .catalog td:nth-child(4) { display: block; grid-area: fee; align-self: center; color: #131313; font-size: 15px; font-weight: 600; text-align: right; }
+  .layout--catalog .catalog td:nth-child(5) { display: block; grid-area: reviews; align-self: center; color: #2f8a16; font-size: 14px; font-weight: 600; }
+  .layout--catalog .catalog td:nth-child(5)::after { content: ' отзывов'; }
+  .layout--catalog .catalog td:nth-child(6) { display: flex; grid-area: report; align-items: center; gap: 8px; min-height: 31px; padding-top: 8px !important; border-top: 1px solid var(--border); color: #7a7a7a; font-size: 13px; }
+  .layout--catalog .catalog td:nth-child(6)::before { content: 'отчёт'; color: #7a7a7a; font-weight: 400; }
+  .layout--catalog .catalog-row--fresh td:nth-child(6) { color: #2f8a16; font-weight: 600; }
+  .layout--catalog .catalog-row--fresh td:nth-child(6)::before { width: 8px; height: 8px; border-radius: 50%; background: #45a828; color: transparent; }
+  .layout--catalog .catalog-row--old td:nth-child(6) { color: #b98100; font-weight: 600; }
+  .layout--catalog .catalog-row--old td:nth-child(6)::before { width: 8px; height: 8px; border-radius: 50%; background: #f5c069; color: transparent; }
+  .layout--catalog .catalog-row--none td:nth-child(6)::before { content: '—'; }
+  .layout--catalog .catalog td.row-action { display: block; position: static; grid-area: action; width: auto !important; transform: none; }
+  .layout--catalog .catalog .details-button { display: grid; place-items: center; width: 24px; min-height: 24px; padding: 0; border: 0; border-radius: 0; background: transparent; color: transparent; font-size: 0; }
+  .layout--catalog .catalog .details-button::after { content: '›'; color: #7a7a7a; font: 400 26px/20px Inter, system-ui, sans-serif; }
+  .layout--catalog .catalog td:nth-child(7),
+  .layout--catalog .catalog td:nth-child(8),
+  .layout--catalog .catalog td:nth-child(9) { display: none; }
+}
+
+@media (min-width: 768px) and (max-width: 899px) {
+  /* The four fixed desktop footer columns cannot fit the 720px tablet rail. */
+  .footer .footer__top {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 32px;
+  }
+  .footer .footer__top > .footer__brand {
+    grid-column: 1 / -1;
+    width: auto;
+    flex-basis: auto;
+  }
+  .footer .footer__top > .footer__column,
+  .footer .footer__top > .footer__cta-group {
+    width: auto;
+    min-width: 0;
+    flex-basis: auto;
+  }
+  .footer .footer__cta-group { align-items: flex-start; gap: 20px; }
+}
+
 /* The rating-status legend is a compact disclosure only on phones. */
 .catalog__legend--disclosure > button { display: none; }
 @media (max-width: 767px) {
