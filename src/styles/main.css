@@ -1166,6 +1166,22 @@ form textarea {
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+@media (min-width: 375px) and (max-width: 767px) {
+  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-status-badges--empty) {
+    grid-template-rows: 24px 36px 49px 0;
+  }
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(7):has(.mobile-status-badges--empty) { display: none !important; }
+  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-status-badges--promo-only) {
+    grid-template-rows: 24px 36px 49px 22.5px;
+  }
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(7):has(.mobile-status-badges--promo-only),
+  .layout--catalog .catalog[data-type="rating"] .mobile-status-badges--promo-only,
+  .layout--catalog .catalog[data-type="rating"] .mobile-status-badge--promo {
+    min-height: 22.5px;
+    height: 22.5px;
+  }
+}
+
 /* Final 375px authority: the supplied rating frame is the source of truth. */
 @media (min-width: 375px) and (max-width: 767px) {
   .catalog-faq .faq { display: block; }
@@ -1181,6 +1197,45 @@ form textarea {
   .footer .footer__mobile-bottom .footer__dzen { flex-direction: row; align-items: center; gap: 6px; height: 28px; margin: 0; text-align: left; }
   .footer .footer__mobile-bottom .footer__dzen svg { flex-basis: 28px; width: 28px; height: 28px; margin: 0; }
   .footer .footer__mobile-bottom > a:not(.footer__dzen) { margin: 0; }
+
+  /* Pen “Рейтинг Mobile 375”: every service-card row has a fixed vertical track. */
+  .layout--catalog .catalog[data-type="rating"] tbody tr {
+    grid-template-rows: 24px 36px 49px 24px 22.5px;
+    padding-bottom: 10px;
+  }
+  .layout--catalog .catalog[data-type="rating"] tbody tr:not(:has(.mobile-promo-badge)) {
+    grid-template-rows: 24px 36px 49px 24px;
+  }
+  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-status-badges--empty) {
+    grid-template-rows: 24px 36px 49px 0;
+  }
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(4) { min-height: 0; gap: 0; }
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(3) { align-self: center; }
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(6) {
+    box-sizing: border-box;
+    height: 49px;
+    min-height: 49px;
+    transform: translateY(-.5px);
+  }
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(7),
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(9) { transform: translateY(-1px); }
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(7):has(.mobile-status-badges--empty) { display: none !important; }
+  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-status-badges--promo-only) {
+    grid-template-rows: 24px 36px 49px 22.5px;
+  }
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(7):has(.mobile-status-badges--promo-only),
+  .layout--catalog .catalog[data-type="rating"] .mobile-status-badges--promo-only,
+  .layout--catalog .catalog[data-type="rating"] .mobile-status-badge--promo {
+    min-height: 22.5px;
+    height: 22.5px;
+  }
+  .layout--catalog .catalog[data-type="rating"] .mobile-promo-badge {
+    box-sizing: border-box;
+    min-height: 22.5px;
+    height: 22.5px;
+    padding: 4px 8px;
+    font: 600 14px/14.5px Inter, system-ui, sans-serif;
+  }
 }
 
 /* Rating page header: one semantic block lets the responsive composition use

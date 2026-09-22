@@ -59,7 +59,7 @@ export const services = [
   { id: 'plati-legko', rank: 1, name: 'Плати Легко!', domain: 'pay-saas.ru', rating: 4.9, fee: 10, feeLabel: '10 — 20%', reviews: 167, reportDate: '12.02.2026', tags: ['fee-10', 'fee-15', 'fresh', 'promo', 'verified', 'new'] },
   { id: 'sanpay', rank: 2, name: 'SanPay', domain: 'sanpay.ru', rating: 4.5, fee: 12, feeLabel: '12 — 18%', reviews: 86, reportDate: '20.11.2025', tags: ['fee-15', 'fresh', 'verified'] },
   { id: 'prosto-pay', rank: 3, name: 'Prosto Pay', domain: 'prostopay.com', rating: 4.2, fee: 15, feeLabel: '15%', reviews: 48, reportDate: '04.03.2024', tags: ['fee-15', 'old'] },
-  { id: 'o-plati', rank: 4, name: 'O-Plati', domain: 'o-plati.by', rating: 4.2, fee: 10, feeLabel: '10 — 15%', reviews: 101, reportDate: '15.01.2026', tags: ['fee-10', 'fee-15', 'fresh', 'mystery'] },
+  { id: 'o-plati', rank: 4, name: 'O-Plati', domain: 'o-plati.by', rating: 4.2, fee: 10, feeLabel: '10 — 15%', reviews: 101, reportDate: '15.01.2026', tags: ['fee-10', 'fee-15', 'fresh', 'mystery', 'verified', 'promo'] },
   { id: 'getpayall', rank: 5, name: 'GetPayAll', domain: 'getpayall.com', rating: 4, fee: 18, feeLabel: '18%', reviews: 6, reportDate: '—', tags: ['fee-20', 'none'] },
   { id: 'oplata-guru', rank: 6, name: 'Oplata.guru', domain: 'oplata.guru', rating: 4, fee: 12, feeLabel: '12 — 18%', reviews: 14, reportDate: '08.2025', tags: ['fee-15', 'old'] },
   { id: 'nowall', rank: 7, name: 'NOWALL', domain: 'nowall.io', rating: 4, fee: 15, feeLabel: '15 — 20%', reviews: 8, reportDate: '—', tags: ['fee-20', 'none'] },

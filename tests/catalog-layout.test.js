@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 const app = readFileSync('src/js/app.js', 'utf8');
 const css = readFileSync('src/styles/main.css', 'utf8');
 const ui = readFileSync('src/js/ui.js', 'utf8');
+const catalog = readFileSync('src/js/catalog.js', 'utf8');
 
 describe('rating catalog layout', () => {
   it('uses the full content width once the ad column is absent', () => {
@@ -47,6 +48,20 @@ describe('rating catalog layout', () => {
     expect(app).toContain('mobile-status-badges');
     expect(app).toContain('report-date');
     expect(css).toContain("content: 'Отчёт ';");
+  });
+
+  it('uses the Pen mobile card grid heights for each service state', () => {
+    expect(css).toContain('grid-template-rows: 24px 36px 49px 24px 22.5px;');
+  });
+
+  it('keeps the O-Plati status and promo state shown by the fourth Pen card', () => {
+    expect(catalog).toContain("tags: ['fee-10', 'fee-15', 'fresh', 'mystery', 'verified', 'promo']");
+  });
+
+  it('derives every mobile rating-card status from the supplied Pen states', () => {
+    expect(app).toContain('const ratingMobileStates = {');
+    expect(app).toContain("21: ['promo']");
+    expect(app).toContain('mobile-status-badges--empty');
   });
 
   it('keeps the lower mobile rating sections as their own Pen background bands', () => {

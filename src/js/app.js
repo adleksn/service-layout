@@ -137,6 +137,15 @@ function setupReviewCardLinks(root) {
   });
 }
 
+const ratingMobileStates = {
+  1: ['verified', 'mystery'], 2: ['verified', 'mystery'], 3: ['verified'], 4: ['verified', 'mystery'], 5: ['verified'],
+  6: ['verified', 'promo'], 7: ['new'], 8: ['verified', 'new'], 9: ['verified', 'promo'], 10: ['new'],
+  12: ['verified'], 17: ['verified'], 19: ['verified'], 20: ['new'], 21: ['promo'], 24: ['verified'], 25: ['verified'],
+  29: ['verified'], 30: ['verified'], 32: ['verified'], 35: ['verified'], 38: ['verified'], 41: ['verified'], 42: ['verified'],
+  43: ['verified'], 45: ['verified'], 47: ['new'], 48: ['verified'], 51: ['verified'],
+};
+const ratingSeparatePromoRanks = new Set([1, 4]);
+
 function setupCatalog() {
   const root = app.querySelector('[data-catalog]'); if (!root) return;
   const data = root.dataset.type === 'cards' ? cards : services;
@@ -165,13 +174,15 @@ function setupCatalog() {
     const destination = cardsMode ? '/virtual-card.html' : '/service.html';
     rows.innerHTML = visible.map((item) => {
       const reportState = item.tags.includes('fresh') ? 'fresh' : item.tags.includes('old') ? 'old' : 'none';
-      const mobileBadges = [
-        item.tags.includes('verified') && '<span class="mobile-status-badge mobile-status-badge--verified">Подтверждён</span>',
-        (item.tags.includes('fresh') || item.tags.includes('old')) && '<span class="mobile-status-badge mobile-status-badge--check">Был тайный покупатель</span>',
-      ].filter(Boolean).join('');
+      const mobileState = cardsMode ? [] : (ratingMobileStates[item.rank] || []);
+      const mobileBadges = mobileState.map((stateName) => {
+        const labels = { verified: 'Подтверждён', mystery: 'Был тайный покупатель', new: 'Новый', promo: 'Есть промокод' };
+        return `<span class="mobile-status-badge mobile-status-badge--${stateName}">${labels[stateName]}</span>`;
+      }).join('');
+      const hasSeparatePromo = !cardsMode && ratingSeparatePromoRanks.has(item.rank);
       const ratingCells = cardsMode
         ? `<td data-label="Выпуск">${item.priceLabel}</td><td data-label="Платёжная система">${item.system}</td><td data-label="Валюта">${item.currency}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Тайный покупатель">${item.tags.includes('fresh') ? '<i class="check-icon">✓</i>' : item.tags.includes('old') ? '<i class="stale-icon">◷</i>' : '—'}</td><td data-label="Промокод">${item.tags.includes('promo') ? '<i class="promo-icon">%</i>' : '—'}</td>`
-        : `<td data-label="Комиссия">${item.feeLabel}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Отчёт"><span class="report-date">${item.reportDate}</span></td><td data-label="Статус"><span class="desktop-status">${item.tags.includes('verified') ? '<i class="check-icon">✓</i>' : '—'}</span><span class="mobile-status-badges">${mobileBadges}</span></td><td data-label="Тайный покупатель">${item.tags.includes('fresh') ? '<i class="check-icon">✓</i>' : item.tags.includes('old') ? '<i class="stale-icon">◷</i>' : '—'}</td><td data-label="Промокод"><span class="desktop-status">${item.tags.includes('promo') ? '<i class="promo-icon">%</i>' : '—'}</span>${item.tags.includes('promo') ? '<span class="mobile-promo-badge">Есть промокод</span>' : ''}</td>`;
+        : `<td data-label="Комиссия">${item.feeLabel}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Отчёт"><span class="report-date">${item.reportDate}</span></td><td data-label="Статус"><span class="desktop-status">${item.tags.includes('verified') ? '<i class="check-icon">✓</i>' : '—'}</span><span class="mobile-status-badges${mobileBadges ? '' : ' mobile-status-badges--empty'}${mobileState.length === 1 && mobileState[0] === 'promo' ? ' mobile-status-badges--promo-only' : ''}">${mobileBadges}</span></td><td data-label="Тайный покупатель">${item.tags.includes('fresh') ? '<i class="check-icon">✓</i>' : item.tags.includes('old') ? '<i class="stale-icon">◷</i>' : '—'}</td><td data-label="Промокод"><span class="desktop-status">${item.tags.includes('promo') ? '<i class="promo-icon">%</i>' : '—'}</span>${hasSeparatePromo ? '<span class="mobile-promo-badge">Есть промокод</span>' : ''}</td>`;
       return `<tr class="catalog-row catalog-row--${reportState}"><td data-label="Место">${item.rank}</td><td data-label="Сервис"><a href="${destination}"><span class="service-mark service-mark--small">${item.name[0]}</span><span><b>${item.name}</b>${item.tags.includes('promo') ? '<em>PROMO</em>' : ''}<small>${item.domain}</small></span></a></td><td data-label="Оценка">${score(item.rating)}</td>${ratingCells}<td class="row-action"><a class="details-button" href="${destination}" aria-label="Подробнее о ${item.name}">Подробнее</a></td></tr>`;
     }).join('');
     resolveSitePaths(root);
