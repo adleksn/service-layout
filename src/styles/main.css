@@ -1123,7 +1123,7 @@ form textarea {
   .faq > div.is-open { padding: 16px 0 0; }
   .faq button { display: flex; min-height: 21px; padding: 0; align-items: center; justify-content: space-between; gap: 12px; }
   .faq > div.is-open > button { padding-inline: 14px; }
-  .faq > div > div { box-sizing: content-box; width: 100%; margin: 0 -1px -1px; padding: 12px 14px; }
+  .faq > div > div { box-sizing: border-box; width: 100%; margin: 0; padding: 12px 14px; }
 }
 
 /* Footer is a distinct authored composition at each Pen breakpoint.  Keeping
@@ -4251,7 +4251,9 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .header.header .nav a:last-child { display: none; }
   .header.header .dzen { width: 32px; height: 32px; margin-left: auto; flex: 0 0 32px; }
   .header.header .header__cta { width: auto; min-height: 40px; height: 40px; margin-left: 14px; padding: 0 16px; font-size: 14px; line-height: 20px; }
+  .footer.footer { padding: 56px 0; }
   .footer.footer .footer__top { gap: 32px; padding: 0; border: 0; }
+  .footer.footer .footer__bottom { box-sizing: content-box; height: 63.5px; min-height: 0; margin-top: 36px; padding: 20px 0 0; gap: 8px; border-top: 1px solid #2b2b2b; }
 }
 @media (min-width: 768px) {
   .faq { gap: 10px; }
@@ -4268,7 +4270,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .faq > div.is-open { padding: 16px 0 0; }
   .faq button { display: flex; min-height: 21px; padding: 0; align-items: center; justify-content: space-between; gap: 12px; }
   .faq > div.is-open > button { padding-inline: 14px; }
-  .faq > div > div { box-sizing: content-box; width: 100%; margin: 0 -1px -1px; padding: 12px 14px; }
+  .faq > div > div { box-sizing: border-box; width: 100%; margin: 0; padding: 12px 14px; }
 }
 
 @media (min-width: 768px) and (max-width: 899px) {
