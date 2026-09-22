@@ -64,6 +64,13 @@ describe('rating catalog layout', () => {
     expect(app).toContain('mobile-status-badges--empty');
   });
 
+  it('keeps mobile review counts clear of scores and renders report-status dots', () => {
+    expect(css).toContain('padding-left: 29px;');
+    expect(css).toContain('.catalog-row--fresh td:nth-child(6)::before');
+    expect(css).toContain('.catalog-row--old td:nth-child(6)::before');
+    expect(css).toContain("content: '' !important;");
+  });
+
   it('keeps the lower mobile rating sections as their own Pen background bands', () => {
     expect(app).toContain('catalog-discontinued');
     expect(css).toContain('.catalog-discontinued');
