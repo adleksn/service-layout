@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 
 const app = readFileSync('src/js/app.js', 'utf8');
 const css = readFileSync('src/styles/main.css', 'utf8');
+const ui = readFileSync('src/js/ui.js', 'utf8');
 
 describe('rating catalog layout', () => {
   it('uses the full content width once the ad column is absent', () => {
@@ -29,5 +30,37 @@ describe('rating catalog layout', () => {
   it('anchors the report legend on the right side of the desktop legend row', () => {
     expect(css).toContain('.catalog__legends { display: flex; align-items: center; justify-content: space-between; width: 100%; }');
     expect(css).not.toContain('.catalog__legends .legend--reports { padding-left: 20px; border-left: 1px solid var(--border); }');
+  });
+
+  it('groups the mobile rating intro into the single page-header frame from Pen', () => {
+    expect(app).toContain('catalog-page-header');
+    expect(app).toContain('catalog-page-metrics');
+    expect(css).toContain('.catalog-page-header');
+  });
+
+  it('keeps the mobile rating introduction to the three-line Pen copy', () => {
+    expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки.');
+    expect(app).not.toContain('проверки, чтобы найти подходящий вариант.');
+  });
+
+  it('retains the Pen report label and visible service status chips in mobile cards', () => {
+    expect(app).toContain('mobile-status-badges');
+    expect(app).toContain('report-date');
+    expect(css).toContain("content: 'Отчёт ';");
+  });
+
+  it('keeps the lower mobile rating sections as their own Pen background bands', () => {
+    expect(app).toContain('catalog-discontinued');
+    expect(css).toContain('.catalog-discontinued');
+  });
+
+  it('includes the complete Pen explanation in the mobile rating SEO section', () => {
+    expect(app).toContain('Виртуальные зарубежные карты');
+    expect(app).toContain('Если у компании появляются массовые жалобы, мы понижаем её позицию');
+  });
+
+  it('uses the Pen FAQ copy for the expanded mobile answer and discontinued-services question', () => {
+    expect(ui).toContain('Позиции пересчитываются каждую неделю');
+    expect(app).toContain('Почему сервис из «Прекратили работу» ещё принимает платежи?');
   });
 });

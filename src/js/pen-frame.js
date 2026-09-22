@@ -533,6 +533,10 @@ function setupPenFaq(frame) {
       item.append(answer);
     }
     if (!question || !answer) return;
+    if (index === 0) {
+      const answerCopy = answer.querySelector('[data-pencil-name="Answer"]') || answer;
+      answerCopy.textContent = 'Позиции пересчитываются каждую неделю, а полная контрольная проверка проходит не реже раза в год.';
+    }
     const answerId = `pen-faq-answer-${index}`;
     answers.set(item, answer);
     item.classList.add('pen-faq-item');

@@ -1083,6 +1083,77 @@ form textarea {
   .check-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* Final rating-page mobile authority: these values are taken from the
+   “Рейтинг Mobile 375” Pen frame. */
+@media (max-width: 767px) {
+  .catalog-page-header .catalog-page-header__inner { padding: 28px 0 32px !important; }
+  .catalog-page-header .catalog-page-header__breadcrumbs { display: flex; align-items: center; gap: 6px; min-height: 14px; margin: 0; padding: 0 !important; font: 400 12px/14px Inter, system-ui, sans-serif !important; }
+  .catalog-page-header .catalog-page-header__breadcrumbs b { color: #131313; font-weight: 600; }
+  .catalog-page-header h1 { margin: 16px 0 !important; font: 700 28px/34px Inter, system-ui, sans-serif !important; letter-spacing: -.4px; }
+  .catalog-page-header > .catalog-page-header__inner > p { font: 400 15px/24px Inter, system-ui, sans-serif !important; }
+  .catalog-page-header .catalog-page-metrics { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 16px; }
+  .catalog-page-header .catalog-page-metrics b { font: 600 13px/20px Inter, system-ui, sans-serif; }
+  .layout.layout--catalog { gap: 0; padding-bottom: 48px; }
+  .layout--catalog > div:first-child { width: 100%; }
+  .layout--catalog .catalog { padding-top: 24px; }
+  .layout--catalog .catalog__legend--disclosure { padding: 0 !important; }
+  .layout--catalog .catalog__legend--disclosure > button { width: 100%; }
+
+  .layout--catalog .catalog tbody tr {
+    grid-template-areas:
+      'place service action'
+      'rating reviews fee'
+      'report report report'
+      'badges badges badges'
+      'promo promo promo';
+  }
+  .layout--catalog .catalog td:nth-child(6) { box-sizing: content-box; height: 31px; min-height: 31px; padding: 8px 0 !important; }
+  .layout--catalog .catalog td:nth-child(6) .report-date::before { content: 'Отчёт '; }
+  .layout--catalog .catalog td:nth-child(2) .service-mark,
+  .layout--catalog .catalog td:nth-child(2) small { display: none !important; }
+  .layout--catalog .catalog td:nth-child(2) a { display: block !important; }
+  .layout--catalog .catalog td:nth-child(7) { display: block !important; grid-area: badges; grid-column: 1 / -1; grid-row: 4; width: 100% !important; min-height: 24px; }
+  .layout--catalog .catalog td:nth-child(7) .desktop-status { display: none; }
+  .layout--catalog .catalog td:nth-child(7) .mobile-status-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+  .layout--catalog .catalog td:nth-child(8) { display: none; }
+  .layout--catalog .catalog td:nth-child(9) { display: block !important; grid-area: promo; grid-column: 1 / -1; grid-row: 5; width: 100% !important; min-height: 0; }
+  .layout--catalog .catalog td:nth-child(9) .desktop-status { display: none; }
+  .layout--catalog .catalog td:nth-child(9):not(:has(.mobile-promo-badge)) { display: none !important; }
+  .mobile-status-badge { display: inline-flex; align-items: center; min-height: 24px; padding: 4px 8px; border-radius: 8px; color: #131313; background: #ededed; font: 600 12px/16px Inter, system-ui, sans-serif; }
+  .mobile-status-badge--verified { color: #45a828; background: #edf7e9; }
+  .mobile-promo-badge { display: inline-flex; align-items: center; min-height: 24px; padding: 4px 8px; border-radius: 8px; color: #6b40c2; background: #f1ebfe; font: 600 12px/16px Inter, system-ui, sans-serif; }
+  .layout--catalog .catalog .details-button { width: 24px; height: 24px; min-height: 24px; }
+
+  .catalog-discontinued,
+  .catalog-faq {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 40px 16px 48px;
+    background: #f5f5f5;
+  }
+  .catalog-discontinued { display: grid; gap: 36px; }
+  .catalog-discontinued .discontinued { display: flex; flex-direction: column; width: 100%; max-width: 343px; margin: 0 auto; padding: 0; gap: 14px; }
+  .catalog-discontinued .discontinued__title { display: flex; align-items: center; height: 25px; min-height: 25px; gap: 8px; }
+  .catalog-discontinued .discontinued h2 { font: 700 20px/25px Inter, system-ui, sans-serif; }
+  .catalog-discontinued .discontinued h2 { margin: 0 !important; }
+  .catalog-discontinued .discontinued > p { margin: 0; font: 400 14px/22px Inter, system-ui, sans-serif; }
+  .catalog-discontinued .discontinued > div { margin-top: 0; }
+  .catalog-discontinued .discontinued__grid { grid-template-columns: 1fr !important; gap: 0 !important; }
+  .catalog-discontinued .discontinued__column { width: 100%; }
+  .catalog-seo { box-sizing: border-box; height: 650px; padding: 40px 0 48px; }
+  .catalog-seo .seo-copy { max-width: none; padding: 0; }
+  .catalog-seo .seo-copy { display: flex; flex-direction: column; gap: 18px; }
+  .catalog-seo .seo-copy h2 { margin: 0; font: 700 22px/29px Inter, system-ui, sans-serif; letter-spacing: -.3px; }
+  .catalog-seo .seo-copy p { margin: 0; font: 400 15px/24px Inter, system-ui, sans-serif; }
+  .catalog-faq .faq { display: block; width: 100%; max-width: 343px; margin: 0 auto; padding: 0; }
+  .catalog-faq .faq h2 { margin: 0 0 18px; font: 700 22px/29px Inter, system-ui, sans-serif; }
+  .catalog-faq .faq > div + div { margin-top: 10px; }
+  .footer__mobile-bottom { box-sizing: border-box; height: 124.5px; margin: 0; padding: 16px 0 0; justify-content: center; }
+  .footer__mobile-bottom .footer__dzen { flex-direction: row; gap: 6px; height: 28px; margin: 0; }
+  .footer__mobile-bottom .footer__dzen svg { width: 28px; height: 28px; }
+  .footer__mobile-bottom > a:not(.footer__dzen) { margin: 0; }
+}
+
 @media (max-width: 374px) {
   .container,
   .header__row,
@@ -1093,6 +1164,47 @@ form textarea {
   .brand__text { font-size: 9px; }
   .lead h1 { font-size: 27px; }
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Final 375px authority: the supplied rating frame is the source of truth. */
+@media (min-width: 375px) and (max-width: 767px) {
+  .catalog-faq .faq { display: block; }
+  .catalog-faq .faq h2 { margin: 0 0 18px; font: 700 22px/29px Inter, system-ui, sans-serif; }
+  .catalog-faq .faq > div { gap: 10px; padding: 16px 14px; }
+  .catalog-faq .faq > div.is-open { padding: 16px 0 0; }
+  .catalog-faq .faq > div + div { margin-top: 10px; }
+  .catalog-faq .faq > div > div { padding: 12px 14px; }
+  .catalog-faq .faq button { min-height: 22px; font-size: 14px; line-height: 22px; }
+  .catalog-faq .faq > div.is-open > div { min-height: 114px; }
+  .footer.footer { padding: 36px 16px; }
+  .footer .footer__mobile-bottom { box-sizing: border-box; height: 124.5px; margin: 0; padding: 16px 0 0; justify-content: center; }
+  .footer .footer__mobile-bottom .footer__dzen { flex-direction: row; align-items: center; gap: 6px; height: 28px; margin: 0; text-align: left; }
+  .footer .footer__mobile-bottom .footer__dzen svg { flex-basis: 28px; width: 28px; height: 28px; margin: 0; }
+  .footer .footer__mobile-bottom > a:not(.footer__dzen) { margin: 0; }
+}
+
+/* Rating page header: one semantic block lets the responsive composition use
+   the same continuous paper panel as the supplied Pen frames. */
+.catalog-page-header { background: #f5f5f5; }
+.catalog-page-header__inner { padding: 48px 0 52px; }
+.catalog-page-header__breadcrumbs { margin: 0; padding: 0; }
+.catalog-page-header h1 { max-width: 800px; margin: 18px 0; color: #131313; font: 700 44px/1.12 Mazzard, Inter, system-ui, sans-serif; letter-spacing: -.035em; }
+.catalog-page-header > .catalog-page-header__inner > p { max-width: 650px; margin: 0; color: #3a3a3a; font: 400 19px/1.5 Inter, system-ui, sans-serif; }
+.catalog-page-metrics { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+.catalog-page-metrics b { display: inline-flex; align-items: center; gap: 8px; color: #131313; font: 600 13px/20px Inter, system-ui, sans-serif; }
+.catalog-page-metrics b::before { width: 5px; height: 5px; border-radius: 50%; background: #45a828; content: ''; }
+
+@media (max-width: 767px) {
+  .catalog-page-header__inner { padding: 28px 0 32px; }
+  .catalog-page-header__breadcrumbs { display: flex; align-items: center; gap: 6px; min-height: 14px; font: 400 12px/14px Inter, system-ui, sans-serif; }
+  .catalog-page-header__breadcrumbs b { color: #131313; font-weight: 600; }
+  .catalog-page-header h1 { margin: 16px 0; font: 700 28px/34px Inter, system-ui, sans-serif; letter-spacing: -.4px; }
+  .catalog-page-header > .catalog-page-header__inner > p { font: 400 15px/24px Inter, system-ui, sans-serif; }
+  .catalog-page-metrics { flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 16px; }
+  .catalog-page-metrics b { font: 600 13px/20px Inter, system-ui, sans-serif; }
+  .layout--catalog { gap: 0; padding-bottom: 48px; }
+  .layout--catalog > div:first-child { width: 100%; }
+  .layout--catalog .catalog { padding-top: 24px; }
 }
 
 /* Rating catalogue — direct semantic counterpart of the supplied Pen frames. */

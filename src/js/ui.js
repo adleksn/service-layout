@@ -73,7 +73,7 @@ export function setupDisclosures(root = document) {
   // The authored rating FAQ contains the full answer copy; keeping it here
   // prevents the responsive line count from drifting away from the Pen frame.
   const ratingAnswer = root.querySelector('#rating-faq-0 > p');
-  if (ratingAnswer) ratingAnswer.textContent = 'Позиции в таблице пересчитываются каждую неделю, а полная контрольная проверка каждого сервиса проходит не реже раза в год — дата последней проверки указана в карточке.';
+  if (ratingAnswer) ratingAnswer.textContent = 'Позиции пересчитываются каждую неделю, а полная контрольная проверка проходит не реже раза в год.';
   const setFaqState = (button, open) => {
     const panel = document.getElementById(button.getAttribute('aria-controls'));
     if (!panel) return;
