@@ -1668,10 +1668,12 @@ form textarea {
 .pen-sort-options button { display: block; width: 100%; padding: 9px 10px; border: 0; border-radius: 6px; background: transparent; color: #3a3a3a; font: 14px/20px Inter, sans-serif; text-align: left; cursor: pointer; }
 .pen-sort-options button:hover,.pen-sort-options button:focus-visible { background: #edf7e9; color: #2f8a16; }
 .pen-sort-options button[aria-selected="true"] { color: #2f8a16; font-weight: 600; }
-.pen-frame .pen-faq-item [data-pencil-name="Question Row"] { cursor: pointer; transition: background-color .15s ease; }
+.pen-frame .pen-faq-item [data-pencil-name="Question Row"] { cursor: pointer; transition: background-color .15s ease, color .15s ease; }
 .pen-frame .pen-faq-item { gap: 0 !important; padding: 0 !important; overflow: hidden; }
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"] { min-height: 60px; padding: 0 16px !important; align-items: center !important; }
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"]:hover { background-color: #dedede; }
+.pen-frame .pen-faq-item [data-pencil-name="Question Row"]:hover [data-pencil-name="Question"] { color: #2f8a16 !important; }
+.pen-frame .pen-faq-item [data-pencil-name="Question Row"]:focus-visible [data-pencil-name="Question"] { color: #2f8a16 !important; }
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"]:focus-visible { outline: 2px solid #45a828; outline-offset: -2px; }
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"]::after { display: block; flex: 0 0 18px; width: 18px; height: 18px; margin-left: 12px; content: ''; background: center / 18px 18px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='m4.5 6.75 4.5 4.5 4.5-4.5' stroke='%237A7A7A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"][aria-expanded="true"]::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='m4.5 11.25 4.5-4.5 4.5 4.5' stroke='%237A7A7A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
@@ -3559,11 +3561,13 @@ body {
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
-  transition: background-color .16s ease;
+  transition: background-color .16s ease, color .16s ease;
 }
 /* The complete closed row changes colour, not just the text's hit area. */
 .faq > div:hover > button { background-color: #dedede; }
+.faq > div:hover > button { color: #2f8a16; }
 .faq button:hover { background-color: #dedede; }
+.faq button:focus-visible { color: #2f8a16; }
 
 /* Shared interactive states sampled from the Pen component compositions. */
 .button {

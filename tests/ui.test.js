@@ -15,6 +15,8 @@ describe('semantic page interactions', () => {
 
     expect(css).toContain('.faq > div:hover > button { background-color: #dedede; }');
     expect(css).toContain('.pen-frame .pen-faq-item [data-pencil-name="Question Row"]:hover { background-color: #dedede; }');
+    expect(css).toContain('.faq > div:hover > button { color: #2f8a16; }');
+    expect(css).toContain('.pen-frame .pen-faq-item [data-pencil-name="Question Row"]:hover [data-pencil-name="Question"] { color: #2f8a16 !important; }');
   });
 
   it('keeps shared Pen component hover states aligned with the reference palette', () => {
