@@ -1096,9 +1096,9 @@ form textarea {
 }
 
 /* Rating catalogue — direct semantic counterpart of the supplied Pen frames. */
-.catalog__legends { display: flex; align-items: center; gap: 20px; }
+.catalog__legends { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 .catalog__legends .legend { margin: 0; padding: 0; }
-.catalog__legends .legend--reports { padding-left: 20px; border-left: 1px solid var(--border); }
+.catalog__legends .legend--reports { padding-left: 0; border-left: 0; }
 .catalog__legend .legend__dot--fresh,
 .catalog__legend .legend__dot--stale,
 .catalog__legend .legend__dot--none {
@@ -1185,6 +1185,9 @@ form textarea {
     border-radius: 12px;
     background: #fff;
   }
+  /* Supersede the older responsive table labels: Pen cards don't repeat
+     column captions inside their cells. */
+  .layout--catalog .catalog td[data-label]::before { content: none !important; display: none !important; }
   .layout--catalog .catalog td { display: none; min-width: 0; padding: 0 !important; }
   .layout--catalog .catalog td:first-child { display: grid; grid-area: place; place-items: center; width: 24px !important; height: 24px; border-radius: 12px; background: #f5f5f5; color: #7a7a7a; font-size: 12px; font-weight: 700; }
   .layout--catalog .catalog td:nth-child(2) { display: block; grid-area: service; width: auto !important; }
@@ -1194,11 +1197,12 @@ form textarea {
   .layout--catalog .catalog td:nth-child(2) small { display: none; }
   .layout--catalog .catalog td:nth-child(3) { display: block; position: static; grid-area: rating; width: auto !important; }
   .layout--catalog .catalog td:nth-child(3) .score { font-size: 18px; line-height: 22px; }
-  .layout--catalog .catalog td:nth-child(4) { display: block; grid-area: fee; align-self: center; color: #131313; font-size: 15px; font-weight: 600; text-align: right; }
+  .layout--catalog .catalog td:nth-child(4) { display: flex; grid-area: fee; flex-direction: column; align-self: center; color: #131313; font-size: 15px; font-weight: 600; line-height: 21px; text-align: right; }
+  .layout--catalog .catalog td:nth-child(4)::after { content: 'комиссия'; color: #7a7a7a; font-size: 11px; font-weight: 400; line-height: 15px; }
   .layout--catalog .catalog td:nth-child(5) { display: block; grid-area: reviews; align-self: center; color: #2f8a16; font-size: 14px; font-weight: 600; }
   .layout--catalog .catalog td:nth-child(5)::after { content: ' отзывов'; }
   .layout--catalog .catalog td:nth-child(6) { display: flex; grid-area: report; align-items: center; gap: 8px; min-height: 31px; padding-top: 8px !important; border-top: 1px solid var(--border); color: #7a7a7a; font-size: 13px; }
-  .layout--catalog .catalog td:nth-child(6)::before { content: 'отчёт'; color: #7a7a7a; font-weight: 400; }
+  .layout--catalog .catalog td:nth-child(6)::before { content: '—'; color: #7a7a7a; font-weight: 400; }
   .layout--catalog .catalog-row--fresh td:nth-child(6) { color: #2f8a16; font-weight: 600; }
   .layout--catalog .catalog-row--fresh td:nth-child(6)::before { width: 8px; height: 8px; border-radius: 50%; background: #45a828; color: transparent; }
   .layout--catalog .catalog-row--old td:nth-child(6) { color: #b98100; font-weight: 600; }
