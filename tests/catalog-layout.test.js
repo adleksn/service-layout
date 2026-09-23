@@ -100,6 +100,12 @@ describe('rating catalog layout', () => {
     expect(app).toContain('class="filter-open__icon"');
   });
 
+  it('removes the initial-letter mark from rating-table service names', () => {
+    expect(app).toContain('const serviceMarkMarkup = cardsMode');
+    expect(app).toContain("<a href=\"${destination}\">${serviceMarkMarkup}<span>");
+    expect(css).toContain('.catalog[data-type="rating"] td:nth-child(2) { padding-left: 0; }');
+  });
+
   it('derives every mobile rating-card status from the supplied Pen states', () => {
     expect(app).toContain('const ratingMobileStates = {');
     expect(app).toContain("21: ['promo']");

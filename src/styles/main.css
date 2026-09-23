@@ -4912,6 +4912,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     vertical-align: middle;
   }
   .layout--catalog .catalog[data-type="rating"] th:nth-child(2) { text-align: left; }
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(2) { padding-left: 0; }
   .layout--catalog .catalog[data-type="rating"] th:nth-child(6) { text-align: center; }
   .table-sort {
     display: inline-flex;
