@@ -1154,6 +1154,39 @@ form textarea {
   .footer__mobile-bottom > a:not(.footer__dzen) { margin: 0; }
 }
 
+@media (max-width: 767px) {
+  .layout--catalog .catalog:not(.catalog--filters-open) .filters { padding-bottom: 15px; }
+  .layout--catalog .sort-select__trigger,
+  .layout--catalog .filter-open { padding-inline: 14px; }
+  .layout--catalog .catalog__legend--disclosure > button { padding: 11px 15px 11px 14px; }
+  .layout--catalog .sort-select__chevron,
+  .layout--catalog .filter-open > b,
+  .layout--catalog .catalog__legend--disclosure > button > span {
+    display: inline-grid;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    place-items: center;
+  }
+}
+
+/* Final mobile alignment for the rating controls. */
+@media (max-width: 767px) {
+  .layout--catalog .catalog:not(.catalog--filters-open) .filters { padding-bottom: 15px; }
+  .layout--catalog .sort-select__trigger,
+  .layout--catalog .filter-open { padding-inline: 14px; }
+  .layout--catalog .catalog__legend--disclosure > button { padding-inline: 14px; }
+  .layout--catalog .sort-select__chevron,
+  .layout--catalog .filter-open > b,
+  .layout--catalog .catalog__legend--disclosure > button > span {
+    display: inline-grid;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    place-items: center;
+  }
+}
+
 @media (max-width: 374px) {
   .container,
   .header__row,
@@ -4993,6 +5026,23 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     stroke-width: 1.35;
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+}
+
+/* Last mobile override: filter, legend and sort use one arrow column. */
+@media (max-width: 767px) {
+  .layout--catalog .catalog:not(.catalog--filters-open) .filters { padding-bottom: 15px; }
+  .layout--catalog .sort-select__trigger,
+  .layout--catalog .filter-open { padding-inline: 14px; }
+  .layout--catalog .catalog__legend--disclosure > button { padding: 11px 15px 11px 14px; }
+  .layout--catalog .sort-select__chevron,
+  .layout--catalog .filter-open > b,
+  .layout--catalog .catalog__legend--disclosure > button > span {
+    display: inline-grid;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    place-items: center;
   }
 }
 

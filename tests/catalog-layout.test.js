@@ -100,6 +100,12 @@ describe('rating catalog layout', () => {
     expect(app).toContain('class="filter-open__icon"');
   });
 
+  it('uses a shared mobile arrow slot and a 15px filter-to-legend gap', () => {
+    expect(css).toContain('.catalog:not(.catalog--filters-open) .filters { padding-bottom: 15px; }');
+    expect(css).toContain('.sort-select__chevron,');
+    expect(css).toContain('flex: 0 0 16px;');
+  });
+
   it('removes the initial-letter mark from rating-table service names', () => {
     expect(app).toContain('const serviceMarkMarkup = cardsMode');
     expect(app).toContain("<a href=\"${destination}\">${serviceMarkMarkup}<span>");
