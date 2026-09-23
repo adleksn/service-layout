@@ -1474,6 +1474,8 @@ form textarea {
 .layout--catalog .chip:hover { transform: translateY(-1px); }
 
 @media (min-width: 768px) {
+  .layout--catalog .catalog[data-type="rating"] th:last-child,
+  .layout--catalog .catalog[data-type="rating"] td:last-child { padding-right: 10px; }
   .layout--catalog .catalog[data-type="rating"] th:first-child,
   .layout--catalog .catalog[data-type="rating"] td:first-child {
     width: 64px;
