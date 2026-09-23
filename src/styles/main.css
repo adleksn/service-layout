@@ -4736,6 +4736,31 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 }
 
 @media (min-width: 375px) and (max-width: 767px) {
+  .layout--catalog .catalog__legends .legend span {
+    align-items: center;
+    min-height: 22px;
+  }
+  .layout--catalog .catalog__legends .legend--reports span { gap: 5px; }
+  .layout--catalog .catalog__legends .legend__dot--fresh,
+  .layout--catalog .catalog__legends .legend__dot--stale {
+    display: inline-grid;
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    place-items: center;
+    border-radius: 6px;
+    background: transparent;
+  }
+  .layout--catalog .catalog__legends .legend__dot--fresh::before,
+  .layout--catalog .catalog__legends .legend__dot--stale::before {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    content: '';
+  }
+  .layout--catalog .catalog__legends .legend__dot--fresh::before { background: #45a828; }
+  .layout--catalog .catalog__legends .legend__dot--stale::before { background: #f5c069; }
   .layout--catalog .catalog[data-type="rating"] td.row-action {
     display: flex !important;
     justify-self: stretch;

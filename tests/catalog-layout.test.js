@@ -86,6 +86,12 @@ describe('rating catalog layout', () => {
     expect(css).toContain('border-radius: 50%;');
   });
 
+  it('aligns mobile report dots with the status SVG slots', () => {
+    expect(css).toContain('flex: 0 0 22px;');
+    expect(css).toContain('.catalog__legends .legend__dot--fresh::before');
+    expect(css).toContain('.catalog__legends .legend--reports span { gap: 5px; }');
+  });
+
   it('derives every mobile rating-card status from the supplied Pen states', () => {
     expect(app).toContain('const ratingMobileStates = {');
     expect(app).toContain("21: ['promo']");
