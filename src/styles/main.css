@@ -1015,6 +1015,39 @@ form textarea {
   }
 }
 
+/* The Methodology Pen footer uses generic exported layers instead of anchor
+   tags. Give its page links and CTA the same hover and button treatment as
+   the shared site footer. */
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "],
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Terms Link"] {
+  cursor: pointer;
+  transition: color .15s ease;
+}
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "]:hover,
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "]:focus-visible,
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Terms Link"]:hover,
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Terms Link"]:focus-visible {
+  color: #45a828 !important;
+}
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Button Add Service"] {
+  display: inline-flex !important;
+  box-sizing: border-box !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 42px !important;
+  padding: 11px 18px !important;
+  border-radius: 8px !important;
+  background: #45a828 !important;
+  cursor: pointer;
+  transition: background-color .15s ease, transform .15s ease;
+}
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Button Add Service"]:hover {
+  background: #2f8a16 !important;
+}
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Button Add Service"]:active {
+  transform: translateY(1px);
+}
+
 @media (min-width: 768px) and (max-width: 899px) {
   .header__row { min-height: 68px; }
   .header .nav,

@@ -76,6 +76,15 @@ describe('unmapped Pen controls', () => {
     expect(css).toContain('transform: translateX(20px);');
   });
 
+  it('gives Methodology footer links and its service CTA the shared hover treatment', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "]:hover');
+    expect(css).toContain('color: #45a828 !important;');
+    expect(css).toContain('[data-pencil-name="Button Add Service"]:hover');
+    expect(css).toContain('background: #2f8a16 !important;');
+  });
+
   it('loads exported Pen frames from the GitHub Pages repository path', () => {
     expect(penSourceUrls('/service-layout/')).toEqual([
       '/service-layout/reference/pen-source.html',
