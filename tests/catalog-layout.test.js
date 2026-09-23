@@ -77,6 +77,15 @@ describe('rating catalog layout', () => {
     expect(css).toContain('padding-left: 40px;');
   });
 
+  it('shows the mobile filter count as a green circular badge', () => {
+    expect(app).toContain('class="filter-open__label"');
+    expect(app).toContain('data-active-count>0</span>');
+    expect(app).toContain("textContent = Object.values(state.filters)");
+    expect(css).toContain('background: #46a827;');
+    expect(css).toContain('color: #ffffff;');
+    expect(css).toContain('border-radius: 50%;');
+  });
+
   it('derives every mobile rating-card status from the supplied Pen states', () => {
     expect(app).toContain('const ratingMobileStates = {');
     expect(app).toContain("21: ['promo']");

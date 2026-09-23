@@ -1829,6 +1829,24 @@ form textarea {
 /* Mobile catalog: preserve the immediately useful controls from the Pen
    frame while the long filter chip collection is collapsed. */
 @media (max-width: 767px) {
+  .layout--catalog .filter-open__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .layout--catalog .filter-open [data-active-count] {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #46a827;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+  }
   .layout--catalog .catalog__mobile-trigger {
     padding: 12px 0 14px;
   }
