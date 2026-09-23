@@ -207,6 +207,7 @@ describe('unmapped Pen controls', () => {
     dom.window.document.body.append(frame);
 
     enhanceInteractions(frame, 'cards');
+    expect(frame.querySelector('[data-pencil-name="Filters Button"] [data-pencil-name="Count"]')?.textContent.trim()).toBe('0');
     frame.querySelector('[data-pencil-name="Filters Button"]')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
 
     expect(frame.querySelector('.pen-card-filter-panel')?.hidden).toBe(false);
@@ -219,8 +220,10 @@ describe('unmapped Pen controls', () => {
     frame.querySelector('[data-pencil-name="Filters Button"]')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
     frame.querySelector('[data-value="Apple Pay"]')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
     expect(frame.querySelector('.pen-card-mobile-empty')?.hidden).toBe(false);
+    expect(frame.querySelector('[data-pencil-name="Filters Button"] [data-pencil-name="Count"]')?.textContent.trim()).toBe('1');
     frame.querySelector('.pen-card-filter-reset')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
     expect(frame.querySelector('.pen-card-mobile-empty')?.hidden).toBe(true);
+    expect(frame.querySelector('[data-pencil-name="Filters Button"] [data-pencil-name="Count"]')?.textContent.trim()).toBe('0');
     expect([...frame.querySelectorAll('[data-pencil-name="Service Cards"] > [data-pencil-name^="Service Card "]')]
       .every((card) => !card.hidden)).toBe(true);
     vi.unstubAllGlobals();

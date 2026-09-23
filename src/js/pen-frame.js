@@ -445,6 +445,11 @@ function setupPenMobileCardFilters(frame) {
 
   const selections = new Map();
   const cardNodes = [...cardsHost.querySelectorAll(':scope > [data-pencil-name^="Service Card "]')];
+  const activeCount = trigger.querySelector('[data-pencil-name="Count"]');
+  const syncActiveCount = () => {
+    if (!activeCount) return;
+    activeCount.textContent = String([...selections.values()].reduce((total, values) => total + values.size, 0));
+  };
   const applyFilters = () => {
     let visible = 0;
     cardNodes.forEach((card) => {
@@ -456,6 +461,7 @@ function setupPenMobileCardFilters(frame) {
     });
     empty.hidden = visible !== 0;
     empty.style.display = visible ? 'none' : 'flex';
+    syncActiveCount();
   };
   const setOpen = (open) => {
     trigger.setAttribute('aria-expanded', String(open));
@@ -500,6 +506,7 @@ function setupPenMobileCardFilters(frame) {
     if (panel.hidden || panel.contains(event.target) || trigger.contains(event.target)) return;
     setOpen(false);
   });
+  applyFilters();
 }
 
 function setupPenCardSort(frame) {
