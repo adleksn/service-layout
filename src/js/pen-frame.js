@@ -703,6 +703,11 @@ export function enhanceInteractions(frame, page) {
   if (page === 'contacts') {
     frame.querySelectorAll('[data-pencil-name="Button Dzen"], [data-pencil-name="Faq Card"]').forEach((node) => makeInteractive(node, '#'));
   }
+  if (page === 'agreement') {
+    frame.querySelectorAll('[data-pencil-name="Link"]').forEach((node) => {
+      if (node.textContent.trim() === 'Методика проверки') makeInteractive(node, '/methodology.html');
+    });
+  }
   if (page === 'service' || page === 'virtual-card') {
     setupPenPromo(frame);
     removePenDemoLabels(frame);
