@@ -58,6 +58,13 @@ describe('rating catalog layout', () => {
     expect(catalog).toContain("tags: ['fee-10', 'fee-15', 'fresh', 'mystery', 'verified', 'promo']");
   });
 
+  it('shows the name promo badge only for the first rating row', () => {
+    expect(app).toContain("!cardsMode && item.rank === 1");
+    expect(app).toContain('class="service-promo-badge"');
+    expect(css).toContain('background: #5ecf36;');
+    expect(css).toContain('color: #ffffff;');
+  });
+
   it('derives every mobile rating-card status from the supplied Pen states', () => {
     expect(app).toContain('const ratingMobileStates = {');
     expect(app).toContain("21: ['promo']");

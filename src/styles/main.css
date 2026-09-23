@@ -2323,6 +2323,20 @@ body {
   border-radius: 3px;
   padding: 1px 3px;
 }
+.layout--catalog .catalog[data-type="rating"] .service-promo-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 7px;
+  padding: 3px 7px;
+  border: 0;
+  border-radius: 8px;
+  background: #5ecf36;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
 .row-link {
   font-weight: 600;
   color: var(--green);
