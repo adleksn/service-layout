@@ -1829,10 +1829,24 @@ form textarea {
 /* Mobile catalog: preserve the immediately useful controls from the Pen
    frame while the long filter chip collection is collapsed. */
 @media (max-width: 767px) {
+  .layout--catalog .catalog:not(.catalog--filters-open) .filters {
+    padding-bottom: 0;
+  }
+  .layout--catalog .catalog__mobile-trigger { padding-bottom: 0; }
+  .layout--catalog .filter-open { color: #3a3a3a; }
   .layout--catalog .filter-open__label {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+  }
+  .layout--catalog .filter-open__icon {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.35;
+    stroke-linecap: round;
   }
   .layout--catalog .filter-open [data-active-count] {
     display: inline-flex;
@@ -1848,7 +1862,7 @@ form textarea {
     line-height: 1;
   }
   .layout--catalog .catalog__mobile-trigger {
-    padding: 12px 0 14px;
+    padding: 12px 0 0;
   }
   .layout--catalog .catalog .filters {
     display: block !important;
@@ -4742,7 +4756,8 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   }
   .layout--catalog .catalog__legends .legend--reports span { gap: 5px; }
   .layout--catalog .catalog__legends .legend__dot--fresh,
-  .layout--catalog .catalog__legends .legend__dot--stale {
+  .layout--catalog .catalog__legends .legend__dot--stale,
+  .layout--catalog .catalog__legends .legend__dot--none {
     display: inline-grid;
     width: 22px;
     height: 22px;
@@ -4750,6 +4765,10 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     place-items: center;
     border-radius: 6px;
     background: transparent;
+  }
+  .layout--catalog .catalog__legends .legend__dot--none {
+    color: #7a7a7a;
+    font: 400 13px/1 Inter, system-ui, sans-serif;
   }
   .layout--catalog .catalog__legends .legend__dot--fresh::before,
   .layout--catalog .catalog__legends .legend__dot--stale::before {

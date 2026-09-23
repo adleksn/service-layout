@@ -90,6 +90,14 @@ describe('rating catalog layout', () => {
     expect(css).toContain('flex: 0 0 22px;');
     expect(css).toContain('.catalog__legends .legend__dot--fresh::before');
     expect(css).toContain('.catalog__legends .legend--reports span { gap: 5px; }');
+    expect(css).toContain('.catalog__legends .legend__dot--none');
+  });
+
+  it('keeps the mobile filter control flush with the legend and uses the Pen text color', () => {
+    expect(css).toContain('.catalog:not(.catalog--filters-open) .filters');
+    expect(css).toContain('.catalog__mobile-trigger { padding-bottom: 0; }');
+    expect(css).toContain('.filter-open { color: #3a3a3a; }');
+    expect(app).toContain('class="filter-open__icon"');
   });
 
   it('derives every mobile rating-card status from the supplied Pen states', () => {
