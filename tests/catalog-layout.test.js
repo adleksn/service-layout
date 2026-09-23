@@ -72,6 +72,11 @@ describe('rating catalog layout', () => {
     expect(css).toContain('text-align: center;');
   });
 
+  it('leaves 40px around the desktop rating-place column', () => {
+    expect(css).toContain('width: 80px;');
+    expect(css).toContain('padding-left: 40px;');
+  });
+
   it('derives every mobile rating-card status from the supplied Pen states', () => {
     expect(app).toContain('const ratingMobileStates = {');
     expect(app).toContain("21: ['promo']");
