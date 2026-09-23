@@ -4323,7 +4323,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .discontinued .discontinued__item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0;
   min-height: 36px;
   padding: 0 14px;
   border-bottom: 1px solid var(--border);
@@ -4335,13 +4335,15 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .discontinued__item b {
   overflow: hidden;
   flex: 1;
+  margin-right: 8px;
   font-size: 14px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .discontinued__item span {
   display: none;
-  color: var(--green-dark);
+  margin-right: 50px;
+  color: #aeaeae;
   font-size: 12px;
   font-weight: 700;
 }
@@ -4360,6 +4362,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .discontinued--danger h2 { font-size: 20px; line-height: 26px; }
   .discontinued > p { font-size: 14px; line-height: 22px; }
   .discontinued__grid { grid-template-columns: 1fr; gap: 0; }
+  .discontinued__item span { margin-right: 48px; }
 }
 @media (min-width: 1280px) {
   .header__row {
