@@ -85,6 +85,12 @@ describe('rating catalog layout', () => {
     expect(css).toContain('font-size: 0;');
   });
 
+  it('uses the Pen info icon for the mobile legend disclosure', () => {
+    expect(app).toContain('legend__trigger-icon');
+    expect(app).toContain('<circle cx="8" cy="8" r="6.25"/>');
+    expect(css).toContain('stroke: currentColor;');
+  });
+
   it('keeps the lower mobile rating sections as their own Pen background bands', () => {
     expect(app).toContain('catalog-discontinued');
     expect(css).toContain('.catalog-discontinued');
