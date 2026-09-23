@@ -40,6 +40,14 @@ describe('semantic page interactions', () => {
     expect(css).not.toContain('.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #3a3a3a !important; }');
   });
 
+  it('renders report pagination as reload links with the requested page selected', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+
+    expect(app).toContain("new URLSearchParams(window.location.search).get('page')");
+    expect(app).toContain('class="pagination__current" aria-current="page"');
+    expect(app).toContain('href="${pageHref(target)}"');
+  });
+
   it('opens and closes the semantic mobile menu with the same button', () => {
     const dom = new JSDOM(`
       <header class="header"><button data-mobile-menu aria-expanded="false" aria-controls="mobile-nav">☰</button></header>

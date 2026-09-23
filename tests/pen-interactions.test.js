@@ -300,6 +300,27 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('marks the requested reports page active and gives every pager a reload destination', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/reports.html?page=2' });
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Отчёты список Mobile 375')
+      .cloneNode(true);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    enhanceInteractions(frame, 'reports');
+    const secondPage = frame.querySelector('[data-pencil-name="Page 2"]');
+    const firstPage = frame.querySelector('[data-pencil-name="Page 1"]');
+    const nextPage = frame.querySelector('[data-pencil-name="Page ›"]');
+
+    expect(secondPage.getAttribute('aria-current')).toBe('page');
+    expect(secondPage.style.backgroundColor).toBe('rgb(69, 168, 40)');
+    expect(firstPage.getAttribute('aria-current')).toBeNull();
+    expect(nextPage.dataset.penLink).toContain('page=3');
+    vi.unstubAllGlobals();
+  });
+
   it('marks the promo action as copied only after its copy icon is pressed', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/service.html' });
     const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]

@@ -117,6 +117,43 @@ function setupPenLoadMore(frame) {
   makeInteractive(button, '#');
 }
 
+function setupPenReportPagination(frame) {
+  const pageCount = 3;
+  const requestedPage = Number(new URLSearchParams(window.location.search).get('page')) || 1;
+  const currentPage = Math.min(pageCount, Math.max(1, requestedPage));
+  const destinationFor = (targetPage) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('page', String(targetPage));
+    return url.toString();
+  };
+  const targetFor = (name) => {
+    if (name === 'Первая') return 1;
+    if (name === 'Последняя') return pageCount;
+    if (name === '‹') return Math.max(1, currentPage - 1);
+    if (name === '›') return Math.min(pageCount, currentPage + 1);
+    return Number(name);
+  };
+  frame.querySelectorAll('[data-pencil-name^="Page "]').forEach((node) => {
+    const name = node.getAttribute('data-pencil-name').slice(5);
+    if (!/^(Первая|Последняя|‹|1|2|3|›)$/.test(name)) return;
+    const targetPage = targetFor(name);
+    const active = targetPage === currentPage && /^[1-3]$/.test(name);
+    const label = node.querySelector('[data-pencil-name="Label"]');
+    node.dataset.penPage = String(targetPage);
+    node.style.backgroundColor = active ? '#45a828' : '#ffffff';
+    label?.style.setProperty('color', active ? '#ffffff' : '#131313', 'important');
+    if (active) node.setAttribute('aria-current', 'page'); else node.removeAttribute('aria-current');
+    node.setAttribute('role', 'link');
+    node.setAttribute('tabindex', '0');
+    node.dataset.penLink = destinationFor(targetPage);
+    const navigate = () => { location.href = destinationFor(targetPage); };
+    node.addEventListener('click', navigate);
+    node.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); navigate(); }
+    });
+  });
+}
+
 function setupPenReviewSlider(frame) {
   const slider = frame.querySelector('[data-pencil-name="Reviews Slider"]');
   if (!slider) return;
@@ -648,11 +685,7 @@ export function enhanceInteractions(frame, page) {
   frame.querySelectorAll('[data-pencil-name="Back Link"]').forEach((node) => makeInteractive(node, page === 'virtual-card' ? '/virtual-cards.html' : '/rating.html'));
   frame.querySelectorAll('[data-pencil-name^="Report Card"]').forEach((node) => makeInteractive(node, '/report.html'));
   if (page === 'reports') {
-    // Pagination is present in the mockup but the destination pages are out of
-    // scope; every visible control remains keyboard-accessible as a # stub.
-    frame.querySelectorAll('[data-pencil-name]').forEach((node) => {
-      if (/^Page (Первая|‹|1|2|3|›|Последняя)$/.test(node.getAttribute('data-pencil-name'))) makeInteractive(node, '#');
-    });
+    setupPenReportPagination(frame);
   }
   if (page === 'report') setupPenReportTabs(frame);
   if (page === 'reports' || page === 'advertising') {
