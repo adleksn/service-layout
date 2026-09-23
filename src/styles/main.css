@@ -1219,6 +1219,7 @@ form textarea {
     gap: 10px;
   }
   #app[data-page="methodology"] .footer__mobile-bottom .footer__dzen {
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
     gap: 6px;
