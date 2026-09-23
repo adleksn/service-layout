@@ -2927,6 +2927,7 @@ body {
 .seo-copy p {
   line-height: 1.65;
 }
+#app[data-page="cards"] .seo-copy p { font-size: 16px; line-height: 26px; }
 .breadcrumbs {
   display: flex;
   gap: 9px;
