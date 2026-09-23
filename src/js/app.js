@@ -41,6 +41,16 @@ const miniTable = (items, card = false) => {
 };
 function home() { return shell(`<section class="hero"><div class="container hero__inner"><div><h1>Рейтинг актуальных<br>средств альтернативной оплаты</h1><p>К сервисам альтернативной оплаты мы относим и посредников, которые оплачивают зарубежные подписки за вас, и сервисы, выпускающие виртуальные зарубежные карты. Проверяем и те, и другие.</p><div class="hero__metrics"><b>103 <span>сервиса в рейтинге</span></b><i>·</i><b>47 <span>сервисов виртуальных карт</span></b><i>·</i><b>2 400 <span>отзывов</span></b></div></div><img class="hero__art" src="/assets/vjJ28.png" alt="" aria-hidden="true"></div></section><section class="container rating-block"><div class="section-heading"><h2>Топ сервисов для оплаты</h2><a class="text-link" href="/rating.html">Весь рейтинг →</a></div>${miniTable(services)}${statusLegend}<a class="button button--wide" href="/rating.html">Смотреть полный рейтинг — 103 сервиса</a></section><section class="container rating-block"><div class="section-heading"><h2>Лучшие сервисы виртуальных карт</h2><a class="text-link" href="/virtual-cards.html">Весь рейтинг →</a></div>${miniTable(cards, true)}<div class="legend"><span><i class="legend__dot legend__dot--check"></i>Был тайный покупатель</span><span><i class="legend__dot legend__dot--promo"></i>Есть промокод</span></div><a class="button button--wide" href="/virtual-cards.html">Смотреть полный рейтинг — 45 сервисов</a></section><section class="mystery"><div class="container mystery__card"><p class="eyebrow">ТАК НЕ ДЕЛАЕТ НИКТО</p><h2>Проверяем своими деньгами</h2><p>Мы не верим сервисам на слово. Наш тайный покупатель регистрируется в сервисе как обычный клиент, оплачивает реальную подписку настоящими деньгами и фиксирует всё: сроки, итоговую комиссию, наличие чека, поведение поддержки, что происходит при проблеме с платежом.</p><p>По каждой проверке мы публикуем подробный отчёт со скриншотами. Если сервис не выполнил обещания — сразу отражаем в карточке.</p><div class="mystery__actions"><a class="button" href="/reports.html">Читать отчёты</a><a class="text-link" href="/methodology.html">Методика проверки →</a></div></div></section><section class="container section about"><h2>О рейтинге</h2><div class="about__grid"><article><b>Актуально</b><p>Обновляем рейтинг каждую неделю и дату проверки.</p></article><article><b>Честно</b><p>Место в рейтинге нельзя купить. Реклама помечена отдельно.</p></article><article><b>Удобно</b><p>Комиссии, сроки и лимиты — в одной таблице.</p></article><article><b>Независимо</b><p>Не связаны с сервисами, платим своими деньгами.</p></article></div><a class="text-link" href="/methodology.html">Как мы проверяем сервисы →</a></section><section class="reviews-home"><div class="container"><div class="section-heading"><h2>Отзывы пользователей</h2><a class="text-link" href="/service.html#reviews">Все 2 400 отзывов →</a></div><div class="reviews-home__grid">${[['Андрей К.','Оплачивал подписку на Spotify и хостинг — оба платежа прошли с первого раза, деньги дошли за семь минут.'],['Марина Л.','Пользуюсь третий месяц для оплаты рекламного кабинета. Курс держится в рамках заявленного, платежи проходят стабильно.'],['Дмитрий В.','Первый платёж завис на сутки, но после обращения в поддержку деньги вернули полностью и без вопросов.']].map(([name,text], i) => `<article><header><span class="avatar">${name[0]}</span><div><b>${['Плати Легко!','SanPay','Prosto Pay'][i]}</b>${score([4.9,4.5,4.2][i])}</div></header><small>${name} · ${['12 февраля 2026','10 февраля 2026','9 февраля 2026'][i]}</small><p>${text}</p></article>`).join('')}</div></div></section><section class="container happening"><div><h2>Что происходит?</h2><p>С 2022 года оплата зарубежных подписок, хостингов и рекламных кабинетов из России перестала работать напрямую. На этом месте выросли десятки посредников: одни берут фиксированную комиссию и выдают чеки, другие исчезают вместе с деньгами клиентов.</p><p>Мы ведём открытый реестр таких сервисов: проверяем юридические данные, тестируем платежи собственными деньгами и собираем отзывы пользователей.</p></div><dl><dt>Распределение сервисов по надежности</dt><div><dd>4.0 — 5.0</dd><b>11</b></div><div><dd>3.0 — 3.9</dd><b>24</b></div><div><dd>2.0 — 2.9</dd><b>31</b></div><div><dd>1.0 — 1.9</dd><b>9</b></div><div><dd>Прекратили работу / сомнительные</dd><b>28</b></div></dl></section>`); }
 
+const applyHomeCopyBreaks = () => {
+  if (page !== 'home') return;
+
+  const mysteryCopy = app.querySelector('.mystery__card p:not(.eyebrow)');
+  if (mysteryCopy) mysteryCopy.innerHTML = 'Мы не верим сервисам на слово. Наш тайный покупатель<br>регистрируется в сервисе как обычный клиент, оплачивает реальную<br>подписку настоящими деньгами и фиксирует всё: сроки, итоговую<br>комиссию, наличие чека, поведение поддержки, что происходит при<br>проблеме с платежом.';
+
+  const happeningCopy = app.querySelector('.happening > div p:last-of-type');
+  if (happeningCopy) happeningCopy.innerHTML = 'Мы ведём открытый реестр таких сервисов: проверяем юридические данные, тестируем платежи собственными деньгами и собираем отзывы пользователей. Рейтинг показывает, кому можно доверить платёж сегодня, а<br>не год назад.';
+};
+
 function catalogPage(type) {
   const title = type === 'cards' ? 'Виртуальные зарубежные карты — рейтинг сервисов' : 'Полный рейтинг сервисов альтернативной оплаты';
   const description = type === 'cards'
@@ -93,6 +103,7 @@ function uiKit() { const states = [['Кнопка основная', 'Обычн
 const render = { home, rating: () => catalogPage('rating'), cards: () => catalogPage('cards'), service: () => service(), 'virtual-card': () => service(true), reports, report, methodology, contacts: () => staticPage('contacts'), advertising: () => staticPage('advertising'), agreement: () => staticPage('agreement'), 'not-found': () => staticPage('not-found'), 'ui-kit': uiKit };
 app.innerHTML = render[page]();
 app.dataset.page = page;
+applyHomeCopyBreaks();
 resolveSitePaths(app);
 setupContactStubs(app);
 setupFooterStubs(app);
@@ -229,7 +240,7 @@ if (reviewSort) reviewSort.addEventListener('change', () => {
     .forEach((review) => list.append(review));
 });
 
-applyExactPenFrame(app, page, initialRequestUrl).then(() => resolveSitePaths(app)).catch(() => {});
+applyExactPenFrame(app, page, initialRequestUrl).then(() => { applyHomeCopyBreaks(); resolveSitePaths(app); }).catch(() => {});
 applyPenMethodologySignSvgs(app).catch(() => {});
 
 // Pen frames are authored at specific control widths, while the semantic

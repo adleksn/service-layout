@@ -2,6 +2,13 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 describe('home transitional responsiveness', () => {
+  it('keeps the requested desktop line breaks in the home-page explanatory copy', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+
+    expect(app).toContain('Мы не верим сервисам на слово. Наш тайный покупатель<br>регистрируется в сервисе как обычный клиент, оплачивает реальную<br>подписку настоящими деньгами и фиксирует всё: сроки, итоговую<br>комиссию, наличие чека, поведение поддержки, что происходит при<br>проблеме с платежом.');
+    expect(app).toContain('Рейтинг показывает, кому можно доверить платёж сегодня, а<br>не год назад.');
+  });
+
   it('interpolates the tablet Pen hero without reverting to the compressed legacy type scale', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
