@@ -3809,6 +3809,19 @@ body {
   margin: 20px 0 0;
   font: 400 16px/26px Inter, system-ui, sans-serif;
 }
+.ad-banner-warning {
+  box-sizing: content-box;
+  width: 730.5px;
+  height: 25px;
+  margin: 0 0 0 -1.5px;
+  padding: 16px;
+  border: solid #e5a83b;
+  border-width: 0 0 0 3px;
+  border-radius: 10px;
+  background: #f5f5f5;
+  color: #131313;
+  font: 400 14px/normal Inter, system-ui, sans-serif;
+}
 .agreement {
   padding-bottom: 90px;
 }
