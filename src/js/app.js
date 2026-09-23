@@ -119,6 +119,12 @@ const alignMethodologyLayout = () => {
   const article = app.querySelector('.methodology-layout > .methodology');
   if (leadBlock && article && !article.contains(leadBlock)) article.prepend(leadBlock);
 };
+const alignAgreementLayout = () => {
+  if (page !== 'agreement') return;
+  const leadBlock = app.querySelector('.lead');
+  const article = app.querySelector('.agreement');
+  if (leadBlock && article && !article.contains(leadBlock)) article.prepend(leadBlock);
+};
 const applyContactAboutCopy = () => {
   if (page !== 'contacts') return;
   const copy = 'sao-rating.ru — независимый проект. Мы не являемся платёжным сервисом, не принимаем<br>платежи и не оказываем финансовых услуг. Наша задача — собрать в одном месте данные о <br>сервисах альтернативной оплаты и проверить их на практике, чтобы вы могли сравнивать не <br>обещания с сайтов, а фактические условия. Проект существует с 2022 года. Регион работы —<br>Российская Федерация.';
@@ -165,6 +171,7 @@ const applyAdvertisingLeadLayout = () => {
 app.innerHTML = render[page]();
 app.dataset.page = page;
 alignMethodologyLayout();
+alignAgreementLayout();
 applyContactAboutCopy();
 applyAdvertisingLeadLayout();
 applyHomeCopyBreaks();

@@ -3865,11 +3865,22 @@ body {
   font: 400 14px/normal Inter, system-ui, sans-serif;
 }
 .agreement {
-  padding-bottom: 90px;
+  width: min(780px, calc(100% - 48px));
+  max-width: none;
+  margin-left: max(24px, calc((100vw - var(--container)) / 2));
+  margin-right: auto;
+  padding-bottom: 64px;
 }
-.agreement > h2:first-child {
-  margin-top: 0;
-}
+.agreement .lead { display: grid; gap: 10px; width: 100%; max-width: none; margin: 0; padding: 20px 0 0; }
+.agreement .lead .eyebrow:empty { display: none; }
+.agreement .lead h1 { width: 100%; max-width: none; margin: 0; font: 700 36px/43px Inter, system-ui, sans-serif; letter-spacing: -.4px; }
+.agreement .lead p:not(.eyebrow) { width: 100%; max-width: none; margin: 0; color: #7a7a7a; font: 400 14px/normal Inter, system-ui, sans-serif; }
+.agreement > h2 { width: 100%; margin: 40px 0 16px; color: #131313; font: 700 32px/40px Inter, system-ui, sans-serif; letter-spacing: 0; }
+.agreement > h3 { width: 100%; margin: 28px 0 12px; color: #131313; font: 700 20px/28px Inter, system-ui, sans-serif; letter-spacing: 0; }
+.agreement > p { width: 100%; margin: 0 0 16px; color: #3a3a3a; font: 400 16px/26px Inter, system-ui, sans-serif; }
+.agreement > ul,
+.agreement > ol { display: grid; gap: 8px; width: 100%; margin: 0 0 16px; padding: 0 0 0 24px; color: #3a3a3a; font: 400 16px/26px Inter, system-ui, sans-serif; }
+.agreement > li { padding-left: 0; }
 .not-found {
   min-height: 590px;
   display: grid;
