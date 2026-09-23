@@ -39,6 +39,10 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.catalog-page-header');
   });
 
+  it('leaves 30px between the rating metrics and the filter block', () => {
+    expect(css).toContain('.catalog-page-header--rating + .layout--catalog { padding-top: 30px; }');
+  });
+
   it('keeps the mobile rating introduction to the three-line Pen copy', () => {
     expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки.');
     expect(app).not.toContain('проверки, чтобы найти подходящий вариант.');

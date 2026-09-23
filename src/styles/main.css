@@ -1393,6 +1393,7 @@ form textarea {
 .catalog-page-header--rating h1 { max-width: none; white-space: nowrap; }
 .catalog-page-header--rating .catalog-page-header__description { max-width: none; white-space: nowrap; }
 .catalog-page-header__description + .catalog-page-header__description { margin-top: 0; }
+.catalog-page-header--rating + .layout--catalog { padding-top: 30px; }
 .catalog--rating .catalog__legend--disclosure { margin: 20px; }
 
 @media (max-width: 767px) {
