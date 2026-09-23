@@ -43,6 +43,10 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.catalog-page-header--rating + .layout--catalog { padding-top: 30px; }');
   });
 
+  it('centers the rating SEO copy block in the catalog column', () => {
+    expect(css).toContain('.layout--catalog .catalog-seo .seo-copy { margin-inline: auto; }');
+  });
+
   it('keeps the mobile rating introduction to the three-line Pen copy', () => {
     expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки.');
     expect(app).not.toContain('проверки, чтобы найти подходящий вариант.');

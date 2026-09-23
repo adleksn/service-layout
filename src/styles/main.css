@@ -2920,6 +2920,7 @@ body {
   padding-top: 75px;
   max-width: 760px;
 }
+.layout--catalog .catalog-seo .seo-copy { margin-inline: auto; }
 .seo-copy h2 {
   font-size: 30px;
 }
