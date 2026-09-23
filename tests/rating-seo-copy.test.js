@@ -1,0 +1,14 @@
+import { readFileSync } from 'node:fs';
+import { describe, expect, it } from 'vitest';
+
+describe('rating SEO copy', () => {
+  it('uses the supplied desktop line breaks and complete text', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+
+    expect(app).toContain('Как устроен рейтинг сервисов альтернативной <br>оплаты<br>');
+    expect(app).toContain('на рынке <br>появилось множество посредников');
+    expect(app).toContain('после первых же переводов.');
+    expect(app).toContain('на предмет накруток. <br>Каждая карточка сервиса содержит дату последней проверки чтобы вы понимали на сколько <br> акктуальна оценка.');
+    expect(app).toContain('даже если формально сайт <br> ещё принимает заявки.');
+  });
+});
