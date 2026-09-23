@@ -76,16 +76,14 @@ describe('unmapped Pen controls', () => {
     expect(css).toContain('transform: translateX(20px);');
   });
 
-  it('gives Methodology footer links and its service CTA the shared hover treatment', () => {
+  it('keeps Methodology footer states shared and gives its CTA the approved width', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
-    expect(css).toContain('.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "]:hover');
-    expect(css).toContain('color: #45a828 !important;');
-    expect(css).toContain('text-underline-offset: 4px;');
-    expect(css).toContain('[data-pen-link]:hover {\n  opacity: 1 !important;');
-    expect(css).toContain('[data-pencil-name="Button Add Service"]:hover');
-    expect(css).toContain('background: #2f8a16 !important;');
-    expect(css).toContain('[data-pencil-name="Button Label"] {\n  color: #ffffff !important;');
+    expect(css).toContain('.pen-frame[data-pencil-name="Методика проверки Desktop 1440"] [data-pencil-name="Footer"] [data-pencil-name="Button Add Service"]');
+    expect(css).toContain('flex: 0 0 100px !important;');
+    expect(css).toContain('width: 100px !important;');
+    expect(css).not.toContain('.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "]:hover');
+    expect(css).not.toContain('[data-pen-link]:hover {\n  opacity: 1 !important;');
   });
 
   it('loads exported Pen frames from the GitHub Pages repository path', () => {
