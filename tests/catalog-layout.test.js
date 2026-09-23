@@ -65,11 +65,11 @@ describe('rating catalog layout', () => {
     expect(css).toContain('color: #ffffff;');
   });
 
-  it('centres the mobile details arrow directly above the fee column', () => {
+  it('aligns the mobile details arrow with the fee percent sign', () => {
     expect(css).toContain('.layout--catalog .catalog[data-type="rating"] td.row-action');
-    expect(css).toContain('justify-content: center;');
+    expect(css).toContain('justify-content: flex-end;');
     expect(css).toContain('justify-self: stretch;');
-    expect(css).toContain('text-align: center;');
+    expect(css).toContain('text-align: right;');
   });
 
   it('leaves 40px around the desktop rating-place column', () => {
