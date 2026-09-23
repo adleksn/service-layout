@@ -168,11 +168,4 @@ describe('rating catalog layout', () => {
     expect(ui).toContain('Позиции пересчитываются каждую неделю');
     expect(app).toContain('Почему сервис из «Прекратили работу» ещё принимает платежи?');
   });
-
-  it('centers every desktop virtual-card table value beneath its column caption', () => {
-    expect(css).toContain('.catalog[data-type="cards"] th,\n  .catalog[data-type="cards"] td');
-    expect(css).toContain('.catalog[data-type="cards"] td:nth-child(2) > a');
-    expect(css).toContain('justify-content: center;');
-    expect(css).toContain('[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Row "] > [data-pencil-name]');
-  });
 });

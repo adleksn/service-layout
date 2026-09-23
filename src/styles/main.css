@@ -5115,39 +5115,3 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .lead h1 { font-size: 27px; }
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }
-
-/* The virtual-card catalogue uses centered data columns on desktop: every
-   value sits on the same axis as its column caption, including the service
-   name and the details control. Mobile keeps its dedicated card layout. */
-@media (min-width: 768px) {
-  .catalog[data-type="cards"] th,
-  .catalog[data-type="cards"] td {
-    text-align: center;
-    vertical-align: middle;
-  }
-  .catalog[data-type="cards"] td:nth-child(2) > a {
-    width: 100%;
-    justify-content: center;
-  }
-  .catalog[data-type="cards"] td:nth-child(2) > a > span {
-    text-align: center;
-  }
-  .catalog[data-type="cards"] th:last-child,
-  .catalog[data-type="cards"] td.row-action {
-    padding-left: 0;
-    padding-right: 0;
-    text-align: center;
-  }
-
-  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name="Table Header"] > [data-pencil-name^="Col "],
-  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Row "] > [data-pencil-name] {
-    justify-content: center !important;
-    text-align: center !important;
-  }
-  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Row "] > [data-pencil-name="Service"] {
-    align-items: center !important;
-  }
-  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name="Service Name Row"] {
-    justify-content: center !important;
-  }
-}
