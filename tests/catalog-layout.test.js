@@ -168,4 +168,10 @@ describe('rating catalog layout', () => {
     expect(ui).toContain('Позиции пересчитываются каждую неделю');
     expect(app).toContain('Почему сервис из «Прекратили работу» ещё принимает платежи?');
   });
+
+  it('centers the requested virtual-card data columns without moving service or action', () => {
+    expect(css).toContain('.catalog[data-type="cards"] th:nth-child(n + 3):nth-child(-n + 9),');
+    expect(css).toContain('.catalog[data-type="cards"] td:nth-child(n + 3):nth-child(-n + 9)');
+    expect(css).toContain('[data-pencil-name="Promo"]');
+  });
 });

@@ -5115,3 +5115,24 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .lead h1 { font-size: 27px; }
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Keep virtual-card values centered beneath these fixed table captions on
+   desktop. Service and the trailing action intentionally keep their layout. */
+@media (min-width: 768px) {
+  .catalog[data-type="cards"] th:nth-child(n + 3):nth-child(-n + 9),
+  .catalog[data-type="cards"] td:nth-child(n + 3):nth-child(-n + 9) {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Row "] > [data-pencil-name="Rating"],
+  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Row "] > [data-pencil-name="Issue"],
+  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Row "] > [data-pencil-name="Payment"],
+  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Row "] > [data-pencil-name="Currency"],
+  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Row "] > [data-pencil-name="Reviews"],
+  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Row "] > [data-pencil-name="Secret"],
+  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Row "] > [data-pencil-name="Promo"] {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
