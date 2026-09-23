@@ -91,6 +91,15 @@ describe('rating catalog layout', () => {
     expect(css).toContain('stroke: currentColor;');
   });
 
+  it('keeps the no-report dash plain and the desktop action columns icon-only', () => {
+    expect(css).toContain('.catalog__legend .legend__dot--none {');
+    expect(css).toContain('background: transparent !important;');
+    expect(app).toContain('Тайный<br>покупатель');
+    expect(app).toContain('mystery-icon');
+    expect(app).toContain('details-button__icon');
+    expect(css).toContain('%23bfa3fa');
+  });
+
   it('keeps the lower mobile rating sections as their own Pen background bands', () => {
     expect(app).toContain('catalog-discontinued');
     expect(css).toContain('.catalog-discontinued');
