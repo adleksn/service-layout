@@ -4722,6 +4722,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     white-space: nowrap;
   }
   .layout--catalog .catalog[data-type="rating"] .report-date::before { content: none !important; }
+  .layout--catalog .catalog[data-type="rating"] .catalog-row--old .report-date { color: #121212; }
   .layout--catalog .catalog[data-type="rating"] .report-date--none {
     color: #7a7a7a;
     font-weight: 400;
