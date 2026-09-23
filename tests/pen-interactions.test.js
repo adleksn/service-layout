@@ -34,15 +34,18 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
-  it('removes report-age labels from the exact desktop rating legend', async () => {
-    const dom = new JSDOM('<div id="app"></div>', { url: 'https://example.test/rating.html' });
-    vi.stubGlobal('window', dom.window);
-    vi.stubGlobal('document', dom.window.document);
-    vi.stubGlobal('location', dom.window.location);
-    Object.defineProperty(dom.window, 'innerWidth', { value: 1440, configurable: true });
-    await applyExactPenFrame(dom.window.document.querySelector('#app'), 'rating', dom.window.location.href);
-    expect(dom.window.document.querySelector('#app').textContent).not.toContain('Отчёт актуален');
-    expect(dom.window.document.querySelector('#app').textContent).not.toContain('Требует обновления');
+  it('uses two requested header lines, a complete legend, and 20px filter spacing on the rating page', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(app).toContain('<p class="catalog-page-header__description">Все сервисы, которые мы проверяли за последние два года — включая те, что перестали работать.</p><p class="catalog-page-header__description">Фильтруйте по комиссии, рейтингу и статусу проверки.</p>');
+    expect(app).toContain('Отчёт актуален');
+    expect(app).toContain('Требует обновления');
+    expect(app).toContain('Отчёта нет');
+    expect(css).toContain('.catalog-page-header--rating h1 { max-width: none; white-space: nowrap; }');
+    expect(css).toContain('.catalog-page-header--rating .catalog-page-header__description { max-width: none; white-space: nowrap; }');
+    expect(css).toContain('.catalog-page-metrics b::before { content: none; }');
+    expect(css).toContain('.catalog--rating .catalog__legend--disclosure { margin: 20px; }');
   });
 
   it('keeps the home table inside the same 1200px rail as “Весь рейтинг”', async () => {

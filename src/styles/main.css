@@ -1389,13 +1389,19 @@ form textarea {
 .catalog-page-header > .catalog-page-header__inner > p { max-width: 650px; margin: 0; color: #3a3a3a; font: 400 19px/1.5 Inter, system-ui, sans-serif; }
 .catalog-page-metrics { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
 .catalog-page-metrics b { display: inline-flex; align-items: center; gap: 8px; color: #131313; font: 600 13px/20px Inter, system-ui, sans-serif; }
-.catalog-page-metrics b::before { width: 5px; height: 5px; border-radius: 50%; background: #45a828; content: ''; }
+.catalog-page-metrics b::before { content: none; }
+.catalog-page-header--rating h1 { max-width: none; white-space: nowrap; }
+.catalog-page-header--rating .catalog-page-header__description { max-width: none; white-space: nowrap; }
+.catalog-page-header__description + .catalog-page-header__description { margin-top: 0; }
+.catalog--rating .catalog__legend--disclosure { margin: 20px; }
 
 @media (max-width: 767px) {
   .catalog-page-header__inner { padding: 28px 0 32px; }
   .catalog-page-header__breadcrumbs { display: flex; align-items: center; gap: 6px; min-height: 14px; font: 400 12px/14px Inter, system-ui, sans-serif; }
   .catalog-page-header__breadcrumbs b { color: #131313; font-weight: 600; }
   .catalog-page-header h1 { margin: 16px 0; font: 700 28px/34px Inter, system-ui, sans-serif; letter-spacing: -.4px; }
+  .catalog-page-header--rating h1,
+  .catalog-page-header--rating .catalog-page-header__description { white-space: normal; }
   .catalog-page-header > .catalog-page-header__inner > p { font: 400 15px/24px Inter, system-ui, sans-serif; }
   .catalog-page-metrics { flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 16px; }
   .catalog-page-metrics b { font: 600 13px/20px Inter, system-ui, sans-serif; }
