@@ -5145,3 +5145,26 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     width: 64px !important;
   }
 }
+
+/* Keep the desktop report advert in its dedicated right rail. The exported
+   layers are flex items with fixed widths; an explicit grid prevents the ad
+   from intruding into the “Коротко о проверке” content column. */
+@media (min-width: 1200px) {
+  .pen-frame[data-pencil-name="Отчёт Desktop 1440"] [data-pencil-name="Columns"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 780px) 340px !important;
+    align-items: start !important;
+    gap: 40px !important;
+  }
+  .pen-frame[data-pencil-name="Отчёт Desktop 1440"] [data-pencil-name="Main Column"] {
+    grid-column: 1;
+    min-width: 0 !important;
+    width: 780px !important;
+  }
+  .pen-frame[data-pencil-name="Отчёт Desktop 1440"] [data-pencil-name="Side Column (sticky)"] {
+    grid-column: 2;
+    justify-self: end;
+    width: 340px !important;
+    margin-left: 0 !important;
+  }
+}

@@ -65,6 +65,15 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('keeps the desktop report advert in a separate right-side grid column', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name="Отчёт Desktop 1440"] [data-pencil-name="Columns"]');
+    expect(css).toContain('grid-template-columns: minmax(0, 780px) 340px !important;');
+    expect(css).toContain('[data-pencil-name="Side Column (sticky)"]');
+    expect(css).toContain('grid-column: 2;');
+  });
+
   it('loads exported Pen frames from the GitHub Pages repository path', () => {
     expect(penSourceUrls('/service-layout/')).toEqual([
       '/service-layout/reference/pen-source.html',
