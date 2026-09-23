@@ -5135,4 +5135,13 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     justify-content: center !important;
     text-align: center !important;
   }
+  /* The source header used 80px for rating and 48px for the last slot,
+     while data rows use 85px and 64px. Matching those pairs keeps every
+     requested column on one vertical axis after the flexible service cell. */
+  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name="Table Header"] > [data-pencil-name="Col Оценка"] {
+    width: 85px !important;
+  }
+  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name="Table Header"] > [data-pencil-name="Col Action"] {
+    width: 64px !important;
+  }
 }

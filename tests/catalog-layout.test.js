@@ -174,4 +174,9 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.catalog[data-type="cards"] td:nth-child(n + 3):nth-child(-n + 9)');
     expect(css).toContain('[data-pencil-name="Promo"]');
   });
+
+  it('gives the virtual-card header the same fixed rating and action widths as its rows', () => {
+    expect(css).toContain('[data-pencil-name="Col Оценка"] {\n    width: 85px !important;');
+    expect(css).toContain('[data-pencil-name="Col Action"] {\n    width: 64px !important;');
+  });
 });
