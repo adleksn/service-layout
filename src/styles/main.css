@@ -5350,3 +5350,38 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 @media (min-width: 768px) {
   .layout--catalog .catalog-faq { display: flex; flex-direction: column; align-items: center; }
 }
+
+@media (min-width: 1200px) {
+  .service-layout .shopper {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    justify-content: flex-start;
+    background-color: #f5f5f5;
+    border-style: solid;
+    border-width: 0 0 0 3px;
+    border-radius: 12px;
+    box-sizing: content-box;
+    width: 778.5px;
+    margin: 0 0 0 -1.5px;
+    padding: 28px;
+    gap: 16px;
+  }
+  .service-layout .shopper { box-sizing: content-box; width: 778.5px; margin: 0 0 0 -1.5px; padding: 28px; gap: 16px; }
+  .service-layout .shopper:not(.shopper--old):not(.shopper--none) { height: 309px; border-color: #45a828; }
+  .service-layout .shopper--old { height: 295px; border-color: #f5c069; }
+  .service-layout .shopper--none { height: auto; border-color: var(--border); }
+  .service-layout .shopper h3 { margin: 0; font-size: 20px; font-weight: 600; line-height: 28px; }
+  .service-layout .shopper .eyebrow { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .8px; }
+  .service-layout .shopper__date { display: flex; align-items: center; gap: 8px; margin: 0; color: #131313; font-size: 14px; font-weight: 600; }
+  .service-layout .shopper__date::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #45a828; }
+  .service-layout .shopper--old .shopper__date::before { background: #f5c069; }
+  .service-layout .shopper__date span { display: none; }
+  .service-layout .shopper dl { display: flex; align-items: center; width: 100%; gap: 0; margin: 0; }
+  .service-layout .shopper dl div { display: flex; flex: 1 1 0; flex-direction: column; align-items: center; gap: 4px; padding: 0; border: 0; }
+  .service-layout .shopper dl div + div { border-left: 1px solid #e6e6e6; }
+  .service-layout .shopper dt { color: #7a7a7a; font-size: 12px; }
+  .service-layout .shopper dd { margin: 0; color: #131313; font-size: 15px; font-weight: 600; }
+  .service-layout .shopper > .text-link { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; border-radius: 8px; background: #45a828; color: #fff; font-size: 15px; font-weight: 600; }
+}

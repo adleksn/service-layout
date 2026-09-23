@@ -15,5 +15,8 @@ describe('service page supplied copy layout', () => {
     expect(app).toContain('[data-pencil-name="About Card"]');
     expect(css).toContain('.shopper__text { margin: 0; font-size: 15px; line-height: 24px; }');
     expect(css).toContain('.about-service p { width: 700px; max-width: 100%; font-size: 16px; line-height: 26px; }');
+    expect(css).toContain('.service-layout .shopper { box-sizing: content-box; width: 778.5px; margin: 0 0 0 -1.5px; padding: 28px; gap: 16px; }');
+    expect(css).toContain('.service-layout .shopper--old { height: 295px; border-color: #f5c069; }');
+    expect(css).toContain('.service-layout .shopper:not(.shopper--old):not(.shopper--none) { height: 309px; border-color: #45a828; }');
   });
 });
