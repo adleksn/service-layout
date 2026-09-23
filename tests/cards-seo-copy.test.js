@@ -9,6 +9,8 @@ describe('virtual-card SEO copy', () => {
     expect(app).toContain('сервисов <br>с 2022 года.');
     expect(app).toContain('выпускаем<br> карту и проверяем');
     expect(app).toContain('Позиции в тааблице пересчитываются каждую неделю');
+    expect(app).toContain("[data-pencil-name=\"SEO Section\"]");
+    expect(app).toContain("[data-pencil-name=\"Answer\"]");
     expect(css).toContain('#app[data-page="cards"] .seo-copy p { font-size: 16px; line-height: 26px; }');
   });
 });
