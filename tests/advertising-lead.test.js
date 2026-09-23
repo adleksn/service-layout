@@ -15,5 +15,8 @@ describe('advertising lead', () => {
     expect(app).toContain('const bannerCopy');
     expect(app).toContain("warning.style.height = '25px';");
     expect(css).toContain('.ad-banner-warning {');
+    expect(css).toContain('.ad-order {\n  box-sizing: content-box;');
+    expect(css).toContain('  gap: 14px;\n  width: 778.5px;\n  height: 170px;');
+    expect(css).toContain('  border: solid #45a828;');
   });
 });
