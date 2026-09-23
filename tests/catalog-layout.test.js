@@ -47,9 +47,9 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.layout--catalog .catalog-seo .seo-copy { margin-inline: auto; }');
   });
 
-  it('centers desktop rating FAQs and fixes each accordion at 430px', () => {
+  it('centers desktop rating FAQs without changing their accordion width', () => {
     expect(css).toContain('.layout--catalog .catalog-faq { display: flex; flex-direction: column; align-items: center; }');
-    expect(css).toContain('.layout--catalog .catalog-faq .faq { width: 430px; max-width: 100%; }');
+    expect(css).not.toContain('.layout--catalog .catalog-faq .faq { width: 430px; max-width: 100%; }');
   });
 
   it('keeps the mobile rating introduction to the three-line Pen copy', () => {
