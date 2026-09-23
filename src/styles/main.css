@@ -4351,9 +4351,12 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .methodology-layout .methodology { width: auto; margin: 0; }
 .methodology-layout > .ad { position: static; top: auto; background: transparent; text-align: right; }
 .methodology-layout > .ad span { padding-top: 0; }
-.methodology-layout .methodology .lead { padding: 20px 0 36px; max-width: none; }
+.methodology-layout .methodology .lead { display: grid; gap: 32px; padding: 20px 0 32px; max-width: none; }
 .methodology-layout .methodology .lead { width: 100%; margin: 0; }
+.methodology-layout .methodology .lead h1 { margin: 0; font: 700 36px/43px Inter, system-ui, sans-serif; letter-spacing: -.4px; }
 .methodology-layout .methodology .lead p { font-size: 16px; line-height: 26px; }
+.methodology-layout .methodology .lead p { max-width: 780px; }
+.methodology-layout .methodology .lead + h2 { margin: 0; }
 .method-criteria { display: grid; gap: 24px; }
 .method-criteria article { padding: 0; border: 0; }
 .method-criteria h3 { margin: 0 0 6px; font-size: 16px; }
