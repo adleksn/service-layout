@@ -70,8 +70,10 @@ describe('unmapped Pen controls', () => {
 
     expect(css).toContain('.pen-frame[data-pencil-name="Отчёт Desktop 1440"] [data-pencil-name="Columns"]');
     expect(css).toContain('grid-template-columns: minmax(0, 780px) 340px !important;');
+    expect(css).toContain('[data-pencil-name="Summary Block"] {\n    box-sizing: border-box !important;');
     expect(css).toContain('[data-pencil-name="Side Column (sticky)"]');
     expect(css).toContain('grid-column: 2;');
+    expect(css).toContain('transform: translateX(20px);');
   });
 
   it('loads exported Pen frames from the GitHub Pages repository path', () => {

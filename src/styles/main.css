@@ -5161,10 +5161,16 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     min-width: 0 !important;
     width: 780px !important;
   }
+  .pen-frame[data-pencil-name="Отчёт Desktop 1440"] [data-pencil-name="Summary Block"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
   .pen-frame[data-pencil-name="Отчёт Desktop 1440"] [data-pencil-name="Side Column (sticky)"] {
     grid-column: 2;
     justify-self: end;
     width: 340px !important;
     margin-left: 0 !important;
+    transform: translateX(20px);
   }
 }
