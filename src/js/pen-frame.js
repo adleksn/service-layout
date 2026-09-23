@@ -86,11 +86,22 @@ function setupPenPromo(frame) {
   };
   setOpen(false);
   closed.querySelectorAll('[data-pencil-name="Button Get Code"]').forEach((button) => activate(button, () => setOpen(true)));
-  opened.querySelectorAll('[data-pencil-name="Button Get Code"]').forEach((button) => activate(button, async () => {
+  const copyPromoCode = () => {
     const code = opened.querySelector('[data-pencil-name="Code"]')?.textContent.trim();
     if (!code) return;
-    try { await navigator.clipboard.writeText(code); } catch { /* Clipboard is unavailable in some embedded browsers. */ }
-  }));
+    const action = opened.querySelector('[data-pencil-name="Button Get Code"]');
+    const label = action?.querySelector('[data-pencil-name="Label"]');
+    action?.style.setProperty('background-color', '#f2f9ee', 'important');
+    label && (label.textContent = 'Скопировано');
+    label?.style.setProperty('color', '#2f8a16', 'important');
+    action?.querySelectorAll('[data-pencil-name="Check Icon"] path').forEach((path) => path.setAttribute('fill', '#2f8a16'));
+    navigator.clipboard?.writeText(code).catch(() => { /* Clipboard is unavailable in some embedded browsers. */ });
+  };
+  opened.querySelectorAll('[data-pencil-name="Copy Icon"]').forEach((icon) => {
+    icon.style.cursor = 'pointer';
+    icon.setAttribute('aria-label', 'Скопировать промокод');
+    activate(icon, copyPromoCode);
+  });
 }
 
 function removePenDemoLabels(frame) {

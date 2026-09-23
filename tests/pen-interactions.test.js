@@ -300,6 +300,30 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('marks the promo action as copied only after its copy icon is pressed', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/service.html' });
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Карточка сервиса Mobile 375')
+      .cloneNode(true);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    enhanceInteractions(frame, 'service');
+    const opened = frame.querySelector('[data-pencil-name="Promo Code Block (open)"]');
+    const action = opened.querySelector('[data-pencil-name="Button Get Code"]');
+    const copyIcon = opened.querySelector('[data-pencil-name="Copy Icon"]');
+
+    expect(action.textContent).toContain('Промокод получен');
+    copyIcon.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+
+    expect(action.textContent).toContain('Скопировано');
+    expect(action.style.backgroundColor).toBe('rgb(242, 249, 238)');
+    expect(action.querySelector('[data-pencil-name="Label"]').style.color).toBe('rgb(47, 138, 22)');
+    expect(action.querySelector('[data-pencil-name="Check Icon"] path').getAttribute('fill')).toBe('#2f8a16');
+    vi.unstubAllGlobals();
+  });
+
   it('includes the amount field in the Pen review form', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/service.html' });
     const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
