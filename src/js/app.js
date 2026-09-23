@@ -161,6 +161,24 @@ const applyAdvertisingLeadLayout = () => {
     warning.style.height = '25px';
     warning.style.padding = '16px';
   });
+  app.querySelectorAll('[data-pencil-name="Final CTA"]').forEach((cta) => {
+    cta.style.alignItems = 'flex-start';
+    cta.style.backgroundColor = '#F5F5F5';
+    cta.style.borderColor = '#45A828';
+    cta.style.borderRadius = '12px';
+    cta.style.borderStyle = 'solid';
+    cta.style.borderWidth = '0 0 0 3px';
+    cta.style.boxSizing = 'content-box';
+    cta.style.display = 'flex';
+    cta.style.flexDirection = 'column';
+    cta.style.flexShrink = '0';
+    cta.style.gap = '14px';
+    cta.style.height = '170px';
+    cta.style.justifyContent = 'flex-start';
+    cta.style.margin = '0 0 0 -1.5px';
+    cta.style.padding = '32px';
+    cta.style.width = '778.5px';
+  });
   if (window.innerWidth >= 1280) {
     app.querySelectorAll('[data-pencil-name="Accent Block"]').forEach((block) => {
       block.style.height = '90px';

@@ -16,6 +16,8 @@ describe('advertising lead', () => {
     expect(app).toContain('const finalCtaCopy');
     expect(app).toContain('ответим и посчитаем под ваши задачи.');
     expect(app).toContain("warning.style.height = '25px';");
+    expect(app).toContain("cta.style.height = '170px';");
+    expect(app).toContain("cta.style.width = '778.5px';");
     expect(css).toContain('.ad-banner-warning {');
     expect(css).toContain('.ad-order {\n  box-sizing: content-box;');
     expect(css).toContain('  gap: 14px;\n  width: 778.5px;\n  height: 170px;');
