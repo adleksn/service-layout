@@ -90,6 +90,7 @@ function uiKit() { const states = [['Кнопка основная', 'Обычн
 
 const render = { home, rating: () => catalogPage('rating'), cards: () => catalogPage('cards'), service: () => service(), 'virtual-card': () => service(true), reports, report, methodology, contacts: () => staticPage('contacts'), advertising: () => staticPage('advertising'), agreement: () => staticPage('agreement'), 'not-found': () => staticPage('not-found'), 'ui-kit': uiKit };
 app.innerHTML = render[page]();
+app.dataset.page = page;
 resolveSitePaths(app);
 setupContactStubs(app);
 setupFooterStubs(app);

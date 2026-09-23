@@ -1215,6 +1215,22 @@ form textarea {
     width: 28px !important;
     height: 28px !important;
   }
+  #app[data-page="methodology"] .footer__mobile-bottom {
+    gap: 10px;
+  }
+  #app[data-page="methodology"] .footer__mobile-bottom .footer__dzen {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    text-align: left;
+  }
+  #app[data-page="methodology"] .footer__mobile-bottom .footer__dzen svg {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+  }
 }
 
 @media (min-width: 375px) and (max-width: 767px) {
