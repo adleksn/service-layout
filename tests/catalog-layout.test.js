@@ -79,6 +79,12 @@ describe('rating catalog layout', () => {
     expect(css).toContain('width: calc(100% + 2px) !important;');
   });
 
+  it('keeps the desktop report treatment and status column icon-only', () => {
+    expect(css).toContain('@media (min-width: 768px) {\n  .layout--catalog .catalog[data-type="rating"] td:nth-child(6)');
+    expect(css).toContain('.desktop-status .check-icon');
+    expect(css).toContain('font-size: 0;');
+  });
+
   it('keeps the lower mobile rating sections as their own Pen background bands', () => {
     expect(app).toContain('catalog-discontinued');
     expect(css).toContain('.catalog-discontinued');
