@@ -13,7 +13,9 @@ describe('methodology sign fidelity', () => {
     expect(app).toContain('Для достоверной проверки условий работы сервиса мы используем понятную');
     expect(app).toContain('Все результаты попадают в карточку сервиса и в отчёт тайного покупателя');
     expect(app).toContain('технология проверки позволяет минимизировать риски');
+    expect(app).toContain('const alignMethodologyLayout');
     expect(css).toContain('.methodology .tabs button[aria-selected="true"] { color: #131313; }');
+    expect(css).toContain('.methodology-layout .methodology .lead { padding: 20px 0 36px; max-width: none; }');
     expect(css).toContain('.method-warning { background: #f5f5f5; border-left-color: #46a827;');
     expect(css).toContain('.method-cta { border-left: 3px solid #46a827; }');
   });
