@@ -3712,6 +3712,9 @@ body {
 .contact-page {
   padding-bottom: 90px;
 }
+.contact-page .article { max-width: none; }
+.contact-page .article h2 { margin: 0 0 16px; }
+.contact-page .article p { margin: 0; max-width: 1200px; font-size: 16px; line-height: 26px; }
 .contact-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -119,9 +119,17 @@ const alignMethodologyLayout = () => {
   const article = app.querySelector('.methodology-layout > .methodology');
   if (leadBlock && article && !article.contains(leadBlock)) article.prepend(leadBlock);
 };
+const applyContactAboutCopy = () => {
+  if (page !== 'contacts') return;
+  const copy = 'sao-rating.ru — независимый проект. Мы не являемся платёжным сервисом, не<br>принимаем платежи и не оказываем финансовых услуг. Наша задача — собрать в одном<br>месте данные о сервисах альтернативной оплаты и проверить их на практике, чтобы вы<br>могли сравнивать не обещания с сайтов, а фактические условия. Проект существует с<br>2022 года. Регион работы — Российская Федерация.';
+  app.querySelectorAll('.contact-page .article > p, [data-pencil-name="О проекте"] [data-pencil-name="Paragraph"]').forEach((paragraph) => {
+    paragraph.innerHTML = copy;
+  });
+};
 app.innerHTML = render[page]();
 app.dataset.page = page;
 alignMethodologyLayout();
+applyContactAboutCopy();
 applyHomeCopyBreaks();
 resolveSitePaths(app);
 setupContactStubs(app);
@@ -259,7 +267,7 @@ if (reviewSort) reviewSort.addEventListener('change', () => {
     .forEach((review) => list.append(review));
 });
 
-applyExactPenFrame(app, page, initialRequestUrl).then(() => { applyHomeCopyBreaks(); resolveSitePaths(app); }).catch(() => {});
+applyExactPenFrame(app, page, initialRequestUrl).then(() => { applyHomeCopyBreaks(); applyContactAboutCopy(); resolveSitePaths(app); }).catch(() => {});
 applyPenMethodologySignSvgs(app).catch(() => {});
 
 // Pen frames are authored at specific control widths, while the semantic
