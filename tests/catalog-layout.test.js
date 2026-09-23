@@ -64,11 +64,19 @@ describe('rating catalog layout', () => {
     expect(app).toContain('mobile-status-badges--empty');
   });
 
-  it('keeps mobile review counts clear of scores and renders report-status dots', () => {
+  it('keeps mobile review counts clear of scores', () => {
     expect(css).toContain('padding-left: 29px;');
-    expect(css).toContain('.catalog-row--fresh td:nth-child(6)::before');
-    expect(css).toContain('.catalog-row--old td:nth-child(6)::before');
-    expect(css).toContain("content: '' !important;");
+  });
+
+  it('renders the mobile report as an explicit row with all three report states', () => {
+    expect(app).toContain('report-dot report-dot--${reportState}');
+    expect(app).toContain("reportState === 'none'");
+    expect(app).toContain('Отчёта нет');
+    expect(css).toContain('.report-dot--fresh { background-color: #45a828; }');
+    expect(css).toContain('.report-dot--old { background-color: #f5c069; }');
+    expect(css).toContain('border-width: 1px 0;');
+    expect(css).toContain('margin: -0.5px 0;');
+    expect(css).toContain('width: calc(100% + 2px) !important;');
   });
 
   it('keeps the lower mobile rating sections as their own Pen background bands', () => {
