@@ -129,12 +129,16 @@ const applyContactAboutCopy = () => {
 const applyAdvertisingLeadLayout = () => {
   if (page !== 'advertising') return;
   const copy = 'Мы не продаём места в рейтинге и не продаём отзывы. Обращения от<br>владельцев сервисов с подобными предложениями мы рассматриваем как<br>попытку ввести клиентов в заблуждение и понижаем оценку таким сервисам.';
+  const promoCopy = 'Пометка появляется в карточке сервиса в общем списке в правом верхнем углу: она<br>выделяет карточку на общем фоне и заставляет посетителя внимательнее остановиться на<br>изучении сервиса. Пометка также включает в себя опцию «Рекламный баннер» — ваш<br>баннер показывается справа на всех страницах сайта. Если таких баннеров несколько, они<br>показываются равномерно, по очереди, каждому новому посетителю.';
   app.querySelectorAll('[data-pencil-name="Accent Block"] [data-pencil-name="Text"]').forEach((text) => {
     text.innerHTML = copy;
   });
+  app.querySelectorAll('#promo > p, [data-pencil-name="Option Promo"] > [data-pencil-name="Text"]').forEach((text) => {
+    text.innerHTML = promoCopy;
+  });
   if (window.innerWidth >= 1280) {
     app.querySelectorAll('[data-pencil-name="Accent Block"]').forEach((block) => {
-      block.style.height = '129px';
+      block.style.height = '90px';
       block.style.padding = '24px';
     });
   }

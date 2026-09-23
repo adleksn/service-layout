@@ -8,7 +8,8 @@ describe('advertising lead', () => {
     expect(app).toContain('const applyAdvertisingLeadLayout');
     expect(app).toContain('Обращения от<br>владельцев сервисов');
     expect(app).toContain('как<br>попытку ввести клиентов');
-    expect(app).toContain("block.style.height = '129px';");
+    expect(app).toContain("block.style.height = '90px';");
     expect(app).toContain("block.style.padding = '24px';");
+    expect(app).toContain('Пометка также включает в себя опцию «Рекламный баннер»');
   });
 });
