@@ -1199,6 +1199,24 @@ form textarea {
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* The methodology mobile frame uses an inline Dzen row in the footer. */
+@media (max-width: 767px) {
+  .pen-frame[data-pencil-name="Методика проверки Mobile 375"] [data-pencil-name="Footer Bottom"] {
+    gap: 10px !important;
+  }
+  .pen-frame[data-pencil-name="Методика проверки Mobile 375"] [data-pencil-name="Dzen Row"] {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+  .pen-frame[data-pencil-name="Методика проверки Mobile 375"] [data-pencil-name="Dzen Icon"] {
+    flex: 0 0 28px !important;
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
 @media (min-width: 375px) and (max-width: 767px) {
   .layout--catalog .catalog[data-type="rating"] td:nth-child(5) { padding-left: 29px; }
   .layout--catalog .catalog[data-type="rating"] .catalog-row--fresh td:nth-child(6)::before {

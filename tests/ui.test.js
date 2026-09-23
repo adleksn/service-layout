@@ -32,6 +32,8 @@ describe('semantic page interactions', () => {
     expect(css).toContain('[data-pencil-name="Report Card MS"]:hover [data-pencil-name="Title"] { color: #46a827 !important; }');
     expect(css).toContain('[data-pencil-name="Copy Icon"]:focus-visible {');
     expect(css).toContain('box-shadow: none !important;');
+    expect(css).toContain('.pen-frame[data-pencil-name="Методика проверки Mobile 375"] [data-pencil-name="Dzen Row"] {');
+    expect(css).toContain('gap: 10px !important;');
     expect(css).toContain('[data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }');
     expect(css).not.toContain('.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #3a3a3a !important; }');
   });
