@@ -1015,13 +1015,25 @@ form textarea {
   }
 }
 
-/* This desktop Pen footer has a narrower source CTA than the approved page.
-   Only its width differs; it otherwise inherits the shared footer states. */
+/* Match the exported footer CTA used on the other desktop pages exactly. */
 .pen-frame[data-pencil-name="Методика проверки Desktop 1440"] [data-pencil-name="Footer"] [data-pencil-name="Button Add Service"] {
+  align-items: center !important;
+  background-color: #45a828 !important;
+  border-radius: 8px !important;
   box-sizing: border-box !important;
-  flex: 0 0 100px !important;
-  width: 100px !important;
-  min-width: 100px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-shrink: 0 !important;
+  gap: 0 !important;
+  height: fit-content !important;
+  justify-content: flex-start !important;
+  padding: 11px 18px !important;
+  width: fit-content !important;
+}
+/* The methodology export uses non-anchor link layers. Give those layers the
+   shared Pen footer hover without introducing a page-specific color state. */
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "][data-pen-link]:hover {
+  opacity: .78 !important;
 }
 
 @media (min-width: 768px) and (max-width: 899px) {

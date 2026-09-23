@@ -76,13 +76,15 @@ describe('unmapped Pen controls', () => {
     expect(css).toContain('transform: translateX(20px);');
   });
 
-  it('keeps Methodology footer states shared and gives its CTA the approved width', () => {
+  it('matches Methodology footer controls to the shared Pen footer', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
     expect(css).toContain('.pen-frame[data-pencil-name="Методика проверки Desktop 1440"] [data-pencil-name="Footer"] [data-pencil-name="Button Add Service"]');
-    expect(css).toContain('flex: 0 0 100px !important;');
-    expect(css).toContain('width: 100px !important;');
-    expect(css).not.toContain('.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "]:hover');
+    expect(css).toContain('height: fit-content !important;');
+    expect(css).toContain('width: fit-content !important;');
+    expect(css).toContain('padding: 11px 18px !important;');
+    expect(css).toContain('[data-pencil-name^="Link "][data-pen-link]:hover');
+    expect(css).toContain('opacity: .78 !important;');
     expect(css).not.toContain('[data-pen-link]:hover {\n  opacity: 1 !important;');
   });
 
