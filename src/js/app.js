@@ -131,6 +131,7 @@ const applyAdvertisingLeadLayout = () => {
   const copy = 'Мы не продаём места в рейтинге и не продаём отзывы. Обращения от<br>владельцев сервисов с подобными предложениями мы рассматриваем как<br>попытку ввести клиентов в заблуждение и понижаем оценку таким сервисам.';
   const promoCopy = 'Пометка появляется в карточке сервиса в общем списке в правом верхнем углу: она<br>выделяет карточку на общем фоне и заставляет посетителя внимательнее остановиться на<br>изучении сервиса. Пометка также включает в себя опцию «Рекламный баннер» — ваш<br>баннер показывается справа на всех страницах сайта. Если таких баннеров несколько, они<br>показываются равномерно, по очереди, каждому новому посетителю.';
   const bannerCopy = 'На всех страницах сайта, кроме главной и контактов, можно разместить баннер справа.<br>Ссылка с баннера ведёт на ваш сайт (без индексации) или на вашу карточку в рейтинге —<br>по вашему выбору. Баннер также показывается в карточках других сервисов: можно<br>выбрать все сервисы или их часть.';
+  const finalCtaCopy = 'Стоимость каждой опции, свободные слоты и условия обсуждаем в телеграм-боте —<br>ответим и посчитаем под ваши задачи.';
   app.querySelectorAll('[data-pencil-name="Accent Block"] [data-pencil-name="Text"]').forEach((text) => {
     text.innerHTML = copy;
   });
@@ -139,6 +140,9 @@ const applyAdvertisingLeadLayout = () => {
   });
   app.querySelectorAll('#banner > p, [data-pencil-name="Option Banner"] > [data-pencil-name="Text"]').forEach((text) => {
     text.innerHTML = bannerCopy;
+  });
+  app.querySelectorAll('.ad-order p, [data-pencil-name="Final CTA"] [data-pencil-name="Paragraph"]').forEach((text) => {
+    text.innerHTML = finalCtaCopy;
   });
   const fallbackBanner = app.querySelector('#banner');
   if (fallbackBanner && !fallbackBanner.querySelector('.ad-banner-warning')) {

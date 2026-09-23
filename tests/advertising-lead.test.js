@@ -13,10 +13,15 @@ describe('advertising lead', () => {
     expect(app).toContain("block.style.padding = '24px';");
     expect(app).toContain('Пометка также включает в себя опцию «Рекламный баннер»');
     expect(app).toContain('const bannerCopy');
+    expect(app).toContain('const finalCtaCopy');
+    expect(app).toContain('ответим и посчитаем под ваши задачи.');
     expect(app).toContain("warning.style.height = '25px';");
     expect(css).toContain('.ad-banner-warning {');
     expect(css).toContain('.ad-order {\n  box-sizing: content-box;');
     expect(css).toContain('  gap: 14px;\n  width: 778.5px;\n  height: 170px;');
     expect(css).toContain('  border: solid #45a828;');
+    expect(css).toContain('font: 700 24px/31px Inter, system-ui, sans-serif;');
+    expect(css).toContain('  height: 52px;');
+    expect(css).toContain('  padding: 0 26px;');
   });
 });
