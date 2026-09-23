@@ -4357,6 +4357,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .methodology-layout > .ad span { padding-top: 0; }
 .methodology-layout .methodology .lead { display: grid; gap: 32px; padding: 20px 0 32px; max-width: none; }
 .methodology-layout .methodology .lead { width: 100%; margin: 0; }
+.methodology-layout .methodology .lead .eyebrow:empty { display: none; }
 .methodology-layout .methodology .lead h1 { margin: 0; font: 700 36px/43px Inter, system-ui, sans-serif; letter-spacing: -.4px; }
 .methodology-layout .methodology .lead p { font-size: 16px; line-height: 26px; }
 .methodology-layout .methodology .lead p { max-width: 780px; }

@@ -19,6 +19,7 @@ describe('methodology sign fidelity', () => {
     expect(css).toContain('.methodology-breadcrumbs { padding-bottom: 0; }');
     expect(css).toContain('.methodology .tabs button[aria-selected="true"] { color: #131313; }');
     expect(css).toContain('.methodology-layout .methodology .lead { display: grid; gap: 32px; padding: 20px 0 32px; max-width: none; }');
+    expect(css).toContain('.methodology-layout .methodology .lead .eyebrow:empty { display: none; }');
     expect(css).toContain('.methodology-layout .methodology .lead p { font-size: 16px; line-height: 26px; }');
     expect(css).toContain('.methodology-layout > .ad { position: static; top: auto; background: transparent; text-align: right; }');
     expect(css).toContain('.method-warning { background: #f5f5f5; border-left-color: #46a827;');
