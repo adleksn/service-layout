@@ -4,6 +4,20 @@ import { describe, expect, it } from 'vitest';
 import { mountMethodologySignSvgs } from '../src/js/pen-frame.js';
 
 describe('methodology sign fidelity', () => {
+  it('uses plain text criteria, a returned advert rail, and the supplied methodology copy', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(app).toContain('methodology-layout');
+    expect(app).toContain('class="method-criteria"');
+    expect(app).toContain('Для достоверной проверки условий работы сервиса мы используем понятную');
+    expect(app).toContain('Все результаты попадают в карточку сервиса и в отчёт тайного покупателя');
+    expect(app).toContain('технология проверки позволяет минимизировать риски');
+    expect(css).toContain('.methodology .tabs button[aria-selected="true"] { color: #131313; }');
+    expect(css).toContain('.method-warning { background: #f5f5f5; border-left-color: #46a827;');
+    expect(css).toContain('.method-cta { border-left: 3px solid #46a827; }');
+  });
+
   it('keeps the exact Pen sign-list rhythm and source colour tokens', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
