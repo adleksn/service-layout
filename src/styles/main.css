@@ -4063,6 +4063,13 @@ body {
 }
 .pen-frame [data-pencil-name="Report Card"]:hover [data-pencil-name="Title"],
 .pen-frame [data-pencil-name="Report Card MS"]:hover [data-pencil-name="Title"] { color: #46a827 !important; }
+/* The copy glyph is an SVG control. Its focused state must stay invisible so
+   clicking it does not draw a square around the icon inside the promo field. */
+.pen-frame [data-pencil-name="Promo Code Block (open)"] [data-pencil-name="Copy Icon"]:focus,
+.pen-frame [data-pencil-name="Promo Code Block (open)"] [data-pencil-name="Copy Icon"]:focus-visible {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
 .catalog tbody tr { transition: background-color .15s ease; }
 .catalog tbody tr:hover { background-color: #f9fbf8; }
 .pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "] { transition: background-color .15s ease; }
