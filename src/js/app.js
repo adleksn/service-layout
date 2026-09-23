@@ -126,10 +126,24 @@ const applyContactAboutCopy = () => {
     paragraph.innerHTML = copy;
   });
 };
+const applyAdvertisingLeadLayout = () => {
+  if (page !== 'advertising') return;
+  const copy = 'Мы не продаём места в рейтинге и не продаём отзывы. Обращения от<br>владельцев сервисов с подобными предложениями мы рассматриваем как<br>попытку ввести клиентов в заблуждение и понижаем оценку таким сервисам.';
+  app.querySelectorAll('[data-pencil-name="Accent Block"] [data-pencil-name="Text"]').forEach((text) => {
+    text.innerHTML = copy;
+  });
+  if (window.innerWidth >= 1280) {
+    app.querySelectorAll('[data-pencil-name="Accent Block"]').forEach((block) => {
+      block.style.height = '129px';
+      block.style.padding = '24px';
+    });
+  }
+};
 app.innerHTML = render[page]();
 app.dataset.page = page;
 alignMethodologyLayout();
 applyContactAboutCopy();
+applyAdvertisingLeadLayout();
 applyHomeCopyBreaks();
 resolveSitePaths(app);
 setupContactStubs(app);
@@ -267,7 +281,7 @@ if (reviewSort) reviewSort.addEventListener('change', () => {
     .forEach((review) => list.append(review));
 });
 
-applyExactPenFrame(app, page, initialRequestUrl).then(() => { applyHomeCopyBreaks(); applyContactAboutCopy(); resolveSitePaths(app); }).catch(() => {});
+applyExactPenFrame(app, page, initialRequestUrl).then(() => { applyHomeCopyBreaks(); applyContactAboutCopy(); applyAdvertisingLeadLayout(); resolveSitePaths(app); }).catch(() => {});
 applyPenMethodologySignSvgs(app).catch(() => {});
 
 // Pen frames are authored at specific control widths, while the semantic
