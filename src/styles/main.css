@@ -3672,7 +3672,7 @@ body {
   font-weight: 700;
 }
 .methodology {
-  padding-bottom: 90px;
+  padding-bottom: 0px;
   /* The Pen frame uses the left content column; do not centre this narrower
      block inside the full-width site container. */
   width: min(820px, calc(100% - 48px));
@@ -4349,6 +4349,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 /* Methodology: the supplied content is an article, not a card grid. */
 .methodology-layout { grid-template-columns: minmax(0, 820px) 340px; align-items: start; }
 .methodology-layout .methodology { width: auto; margin: 0; }
+.methodology-breadcrumbs { padding-bottom: 0; }
 .methodology-layout > .ad { position: static; top: auto; background: transparent; text-align: right; }
 .methodology-layout > .ad span { padding-top: 0; }
 .methodology-layout .methodology .lead { display: grid; gap: 32px; padding: 20px 0 32px; max-width: none; }

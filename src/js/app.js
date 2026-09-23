@@ -114,6 +114,7 @@ function methodologyUpdated() {
 const render = { home, rating: () => catalogPage('rating'), cards: () => catalogPage('cards'), service: () => service(), 'virtual-card': () => service(true), reports, report, methodology: methodologyUpdated, contacts: () => staticPage('contacts'), advertising: () => staticPage('advertising'), agreement: () => staticPage('agreement'), 'not-found': () => staticPage('not-found'), 'ui-kit': uiKit };
 const alignMethodologyLayout = () => {
   if (page !== 'methodology') return;
+  app.querySelector('.breadcrumbs')?.classList.add('methodology-breadcrumbs');
   const leadBlock = app.querySelector('.lead');
   const article = app.querySelector('.methodology-layout > .methodology');
   if (leadBlock && article && !article.contains(leadBlock)) article.prepend(leadBlock);
