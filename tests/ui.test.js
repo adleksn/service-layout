@@ -37,6 +37,9 @@ describe('semantic page interactions', () => {
     expect(css).toContain('#app[data-page="methodology"] .footer__mobile-bottom .footer__dzen {');
     expect(css).not.toContain('#app[data-page="methodology"] .footer__column a:hover');
     expect(css).not.toContain('#app[data-page="methodology"] .footer .footer__cta:hover');
+    expect(css).toContain('#app[data-page="methodology"] .footer__desktop .footer__cta-group > .footer__cta');
+    expect(css).toContain('#app[data-page="methodology"] .footer__column > a:hover');
+    expect(css).toContain('width: fit-content;');
     expect(css).toContain('display: inline-flex;');
     expect(css).toContain('[data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }');
     expect(css).not.toContain('.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #3a3a3a !important; }');

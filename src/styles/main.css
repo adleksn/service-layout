@@ -1036,6 +1036,28 @@ form textarea {
   opacity: .78 !important;
 }
 
+/* Methodology intentionally keeps the semantic page for its interactive
+   tabs. Its footer therefore needs the same concrete CTA/link states as the
+   exported footers, using the semantic elements that are actually rendered. */
+#app[data-page="methodology"] .footer__desktop .footer__cta-group > .footer__cta {
+  align-items: center;
+  background-color: #45a828;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  gap: 0;
+  height: fit-content;
+  justify-content: flex-start;
+  padding: 11px 18px;
+  width: fit-content;
+}
+#app[data-page="methodology"] .footer__column > a:hover,
+#app[data-page="methodology"] .footer__column > a:focus-visible {
+  opacity: .78;
+}
+
 @media (min-width: 768px) and (max-width: 899px) {
   .header__row { min-height: 68px; }
   .header .nav,
