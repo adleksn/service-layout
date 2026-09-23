@@ -5349,6 +5349,8 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 
 @media (min-width: 768px) {
   .layout--catalog .catalog-faq { display: flex; flex-direction: column; align-items: center; }
+  .service-layout .shopper:not(.shopper--old):not(.shopper--none) { height: 309px; }
+  .service-layout .shopper--old { height: 295px; }
 }
 
 @media (min-width: 1200px) {

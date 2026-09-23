@@ -12,6 +12,8 @@ describe('service page supplied copy layout', () => {
     expect(app).toContain('Судя по количеству отзывов и стабильно высокой оценке');
     expect(app).toContain('[data-pencil-name="Mystery Shopper Report (fresh)"]');
     expect(app).toContain('[data-pencil-name="Mystery Shopper Report (stale)"]');
+    expect(app).toContain("freshReport.style.height = '309px'");
+    expect(app).toContain("staleReport.style.height = '295px'");
     expect(app).toContain('[data-pencil-name="About Card"]');
     expect(css).toContain('.shopper__text { margin: 0; font-size: 15px; line-height: 24px; }');
     expect(css).toContain('.about-service p { width: 700px; max-width: 100%; font-size: 16px; line-height: 26px; }');
