@@ -1023,11 +1023,17 @@ form textarea {
   cursor: pointer;
   transition: color .15s ease;
 }
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pen-link]:hover {
+  opacity: 1 !important;
+}
 .pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "]:hover,
 .pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "]:focus-visible,
 .pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Terms Link"]:hover,
 .pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Terms Link"]:focus-visible {
   color: #45a828 !important;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 .pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Button Add Service"] {
   display: inline-flex !important;
@@ -1040,6 +1046,9 @@ form textarea {
   background: #45a828 !important;
   cursor: pointer;
   transition: background-color .15s ease, transform .15s ease;
+}
+.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Button Add Service"] [data-pencil-name="Button Label"] {
+  color: #ffffff !important;
 }
 .pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name="Button Add Service"]:hover {
   background: #2f8a16 !important;

@@ -81,8 +81,11 @@ describe('unmapped Pen controls', () => {
 
     expect(css).toContain('.pen-frame[data-pencil-name^="Методика проверки"] [data-pencil-name="Footer"] [data-pencil-name^="Link "]:hover');
     expect(css).toContain('color: #45a828 !important;');
+    expect(css).toContain('text-underline-offset: 4px;');
+    expect(css).toContain('[data-pen-link]:hover {\n  opacity: 1 !important;');
     expect(css).toContain('[data-pencil-name="Button Add Service"]:hover');
     expect(css).toContain('background: #2f8a16 !important;');
+    expect(css).toContain('[data-pencil-name="Button Label"] {\n  color: #ffffff !important;');
   });
 
   it('loads exported Pen frames from the GitHub Pages repository path', () => {
