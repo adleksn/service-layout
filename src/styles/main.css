@@ -4718,6 +4718,12 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 }
 
 @media (min-width: 375px) and (max-width: 767px) {
+  .layout--catalog .catalog[data-type="rating"] td.row-action {
+    display: flex !important;
+    justify-self: stretch;
+    justify-content: center;
+    text-align: center;
+  }
   .layout--catalog .catalog[data-type="rating"] td:nth-child(5) { padding-left: 29px !important; }
   .layout--catalog .catalog[data-type="rating"] td:nth-child(6) {
     align-items: center;

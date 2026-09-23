@@ -65,6 +65,13 @@ describe('rating catalog layout', () => {
     expect(css).toContain('color: #ffffff;');
   });
 
+  it('centres the mobile details arrow directly above the fee column', () => {
+    expect(css).toContain('.layout--catalog .catalog[data-type="rating"] td.row-action');
+    expect(css).toContain('justify-content: center;');
+    expect(css).toContain('justify-self: stretch;');
+    expect(css).toContain('text-align: center;');
+  });
+
   it('derives every mobile rating-card status from the supplied Pen states', () => {
     expect(app).toContain('const ratingMobileStates = {');
     expect(app).toContain("21: ['promo']");
