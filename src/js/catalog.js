@@ -61,10 +61,10 @@ export const services = [
   { id: 'prosto-pay', rank: 3, name: 'Prosto Pay', domain: 'prostopay.com', rating: 4.2, fee: 15, feeLabel: '15%', reviews: 48, reportDate: '04.03.2024', tags: ['fee-15', 'old'] },
   { id: 'o-plati', rank: 4, name: 'O-Plati', domain: 'o-plati.by', rating: 4.2, fee: 10, feeLabel: '10 — 15%', reviews: 101, reportDate: '15.01.2026', tags: ['fee-10', 'fee-15', 'fresh', 'mystery', 'verified', 'promo'] },
   { id: 'getpayall', rank: 5, name: 'GetPayAll', domain: 'getpayall.com', rating: 4, fee: 18, feeLabel: '18%', reviews: 6, reportDate: '—', tags: ['fee-20', 'none'] },
-  { id: 'oplata-guru', rank: 6, name: 'Oplata.guru', domain: 'oplata.guru', rating: 4, fee: 12, feeLabel: '12 — 18%', reviews: 14, reportDate: '08.2025', tags: ['fee-15', 'old'] },
+  { id: 'oplata-guru', rank: 6, name: 'Oplata.guru', domain: 'oplata.guru', rating: 4, fee: 12, feeLabel: '12 — 18%', reviews: 14, reportDate: '08.2025', tags: ['fee-15', 'old', 'promo'] },
   { id: 'nowall', rank: 7, name: 'NOWALL', domain: 'nowall.io', rating: 4, fee: 15, feeLabel: '15 — 20%', reviews: 8, reportDate: '—', tags: ['fee-20', 'none'] },
   { id: 'payboy', rank: 8, name: 'PayBoy', domain: 'payboy.ru', rating: 3.8, fee: 10, feeLabel: '10 — 16%', reviews: 31, reportDate: '02.2024', tags: ['fee-15', 'old'] },
-  { id: 'dolphin-pay', rank: 9, name: 'Dolphin Pay', domain: 'dolphinpay.ru', rating: 3.8, fee: 18, feeLabel: '18 — 25%', reviews: 19, reportDate: '12.2025', tags: ['fee-20', 'fresh'] },
+  { id: 'dolphin-pay', rank: 9, name: 'Dolphin Pay', domain: 'dolphinpay.ru', rating: 3.8, fee: 18, feeLabel: '18 — 25%', reviews: 19, reportDate: '12.2025', tags: ['fee-20', 'fresh', 'promo'] },
   { id: 'gctransfer', rank: 10, name: 'GCtransfer', domain: 'gctransfer.com', rating: 3.8, fee: 14, feeLabel: '14 — 22%', reviews: 27, reportDate: '—', tags: ['fee-15', 'fee-20', 'none'] }
   ,{ id: 'cheatpay', rank: 11, name: 'CheatPay', domain: 'cheatpay.ru', rating: 3.7, fee: 20, feeLabel: '20 — 28%', reviews: 15, reportDate: '—', tags: ['fee-20', 'none'] }
   ,{ id: 'helpers-team', rank: 12, name: 'HELPERS TEAM', domain: 'helpersteam.ru', rating: 3.7, fee: 18, feeLabel: '18 — 24%', reviews: 11, reportDate: '09.2025', tags: ['fee-20', 'old'] }
@@ -76,7 +76,7 @@ export const services = [
   ,{ id: 'fastgroup', rank: 18, name: 'FastGroup', domain: 'fastgroup.ru', rating: 3.5, fee: 15, feeLabel: '15 — 22%', reviews: 20, reportDate: '01.2025', tags: ['fee-15', 'fee-20', 'old'] }
   ,{ id: 'directway', rank: 19, name: 'DirectWay', domain: 'directway.ru', rating: 3.5, fee: 20, feeLabel: '20 — 28%', reviews: 9, reportDate: '03.2024', tags: ['fee-20', 'old'] }
   ,{ id: 'truecash', rank: 20, name: 'TrueCash', domain: 'truecash.ru', rating: 3.4, fee: 21, feeLabel: '21 — 26%', reviews: 26, reportDate: '04.2024', tags: ['fee-20', 'old'] }
-  ,{ id: 'transsend', rank: 21, name: 'TransSend', domain: 'transsend.ru', rating: 3.4, fee: 20, feeLabel: '20 — 27%', reviews: 20, reportDate: '—', tags: ['fee-20', 'none'] }
+  ,{ id: 'transsend', rank: 21, name: 'TransSend', domain: 'transsend.ru', rating: 3.4, fee: 20, feeLabel: '20 — 27%', reviews: 20, reportDate: '—', tags: ['fee-20', 'none', 'promo'] }
   ,{ id: 'swiftlink', rank: 22, name: 'SwiftLink', domain: 'swiftlink.ru', rating: 3.4, fee: 19, feeLabel: '19 — 28%', reviews: 29, reportDate: '06.2024', tags: ['fee-20', 'old'] }
   ,{ id: 'cityflow', rank: 23, name: 'CityFlow', domain: 'cityflow.ru', rating: 3.3, fee: 15, feeLabel: '15 — 19%', reviews: 4, reportDate: '—', tags: ['fee-15', 'none'] }
   ,{ id: 'silvertransfer', rank: 24, name: 'SilverTransfer', domain: 'silvertransfer.ru', rating: 3.3, fee: 14, feeLabel: '14 — 23%', reviews: 23, reportDate: '—', tags: ['fee-15', 'fee-20', 'none'] }
