@@ -1241,44 +1241,6 @@ form textarea {
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* The live methodology page renders the shared semantic footer (rather than
-   the exported Pen layers above). Keep its interactive links and CTA in the
-   same state system as the rest of the site. */
-#app[data-page="methodology"] .footer a {
-  transition: color .15s ease, background-color .15s ease, text-decoration-color .15s ease;
-}
-#app[data-page="methodology"] .footer__column a:hover,
-#app[data-page="methodology"] .footer__column a:focus-visible,
-#app[data-page="methodology"] .footer__bottom a:hover,
-#app[data-page="methodology"] .footer__bottom a:focus-visible {
-  color: #46a827;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-}
-#app[data-page="methodology"] .footer .footer__cta {
-  display: inline-flex;
-  box-sizing: border-box;
-  align-items: center;
-  justify-content: center;
-  min-height: 42px;
-  height: 42px;
-  margin: 0;
-  padding: 11px 18px;
-  color: #ffffff;
-  background-color: #46a827;
-  border: 0;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-}
-#app[data-page="methodology"] .footer .footer__cta:hover,
-#app[data-page="methodology"] .footer .footer__cta:focus-visible {
-  color: #ffffff;
-  background-color: #2f8a16;
-  text-decoration: none;
-}
-
 /* The methodology mobile frame uses an inline Dzen row in the footer. */
 @media (max-width: 767px) {
   .pen-frame[data-pencil-name="Методика проверки Mobile 375"] [data-pencil-name="Footer Bottom"] {
