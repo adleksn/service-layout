@@ -80,8 +80,8 @@ function catalogPage(type) {
 const serviceReviews = [['Марина','Пользуюсь сервисом уже полгода для оплаты рекламных кабинетов. Ни разу не было проблем с платежами, деньги доходят за считанные минуты. Комиссия честная, как заявлено на сайте.','03.12.2025'],['Владимир','Оплачивал подписку Adobe через этот сервис — прошло быстро, чек прислали сразу. Из минусов: поддержка не сразу ответила в выходной день, пришлось подождать до утра понедельника.','28.11.2025'],['Олеся','Отличный сервис, пользуюсь регулярно. Курс всегда честный, никаких скрытых комиссий не обнаружила. Рекомендую всем, кто ищет надёжный способ оплаты зарубежных подписок.','20.11.2025'],['Андрей','Платил за хостинг на полгода вперёд. Всё прошло гладко, но сумма оказалась чуть больше, чем я ожидал из-за курса — уточняйте актуальный курс перед оплатой.','15.11.2025'],['Дмитрий','Сервисом пользуюсь для оплаты Spotify и Netflix. Работает стабильно уже почти год.','08.11.2025']];
 const shopper = (kind = 'fresh') => kind === 'none' ? `<section class="shopper shopper--none"><h3>Тайный покупатель ещё не проверял этот сервис</h3><p>Проверка появится после контрольной закупки</p></section>` : `<section class="shopper ${kind === 'old' ? 'shopper--old' : ''}"><p class="eyebrow">ТАЙНЫЙ ПОКУПАТЕЛЬ</p><h3>Мы оплатили подписку и проверили сервис</h3><p class="shopper__date">Проверка от ${kind === 'old' ? '03.2024' : '12.02.2026'} ${kind === 'old' ? '<span>Требует обновления</span>' : '<span>Актуально</span>'}</p><p>${kind === 'old' ? 'Заказали подписку Spotify Premium на месяц через форму сервиса. Платёж прошёл с первого раза, но с тех пор прошло больше года — условия и надёжность сервиса могли измениться, поэтому данные требуют повторной проверки.' : 'Заказали подписку Spotify Premium на месяц через форму сервиса. Платёж прошёл с первого раза картой другого банка, деньги списались в рублях по курсу чуть выше биржевого. В целом сервис работает предсказуемо: сроки и комиссия совпали с указанными на сайте, поддержка была на связи в течение всей сделки.'}</p><dl><div><dt>Платёж прошёл</dt><dd>за ${kind === 'old' ? '12' : '7'} минут</dd></div><div><dt>Чек</dt><dd>предоставлен</dd></div><div><dt>Поддержка</dt><dd>ответ за ${kind === 'old' ? '40' : '2'} минуты</dd></div></dl><a class="text-link" href="#">Читать полный отчёт →</a></section>`;
 const applyServiceCopyLayout = () => {
-  const fresh = app.querySelector('.shopper:not(.shopper--old):not(.shopper--none) .shopper__date + p');
-  const stale = app.querySelector('.shopper--old .shopper__date + p');
+  const fresh = app.querySelector('.shopper:not(.shopper--old):not(.shopper--none) .shopper__date + p') || app.querySelector('[data-pencil-name="Mystery Shopper Report (fresh)"] [data-pencil-name="Paragraph"]');
+  const stale = app.querySelector('.shopper--old .shopper__date + p') || app.querySelector('[data-pencil-name="Mystery Shopper Report (stale)"] [data-pencil-name="Paragraph"]');
   if (fresh) {
     fresh.className = 'shopper__text';
     fresh.innerHTML = 'Заказали подписку Spotify Premium на месяц через форму сервиса. Платёж прошёл с первого <br> раза картой другого банка, деньги списались в рублях по курсу чуть выше биржевого. В целом <br> сервис работает предсказуемо: сроки и комиссия совпали с указанными на сайте, поддержка <br> была на связи в течение всей сделки.';
@@ -91,7 +91,8 @@ const applyServiceCopyLayout = () => {
     stale.innerHTML = 'Заказали подписку Spotify Premium на месяц через форму сервиса. Платёж прошёл с первого <br> раза, но с тех пор прошло больше года — условия и надёжность сервиса могли измениться,<br> поэтому данные требуют повторной проверки.';
   }
   const about = app.querySelector('.about-service');
-  const paragraphs = about ? [...about.querySelectorAll('p')] : [];
+  const penAbout = app.querySelector('[data-pencil-name="About Card"]');
+  const paragraphs = about ? [...about.querySelectorAll('p')] : [...(penAbout?.querySelectorAll('[data-pencil-name="Paragraph"]') || [])];
   const copy = [
     '«Плати Легко!» работает с 2022 года и специализируется на оплате зарубежных<br> подписок и сервисов для клиентов из России. Сервис принимает платежи в рублях, а<br> расчёт с зарубежным поставщиком берёт на себя, используя карты партнёрских<br> банков в других юрисдикциях.',
     'Схема простая: пользователь оставляет ссылку на нужную подписку и данные для<br> оплаты, сервис проводит платёж в течение нескольких минут и присылает<br> подтверждение с деталями списания. Доступы к личным кабинетам сервис не<br> запрашивает — только сумму и реквизиты платежа.',
@@ -101,6 +102,7 @@ const applyServiceCopyLayout = () => {
   paragraphs.forEach((paragraph, index) => {
     if (copy[index]) paragraph.innerHTML = copy[index];
   });
+  if (penAbout) paragraphs.slice(4).forEach((paragraph) => paragraph.remove());
 };
 const applyCardsCopyLayout = () => {
   const semanticParagraphs = [...app.querySelectorAll('.catalog-seo .seo-copy p')];
