@@ -4039,9 +4039,20 @@ body {
 }
 .text-link:hover { color: #45a828; }
 .report-list > a {
-  transition: background-color .15s ease, border-color .15s ease;
+  transition: border-color .15s ease, outline-color .15s ease;
 }
-.report-list > a:hover { background-color: #f9fbf8; }
+.report-list > a strong { transition: color .15s ease; }
+.report-list > a:hover {
+  background-color: var(--paper);
+  border-color: #46a827;
+}
+.report-list > a:hover strong { color: #46a827; }
+/* Source-report rows have no lateral border at rest.  An inset outline gives
+   the hovered report card a complete green frame without changing its width. */
+.report-list--source > a:hover {
+  outline: 1px solid #46a827;
+  outline-offset: -1px;
+}
 /* Both report-card variants are used by the exported report-list frames. */
 .pen-frame [data-pencil-name="Report Card"],
 .pen-frame [data-pencil-name="Report Card MS"] { transition: background-color .15s ease, border-color .15s ease; }

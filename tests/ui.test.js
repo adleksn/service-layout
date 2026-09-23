@@ -22,7 +22,10 @@ describe('semantic page interactions', () => {
   it('keeps shared Pen component hover states aligned with the reference palette', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
-    expect(css).toContain('.report-list > a:hover { background-color: #f9fbf8; }');
+    expect(css).toContain('background-color: var(--paper);');
+    expect(css).toContain('.report-list > a:hover strong { color: #46a827; }');
+    expect(css).toContain('.report-list--source > a:hover {');
+    expect(css).toContain('outline: 1px solid #46a827;');
     expect(css).toContain('.catalog tbody tr:hover { background-color: #f9fbf8; }');
     expect(css).toContain('[data-pencil-name="Report Card MS"]:hover { background-color: #f9fbf8 !important; }');
     expect(css).toContain('[data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }');
