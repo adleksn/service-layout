@@ -3158,6 +3158,7 @@ body {
   font-size: 13px;
   color: var(--muted);
 }
+.shopper__text { margin: 0; font-size: 15px; line-height: 24px; }
 .shopper__date span {
   margin-left: 8px;
   color: var(--green);
@@ -3187,6 +3188,7 @@ body {
 .about-service {
   padding: 42px 0 20px;
 }
+.about-service p { width: 700px; max-width: 100%; font-size: 16px; line-height: 26px; }
 .review-form form {
   max-width: none;
   grid-template-columns: 1fr 1fr;
