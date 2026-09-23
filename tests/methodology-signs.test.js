@@ -16,6 +16,7 @@ describe('methodology sign fidelity', () => {
     expect(app).toContain('const alignMethodologyLayout');
     expect(css).toContain('.methodology .tabs button[aria-selected="true"] { color: #131313; }');
     expect(css).toContain('.methodology-layout .methodology .lead { padding: 20px 0 36px; max-width: none; }');
+    expect(css).toContain('.methodology-layout > .ad { position: static; top: auto; background: transparent; text-align: right; }');
     expect(css).toContain('.method-warning { background: #f5f5f5; border-left-color: #46a827;');
     expect(css).toContain('.method-cta { border-left: 3px solid #46a827; }');
   });

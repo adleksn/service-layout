@@ -4349,6 +4349,8 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 /* Methodology: the supplied content is an article, not a card grid. */
 .methodology-layout { grid-template-columns: minmax(0, 820px) 340px; align-items: start; }
 .methodology-layout .methodology { width: auto; margin: 0; }
+.methodology-layout > .ad { position: static; top: auto; background: transparent; text-align: right; }
+.methodology-layout > .ad span { padding-top: 0; }
 .methodology-layout .methodology .lead { padding: 20px 0 36px; max-width: none; }
 .methodology-layout .methodology .lead { width: 100%; margin: 0; }
 .method-criteria { display: grid; gap: 24px; }
