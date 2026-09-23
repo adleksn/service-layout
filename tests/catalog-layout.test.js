@@ -47,6 +47,11 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.layout--catalog .catalog-seo .seo-copy { margin-inline: auto; }');
   });
 
+  it('centers desktop rating FAQs and fixes each accordion at 430px', () => {
+    expect(css).toContain('.layout--catalog .catalog-faq { display: flex; flex-direction: column; align-items: center; }');
+    expect(css).toContain('.layout--catalog .catalog-faq .faq { width: 430px; max-width: 100%; }');
+  });
+
   it('keeps the mobile rating introduction to the three-line Pen copy', () => {
     expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки.');
     expect(app).not.toContain('проверки, чтобы найти подходящий вариант.');
