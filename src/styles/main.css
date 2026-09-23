@@ -4057,7 +4057,12 @@ body {
 .pen-frame [data-pencil-name="Report Card"],
 .pen-frame [data-pencil-name="Report Card MS"] { transition: background-color .15s ease, border-color .15s ease; }
 .pen-frame [data-pencil-name="Report Card"]:hover,
-.pen-frame [data-pencil-name="Report Card MS"]:hover { background-color: #f9fbf8 !important; }
+.pen-frame [data-pencil-name="Report Card MS"]:hover {
+  background-color: #ffffff !important;
+  border-color: #46a827 !important;
+}
+.pen-frame [data-pencil-name="Report Card"]:hover [data-pencil-name="Title"],
+.pen-frame [data-pencil-name="Report Card MS"]:hover [data-pencil-name="Title"] { color: #46a827 !important; }
 .catalog tbody tr { transition: background-color .15s ease; }
 .catalog tbody tr:hover { background-color: #f9fbf8; }
 .pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "] { transition: background-color .15s ease; }

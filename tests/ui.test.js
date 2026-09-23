@@ -27,7 +27,9 @@ describe('semantic page interactions', () => {
     expect(css).toContain('.report-list--source > a:hover {');
     expect(css).toContain('outline: 1px solid #46a827;');
     expect(css).toContain('.catalog tbody tr:hover { background-color: #f9fbf8; }');
-    expect(css).toContain('[data-pencil-name="Report Card MS"]:hover { background-color: #f9fbf8 !important; }');
+    expect(css).toContain('background-color: #ffffff !important;');
+    expect(css).toContain('border-color: #46a827 !important;');
+    expect(css).toContain('[data-pencil-name="Report Card MS"]:hover [data-pencil-name="Title"] { color: #46a827 !important; }');
     expect(css).toContain('[data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }');
     expect(css).not.toContain('.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #3a3a3a !important; }');
   });
