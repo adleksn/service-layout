@@ -35,6 +35,9 @@ describe('semantic page interactions', () => {
     expect(css).toContain('.pen-frame[data-pencil-name="Методика проверки Mobile 375"] [data-pencil-name="Dzen Row"] {');
     expect(css).toContain('gap: 10px !important;');
     expect(css).toContain('#app[data-page="methodology"] .footer__mobile-bottom .footer__dzen {');
+    expect(css).toContain('#app[data-page="methodology"] .footer__column a:hover');
+    expect(css).toContain('#app[data-page="methodology"] .footer .footer__cta:hover');
+    expect(css).toContain('background-color: #46a827;');
     expect(css).toContain('display: inline-flex;');
     expect(css).toContain('[data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }');
     expect(css).not.toContain('.pen-frame [data-pencil-name="Button Dzen"]:hover { background-color: #3a3a3a !important; }');
