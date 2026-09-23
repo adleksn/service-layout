@@ -8,5 +8,6 @@ describe('agreement methodology link', () => {
     expect(source).toContain("if (page === 'agreement')");
     expect(source).toContain("node.textContent.trim() === 'Методика проверки'");
     expect(source).toContain("makeInteractive(node, '/methodology.html')");
+    expect(source).toContain("['report', 'reports', 'advertising', 'agreement'].includes(page)");
   });
 });

@@ -763,7 +763,7 @@ export function targetFor(page, width, requestUrl) {
   // The report has a complete authored desktop article in Pen. It already
   // fits the 1200px content grid at 1280px and avoids the abbreviated local
   // fallback text at this breakpoint.
-  if (['report', 'reports', 'advertising'].includes(page) && width >= 1280) return variants.desktop;
+  if (['report', 'reports', 'advertising', 'agreement'].includes(page) && width >= 1280) return variants.desktop;
   // The home page has authored 1024px and 1440px compositions. Selecting the
   // nearest one across the entire desktop range avoids falling back to a
   // visually different semantic page at common laptop widths such as 1280px.
