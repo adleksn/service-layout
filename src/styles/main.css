@@ -5462,3 +5462,30 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .pen-frame [data-pencil-name="Textarea"] > svg { display: block; }
 .pen-frame [data-pencil-name="Field Введите сумму 6 + 4"] .pen-review-control { align-self: center; height: 20px; margin: 0; padding: 0; }
 .pen-frame [data-pencil-name="Textarea"] .pen-review-control { align-self: flex-start; margin: 0; padding: 0; }
+
+/* Exact desktop cell content from the Pen rating table. */
+@media (min-width: 768px) {
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(3) .score {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #131313;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 23px;
+  }
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(3) .score::before {
+    margin-right: 6px;
+    color: #f5c069;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+  }
+  .layout--catalog .catalog[data-type="rating"] .report-date__mobile-label { display: none; }
+  .layout--catalog .catalog[data-type="rating"] .report-date__mobile-value { display: none; }
+  .layout--catalog .catalog[data-type="rating"] .report-date__desktop-value { display: inline; }
+  .layout--catalog .catalog[data-type="rating"] .report-date { font-size: 14px; line-height: 21px; }
+  .layout--catalog .catalog[data-type="rating"] .desktop-status .check-icon,
+  .layout--catalog .catalog[data-type="rating"] .desktop-status .promo-icon { display: inline-grid; }
+}

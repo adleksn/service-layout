@@ -1,3 +1,9 @@
+import '@fontsource/inter/cyrillic-400.css';
+import '@fontsource/inter/cyrillic-600.css';
+import '@fontsource/inter/cyrillic-700.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
 import '../styles/main.css';
 import { cards, filterCatalog, parseFilterState, serializeFilterState, services, sortCatalog } from './catalog.js';
 import { setupCatalogLegend, setupDisclosures, setupMobileMenu, setupPromo, setupReviewForm, setupServiceStatusBadges, setupTabs } from './ui.js';
@@ -370,6 +376,9 @@ const ratingMobileStates = {
 function setupCatalog() {
   const root = app.querySelector('[data-catalog]'); if (!root) return;
   const data = root.dataset.type === 'cards' ? cards : services;
+  const ratingVerifiedRanks = new Set([1, 2, 3, 4, 5, 6, 8, 9, 12, 17, 19, 24, 25, 29, 30, 32, 35, 38, 41, 42, 43, 45, 48, 51]);
+  const ratingMysteryRanks = new Set([1, 2, 4]);
+  const ratingPromoRanks = new Set([1, 4, 6, 9, 21]);
   const state = { query: '', filters: { ...parseFilterState() }, sort: 'rating' };
   const filterPanel = root.querySelector('#catalog-filters');
   const filterTrigger = root.querySelector('[data-mobile-filter]');
@@ -403,13 +412,13 @@ function setupCatalog() {
       const reportMarkup = reportState === 'none'
         ? '<span class="report-date report-date--none"><span class="report-date__mobile-value">Отчёта нет</span><span class="report-date__desktop-value">—</span></span>'
         : `<span class="report-dot report-dot--${reportState}"></span><span class="report-date"><span class="report-date__mobile-label">Отчёт </span>${item.reportDate}</span>`;
-      const mysteryMarkup = item.tags.includes('mystery') ? '<i class="mystery-icon" aria-label="Был тайный покупатель"></i>' : '—';
-      const promoMarkup = item.tags.includes('promo') ? '<i class="promo-icon" aria-label="Есть промокод"></i>' : '—';
+      const mysteryMarkup = (cardsMode ? item.tags.includes('mystery') : ratingMysteryRanks.has(item.rank)) ? '<i class="mystery-icon" aria-label="Был тайный покупатель"></i>' : '—';
+      const promoMarkup = (cardsMode ? item.tags.includes('promo') : ratingPromoRanks.has(item.rank)) ? '<i class="promo-icon" aria-label="Есть промокод"></i>' : '—';
       const namePromoMarkup = !cardsMode && item.rank === 1 ? '<em class="service-promo-badge">PROMO</em>' : '';
       const serviceMarkMarkup = cardsMode ? `<span class="service-mark service-mark--small">${item.name[0]}</span>` : '';
       const ratingCells = cardsMode
         ? `<td data-label="Выпуск">${item.priceLabel}</td><td data-label="Платёжная система">${item.system}</td><td data-label="Валюта">${item.currency}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Тайный покупатель">${item.tags.includes('fresh') ? '<i class="check-icon">✓</i>' : item.tags.includes('old') ? '<i class="stale-icon">◷</i>' : '—'}</td><td data-label="Промокод">${item.tags.includes('promo') ? '<i class="promo-icon">%</i>' : '—'}</td>`
-        : `<td data-label="Комиссия">${item.feeLabel}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Отчёт">${reportMarkup}</td><td data-label="Статус"><span class="desktop-status">${item.tags.includes('verified') ? '<i class="check-icon" aria-label="Подтверждён"></i>' : '—'}</span><span class="mobile-status-badges${mobileBadges ? '' : ' mobile-status-badges--empty'}${mobileState.length === 1 && mobileState[0] === 'promo' ? ' mobile-status-badges--promo-only' : ''}">${mobileBadges}</span></td><td data-label="Тайный покупатель">${mysteryMarkup}</td><td data-label="Промокод"><span class="desktop-status">${promoMarkup}</span></td>`;
+        : `<td data-label="Комиссия">${item.feeLabel}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Отчёт">${reportMarkup}</td><td data-label="Статус"><span class="desktop-status">${ratingVerifiedRanks.has(item.rank) ? '<i class="check-icon" aria-label="Подтверждён"></i>' : '—'}</span><span class="mobile-status-badges${mobileBadges ? '' : ' mobile-status-badges--empty'}${mobileState.length === 1 && mobileState[0] === 'promo' ? ' mobile-status-badges--promo-only' : ''}">${mobileBadges}</span></td><td data-label="Тайный покупатель">${mysteryMarkup}</td><td data-label="Промокод"><span class="desktop-status">${promoMarkup}</span></td>`;
       const actionMarkup = cardsMode ? 'Подробнее' : '<svg class="details-button__icon" aria-hidden="true" viewBox="0 0 14 14"><path d="M2 7h9M8 3.5 11.5 7 8 10.5"/></svg>';
       return `<tr class="catalog-row catalog-row--${reportState}"><td data-label="Место">${item.rank}</td><td data-label="Сервис"><a href="${destination}">${serviceMarkMarkup}<span><b>${item.name}</b>${namePromoMarkup}<small>${item.domain}</small></span></a></td><td data-label="Оценка">${score(item.rating)}</td>${ratingCells}<td class="row-action"><a class="details-button" href="${destination}" aria-label="Подробнее о ${item.name}">${actionMarkup}</a></td></tr>`;
     }).join('');
