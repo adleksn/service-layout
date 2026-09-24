@@ -178,6 +178,7 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.layout--catalog .catalog-discontinued { background: #f5f5f5; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title h2 { color: #3a3a3a; font-weight: 400; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued > p { color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item b { color: #3a3a3a; font-weight: 400; }');
     expect(css).toContain('.layout--catalog .catalog-faq .faq > div.is-open { padding: 18px 16px; }');
   });
 
