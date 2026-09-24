@@ -5404,3 +5404,27 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .service-layout .shopper dd { margin: 0; color: #131313; font-size: 15px; font-weight: 600; }
   .service-layout .shopper > .text-link { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; border-radius: 8px; background: #45a828; color: #fff; font-size: 15px; font-weight: 600; }
 }
+
+/* Rating registry notices keep their neutral Pen treatment in both columns. */
+.layout--catalog .catalog-discontinued { background: #f5f5f5; }
+.layout--catalog .catalog-discontinued .discontinued { background: #f5f5f5; }
+.layout--catalog .catalog-discontinued .discontinued__title h2 { color: #3a3a3a; font-weight: 400; }
+.layout--catalog .catalog-discontinued .discontinued > p { color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }
+
+/* Expanding an answer must not change the FAQ card width. */
+.layout--catalog .catalog-faq .faq > div,
+.layout--catalog .catalog-faq .faq > div.is-open,
+.layout--catalog .catalog-faq .faq > div.is-open > div {
+  box-sizing: border-box;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .layout--catalog .catalog-faq .faq > div.is-open { padding: 18px 16px; }
+  .layout--catalog .catalog-faq .faq > div.is-open > button { padding-inline: 0; }
+  .layout--catalog .catalog-faq .faq > div.is-open > div { margin: 0; padding: 14px 0 0; }
+}
+@media (max-width: 767px) {
+  .layout--catalog .catalog-faq .faq > div.is-open { padding: 16px 14px; }
+  .layout--catalog .catalog-faq .faq > div.is-open > button { padding-inline: 0; }
+  .layout--catalog .catalog-faq .faq > div.is-open > div { margin: 0; padding: 12px 0 0; }
+}
