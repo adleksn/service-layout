@@ -4437,6 +4437,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .methodology-layout .methodology .lead p { font-size: 16px; line-height: 26px; }
 .methodology-layout .methodology .lead p { max-width: 780px; }
 .methodology-layout .methodology .lead + h2 { margin: 0; }
+.methodology-layout .methodology > p { color: #9b9b9b; }
 .method-criteria { display: grid; gap: 24px; }
 .method-criteria article { padding: 0; border: 0; }
 .method-criteria h3 { margin: 0 0 6px; font-size: 16px; }
@@ -4446,7 +4447,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .methodology .tabs button[aria-selected="true"] { border-color: #46a827; }
 .method-warning { background: #f5f5f5; border-left-color: #46a827; border-radius: 8px; }
 .method-warning p { color: #4c4c4c; }
-.method-signs article { grid-template-columns: 1fr; gap: 0; }
+.method-warning p { font-style: italic; }
 .method-cta { border-left: 3px solid #46a827; }
 @media (max-width: 1199px) {
   .methodology-layout { display: block; }
