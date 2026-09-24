@@ -201,6 +201,23 @@ const alignAgreementLayout = () => {
   const article = app.querySelector('.agreement');
   if (leadBlock && article && !article.contains(leadBlock)) article.prepend(leadBlock);
 };
+const applyAgreementCopyLayout = () => {
+  if (page !== 'agreement') return;
+  const replace = (start, html) => {
+    const paragraph = [...app.querySelectorAll('[data-pencil-name="Paragraph"], [data-pencil-name="Item Text"], .agreement p')]
+      .find((node) => node.textContent.trim().startsWith(start));
+    if (paragraph) paragraph.innerHTML = html;
+  };
+  replace('Настоящее Пользовательское соглашение', 'Настоящее Пользовательское соглашение (далее — «Соглашение») регулирует условия использования сайта sao-rating.ru (далее — «Сайт»), включая размещённые на нём материалы, отчёты, отзывы и иные сведения. Используя Сайт, пользователь подтверждает, что ознакомился<br>с условиями Соглашения и принимает их в полном объёме.');
+  replace('Администрация Сайта вправе', 'Администрация Сайта вправе в любое время изменять условия настоящего Соглашения без предварительного уведомления пользователей. Актуальная редакция Соглашения всегда<br>доступна по данному адресу, дата редакции указана в верхней части страницы.');
+  replace('Сайт — совокупность', 'Сайт — совокупность программных и аппаратных средств, размещённых по адресу sao-rating.ru, предназначенных для публикации рейтингов, отчётов и отзывов о сервисах альтернативной<br>оплаты.');
+  replace('Соглашение распространяется', 'Соглашение распространяется на все разделы Сайта и на все виды взаимодействия<br>пользователя с его функциональностью, включая просмотр рейтинга, чтение отчётов и<br>оставление отзывов.');
+  replace('Администрация предоставляет', 'Администрация предоставляет пользователю доступ к функциональности Сайта, включая<br>просмотр рейтинга сервисов альтернативной оплаты, чтение отчётов тайного покупателя и<br>ознакомление с отзывами других пользователей.');
+  replace('Пользователь обязуется', 'Пользователь обязуется использовать Сайт только в законных целях и не нарушать права<br>третьих лиц. Администрация вправе ограничить доступ пользователю в случае нарушения<br>условий настоящего Соглашения.');
+  replace('Администрация вправе удалять', 'Администрация вправе удалять материалы, нарушающие условия Соглашения, без<br>объяснения причин.');
+  replace('Сайт предоставляется', 'Сайт предоставляется по принципу «как есть». Администрация не гарантирует, что информация<br>на Сайте является полной, точной или актуальной на момент её использования пользователем.');
+  replace('Продолжение использования', 'Продолжение использования Сайта после публикации изменений означает согласие<br>пользователя с новой редакцией Соглашения. Если пользователь не согласен с изменениями, он<br>обязан прекратить использование Сайта.');
+};
 const applyContactAboutCopy = () => {
   if (page !== 'contacts') return;
   const copy = 'sao-rating.ru — независимый проект. Мы не являемся платёжным сервисом, не принимаем<br>платежи и не оказываем финансовых услуг. Наша задача — собрать в одном месте данные о <br>сервисах альтернативной оплаты и проверить их на практике, чтобы вы могли сравнивать не <br>обещания с сайтов, а фактические условия. Проект существует с 2022 года. Регион работы —<br>Российская Федерация.';
@@ -266,6 +283,7 @@ app.innerHTML = render[page]();
 app.dataset.page = page;
 alignMethodologyLayout();
 alignAgreementLayout();
+applyAgreementCopyLayout();
 applyContactAboutCopy();
 applyAdvertisingLeadLayout();
 applyHomeCopyBreaks();
@@ -409,7 +427,7 @@ if (reviewSort) reviewSort.addEventListener('change', () => {
     .forEach((review) => list.append(review));
 });
 
-applyExactPenFrame(app, page, initialRequestUrl).then(() => { applyHomeCopyBreaks(); applyContactAboutCopy(); applyAdvertisingLeadLayout(); if (page === 'service' || page === 'virtual-card') applyServiceCopyLayout(); if (page === 'report') applyReportCopyLayout(); if (page === 'cards') applyCardsCopyLayout(); if (page === 'reports') applyReportsCtaLayout(); resolveSitePaths(app); }).catch(() => {});
+applyExactPenFrame(app, page, initialRequestUrl).then(() => { applyHomeCopyBreaks(); if (page === 'agreement') applyAgreementCopyLayout(); applyContactAboutCopy(); applyAdvertisingLeadLayout(); if (page === 'service' || page === 'virtual-card') applyServiceCopyLayout(); if (page === 'report') applyReportCopyLayout(); if (page === 'cards') applyCardsCopyLayout(); if (page === 'reports') applyReportsCtaLayout(); resolveSitePaths(app); }).catch(() => {});
 applyPenMethodologySignSvgs(app).catch(() => {});
 
 // Pen frames are authored at specific control widths, while the semantic

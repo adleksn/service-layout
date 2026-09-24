@@ -7,6 +7,10 @@ describe('agreement layout', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
     expect(app).toContain('const alignAgreementLayout');
+    expect(app).toContain('const applyAgreementCopyLayout = () =>');
+    expect(app).toContain('подтверждает, что ознакомился<br>с условиями Соглашения');
+    expect(app).toContain('Администрация вправе удалять материалы, нарушающие условия Соглашения, без<br>объяснения причин.');
+    expect(app).toContain("if (page === 'agreement') applyAgreementCopyLayout();");
     expect(css).toContain('.agreement {\n  width: min(780px, calc(100% - 48px));');
     expect(css).toContain('margin: 40px 0 16px; color: #131313; font: 700 32px/40px');
     expect(css).toContain('margin: 28px 0 12px; color: #131313; font: 700 20px/28px');
