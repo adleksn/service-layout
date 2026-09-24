@@ -250,6 +250,16 @@ describe('unmapped Pen controls', () => {
     expect(states).not.toContain('Состояние 2: выбрана старая проверка');
   });
 
+  it('uses the supplied 75px summary block for the old report check', () => {
+    const states = readFileSync('public/reference/pen-states.html', 'utf8');
+    const dom = new JSDOM(states, { url: 'https://example.test/report.html' });
+    const oldSummary = dom.window.document.querySelector('[data-pencil-name="Отчёт Desktop — Состояние 2"] [data-pencil-name="Summary Block (old)"]');
+
+    expect(oldSummary?.style.height).toBe('75px');
+    expect(oldSummary?.style.padding).toBe('20px');
+    expect(oldSummary?.style.borderColor).toBe('rgb(245, 166, 35)');
+  });
+
   it('makes the virtual-card mobile sort control functional for Pen card rows', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/virtual-cards.html' });
     const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
