@@ -201,6 +201,14 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('uses the old report state without its exported state-label layer', () => {
+    const states = readFileSync('public/reference/pen-states.html', 'utf8');
+    const dom = new JSDOM('', { url: 'https://example.test/report.html#check-2023' });
+
+    expect(targetFor('report', 1440, dom.window.location.href)).toBe('Отчёт Desktop — Состояние 2');
+    expect(states).not.toContain('Состояние 2: выбрана старая проверка');
+  });
+
   it('makes the virtual-card mobile sort control functional for Pen card rows', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/virtual-cards.html' });
     const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
