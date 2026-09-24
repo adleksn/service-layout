@@ -37,7 +37,7 @@ describe('catalog filters', () => {
   it('renders semantic table status values with SVG badges rather than text glyphs', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
-    expect(css).toContain('.check-icon::before,\n.promo-icon::before,\n.stale-icon::before');
+    expect(css).toContain('.check-icon::before,\n.new-icon::before,\n.promo-icon::before,\n.stale-icon::before');
     expect(css).toContain('data:image/svg+xml');
   });
 

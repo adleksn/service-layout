@@ -152,6 +152,13 @@ describe('rating catalog layout', () => {
     expect(css).toContain('font-size: 0;');
   });
 
+  it('renders the Pen sparkles icon for every desktop New status', () => {
+    expect(app).toContain('const ratingNewRanks = new Set([7, 8, 10, 20, 47]);');
+    expect(app).toContain("ratingNewRanks.has(item.rank) ? '<i class=\"new-icon\" aria-label=\"Новый\"></i>'");
+    expect(css).toContain('.new-icon::before');
+    expect(css).toContain("stroke='%237A7A7A'");
+  });
+
   it('uses the Pen info icon for the mobile legend disclosure', () => {
     expect(app).toContain('legend__trigger-icon');
     expect(app).toContain('<circle cx="8" cy="8" r="6.25"/>');
