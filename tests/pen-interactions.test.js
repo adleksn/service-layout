@@ -201,7 +201,7 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
-  it('switches to the old report state when a report-tab hash changes without a page reload', async () => {
+  it('switches to the old report state when either old report tab is clicked without a page reload', async () => {
     const source = readFileSync('public/reference/pen-source.html', 'utf8');
     const states = readFileSync('public/reference/pen-states.html', 'utf8');
     const dom = new JSDOM('<main id="app"><header class="header"></header></main>', { url: 'http://localhost/report.html' });
@@ -217,10 +217,16 @@ describe('unmapped Pen controls', () => {
     const root = dom.window.document.querySelector('#app');
 
     await applyExactPenFrame(root, 'report', dom.window.location.href);
-    dom.window.location.hash = '#check-2023';
-    await new Promise((resolve) => dom.window.setTimeout(resolve, 0));
+    for (const date of ['03.09.2023', '12.01.2023']) {
+      root.querySelector(`[data-pencil-name="Tab ${date}"]`)?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+      await new Promise((resolve) => dom.window.setTimeout(resolve, 0));
+    }
 
-    expect(root.dataset.penExact).toBe('Отчёт Desktop — Состояние 2');
+    expect(root.dataset.penExact).toBe('Отчёт Desktop 1440');
+    expect(root.querySelector('[data-pencil-name="Checked Service Card"]')?.textContent).toContain('RUPay.money');
+    expect(root.querySelector('[data-pencil-name="Warning Banner"]')?.textContent).toContain('Вы смотрите проверку от 03.09.2023');
+    expect(root.textContent).toContain('Изучить сервис в рейтинге →');
+    expect(root.textContent).toContain('Перейти на сайт сервиса ↗');
     vi.unstubAllGlobals();
   });
 
@@ -228,7 +234,7 @@ describe('unmapped Pen controls', () => {
     const states = readFileSync('public/reference/pen-states.html', 'utf8');
     const dom = new JSDOM('', { url: 'https://example.test/report.html#check-2023' });
 
-    expect(targetFor('report', 1440, dom.window.location.href)).toBe('Отчёт Desktop — Состояние 2');
+    expect(targetFor('report', 1440, dom.window.location.href)).toBe('Отчёт Desktop 1440');
     expect(states).not.toContain('Состояние 2: выбрана старая проверка');
   });
 

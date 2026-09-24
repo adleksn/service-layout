@@ -611,7 +611,7 @@ function setupPenFaq(frame) {
   });
 }
 
-function setupPenReportTabs(frame) {
+function setupPenReportTabs(frame, onSelect) {
   const tabs = [...frame.querySelectorAll('[data-pencil-name^="Tab "]')]
     .filter((tab) => /^Tab \d{2}\.\d{2}\.\d{4}$/.test(tab.getAttribute('data-pencil-name') || ''));
   if (!tabs.length) return;
@@ -621,12 +621,45 @@ function setupPenReportTabs(frame) {
     tab.setAttribute('role', 'tab');
     tab.setAttribute('aria-selected', String(selected));
     tab.tabIndex = selected ? 0 : -1;
-    const activate = () => { window.location.hash = targets[index] || '#check-2023'; };
+    const activate = () => {
+      const target = targets[index] || '#check-2023';
+      if (onSelect) {
+        window.history.pushState(null, '', target);
+        onSelect(target);
+      } else {
+        window.location.hash = target;
+      }
+    };
     tab.addEventListener('click', activate);
     tab.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(); }
     });
   });
+}
+
+function setupPenReportState(frame, stateSource, initialHash) {
+  const mainColumn = frame.querySelector('[data-pencil-name="Main Column"]');
+  const serviceCard = mainColumn && [...mainColumn.children]
+    .find((node) => node.getAttribute('data-pencil-name') === 'Checked Service Card');
+  const oldDemo = stateSource?.querySelector('[data-pencil-name="Old Check Demo"]');
+  if (!mainColumn || !serviceCard || !oldDemo) return null;
+
+  const children = [...mainColumn.children];
+  const staticChildren = children.slice(0, children.indexOf(serviceCard) + 1);
+  const persistentStart = children.findIndex((node) => node.getAttribute('data-pencil-name') === 'Button Row');
+  if (persistentStart === -1) return null;
+  const normalContent = children.slice(staticChildren.length, persistentStart).map((node) => node.cloneNode(true));
+  const persistentContent = children.slice(persistentStart);
+  const oldContent = [...oldDemo.children].map((node) => node.cloneNode(true));
+  let ready = false;
+  const show = (hash) => {
+    const content = hash === '#check-2023' ? oldContent : normalContent;
+    mainColumn.replaceChildren(...staticChildren, ...content.map((node) => node.cloneNode(true)), ...persistentContent);
+    if (ready) setupPenReportTabs(mainColumn, show);
+    ready = true;
+  };
+  show(initialHash);
+  return show;
 }
 
 function setupPenMobileCardLinks(frame, page) {
@@ -655,7 +688,7 @@ function setupPenMobileCardLinks(frame, page) {
   });
 }
 
-export function enhanceInteractions(frame, page) {
+export function enhanceInteractions(frame, page, { onReportTabChange } = {}) {
   frame.querySelectorAll('[data-pencil-name]').forEach((node) => {
     const destination = destinationByLayer[node.getAttribute('data-pencil-name')];
     if (destination) makeInteractive(node, destination);
@@ -694,7 +727,7 @@ export function enhanceInteractions(frame, page) {
   if (page === 'reports') {
     setupPenReportPagination(frame);
   }
-  if (page === 'report') setupPenReportTabs(frame);
+  if (page === 'report') setupPenReportTabs(frame, onReportTabChange);
   if (page === 'reports' || page === 'advertising') {
     frame.querySelectorAll('[data-pencil-name="Button"]').forEach((node) => {
       if (node.textContent.trim() === 'Написать в Telegram ↗') makeInteractive(node, '#');
@@ -752,7 +785,6 @@ export function targetFor(page, width, requestUrl) {
   if (query.get('empty') === '1' && page === 'rating') return mobile ? 'Рейтинг — ничего не найдено Mobile 375' : 'Рейтинг — ничего не найдено Desktop 1440';
   if (query.get('empty') === '1' && page === 'cards') return mobile ? 'Виртуальные карты — ничего не найдено Mobile 375' : 'Виртуальные карты — ничего не найдено Desktop 1440';
   if (query.get('reviews') === 'none' && page === 'service') return mobile ? 'Карточка сервиса без отзывов Mobile 375' : 'Карточка сервиса без отзывов Desktop 1440';
-  if (request.hash === '#check-2023' && page === 'report') return mobile ? 'Отчёт Mobile — Состояние 2' : 'Отчёт Desktop — Состояние 2';
   // The services rating and methodology use the semantic local implementation:
   // the Pen export contains a static tab-demo duplicate, which cannot become
   // a single accessible interactive disclosure without replacing it.
@@ -874,7 +906,13 @@ export async function applyExactPenFrame(root, page, requestUrl = window.locatio
       if (['Отчёт актуален', 'Требует обновления'].includes(node.textContent.trim())) node.remove();
     });
   }
-  enhanceInteractions(frame, page);
+  const requestHash = new URL(requestUrl, window.location.origin).hash;
+  const oldReportState = page === 'report'
+    ? sources.flatMap((html) => [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('[data-pencil-name]')])
+      .find((node) => node.getAttribute('data-pencil-name') === (window.innerWidth >= 375 && window.innerWidth <= 480 ? 'Отчёт Mobile — Состояние 2' : 'Отчёт Desktop — Состояние 2'))
+    : null;
+  const switchReportState = page === 'report' ? setupPenReportState(frame, oldReportState, requestHash) : null;
+  enhanceInteractions(frame, page, { onReportTabChange: switchReportState });
   root.replaceChildren(...(sharedHeader ? [sharedHeader, frame] : [frame]));
   root.dataset.penExact = target;
 
@@ -882,14 +920,10 @@ export async function applyExactPenFrame(root, page, requestUrl = window.locatio
   // hash changes so selecting a date swaps the report immediately instead of
   // requiring a browser refresh.
   if (!root.__penReportHashListener && page === 'report') {
-    root.__penReportHashListener = () => {
-      const requestedTarget = targetFor(page, window.innerWidth, window.location.href);
-      if (requestedTarget && requestedTarget !== root.dataset.penExact) {
-        applyExactPenFrame(root, page, window.location.href);
-      }
-    };
+    root.__penReportHashListener = () => root.__penReportState?.(window.location.hash);
     window.addEventListener('hashchange', root.__penReportHashListener);
   }
+  if (page === 'report') root.__penReportState = switchReportState;
 
   // A Pen export is a fixed reference composition.  When a user changes the
   // browser width after the page has loaded, mount the correct composition
