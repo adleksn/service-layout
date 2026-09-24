@@ -175,7 +175,7 @@ describe('rating catalog layout', () => {
   it('uses the requested neutral copy and stable accordion frame in rating lower sections', () => {
     expect(app).toContain('Эти сервисы больше не принимают платежи или перестали отвечать на обращения пользователей. Мы держим в реестре, чтоб вы могли<br>сверится перед оплатой.');
     expect(app).toContain('По этим сервисам поступали поступали жалобы на невыполненные платежи или подозрительное поведение поддержки. Будьте осторожны, если все же решите<br>ими воспользоваться');
-    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title h2 { color: #131313; font-weight: 400; }');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title h2 { color: #131313; font-weight: 700; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued > p { color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item b { color: #3a3a3a; font-weight: 400; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__grid { background: #f5f5f5; }');
