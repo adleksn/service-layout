@@ -178,11 +178,11 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title h2 { color: #3a3a3a; font-weight: 400; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued > p { color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item b { color: #3a3a3a; font-weight: 400; }');
-    expect(css).toContain('.layout--catalog .catalog-faq .faq > div.is-open { padding: 18px 16px; }');
+    expect(css).toContain('.layout--catalog .catalog-faq {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    width: 100vw;');
     expect(css).toContain('.layout--catalog .catalog + .catalog-discontinued { margin-top: 70px; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued { width: 100vw; margin-left: calc(50% - 50vw); padding-block: 70px; background: #f5f5f5; }');
-    expect(css).toContain('.layout--catalog .catalog-faq .faq { align-self: stretch; width: 100%; max-width: none; }');
-    expect(css).toContain('.layout--catalog .catalog-faq .faq > div.is-open > div { margin: 0; padding: 14px 0 0; background: #f5f5f5; }');
+    expect(css).toContain('.layout--catalog .catalog-faq .faq {\n    box-sizing: border-box;\n    width: 800px;');
+    expect(css).toContain('background-color: #f5f5f5 !important;');
   });
 
   it('includes the complete Pen explanation in the mobile rating SEO section', () => {

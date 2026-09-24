@@ -5415,28 +5415,43 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .layout--catalog .catalog-discontinued .discontinued > p { color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }
 .layout--catalog .catalog-discontinued .discontinued__item b { color: #3a3a3a; font-weight: 400; }
 
-/* Expanding an answer must not change the FAQ card width. */
-.layout--catalog .catalog-faq .faq { align-self: stretch; width: 100%; max-width: none; }
-.layout--catalog .catalog-faq .faq > div,
-.layout--catalog .catalog-faq .faq > div.is-open,
-.layout--catalog .catalog-faq .faq > div.is-open > div {
-  box-sizing: border-box;
-  width: 100%;
-}
+/* Rating FAQ: the same desktop structure as the virtual-cards Pen frame. */
 @media (min-width: 768px) {
-  .layout--catalog .catalog-faq .faq > div.is-open { padding: 18px 16px; }
-  .layout--catalog .catalog-faq .faq > div.is-open > button { padding-inline: 0; }
-  .layout--catalog .catalog-faq .faq > div.is-open > div { margin: 0; padding: 14px 0 0; background: #f5f5f5; }
+  .layout--catalog .catalog-faq {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 64px 24px;
+    background-color: #f5f5f5;
+  }
+  .layout--catalog .catalog-faq .faq {
+    box-sizing: border-box;
+    width: 800px;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .layout--catalog .catalog-faq .faq > h2 { margin: 0 0 20px; }
+  .layout--catalog .catalog-faq .faq > div { width: 100%; }
+  .layout--catalog .catalog-faq .faq > div.is-open { padding: 18px 0 0; }
+  .layout--catalog .catalog-faq .faq > div.is-open > button { padding-inline: 16px; }
+  .layout--catalog .catalog-faq .faq > div.is-open > div {
+    box-sizing: content-box;
+    width: 100%;
+    margin: 0 -0.5px -0.5px;
+    padding: 14px 16px;
+    border: solid #e6e6e6;
+    border-width: 0 1px 1px;
+    border-radius: 0 0 8px 8px;
+    background-color: #f5f5f5 !important;
+  }
 }
 @media (max-width: 767px) {
   .layout--catalog .catalog-faq .faq > div.is-open { padding: 16px 14px; }
   .layout--catalog .catalog-faq .faq > div.is-open > button { padding-inline: 0; }
   .layout--catalog .catalog-faq .faq > div.is-open > div { margin: 0; padding: 12px 0 0; background: #f5f5f5; }
-}
-
-/* The expanded FAQ answer has the same #f5f5f5 surface on rating and cards. */
-.layout--catalog .catalog-faq .faq > div.is-open > div {
-  background-color: #f5f5f5 !important;
 }
 
 /* Exported review controls align their text baseline with the leading icon. */
