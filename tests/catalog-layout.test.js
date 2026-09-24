@@ -52,6 +52,13 @@ describe('rating catalog layout', () => {
     expect(css).not.toContain('.layout--catalog .catalog-faq .faq { width: 430px; max-width: 100%; }');
   });
 
+  it('extends the rating FAQ background 50px upward and flush to the footer', () => {
+    expect(css).toContain('#app[data-page="rating"] .layout--catalog { padding-bottom: 0; }');
+    expect(css).toContain('#app[data-page="rating"] .layout--catalog .catalog-faq { margin-top: -50px; }');
+    expect(css).toContain('padding: 114px 24px 64px;');
+    expect(css).toContain('padding-top: 90px;');
+  });
+
   it('keeps the mobile rating introduction to the three-line Pen copy', () => {
     expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки.');
     expect(app).not.toContain('проверки, чтобы найти подходящий вариант.');
