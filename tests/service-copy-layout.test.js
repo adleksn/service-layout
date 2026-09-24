@@ -5,6 +5,7 @@ describe('service page supplied copy layout', () => {
   it('uses the supplied line breaks in shopper reports and service description', () => {
     const app = readFileSync('src/js/app.js', 'utf8');
     const css = readFileSync('src/styles/main.css', 'utf8');
+    const penSource = readFileSync('public/reference/pen-source.html', 'utf8');
 
     expect(app).toContain('первого <br> раза картой другого банка');
     expect(app).toContain('могли измениться,<br> поэтому данные требуют повторной проверки.');
@@ -24,6 +25,7 @@ describe('service page supplied copy layout', () => {
     expect(app).toContain("['Екатерина', 'Сначала сомневалась");
     expect(app).toContain('Плачу за подписку Canva через этот сервис уже три месяца подряд. Всё<br> стабильно, интерфейс простой<br> и понятный, деньги приходят получателю быстро.');
     expect(app).toContain("['Татьяна', 'Плачу за подписку Canva");
+    expect(penSource).toContain('Плачу за подписку Canva через этот сервис уже три месяца подряд. Всё стабильно, интерфейс простой<br> и понятный, деньги приходят получателю быстро.');
     expect(css).toContain('.shopper__text { margin: 0; font-size: 15px; line-height: 24px; }');
     expect(css).toContain('.about-service p { width: 700px; max-width: 100%; font-size: 16px; line-height: 26px; }');
     expect(css).toContain('.service-layout .shopper { box-sizing: content-box; width: 778.5px; margin: 0 0 0 -1.5px; padding: 28px; gap: 16px; }');
