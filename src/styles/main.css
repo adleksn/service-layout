@@ -4255,6 +4255,8 @@ body {
 .pen-frame [data-pencil-name="Button Primary"],
 .pen-frame [data-pencil-name="Button Dzen"] { cursor: pointer; transition: background-color .15s ease, transform .15s ease; }
 .pen-frame [data-pencil-name="Button Primary"]:hover { background-color: #2f8a16 !important; }
+.pen-frame [data-pencil-name="Checked Service Card"] [data-pencil-name="Button"] { cursor: pointer; transition: background-color .15s ease, box-shadow .15s ease; }
+.pen-frame [data-pencil-name="Checked Service Card"] [data-pencil-name="Button"]:hover { background-color: #2f8a16 !important; box-shadow: 0 4px 12px rgb(69 168 40 / .18); }
 .pen-frame [data-pencil-name="Button Primary"]:active,
 .pen-frame [data-pencil-name="Button Dzen"]:active { transform: translateY(1px); }
 

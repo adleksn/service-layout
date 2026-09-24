@@ -268,6 +268,13 @@ describe('unmapped Pen controls', () => {
     expect(oldSummary?.style.borderColor).toBe('rgb(245, 166, 35)');
   });
 
+  it('gives the checked-service green action the shared green-button hover state', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame [data-pencil-name="Checked Service Card"] [data-pencil-name="Button"]:hover');
+    expect(css).toContain('background-color: #2f8a16 !important;');
+  });
+
   it('makes the virtual-card mobile sort control functional for Pen card rows', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/virtual-cards.html' });
     const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
