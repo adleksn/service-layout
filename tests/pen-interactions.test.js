@@ -242,6 +242,11 @@ describe('unmapped Pen controls', () => {
     expect(root.querySelector('[data-pencil-name="Tab 12.01.2023"]')?.style.outline).toBe('1px solid #45A828');
     expect(root.querySelector('[data-pencil-name="Article Card (old, condensed)"] [data-pencil-name="img"]')?.style.backgroundImage)
       .toBe('url("/assets/fda0d46096cb5d4a.png")');
+    root.querySelector('[data-pencil-name="Warning Banner"] [data-pencil-name="Link"]')
+      ?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    await new Promise((resolve) => dom.window.setTimeout(resolve, 0));
+    expect(root.querySelector('[data-pencil-name="Warning Banner"]')).toBeNull();
+    expect(root.querySelector('[data-pencil-name="Summary Block"]')?.textContent).toContain('Платёж прошёл без проблем');
     vi.unstubAllGlobals();
   });
 

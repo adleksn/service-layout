@@ -682,6 +682,19 @@ function setupPenReportState(frame, stateSource, initialHash) {
         }
         if (!selected) dot?.remove();
       });
+      mainColumn.querySelectorAll('[data-pencil-name="Warning Banner"] [data-pencil-name="Link"]').forEach((link) => {
+        const activate = () => {
+          window.history.pushState(null, '', '#check-2024');
+          show('#check-2024', 0);
+        };
+        link.setAttribute('role', 'link');
+        link.setAttribute('tabindex', '0');
+        link.dataset.penLink = '#check-2024';
+        link.addEventListener('click', activate);
+        link.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(); }
+        });
+      });
     }
     if (ready) setupPenReportTabs(mainColumn, show);
     ready = true;
