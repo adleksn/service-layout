@@ -50,11 +50,21 @@ function home() { return shell(`<section class="hero"><div class="container hero
 const applyHomeCopyBreaks = () => {
   if (page !== 'home') return;
 
-  const mysteryCopy = app.querySelector('.mystery__card p:not(.eyebrow)');
+  const pencilParagraphs = [...app.querySelectorAll('[data-pencil-name="Paragraph"], [data-pencil-name="Paragraph 1"]')];
+  const mysteryCopy = app.querySelector('.mystery__card p:not(.eyebrow)')
+    || pencilParagraphs.find((paragraph) => paragraph.textContent.includes('Мы не верим сервисам на слово'));
   if (mysteryCopy) mysteryCopy.innerHTML = 'Мы не верим сервисам на слово. Наш тайный покупатель<br>регистрируется в сервисе как обычный клиент, оплачивает реальную<br>подписку настоящими деньгами и фиксирует всё: сроки, итоговую<br>комиссию, наличие чека, поведение поддержки, что происходит при<br>проблеме с платежом.';
 
   const happeningCopy = app.querySelector('.happening > div');
-  if (happeningCopy) happeningCopy.innerHTML = '<h2>Что происходит?</h2><p>С 2022 года оплата зарубежных подписок, хостингов и рекламных кабинетов<br>из России перестала работать напрямую. На этом месте выросли десятки<br>посредников: одни берут фиксированную комиссию и выдают чеки, другие<br>исчезают вместе с деньгами клиентов.</p><p>Мы ведём открытый реестр таких сервисов: проверяем юридические<br>данные, тестируем платежи собственными деньгами и собираем отзывы<br>пользователей. Рейтинг показывает, кому можно доверить платёж сегодня, а<br>не год назад.</p>';
+  if (happeningCopy) {
+    happeningCopy.innerHTML = '<h2>Что происходит?</h2><p>С 2022 года оплата зарубежных подписок, хостингов и рекламных кабинетов<br>из России перестала работать напрямую. На этом месте выросли десятки<br>посредников: одни берут фиксированную комиссию и выдают чеки, другие<br>исчезают вместе с деньгами клиентов.</p><p>Мы ведём открытый реестр таких сервисов: проверяем юридические<br>данные, тестируем платежи собственными деньгами и собираем отзывы<br>пользователей. Рейтинг показывает, кому можно доверить платёж сегодня, а<br>не год назад.</p>';
+    return;
+  }
+
+  const happeningFirst = pencilParagraphs.find((paragraph) => paragraph.textContent.includes('С 2022 года оплата зарубежных подписок'));
+  const happeningSecond = pencilParagraphs.find((paragraph) => paragraph.textContent.includes('Мы ведём открытый реестр таких сервисов'));
+  if (happeningFirst) happeningFirst.innerHTML = 'С 2022 года оплата зарубежных подписок, хостингов и рекламных кабинетов<br>из России перестала работать напрямую. На этом месте выросли десятки<br>посредников: одни берут фиксированную комиссию и выдают чеки, другие<br>исчезают вместе с деньгами клиентов.';
+  if (happeningSecond) happeningSecond.innerHTML = 'Мы ведём открытый реестр таких сервисов: проверяем юридические<br>данные, тестируем платежи собственными деньгами и собираем отзывы<br>пользователей. Рейтинг показывает, кому можно доверить платёж сегодня, а<br>не год назад.';
 };
 
 function catalogPage(type) {
