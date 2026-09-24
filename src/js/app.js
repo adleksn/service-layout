@@ -111,6 +111,33 @@ const applyServiceCopyLayout = () => {
   });
   if (penAbout) paragraphs.slice(4).forEach((paragraph) => paragraph.remove());
 };
+const applyReportCopyLayout = () => {
+  if (page !== 'report') return;
+  const frame = app.querySelector('[data-pencil-name="Отчёт Desktop 1440"]');
+  if (!frame) return;
+
+  const replace = (start, html) => {
+    const node = [...frame.querySelectorAll('[data-pencil-name="Summary Text"], [data-pencil-name="Paragraph"], [data-pencil-name="Text"]')]
+      .find((item) => item.textContent.trim().startsWith(start));
+    if (node) node.innerHTML = html;
+  };
+
+  replace('Платёж прошёл без проблем', 'Платёж прошёл без проблем, деньги дошли до Dropbox в тот же день. Вся операция от первого сообщения менеджеру до списания заняла 21 минуту. Ключевая оговорка —<br>сервис не выдал чек об оплате, и это стоит учитывать при выборе.');
+  replace('RUPay.money — стандартный', 'RUPay.money — стандартный платёжный сервис для покупки подписок на сервисы, доступа к программному обеспечению, пополнению балансов, а также покупки<br>билетов и бронирования отелей за рубежом. Сервис предлагает «выгодную и удобную<br>оплату», как заявлено на официальном сайте. Чтобы удостовериться в этом, мы<br>решили оплатить месячную подписку на облачное хранилище Dropbox. А теперь<br>передаём слово тайному покупателю:');
+  replace('Я долго выбирал', 'Я долго выбирал подходящее решение для регулярной оплаты подписок на Adobe, Dropbox и другие иностранные сервисы, которые перестали работать в РФ и<br>ограничили возможность оплаты для россиян. Большинство сервисов были<br>непрозрачными, т.е. мало информации на сайте, и у меня были сомнения в легальности<br>работы некоторых платформ.');
+  replace('Я сразу обратил внимание', 'Я сразу обратил внимание на RUPay.money, потому что на сайте разместили<br>достаточно информации о компании. Здесь опубликованы реквизиты, включая<br>расчётные счета. Кроме того, компания получила свидетельство о регистрации<br>оператора платёжной системы ЦБ РФ. Получается, что есть какие-то гарантии,<br>поскольку в случае инцидентов (например, клиент перевёл деньги, а сервис не выдал<br>виртуалку) можно хотя бы написать жалобу в ЦБ и Роспотребнадзор для<br>решения<br>проблемы.');
+  replace('Тарифы для каждой', 'Тарифы для каждой из примерно одинаковые. Есть отличия только у денежных<br>переводов. Подробнее о комиссиях (в рублях):');
+  replace('Для денежных переводов', 'Для денежных переводов компания увеличила минимальную сумму перевода и<br>немного скорректировала комиссии:');
+  replace('Используя сервисы альтернативной', 'Используя сервисы альтернативной оплаты, нужно смотреть не только на сервисный сбор, но и курс обмена валюты. Компании могут существенно завысить банковский<br>курс обмена. RUPay.money публикует актуальный курс валют прямо на сайте, поэтому<br>клиент может самостоятельно посчитать стоимость подписки в рублях, не обращаясь к<br>менеджеру. Он указан в блоке «Стоимость перевода». На момент написания статьи<br>(21.12.24) компания обменивает рубли на доллары и евро по следующему курсу:');
+  replace('Для оплаты сервисов и отелей', 'Для оплаты сервисов и отелей клиенты должны написать менеджеру в Telegram. На<br>сайте нет формы обратной связи и т.п. Клиент через него переводит рубли.<br>RUPay.money предлагает разные способы оплаты. Основные из них:');
+  replace('Виртуальная карта.', 'Виртуальная карта. Менеджер предоставляет пользователю реквизиты карточки,<br>выпущенной иностранным банком. Клиент самостоятельно оплачивает подписки<br>или товары в интернете. Преимущество этого способа — посторонние люди не<br>зайдут в аккаунт.');
+  replace('Как и было сказано', 'Как и было сказано в инструкции на сайте, я перешёл в Telegram по ссылке на сайте и написал менеджеру. Специалист ответил на сообщение мгновенно и сразу спросил о сумме оплаты. Подписка на Dropbox в 2024 году составляет 11,99 долларов. Менеджер посчитал стоимость в рублях, и получилось 1457 рублей. Сотрудник RUPay.money<br>немного подробнее рассказал об оплате. По его словам, сервис переводит валюту на<br>счёт в европейском банке и предоставит реквизиты.');
+  replace('У меня не возникло', 'У меня не возникло сложностей с оплатой подписки. Dropbox сразу принял карту и<br>списал с неё деньги.');
+  replace('Оплата подписки на Dropbox', 'Оплата подписки на Dropbox за 11,99 долларов обошлась в 1457 рублей, из<br>которых 300 — комиссия. Плюс RUPay.money — выгодный обменный курс: сервис<br>конвертирует валюты по курсу даже ниже, чем в Сбер Онлайн.');
+  replace('Покупка месячной подписки', 'Покупка месячной подписки заняла всего 16 минут. Во время оплаты менеджер<br>был на связи и надолго не исчезал, так что не возникало задержек. При этом<br>подготовка виртуалки заняла 5 минут.');
+  replace('RUPay.money не только', 'RUPay.money не только покупает подписки на иностранные сервисы, но и<br>оплачивает отели, билеты, а также переводит деньги на счета в зарубежных<br>банках. Обменный курс и комиссии для всех услуг практически не отличаются.');
+  replace('Сервис имеет бонус', 'Сервис имеет бонус для клиентов, которые нашли аналогичную платформу для оплаты подписок с комиссией ниже: RUPay.money сделает скидку для первой<br>оплаты и обнулит комиссию для второй.');
+};
 const applyCardsCopyLayout = () => {
   const semanticParagraphs = [...app.querySelectorAll('.catalog-seo .seo-copy p')];
   const penSeoSection = app.querySelector('[data-pencil-name="SEO Section"]');
@@ -243,6 +270,7 @@ applyContactAboutCopy();
 applyAdvertisingLeadLayout();
 applyHomeCopyBreaks();
 if (page === 'service' || page === 'virtual-card') applyServiceCopyLayout();
+if (page === 'report') applyReportCopyLayout();
 if (page === 'cards') applyCardsCopyLayout();
 if (page === 'reports') applyReportsCtaLayout();
 resolveSitePaths(app);
@@ -381,7 +409,7 @@ if (reviewSort) reviewSort.addEventListener('change', () => {
     .forEach((review) => list.append(review));
 });
 
-applyExactPenFrame(app, page, initialRequestUrl).then(() => { applyHomeCopyBreaks(); applyContactAboutCopy(); applyAdvertisingLeadLayout(); if (page === 'service' || page === 'virtual-card') applyServiceCopyLayout(); if (page === 'cards') applyCardsCopyLayout(); if (page === 'reports') applyReportsCtaLayout(); resolveSitePaths(app); }).catch(() => {});
+applyExactPenFrame(app, page, initialRequestUrl).then(() => { applyHomeCopyBreaks(); applyContactAboutCopy(); applyAdvertisingLeadLayout(); if (page === 'service' || page === 'virtual-card') applyServiceCopyLayout(); if (page === 'report') applyReportCopyLayout(); if (page === 'cards') applyCardsCopyLayout(); if (page === 'reports') applyReportsCtaLayout(); resolveSitePaths(app); }).catch(() => {});
 applyPenMethodologySignSvgs(app).catch(() => {});
 
 // Pen frames are authored at specific control widths, while the semantic
