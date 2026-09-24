@@ -191,7 +191,7 @@ describe('rating catalog layout', () => {
   });
 
   it('uses the virtual-card FAQ copy for the rating answer and discontinued-services question', () => {
-    expect(app).toContain('Позиции в тааблице пересчитываются каждую неделю, а полная контрольная проверка каждого');
+    expect(app).toContain('Позиции в таблице пересчитываются каждую неделю, а полная контрольная проверка каждого');
     expect(ui).not.toContain("root.querySelector('#rating-faq-0 > p')");
     expect(app).toContain('Почему сервис из «Прекратили работу» ещё принимает платежи?');
   });
