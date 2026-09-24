@@ -201,6 +201,18 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('keeps one report heading and removes the exported stale-report demo label', () => {
+    const source = readFileSync('public/reference/pen-source.html', 'utf8');
+    const dom = new JSDOM(source, { url: 'https://example.test/report.html' });
+    const report = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Отчёт Desktop 1440');
+
+    const headings = [...report.querySelectorAll('[data-pencil-name="Main Column"] [data-pencil-name="H1"]')]
+      .filter((heading) => heading.textContent.trim() === 'RUPay.money — отчёт о проверке тайным покупателем');
+    expect(headings).toHaveLength(1);
+    expect(report.textContent).not.toContain('Пример: устаревший отчёт (заголовок)');
+  });
+
   it('switches to the old report state when either old report tab is clicked without a page reload', async () => {
     const source = readFileSync('public/reference/pen-source.html', 'utf8');
     const states = readFileSync('public/reference/pen-states.html', 'utf8');
