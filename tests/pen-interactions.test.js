@@ -239,6 +239,9 @@ describe('unmapped Pen controls', () => {
     expect(root.querySelector('[data-pencil-name="Warning Banner"]')?.textContent).toContain('Вы смотрите проверку от 03.09.2023');
     expect(root.textContent).toContain('Изучить сервис в рейтинге →');
     expect(root.textContent).toContain('Перейти на сайт сервиса ↗');
+    expect(root.querySelector('[data-pencil-name="Tab 12.01.2023"]')?.style.outline).toBe('1px solid #45A828');
+    expect(root.querySelector('[data-pencil-name="Article Card (old, condensed)"] [data-pencil-name="img"]')?.style.backgroundImage)
+      .toBe('url("/assets/fda0d46096cb5d4a.png")');
     vi.unstubAllGlobals();
   });
 

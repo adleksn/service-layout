@@ -625,7 +625,7 @@ function setupPenReportTabs(frame, onSelect) {
       const target = targets[index] || '#check-2023';
       if (onSelect) {
         window.history.pushState(null, '', target);
-        onSelect(target);
+        onSelect(target, index);
       } else {
         window.location.hash = target;
       }
@@ -652,9 +652,37 @@ function setupPenReportState(frame, stateSource, initialHash) {
   const persistentContent = children.slice(persistentStart);
   const oldContent = [...oldDemo.children].map((node) => node.cloneNode(true));
   let ready = false;
-  const show = (hash) => {
+  const cloneContent = (content) => content.map((node) => {
+    const clone = node.cloneNode(true);
+    clone.querySelectorAll('[style*="images/"]').forEach((image) => {
+      const match = image.style.backgroundImage.match(/url\(["']?images\/([^"')]+)/);
+      if (match) image.style.backgroundImage = `url('${sitePath(`assets/${match[1]}`)}')`;
+    });
+    return clone;
+  });
+  const show = (hash, selectedIndex = hash === '#check-2023' ? 1 : 0) => {
     const content = hash === '#check-2023' ? oldContent : normalContent;
-    mainColumn.replaceChildren(...staticChildren, ...content.map((node) => node.cloneNode(true)), ...persistentContent);
+    mainColumn.replaceChildren(...staticChildren, ...cloneContent(content), ...persistentContent);
+    if (hash === '#check-2023') {
+      [...mainColumn.querySelectorAll('[data-pencil-name^="Tab "]')].forEach((tab, index) => {
+        const selected = index === selectedIndex;
+        tab.style.backgroundColor = selected ? '#FFFFFF' : '#F5F5F5';
+        tab.style.outline = selected ? '1px solid #45A828' : 'none';
+        const date = tab.querySelector('[data-pencil-name="Date"]');
+        if (date) {
+          date.style.color = selected ? '#2F8A16' : '#3A3A3A';
+          date.style.fontWeight = selected ? '600' : '500';
+        }
+        let dot = tab.querySelector('[data-pencil-name="Dot"]');
+        if (selected && !dot) {
+          dot = document.createElement('div');
+          dot.dataset.pencilName = 'Dot';
+          dot.style.cssText = 'background-color: #F5A623; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 6px; width: 6px';
+          tab.prepend(dot);
+        }
+        if (!selected) dot?.remove();
+      });
+    }
     if (ready) setupPenReportTabs(mainColumn, show);
     ready = true;
   };
