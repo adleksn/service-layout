@@ -87,6 +87,9 @@ const applyServiceCopyLayout = () => {
   const staleReport = app.querySelector('[data-pencil-name="Mystery Shopper Report (stale)"]');
   if (freshReport) freshReport.style.height = '309px';
   if (staleReport) staleReport.style.height = '295px';
+  const paramsCard = app.querySelector('[data-pencil-name="Params Card"]');
+  const paramRows = [...(paramsCard?.querySelectorAll('[data-pencil-name="Param Row"]') || [])];
+  paramRows.forEach((row, index) => { row.style.height = index === 0 ? '35.5px' : '30.5px'; });
   const fresh = app.querySelector('.shopper:not(.shopper--old):not(.shopper--none) .shopper__date + p') || app.querySelector('[data-pencil-name="Mystery Shopper Report (fresh)"] [data-pencil-name="Paragraph"]');
   const stale = app.querySelector('.shopper--old .shopper__date + p') || app.querySelector('[data-pencil-name="Mystery Shopper Report (stale)"] [data-pencil-name="Paragraph"]');
   if (fresh) {
@@ -104,12 +107,26 @@ const applyServiceCopyLayout = () => {
     '«Плати Легко!» работает с 2022 года и специализируется на оплате зарубежных<br> подписок и сервисов для клиентов из России. Сервис принимает платежи в рублях, а<br> расчёт с зарубежным поставщиком берёт на себя, используя карты партнёрских<br> банков в других юрисдикциях.',
     'Схема простая: пользователь оставляет ссылку на нужную подписку и данные для<br> оплаты, сервис проводит платёж в течение нескольких минут и присылает<br> подтверждение с деталями списания. Доступы к личным кабинетам сервис не<br> запрашивает — только сумму и реквизиты платежа.',
     'Комиссия зависит от направления и обычно составляет от 10 до 20% сверх суммы<br> платежа. Итоговая сумма показывается до подтверждения операции, скрытых<br> надбавок при списании мы не зафиксировали.',
+    'Поддержка отвечает в чате на сайте и в Telegram, среднее время ответа — несколько <br>минут в рабочее время. По нашим наблюдениям, сервис оперативно реагирует на <br> спорные ситуации и готов возвращать деньги при сбоях платежа.',
     'Судя по количеству отзывов и стабильно высокой оценке, сервис пользуется<br> устойчивым спросом больше двух лет — для этой ниши это довольно долгий срок<br> работы.'
   ];
   paragraphs.forEach((paragraph, index) => {
     if (copy[index]) paragraph.innerHTML = copy[index];
   });
-  if (penAbout) paragraphs.slice(4).forEach((paragraph) => paragraph.remove());
+  if (penAbout) paragraphs.slice(5).forEach((paragraph) => paragraph.remove());
+  const reviewCopies = [
+    'Отличный сервис, пользуюсь регулярно. Курс всегда честный, никаких скрытых<br> комиссий не<br> обнаружила. Рекомендую всем, кто ищет надёжный способ оплаты<br> зарубежных подписок.',
+    'Платил за хостинг на полгода вперёд. Всё прошло гладко, но сумма оказалась<br> чуть больше, чем я<br> ожидал из-за курса — уточняйте актуальный курс перед<br> оплатой.',
+    'Пользуюсь для оплаты корпоративных подписок компании. Отдельное спасибо за<br> возможность<br> получить закрывающие документы для бухгалтерии — не все подобные<br> сервисы это предлагают.',
+    'Плачу за подписку Canva через этот сервис уже три месяца подряд. Всё<br> стабильно, интерфейс простой <br>и понятный, деньги приходят получателю быстро.'
+  ];
+  const reviewItems = [...app.querySelectorAll('[data-pencil-name="Reviews List"] > [data-pencil-name^="Review Item"]')];
+  const firstRequestedReview = reviewItems.findIndex((item) => item.querySelector('[data-pencil-name="Name"]')?.textContent.trim() === 'Олеся');
+  reviewItems.slice(firstRequestedReview < 0 ? 0 : firstRequestedReview, (firstRequestedReview < 0 ? 0 : firstRequestedReview) + reviewCopies.length)
+    .forEach((item, index) => {
+      const text = item.querySelector('[data-pencil-name="Text"]');
+      if (text) text.innerHTML = reviewCopies[index];
+    });
 };
 const applyReportCopyLayout = () => {
   if (page !== 'report') return;

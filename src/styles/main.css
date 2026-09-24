@@ -5428,3 +5428,9 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .layout--catalog .catalog-faq .faq > div.is-open > button { padding-inline: 0; }
   .layout--catalog .catalog-faq .faq > div.is-open > div { margin: 0; padding: 12px 0 0; }
 }
+
+/* Exported review controls align their text baseline with the leading icon. */
+.pen-frame [data-pencil-name="Field Введите сумму 6 + 4"] > svg,
+.pen-frame [data-pencil-name="Textarea"] > svg { display: block; }
+.pen-frame [data-pencil-name="Field Введите сумму 6 + 4"] .pen-review-control { align-self: center; height: 20px; margin: 0; padding: 0; }
+.pen-frame [data-pencil-name="Textarea"] .pen-review-control { align-self: flex-start; margin: 0; padding: 0; }
