@@ -215,7 +215,7 @@ function setupPenReviewForm(frame) {
   const fields = [
     ['Field Ваше имя', 'name', 'text', 'Ваше имя'],
     ['Field Ваш e-mail', 'email', 'email', 'Ваш e-mail'],
-    ['Field Введите сумму 6 + 4', 'amount', 'number', 'Сумма платежа']
+    ['Field Введите сумму 6 + 4', 'amount', 'number', 'Введите сумму 6 + 4']
   ];
   const controls = [];
   fields.forEach(([layer, name, type, placeholder]) => {
