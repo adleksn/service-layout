@@ -201,6 +201,29 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('switches to the old report state when a report-tab hash changes without a page reload', async () => {
+    const source = readFileSync('public/reference/pen-source.html', 'utf8');
+    const states = readFileSync('public/reference/pen-states.html', 'utf8');
+    const dom = new JSDOM('<main id="app"><header class="header"></header></main>', { url: 'http://localhost/report.html' });
+    Object.defineProperty(dom.window, 'innerWidth', { configurable: true, value: 1440 });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('DOMParser', dom.window.DOMParser);
+    vi.stubGlobal('location', dom.window.location);
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async (url) => ({
+      ok: true,
+      text: async () => String(url).includes('pen-states') ? states : source
+    })));
+    const root = dom.window.document.querySelector('#app');
+
+    await applyExactPenFrame(root, 'report', dom.window.location.href);
+    dom.window.location.hash = '#check-2023';
+    await new Promise((resolve) => dom.window.setTimeout(resolve, 0));
+
+    expect(root.dataset.penExact).toBe('Отчёт Desktop — Состояние 2');
+    vi.unstubAllGlobals();
+  });
+
   it('uses the old report state without its exported state-label layer', () => {
     const states = readFileSync('public/reference/pen-states.html', 'utf8');
     const dom = new JSDOM('', { url: 'https://example.test/report.html#check-2023' });

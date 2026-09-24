@@ -621,7 +621,7 @@ function setupPenReportTabs(frame) {
     tab.setAttribute('role', 'tab');
     tab.setAttribute('aria-selected', String(selected));
     tab.tabIndex = selected ? 0 : -1;
-    const activate = () => { window.location.href = `${window.location.pathname}${targets[index] || '#check-2023'}`; };
+    const activate = () => { window.location.hash = targets[index] || '#check-2023'; };
     tab.addEventListener('click', activate);
     tab.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(); }
@@ -877,6 +877,19 @@ export async function applyExactPenFrame(root, page, requestUrl = window.locatio
   enhanceInteractions(frame, page);
   root.replaceChildren(...(sharedHeader ? [sharedHeader, frame] : [frame]));
   root.dataset.penExact = target;
+
+  // Report tabs select a different authored frame. Listen for same-document
+  // hash changes so selecting a date swaps the report immediately instead of
+  // requiring a browser refresh.
+  if (!root.__penReportHashListener && page === 'report') {
+    root.__penReportHashListener = () => {
+      const requestedTarget = targetFor(page, window.innerWidth, window.location.href);
+      if (requestedTarget && requestedTarget !== root.dataset.penExact) {
+        applyExactPenFrame(root, page, window.location.href);
+      }
+    };
+    window.addEventListener('hashchange', root.__penReportHashListener);
+  }
 
   // A Pen export is a fixed reference composition.  When a user changes the
   // browser width after the page has loaded, mount the correct composition
