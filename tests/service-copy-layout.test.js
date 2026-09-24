@@ -19,8 +19,11 @@ describe('service page supplied copy layout', () => {
     expect(app).toContain("paramRows.forEach((row, index) => { row.style.height = index === 0 ? '35.5px' : '30.5px'; });");
     expect(app).toContain('Отличный сервис, пользуюсь регулярно. Курс всегда честный, никаких скрытых<br> комиссий не обнаружила. Рекомендую всем, кто ищет надёжный способ оплаты<br> зарубежных подписок.');
     expect(app).toContain('Пользуюсь для оплаты корпоративных подписок компании. Отдельное спасибо за возможность<br> получить закрывающие документы для бухгалтерии — не все подобные сервисы это предлагают.');
+    expect(app).toContain("['Сергей', 'Пользуюсь для оплаты корпоративных подписок");
     expect(app).toContain('Сначала сомневалась, но решила попробывать после хороших отзывов. Платеж прошел за пять минут,<br>никаких сюрпризов с комиссией не было. Буду пользоваться дальше.');
+    expect(app).toContain("['Екатерина', 'Сначала сомневалась");
     expect(app).toContain('Плачу за подписку Canva через этот сервис уже три месяца подряд. Всё<br> стабильно, интерфейс простой<br> и понятный, деньги приходят получателю быстро.');
+    expect(app).toContain("['Татьяна', 'Плачу за подписку Canva");
     expect(css).toContain('.shopper__text { margin: 0; font-size: 15px; line-height: 24px; }');
     expect(css).toContain('.about-service p { width: 700px; max-width: 100%; font-size: 16px; line-height: 26px; }');
     expect(css).toContain('.service-layout .shopper { box-sizing: content-box; width: 778.5px; margin: 0 0 0 -1.5px; padding: 28px; gap: 16px; }');
