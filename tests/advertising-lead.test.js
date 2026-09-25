@@ -30,4 +30,11 @@ describe('advertising lead', () => {
     expect(css).toContain('height: auto !important;');
     expect(css).toContain('margin: 0 !important;');
   });
+
+  it('leaves the 375px Pen typography and spacing untouched by desktop adjustments', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+
+    expect(app).toContain('if (window.innerWidth < 768) return;');
+    expect(app).toContain("text.innerHTML = finalCtaCopy;");
+  });
 });
