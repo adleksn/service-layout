@@ -209,12 +209,13 @@ describe('rating catalog layout', () => {
 
   it('uses the requested neutral copy and stable accordion frame in rating lower sections', () => {
     expect(app).toContain('Эти сервисы больше не принимают платежи или перестали отвечать на обращения пользователей. Мы держим в реестре, чтоб вы могли<br>сверится перед оплатой.');
-    expect(app).toContain('По этим сервисам поступали поступали жалобы на невыполненные платежи или подозрительное поведение поддержки. Будьте осторожны, если все же решите<br>ими воспользоваться');
+    expect(app).toContain('По этим сервисам поступали жалобы на невыполненные платежи или подозрительное поведение поддержки. Будьте осторожны, если всё же решите ими воспользоваться.');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title h2 { margin: 0; color: #131313; font-weight: 700; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued > p { margin: 0; color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item b { color: #3a3a3a; font-weight: 400; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__grid { margin-top: 0; background: #f5f5f5; }');
-    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__column { background: #ffffff; }');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item { background: #ffffff; }');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__column { background: transparent; }');
     expect(css).toContain('.layout--catalog .catalog-faq {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    width: 100vw;');
     expect(css).toContain('.layout--catalog .catalog + .catalog-discontinued { margin-top: 0; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued { width: 100vw; margin-left: calc(50% - 50vw); padding: 64px 24px; background: #f5f5f5; }');

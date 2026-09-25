@@ -5448,8 +5448,9 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .layout--catalog .catalog-discontinued .discontinued__title h2 { margin: 0; color: #131313; font-weight: 700; }
   .layout--catalog .catalog-discontinued .discontinued > p { margin: 0; color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }
   .layout--catalog .catalog-discontinued .discontinued__grid { margin-top: 0; background: #f5f5f5; }
+  .layout--catalog .catalog-discontinued .discontinued__item { background: #ffffff; }
   .layout--catalog .catalog-discontinued .discontinued__item b { color: #3a3a3a; font-weight: 400; }
-  .layout--catalog .catalog-discontinued .discontinued__column { background: #ffffff; }
+  .layout--catalog .catalog-discontinued .discontinued__column { background: transparent; }
 }
 
 #app[data-page="rating"] .layout--catalog { padding-bottom: 0; }

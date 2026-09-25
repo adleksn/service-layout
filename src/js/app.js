@@ -248,6 +248,12 @@ const preserveRatingMobileTextWrapping = () => {
   if (page !== 'rating' || window.innerWidth >= 768) return;
   app.querySelectorAll('.catalog-discontinued br, .catalog-seo br, .catalog-faq br').forEach((lineBreak) => lineBreak.replaceWith(' '));
 };
+
+const normalizeRatingRegistryCopy = () => {
+  if (page !== 'rating') return;
+  const fraudDescription = app.querySelector('.discontinued--danger > p');
+  if (fraudDescription) fraudDescription.textContent = 'По этим сервисам поступали жалобы на невыполненные платежи или подозрительное поведение поддержки. Будьте осторожны, если всё же решите ими воспользоваться.';
+};
 const alignAgreementLayout = () => {
   if (page !== 'agreement') return;
   const leadBlock = app.querySelector('.lead');
@@ -342,6 +348,7 @@ app.dataset.page = page;
 alignMethodologyLayout();
 preserveMethodologyMobileTextWrapping();
 preserveRatingMobileTextWrapping();
+normalizeRatingRegistryCopy();
 alignAgreementLayout();
 applyAgreementCopyLayout();
 applyContactAboutCopy();
