@@ -5711,3 +5711,60 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     right: -2px !important;
   }
 }
+
+/* On the mobile rating page, an expanded FAQ consists of a gray trigger and a
+   separate white answer panel. Keeping the parent unpadded prevents a gray
+   frame from appearing around the revealed copy. */
+@media (max-width: 767px) {
+  .layout--catalog .catalog-faq .faq > div.is-open {
+    gap: 0;
+    padding: 0;
+    background: #e4e4e4;
+  }
+
+  .layout--catalog .catalog-faq .faq > div.is-open > button {
+    padding: 16px 14px;
+    border-radius: 8px 8px 0 0;
+    background: #e4e4e4;
+  }
+
+  .layout--catalog .catalog-faq .faq > div.is-open > div {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 12px 14px;
+    border: 0;
+    border-radius: 0 0 8px 8px;
+    background: #fff !important;
+  }
+
+  .footer .footer__mobile-bottom .footer__dzen {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    margin-inline: auto;
+  }
+
+  .footer .footer__mobile-bottom .footer__dzen svg {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+  }
+
+  .pen-frame[data-pencil-name$="Mobile 375"] [data-pencil-name="Dzen Row"] {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  .pen-frame[data-pencil-name$="Mobile 375"] [data-pencil-name="Dzen Icon"] {
+    flex: 0 0 28px !important;
+    width: 28px !important;
+    height: 28px !important;
+    margin: 0 !important;
+  }
+}

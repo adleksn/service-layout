@@ -38,6 +38,8 @@ describe('header CTA fidelity', () => {
     expect(css).toContain('.footer .footer__mobile-bottom {\n    align-items: center;\n    text-align: center;');
     expect(css).toContain('.footer .footer__mobile-bottom .footer__dzen {\n    justify-content: center;\n    margin-inline: auto;\n    text-align: center;');
     expect(css).toContain('.pen-frame[data-pencil-name$="Mobile 375"] [data-pencil-name="Footer Bottom"] {\n    width: 100% !important;\n    align-self: stretch !important;\n    align-items: center !important;\n    text-align: center !important;');
+    expect(css).toContain('.footer .footer__mobile-bottom .footer__dzen {\n    display: inline-flex;\n    flex-direction: row;\n    align-items: center;');
+    expect(css).toContain('.pen-frame[data-pencil-name$="Mobile 375"] [data-pencil-name="Dzen Row"] {\n    display: flex !important;\n    flex-direction: row !important;');
   });
 
   it('keeps the bordered shared header at the 74px Pen outer height', () => {
