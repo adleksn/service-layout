@@ -10,6 +10,8 @@ describe('RUPay mystery shopper report copy layout', () => {
     expect(app).toContain('бронирования отелей за рубежом. Сервис предлагает «выгодную и удобную<br>оплату»');
     expect(app).toContain('виртуалку) можно хотя бы написать жалобу в ЦБ и Роспотребнадзор для<br>решения<br>проблемы.');
     expect(app).toContain('Плюс RUPay.money — выгодный обменный курс: сервис<br>конвертирует валюты');
+    expect(app).toContain("setWidth('Я долго выбирал', '701px');");
+    expect(app).toContain("setWidth('Я сразу обратил внимание', '700px');");
     expect(app).toContain("if (page === 'report') applyReportCopyLayout();");
     const penFrame = readFileSync('src/js/pen-frame.js', 'utf8');
     expect(penFrame).toContain("if (page === 'report' && width >= 1200) return variants.desktop;");
