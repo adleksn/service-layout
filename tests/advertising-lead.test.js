@@ -25,5 +25,9 @@ describe('advertising lead', () => {
     expect(css).toContain('font: 700 24px/31px Inter, system-ui, sans-serif;');
     expect(css).toContain('  height: 52px;');
     expect(css).toContain('  padding: 0 26px;');
+    expect(css).toContain('.ad-banner-warning,\n  .ad-order,\n  .pen-frame [data-pencil-name="Option Banner"] [data-pencil-name="Warning"]');
+    expect(css).toContain('width: 100% !important;');
+    expect(css).toContain('height: auto !important;');
+    expect(css).toContain('margin: 0 !important;');
   });
 });

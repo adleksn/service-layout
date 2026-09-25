@@ -5508,3 +5508,29 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .layout--catalog .catalog[data-type="rating"] .desktop-status .check-icon,
   .layout--catalog .catalog[data-type="rating"] .desktop-status .promo-icon { display: inline-grid; }
 }
+
+/* The advertising callouts are fixed-size desktop Pen layers. On phones their
+   content-box dimensions overflow the page rail, so size them to the rail. */
+@media (max-width: 767px) {
+  .ad-banner-warning,
+  .ad-order,
+  .pen-frame [data-pencil-name="Option Banner"] [data-pencil-name="Warning"],
+  .pen-frame [data-pencil-name="Final CTA"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+  .ad-order,
+  .pen-frame [data-pencil-name="Final CTA"] {
+    gap: 12px !important;
+    padding: 24px !important;
+  }
+
+  .ad-banner-warning,
+  .pen-frame [data-pencil-name="Option Banner"] [data-pencil-name="Warning"] {
+    padding: 14px !important;
+  }
+}
