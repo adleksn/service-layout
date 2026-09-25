@@ -34,6 +34,7 @@ describe('service page supplied copy layout', () => {
     expect(css).toContain('.service-layout .shopper:not(.shopper--old):not(.shopper--none) { height: 309px; border-color: #45a828; }');
     expect(css).toContain('[data-pencil-name="Field Введите сумму 6 + 4"] .pen-review-control { align-self: center; height: 20px; margin: 0; padding: 0; }');
     expect(css).toContain('[data-pencil-name="Textarea"] .pen-review-control { align-self: flex-start; margin: 0; padding: 0; }');
+    expect(css).toContain('.pen-frame[data-pencil-name^="Виртуальные карты — Карточка сервиса"] [data-pencil-name="Field Ваш e-mail"] .pen-review-control:focus { outline: 0; }');
   });
 
   it('keeps the supplied 375px virtual-card spacing and text measure', () => {

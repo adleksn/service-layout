@@ -29,6 +29,8 @@ describe('advertising lead', () => {
     expect(css).toContain('width: 100% !important;');
     expect(css).toContain('height: auto !important;');
     expect(css).toContain('margin: 0 !important;');
+    expect(css).toContain('.pen-frame[data-pencil-name="Реклама Desktop 1440"] [data-pencil-name="Accent Block"] [data-pencil-name="Text"],');
+    expect(css).toContain('font-weight: 600 !important;');
   });
 
   it('leaves the 375px Pen typography and spacing untouched by desktop adjustments', () => {
