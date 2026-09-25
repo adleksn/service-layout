@@ -12,7 +12,11 @@ describe('reports mystery-shopper CTA', () => {
     expect(css).toContain('.report-list--source .become-shopper { box-sizing: content-box; width: 778.5px; height: 143px; margin: 0 0 0 -1.5px; padding: 24px; gap: 12px; }');
     expect(css).toContain('.pen-frame[data-pencil-name="Отчёты список Mobile 375"] [data-pencil-name="CTA Block"]');
     expect(css).toContain('box-sizing: content-box !important;');
-    expect(css).toContain('height: 232px !important;');
+    expect(css).toContain(`.pen-frame[data-pencil-name="Отчёты список Mobile 375"] [data-pencil-name="CTA Block"] {
+    box-sizing: content-box !important;
+    width: calc(100% - 43px) !important;
+    max-width: calc(100% - 43px) !important;
+    height: auto !important;`);
     expect(css).toContain(`.pen-frame[data-pencil-name="Отчёты список Mobile 375"] [data-pencil-name="CTA Block"] [data-pencil-name="Paragraph"] {
     font-size: 13px !important;
   }`);
