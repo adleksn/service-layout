@@ -38,6 +38,7 @@ describe('service page supplied copy layout', () => {
 
   it('keeps the supplied 375px virtual-card spacing and text measure', () => {
     const app = readFileSync('src/js/app.js', 'utf8');
+    const css = readFileSync('src/styles/main.css', 'utf8');
     const penSource = readFileSync('public/reference/pen-source.html', 'utf8');
 
     expect(app).toContain("const applyServiceCopyLayout = () => {\n  if (window.innerWidth < 768) return;");
@@ -45,5 +46,9 @@ describe('service page supplied copy layout', () => {
     expect(penSource).toContain('data-pencil-name="Mystery Shopper Report (fresh)"');
     expect(penSource).toContain('height: 440px');
     expect(penSource).toContain('padding: 20px 16px 48px 16px');
+    expect(css).toContain('.pen-frame[data-pencil-name="Виртуальные карты — Карточка сервиса Mobile 375"] [data-pencil-name="Mystery Shopper Report (fresh)"]');
+    expect(css).toContain('height: 483px !important;');
+    expect(css).toContain('height: 461px !important;');
+    expect(css).toContain('[data-pencil-name="Metrics Row"] > [data-pencil-name="Metric Row"]');
   });
 });

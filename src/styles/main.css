@@ -5534,3 +5534,29 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     padding: 14px !important;
   }
 }
+
+/* The 375px virtual-card report layers are exported as content-box elements.
+   Their padding otherwise pushes metrics and the CTA past the phone rail. */
+@media (max-width: 767px) {
+  .pen-frame[data-pencil-name="Виртуальные карты — Карточка сервиса Mobile 375"] [data-pencil-name="Mystery Shopper Report (fresh)"],
+  .pen-frame[data-pencil-name="Виртуальные карты — Карточка сервиса Mobile 375"] [data-pencil-name="Mystery Shopper Report (stale)"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+  }
+
+  .pen-frame[data-pencil-name="Виртуальные карты — Карточка сервиса Mobile 375"] [data-pencil-name="Mystery Shopper Report (fresh)"] {
+    height: 483px !important;
+  }
+
+  .pen-frame[data-pencil-name="Виртуальные карты — Карточка сервиса Mobile 375"] [data-pencil-name="Mystery Shopper Report (stale)"] {
+    height: 461px !important;
+  }
+
+  .pen-frame[data-pencil-name="Виртуальные карты — Карточка сервиса Mobile 375"] [data-pencil-name="Metrics Row"] > [data-pencil-name="Metric Row"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+}
