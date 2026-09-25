@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { JSDOM } from 'jsdom';
 
 const app = readFileSync('src/js/app.js', 'utf8');
 const css = readFileSync('src/styles/main.css', 'utf8');
@@ -52,11 +53,16 @@ describe('rating catalog layout', () => {
     expect(css).not.toContain('.layout--catalog .catalog-faq .faq { width: 430px; max-width: 100%; }');
   });
 
-  it('extends the rating FAQ background 50px upward and flush to the footer', () => {
-    expect(css).toContain('#app[data-page="rating"] .layout--catalog { padding-bottom: 0; }');
-    expect(css).toContain('#app[data-page="rating"] .layout--catalog .catalog-faq { margin-top: -50px; }');
-    expect(css).toContain('padding: 114px 24px 64px;');
-    expect(css).toContain('padding-top: 90px;');
+  it('keeps the rating SEO white and gives the FAQ exactly 50px of gray space above it', () => {
+    const dom = new JSDOM('<!doctype html><style></style><div id="app" data-page="rating"><div class="layout layout--catalog"><section class="catalog-seo"></section><section class="catalog-faq"></section></div></div>');
+    dom.window.document.querySelector('style').textContent = css.replace(/^@import.*$/m, '');
+    const layoutStyle = dom.window.getComputedStyle(dom.window.document.querySelector('.layout--catalog'));
+    const faqStyle = dom.window.getComputedStyle(dom.window.document.querySelector('.catalog-faq'));
+
+    expect(layoutStyle.paddingBottom).toBe('0px');
+    expect(faqStyle.marginTop).toBe('0px');
+    expect(faqStyle.paddingTop).toBe('50px');
+    expect(faqStyle.backgroundColor).toBe('rgb(245, 245, 245)');
   });
 
   it('keeps the mobile rating introduction to the three-line Pen copy', () => {

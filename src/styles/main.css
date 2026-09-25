@@ -5434,7 +5434,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .layout--catalog .catalog-discontinued .discontinued__column { background: #ffffff; }
 
 #app[data-page="rating"] .layout--catalog { padding-bottom: 0; }
-#app[data-page="rating"] .layout--catalog .catalog-faq { margin-top: -50px; }
+#app[data-page="rating"] .layout--catalog .catalog-faq { margin-top: 0; padding-top: 50px; background-color: #f5f5f5; }
 
 /* Rating FAQ: the same desktop structure as the virtual-cards Pen frame. */
 @media (min-width: 768px) {
@@ -5444,7 +5444,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     align-items: center;
     width: 100vw;
     margin-left: calc(50% - 50vw);
-    padding: 114px 24px 64px;
+    padding: 64px 24px;
     background-color: #f5f5f5;
   }
   .layout--catalog .catalog-faq .faq {
@@ -5470,7 +5470,6 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   }
 }
 @media (max-width: 767px) {
-  #app[data-page="rating"] .layout--catalog .catalog-faq { padding-top: 90px; }
   .layout--catalog .catalog-faq .faq > div.is-open { padding: 16px 14px; }
   .layout--catalog .catalog-faq .faq > div.is-open > button { padding-inline: 0; }
   .layout--catalog .catalog-faq .faq > div.is-open > div { margin: 0; padding: 12px 0 0; background: #f5f5f5; }
