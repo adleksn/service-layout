@@ -5589,12 +5589,12 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   }
 }
 
-/* The report summary is exported as content-box; include its padding and
-   left border in the mobile rail so its copy wraps like the 375px frame. */
+/* Preserve the exported 375px text measure so the summary wraps in the
+   same three lines as the mobile Pen frame. */
 @media (max-width: 767px) {
   .pen-frame[data-pencil-name="Отчёт Mobile 375"] [data-pencil-name="Summary Block"] {
-    width: calc(100% - 43px) !important;
-    max-width: calc(100% - 43px) !important;
+    width: 341.5px !important;
+    max-width: none !important;
   }
 }
 
