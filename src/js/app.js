@@ -182,6 +182,7 @@ const applyReportCopyLayout = () => {
   replace('Сервис имеет бонус', 'Сервис имеет бонус для клиентов, которые нашли аналогичную платформу для оплаты подписок с комиссией ниже: RUPay.money сделает скидку для первой<br>оплаты и обнулит комиссию для второй.');
 };
 const applyCardsCopyLayout = () => {
+  if (window.innerWidth < 768) return;
   const semanticParagraphs = [...app.querySelectorAll('.catalog-seo .seo-copy p')];
   const penSeoSection = app.querySelector('[data-pencil-name="SEO Section"]');
   const paragraphs = semanticParagraphs.length ? semanticParagraphs : [...(penSeoSection?.querySelectorAll('[data-pencil-name="Paragraph"]') || [])];

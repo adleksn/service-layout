@@ -14,4 +14,10 @@ describe('virtual-card SEO copy', () => {
     expect(app).toContain("[data-pencil-name=\"Answer\"]");
     expect(css).toContain('#app[data-page="cards"] .seo-copy p { font-size: 16px; line-height: 26px; }');
   });
+
+  it('preserves the supplied natural line wrapping in the 375px card frame', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+
+    expect(app).toContain("const applyCardsCopyLayout = () => {\n  if (window.innerWidth < 768) return;");
+  });
 });
