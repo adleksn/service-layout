@@ -5538,6 +5538,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 
 /* The email control in the virtual-card review form is a neutral field, not
    the green verification field. Keep its focus state free of that outline. */
+.pen-frame[data-pencil-name^="Виртуальные карты — Карточка сервиса"] [data-pencil-name="Field Ваше имя"] .pen-review-control:focus,
 .pen-frame[data-pencil-name^="Виртуальные карты — Карточка сервиса"] [data-pencil-name="Field Ваш e-mail"] .pen-review-control:focus { outline: 0; }
 
 /* The advertising disclosure is intentionally emphasized in both supplied
