@@ -5597,3 +5597,17 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     max-width: calc(100% - 43px) !important;
   }
 }
+
+/* Restore the report-list CTA's 375px content height without letting its
+   content-box padding widen the block beyond the phone rail. */
+@media (max-width: 480px) {
+  .pen-frame[data-pencil-name="Отчёты список Mobile 375"] [data-pencil-name="CTA Block"] {
+    box-sizing: content-box !important;
+    width: calc(100% - 43px) !important;
+    max-width: calc(100% - 43px) !important;
+    height: 232px !important;
+    margin: 0 0 0 -1.5px !important;
+    padding: 18px !important;
+    gap: 10px !important;
+  }
+}
