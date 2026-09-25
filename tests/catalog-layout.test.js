@@ -210,16 +210,25 @@ describe('rating catalog layout', () => {
   it('uses the requested neutral copy and stable accordion frame in rating lower sections', () => {
     expect(app).toContain('Эти сервисы больше не принимают платежи или перестали отвечать на обращения пользователей. Мы держим в реестре, чтоб вы могли<br>сверится перед оплатой.');
     expect(app).toContain('По этим сервисам поступали поступали жалобы на невыполненные платежи или подозрительное поведение поддержки. Будьте осторожны, если все же решите<br>ими воспользоваться');
-    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title h2 { color: #131313; font-weight: 700; }');
-    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued > p { color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title h2 { margin: 0; color: #131313; font-weight: 700; }');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued > p { margin: 0; color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item b { color: #3a3a3a; font-weight: 400; }');
-    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__grid { background: #f5f5f5; }');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__grid { margin-top: 0; background: #f5f5f5; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__column { background: #ffffff; }');
     expect(css).toContain('.layout--catalog .catalog-faq {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    width: 100vw;');
-    expect(css).toContain('.layout--catalog .catalog + .catalog-discontinued { margin-top: 70px; }');
-    expect(css).toContain('.layout--catalog .catalog-discontinued { width: 100vw; margin-left: calc(50% - 50vw); padding-block: 70px; background: #f5f5f5; }');
+    expect(css).toContain('.layout--catalog .catalog + .catalog-discontinued { margin-top: 0; }');
+    expect(css).toContain('.layout--catalog .catalog-discontinued { width: 100vw; margin-left: calc(50% - 50vw); padding: 64px 24px; background: #f5f5f5; }');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued { display: flex; flex-direction: column; width:');
+    expect(css).toContain('padding-top: 0; gap: 20px; background: #f5f5f5;');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued + .discontinued { padding-top: 48px; }');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title { border-top: 0; margin-top: 0; }');
     expect(css).toContain('.layout--catalog .catalog-faq .faq {\n    box-sizing: border-box;\n    width: 800px;');
     expect(css).toContain('background-color: #f5f5f5 !important;');
+  });
+
+  it('uses a fixed chevron so the catalog sort control rotates without shifting', () => {
+    expect(css).toContain('.sort-select__chevron {\n  display: inline-flex;');
+    expect(css).toContain('.sort-select__chevron::before {\n  width: 7px;');
   });
 
   it('includes the complete Pen explanation in the mobile rating SEO section', () => {

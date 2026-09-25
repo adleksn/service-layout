@@ -4138,10 +4138,25 @@ body {
   cursor: pointer;
 }
 .sort-select__chevron {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  align-items: center;
+  justify-content: center;
   color: var(--green-dark);
-  font-size: 17px;
-  line-height: 18px;
+  font-size: 0;
+  line-height: 1;
   transition: transform .18s ease;
+  transform-origin: center;
+}
+.sort-select__chevron::before {
+  width: 7px;
+  height: 7px;
+  content: '';
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
 }
 .sort-select__trigger[aria-expanded="true"] .sort-select__chevron { transform: rotate(180deg); }
 .sort-select__options {
@@ -5422,17 +5437,20 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .service-layout .shopper > .text-link { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; border-radius: 8px; background: #45a828; color: #fff; font-size: 15px; font-weight: 600; }
 }
 
-/* Rating registry notices are a full-width band, separated from the table by
-   a white 70px interval. */
-.layout--catalog .catalog + .catalog-discontinued { margin-top: 70px; }
-.layout--catalog .catalog-discontinued { width: 100vw; margin-left: calc(50% - 50vw); padding-block: 70px; background: #f5f5f5; }
-.layout--catalog .catalog-discontinued .discontinued { width: min(1200px, calc(100vw - 32px)); margin-inline: auto; padding-top: 0; background: #f5f5f5; }
-.layout--catalog .catalog-discontinued .discontinued + .discontinued { padding-top: 70px; }
-.layout--catalog .catalog-discontinued .discontinued__title h2 { color: #131313; font-weight: 700; }
-.layout--catalog .catalog-discontinued .discontinued > p { color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }
-.layout--catalog .catalog-discontinued .discontinued__item b { color: #3a3a3a; font-weight: 400; }
-.layout--catalog .catalog-discontinued .discontinued__grid { background: #f5f5f5; }
-.layout--catalog .catalog-discontinued .discontinued__column { background: #ffffff; }
+/* Rating registry notices follow the desktop Pen frame: 64px section padding,
+   20px inside a notice, and 48px between the two notices. */
+@media (min-width: 768px) {
+  .layout--catalog .catalog + .catalog-discontinued { margin-top: 0; }
+  .layout--catalog .catalog-discontinued { width: 100vw; margin-left: calc(50% - 50vw); padding: 64px 24px; background: #f5f5f5; }
+  .layout--catalog .catalog-discontinued .discontinued { display: flex; flex-direction: column; width: min(1200px, calc(100vw - 32px)); margin-inline: auto; padding-top: 0; gap: 20px; background: #f5f5f5; }
+  .layout--catalog .catalog-discontinued .discontinued + .discontinued { padding-top: 48px; }
+  .layout--catalog .catalog-discontinued .discontinued__title { border-top: 0; margin-top: 0; }
+  .layout--catalog .catalog-discontinued .discontinued__title h2 { margin: 0; color: #131313; font-weight: 700; }
+  .layout--catalog .catalog-discontinued .discontinued > p { margin: 0; color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }
+  .layout--catalog .catalog-discontinued .discontinued__grid { margin-top: 0; background: #f5f5f5; }
+  .layout--catalog .catalog-discontinued .discontinued__item b { color: #3a3a3a; font-weight: 400; }
+  .layout--catalog .catalog-discontinued .discontinued__column { background: #ffffff; }
+}
 
 #app[data-page="rating"] .layout--catalog { padding-bottom: 0; }
 #app[data-page="rating"] .layout--catalog .catalog-faq { margin-top: 0; padding-top: 50px; background-color: #f5f5f5; }
