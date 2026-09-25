@@ -254,6 +254,15 @@ const normalizeRatingRegistryCopy = () => {
   const fraudDescription = app.querySelector('.discontinued--danger > p');
   if (fraudDescription) fraudDescription.textContent = 'По этим сервисам поступали жалобы на невыполненные платежи или подозрительное поведение поддержки. Будьте осторожны, если всё же решите ими воспользоваться.';
 };
+
+const normalizeRatingEmptyState = () => {
+  if (page !== 'rating') return;
+  const emptyState = app.querySelector('.catalog[data-type="rating"] .empty-state');
+  if (!emptyState) return;
+  emptyState.querySelector('.empty-state__icon')?.remove();
+  const description = emptyState.querySelector('p');
+  if (description) description.textContent = 'Под выбранные условия не подошёл ни один сервис. Попробуйте убрать часть фильтров или сбросить их полностью.';
+};
 const alignAgreementLayout = () => {
   if (page !== 'agreement') return;
   const leadBlock = app.querySelector('.lead');
@@ -349,6 +358,7 @@ alignMethodologyLayout();
 preserveMethodologyMobileTextWrapping();
 preserveRatingMobileTextWrapping();
 normalizeRatingRegistryCopy();
+normalizeRatingEmptyState();
 alignAgreementLayout();
 applyAgreementCopyLayout();
 applyContactAboutCopy();
