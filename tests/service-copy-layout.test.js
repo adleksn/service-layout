@@ -35,4 +35,15 @@ describe('service page supplied copy layout', () => {
     expect(css).toContain('[data-pencil-name="Field Введите сумму 6 + 4"] .pen-review-control { align-self: center; height: 20px; margin: 0; padding: 0; }');
     expect(css).toContain('[data-pencil-name="Textarea"] .pen-review-control { align-self: flex-start; margin: 0; padding: 0; }');
   });
+
+  it('keeps the supplied 375px virtual-card spacing and text measure', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+    const penSource = readFileSync('public/reference/pen-source.html', 'utf8');
+
+    expect(app).toContain("const applyServiceCopyLayout = () => {\n  if (window.innerWidth < 768) return;");
+    expect(penSource).toContain('data-pencil-name="Params Card Mobile TEST"');
+    expect(penSource).toContain('data-pencil-name="Mystery Shopper Report (fresh)"');
+    expect(penSource).toContain('height: 440px');
+    expect(penSource).toContain('padding: 20px 16px 48px 16px');
+  });
 });
