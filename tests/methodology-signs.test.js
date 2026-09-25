@@ -16,6 +16,10 @@ describe('methodology sign fidelity', () => {
     expect(app).toContain('часть из которой попадает вам<br> в обзор сервиса');
     expect(app).toContain('Все результаты попадают в карточку сервиса и в отчёт тайного покупателя');
     expect(app).toContain('технология проверки позволяет минимизировать риски');
+    expect(app).toContain('наценку к курсу — итоговую сумму, которую вы отдадите за год.');
+    expect(app).toContain('рейтинге — это разные, не связанные между собой вещи.');
+    expect(app).toContain('удаления не является — в<br> том числе по просьбе сервиса.');
+    expect(app).toContain('и без нашей<br> страницы человек попадёт на клон или на фишинговый сайт.');
     expect(app).toContain('const alignMethodologyLayout');
     expect(app).toContain("classList.add('methodology-breadcrumbs')");
     expect(css).toContain('.methodology {\n  padding-bottom: 0px;');
