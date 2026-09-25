@@ -247,6 +247,7 @@ const alignAgreementLayout = () => {
 };
 const applyAgreementCopyLayout = () => {
   if (page !== 'agreement') return;
+  if (window.innerWidth < 768) return;
   const replace = (start, html) => {
     const paragraph = [...app.querySelectorAll('[data-pencil-name="Paragraph"], [data-pencil-name="Item Text"], .agreement p')]
       .find((node) => node.textContent.trim().startsWith(start));

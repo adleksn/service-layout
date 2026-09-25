@@ -8,6 +8,7 @@ describe('agreement layout', () => {
 
     expect(app).toContain('const alignAgreementLayout');
     expect(app).toContain('const applyAgreementCopyLayout = () =>');
+    expect(app).toContain("if (window.innerWidth < 768) return;\n  const replace =");
     expect(app).toContain('подтверждает, что ознакомился<br>с условиями Соглашения');
     expect(app).toContain('Администрация вправе удалять материалы, нарушающие условия Соглашения, без<br>объяснения причин.');
     expect(app).toContain("if (page === 'agreement') applyAgreementCopyLayout();");
