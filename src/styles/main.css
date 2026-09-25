@@ -5670,6 +5670,8 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   }
 
   .pen-frame[data-pencil-name$="Mobile 375"] [data-pencil-name="Footer Bottom"] {
+    width: 100% !important;
+    align-self: stretch !important;
     align-items: center !important;
     text-align: center !important;
   }
