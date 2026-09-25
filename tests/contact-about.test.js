@@ -7,6 +7,7 @@ describe('contact page about copy', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
     expect(app).toContain('const applyContactAboutCopy');
+    expect(app).toContain("const applyContactAboutCopy = () => {\n  if (page !== 'contacts') return;\n  if (window.innerWidth < 768) return;");
         expect(app).toContain('платёжным сервисом, не принимаем<br>платежи');
         expect(app).toContain('Проект существует с 2022 года. Регион работы —<br>Российская Федерация.');
     expect(css).toContain('.contact-page .article { max-width: none; }');

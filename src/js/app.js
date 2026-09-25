@@ -265,6 +265,7 @@ const applyAgreementCopyLayout = () => {
 };
 const applyContactAboutCopy = () => {
   if (page !== 'contacts') return;
+  if (window.innerWidth < 768) return;
   const copy = 'sao-rating.ru — независимый проект. Мы не являемся платёжным сервисом, не принимаем<br>платежи и не оказываем финансовых услуг. Наша задача — собрать в одном месте данные о <br>сервисах альтернативной оплаты и проверить их на практике, чтобы вы могли сравнивать не <br>обещания с сайтов, а фактические условия. Проект существует с 2022 года. Регион работы —<br>Российская Федерация.';
   app.querySelectorAll('.contact-page .article > p, [data-pencil-name="О проекте"] [data-pencil-name="Paragraph"]').forEach((paragraph) => {
     paragraph.innerHTML = copy;
