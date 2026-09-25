@@ -55,7 +55,7 @@ describe('unmapped Pen controls', () => {
     const app = readFileSync('src/js/app.js', 'utf8');
     const css = readFileSync('src/styles/main.css', 'utf8');
 
-    expect(app).toContain('<p class="catalog-page-header__description">Все сервисы, которые мы проверяли за последние два года — включая те, что перестали работать.</p><p class="catalog-page-header__description">Фильтруйте по комиссии, рейтингу и статусу проверки.</p>');
+    expect(app).toContain('<p class="catalog-page-header__description">Все сервисы, которые мы проверяли за последние два года — включая те, что перестали работать.</p><p class="catalog-page-header__description">Фильтруйте по комиссии, рейтингу и статусу проверки, чтобы найти подходящий вариант.</p>');
     expect(app).toContain('Отчёт актуален');
     expect(app).toContain('Требует обновления');
     expect(app).toContain('Отчёта нет');

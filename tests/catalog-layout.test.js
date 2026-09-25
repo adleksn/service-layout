@@ -81,9 +81,8 @@ describe('rating catalog layout', () => {
     expect(dom.window.getComputedStyle(dom.window.document.querySelector('.seo-copy')).paddingBottom).toBe('40px');
   });
 
-  it('keeps the mobile rating introduction to the three-line Pen copy', () => {
-    expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки.');
-    expect(app).not.toContain('проверки, чтобы найти подходящий вариант.');
+  it('includes the extended rating introduction copy', () => {
+    expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки, чтобы найти подходящий вариант.');
   });
 
   it('retains the Pen report label and visible service status chips in mobile cards', () => {

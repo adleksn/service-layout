@@ -8,6 +8,7 @@ describe('rating SEO copy', () => {
     expect(app).toContain("const preserveRatingMobileTextWrapping = () => {\n  if (page !== 'rating' || window.innerWidth >= 768) return;");
     expect(app).toContain("app.querySelectorAll('.catalog-discontinued br, .catalog-seo br, .catalog-faq br').forEach((lineBreak) => lineBreak.replaceWith(' '));");
     expect(app).toContain('preserveRatingMobileTextWrapping();');
+    expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки, чтобы найти подходящий вариант.');
     expect(app).toContain('Как устроен рейтинг сервисов альтернативной <br>оплаты<br>');
     expect(app).toContain('на рынке <br>появилось множество посредников');
     expect(app).toContain('после первых же переводов.');
