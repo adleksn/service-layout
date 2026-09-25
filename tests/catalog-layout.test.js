@@ -65,6 +65,13 @@ describe('rating catalog layout', () => {
     expect(faqStyle.backgroundColor).toBe('rgb(245, 245, 245)');
   });
 
+  it('keeps 40px below the rating SEO copy before the FAQ section', () => {
+    const dom = new JSDOM('<!doctype html><style></style><div class="seo-copy"></div>');
+    dom.window.document.querySelector('style').textContent = css.replace(/^@import.*$/m, '');
+
+    expect(dom.window.getComputedStyle(dom.window.document.querySelector('.seo-copy')).paddingBottom).toBe('40px');
+  });
+
   it('keeps the mobile rating introduction to the three-line Pen copy', () => {
     expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки.');
     expect(app).not.toContain('проверки, чтобы найти подходящий вариант.');

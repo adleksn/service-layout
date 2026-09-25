@@ -2933,6 +2933,7 @@ body {
 }
 .seo-copy {
   padding-top: 75px;
+  padding-bottom: 40px;
   max-width: 760px;
 }
 .layout--catalog .catalog-seo .seo-copy { margin-inline: auto; }
