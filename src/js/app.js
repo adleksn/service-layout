@@ -244,6 +244,10 @@ const preserveMethodologyMobileTextWrapping = () => {
   if (page !== 'methodology' || window.innerWidth >= 768) return;
   app.querySelectorAll('br').forEach((lineBreak) => lineBreak.remove());
 };
+const preserveRatingMobileTextWrapping = () => {
+  if (page !== 'rating' || window.innerWidth >= 768) return;
+  app.querySelectorAll('.catalog-discontinued br, .catalog-seo br, .catalog-faq br').forEach((lineBreak) => lineBreak.replaceWith(' '));
+};
 const alignAgreementLayout = () => {
   if (page !== 'agreement') return;
   const leadBlock = app.querySelector('.lead');
@@ -337,6 +341,7 @@ app.innerHTML = render[page]();
 app.dataset.page = page;
 alignMethodologyLayout();
 preserveMethodologyMobileTextWrapping();
+preserveRatingMobileTextWrapping();
 alignAgreementLayout();
 applyAgreementCopyLayout();
 applyContactAboutCopy();
@@ -487,7 +492,7 @@ if (reviewSort) reviewSort.addEventListener('change', () => {
     .forEach((review) => list.append(review));
 });
 
-applyExactPenFrame(app, page, initialRequestUrl).then(() => { preserveMethodologyMobileTextWrapping(); applyHomeCopyBreaks(); if (page === 'agreement') applyAgreementCopyLayout(); applyContactAboutCopy(); applyAdvertisingLeadLayout(); if (page === 'service' || page === 'virtual-card') applyServiceCopyLayout(); if (page === 'report') applyReportCopyLayout(); if (page === 'cards') applyCardsCopyLayout(); if (page === 'reports') applyReportsCtaLayout(); resolveSitePaths(app); }).catch(() => {});
+applyExactPenFrame(app, page, initialRequestUrl).then(() => { preserveMethodologyMobileTextWrapping(); preserveRatingMobileTextWrapping(); applyHomeCopyBreaks(); if (page === 'agreement') applyAgreementCopyLayout(); applyContactAboutCopy(); applyAdvertisingLeadLayout(); if (page === 'service' || page === 'virtual-card') applyServiceCopyLayout(); if (page === 'report') applyReportCopyLayout(); if (page === 'cards') applyCardsCopyLayout(); if (page === 'reports') applyReportsCtaLayout(); resolveSitePaths(app); }).catch(() => {});
 applyPenMethodologySignSvgs(app).catch(() => {});
 
 // Pen frames are authored at specific control widths, while the semantic
