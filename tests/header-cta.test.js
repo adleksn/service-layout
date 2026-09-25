@@ -32,12 +32,12 @@ describe('header CTA fidelity', () => {
     expect(css).toContain('.dzen svg,\n.footer__dzen svg { display: block; width: 100%; height: 100%; }');
   });
 
-  it('stacks the mobile Dzen icon above its centered label', () => {
+  it('keeps every mobile footer item centered', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
-    expect(css).toContain('.footer__mobile-bottom .footer__dzen { flex-direction: column; align-items: center; text-align: center; }');
-    expect(css).toContain('.footer__mobile-bottom .footer__dzen svg { margin-inline: auto; }');
-    expect(css).toContain('.footer .footer__mobile-bottom { height: auto; min-height: 0; }');
+    expect(css).toContain('.footer .footer__mobile-bottom {\n    align-items: center;\n    text-align: center;');
+    expect(css).toContain('.footer .footer__mobile-bottom .footer__dzen {\n    justify-content: center;\n    margin-inline: auto;\n    text-align: center;');
+    expect(css).toContain('.pen-frame[data-pencil-name$="Mobile 375"] [data-pencil-name="Footer Bottom"] {\n    align-items: center !important;\n    text-align: center !important;');
   });
 
   it('keeps the bordered shared header at the 74px Pen outer height', () => {

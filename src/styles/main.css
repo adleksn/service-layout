@@ -2891,41 +2891,6 @@ body {
   font-size: 38px;
   color: var(--green);
 }
-.layout--catalog .catalog[data-type="rating"] .empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 0;
-  padding: 32px 20px;
-  border: 1px solid #e6e6e6;
-  border-radius: 12px;
-}
-.layout--catalog .catalog[data-type="rating"] .empty-state h2 {
-  margin: 0;
-  color: #131313;
-  font: 600 20px/normal Inter, system-ui, sans-serif;
-}
-.layout--catalog .catalog[data-type="rating"] .empty-state p {
-  max-width: 420px;
-  margin: 0;
-  color: #7a7a7a;
-  font: 400 16px/26px Inter, system-ui, sans-serif;
-  text-align: center;
-}
-.layout--catalog .catalog[data-type="rating"] .empty-state .button {
-  min-height: 48px;
-  padding: 0 18px;
-  border: 1px solid #45a828;
-  border-radius: 8px;
-  background: #fff;
-  color: #45a828;
-}
-@media (max-width: 767px) {
-  .layout--catalog .catalog[data-type="rating"] .empty-state p { max-width: 280px; }
-  .layout--catalog .catalog[data-type="rating"] .empty-state .button { width: 100%; }
-}
 .filter-open {
   display: none;
 }
@@ -5679,5 +5644,46 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 
   .pen-frame[data-pencil-name="Отчёты список Mobile 375"] [data-pencil-name="CTA Block"] [data-pencil-name="Paragraph"] {
     font-size: 13px !important;
+  }
+}
+
+/* The mobile footer's Dzen link, terms link and copyright form one centred
+   stack in every supplied 375px frame. Keep this authority mobile-only so the
+   desktop footer retains its existing composition. */
+@media (max-width: 767px) {
+  .footer .footer__mobile-bottom {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer .footer__mobile-bottom .footer__dzen {
+    justify-content: center;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .footer .footer__mobile-bottom > a:not(.footer__dzen),
+  .footer .footer__mobile-bottom > span {
+    align-self: center;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .pen-frame[data-pencil-name$="Mobile 375"] [data-pencil-name="Footer Bottom"] {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .pen-frame[data-pencil-name$="Mobile 375"] [data-pencil-name="Dzen Row"] {
+    align-items: center !important;
+    justify-content: center !important;
+    margin-inline: auto !important;
+    text-align: center !important;
+  }
+
+  .pen-frame[data-pencil-name$="Mobile 375"] [data-pencil-name="Terms Link"],
+  .pen-frame[data-pencil-name$="Mobile 375"] [data-pencil-name="Copyright"] {
+    margin-inline: auto !important;
+    text-align: center !important;
   }
 }

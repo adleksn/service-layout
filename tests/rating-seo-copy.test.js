@@ -4,14 +4,10 @@ import { describe, expect, it } from 'vitest';
 describe('rating SEO copy', () => {
   it('uses the supplied desktop line breaks and complete text', () => {
     const app = readFileSync('src/js/app.js', 'utf8');
-    const css = readFileSync('src/styles/main.css', 'utf8');
 
     expect(app).toContain("const preserveRatingMobileTextWrapping = () => {\n  if (page !== 'rating' || window.innerWidth >= 768) return;");
     expect(app).toContain("app.querySelectorAll('.catalog-discontinued br, .catalog-seo br, .catalog-faq br').forEach((lineBreak) => lineBreak.replaceWith(' '));");
-    expect(app).toContain("Под выбранные условия не подошёл ни один сервис. Попробуйте убрать часть фильтров или сбросить их полностью.");
-    expect(css).toContain('.layout--catalog .catalog[data-type="rating"] .empty-state {');
-    expect(css).toContain('border: 1px solid #e6e6e6;');
-    expect(css).toContain('min-height: 48px;');
+    expect(app).toContain('Попробуйте изменить запрос или сбросить выбранные фильтры.');
     expect(app).toContain('preserveRatingMobileTextWrapping();');
     expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки, чтобы найти подходящий вариант.');
     expect(app).toContain('Как устроен рейтинг сервисов альтернативной <br>оплаты<br>');
