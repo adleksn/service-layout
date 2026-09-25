@@ -8,7 +8,7 @@ describe('RUPay mystery shopper report copy layout', () => {
     expect(app).toContain('const applyReportCopyLayout = () =>');
     expect(app).toContain('сервис не выдал чек об оплате, и это стоит учитывать при выборе.');
     expect(app).toContain('бронирования отелей за рубежом. Сервис предлагает «выгодную и удобную<br>оплату»');
-    expect(app).toContain('виртуалку) можно хотя бы написать жалобу в ЦБ и Роспотребнадзор для<br>решения<br>проблемы.');
+    expect(app).toContain('виртуалку) можно хотя бы написать жалобу в ЦБ и Роспотребнадзор для решения<br>проблемы.');
     expect(app).toContain('Плюс RUPay.money — выгодный обменный курс: сервис<br>конвертирует валюты');
     expect(app).toContain("setWidth('Я долго выбирал', '701px');");
     expect(app).toContain("setWidth('Я сразу обратил внимание', '700px');");
