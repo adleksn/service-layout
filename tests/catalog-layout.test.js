@@ -29,6 +29,15 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.layout--catalog .catalog td[data-label]::before { content: none !important; display: none !important; }');
   });
 
+  it('keeps the 375px virtual-card catalogue text gutters from the Pen frame', () => {
+    expect(css).toContain('.pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Page Header"]');
+    expect(css).toContain('padding: 28px 16px 32px !important;');
+    expect(css).toContain('[data-pencil-name="Rating Section"]');
+    expect(css).toContain('padding: 24px 16px 48px !important;');
+    expect(css).toContain('[data-pencil-name^="Service Card"]');
+    expect(css).toContain('padding: 11px 16px !important;');
+  });
+
   it('anchors the report legend on the right side of the desktop legend row', () => {
     expect(css).toContain('.catalog__legends { display: flex; align-items: center; justify-content: space-between; width: 100%; }');
     expect(css).not.toContain('.catalog__legends .legend--reports { padding-left: 20px; border-left: 1px solid var(--border); }');

@@ -5560,3 +5560,31 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     width: 100% !important;
   }
 }
+
+/* Keep the catalogue's text rail aligned with the supplied 375px card frame. */
+@media (max-width: 767px) {
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Page Header"] {
+    padding: 28px 16px 32px !important;
+  }
+
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Rating Section"] {
+    padding: 24px 16px 48px !important;
+  }
+
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Search Box"],
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Sort Select"],
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Filters Button"],
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Legend Button"] {
+    padding: 12px 14px !important;
+  }
+
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name^="Service Card"] {
+    padding: 11px 16px !important;
+  }
+
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Details Block"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding: 10px 0 0 !important;
+  }
+}
