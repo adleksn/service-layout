@@ -192,6 +192,7 @@ const applyCardsCopyLayout = () => {
   if (answer) answer.innerHTML = 'Позиции в таблице пересчитываются каждую неделю, а полная контрольная проверка каждого <br> эмитента проходит не реже раза в год —— дата последней проверки указана в карточке.';
 };
 const applyReportsCtaLayout = () => {
+  if (window.innerWidth < 768) return;
   const copy = 'Мы даём средства на оплату сервиса, инструкцию и список вопросов. Вы делаете покупку, мы<br> публикуем отчёт совместно с вами. Условия обсуждаем в телеграме.';
   const semantic = app.querySelector('.report-list--source .become-shopper');
   const pen = app.querySelector('[data-pencil-name="CTA Block"]');
