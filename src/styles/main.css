@@ -5612,4 +5612,8 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     padding: 18px !important;
     gap: 10px !important;
   }
+
+  .pen-frame[data-pencil-name="Отчёты список Mobile 375"] [data-pencil-name="CTA Block"] [data-pencil-name="Paragraph"] {
+    font-size: 13px !important;
+  }
 }

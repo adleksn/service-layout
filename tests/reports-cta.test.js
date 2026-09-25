@@ -13,5 +13,8 @@ describe('reports mystery-shopper CTA', () => {
     expect(css).toContain('.pen-frame[data-pencil-name="Отчёты список Mobile 375"] [data-pencil-name="CTA Block"]');
     expect(css).toContain('box-sizing: content-box !important;');
     expect(css).toContain('height: 232px !important;');
+    expect(css).toContain(`.pen-frame[data-pencil-name="Отчёты список Mobile 375"] [data-pencil-name="CTA Block"] [data-pencil-name="Paragraph"] {
+    font-size: 13px !important;
+  }`);
   });
 });
