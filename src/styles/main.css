@@ -5589,12 +5589,14 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   }
 }
 
-/* Preserve the exported 375px text measure so the summary wraps in the
-   same three lines as the mobile Pen frame. */
+/* Keep the exported summary within the 375px rail and let the card end
+   directly after its copy instead of retaining its desktop-sized height. */
 @media (max-width: 767px) {
   .pen-frame[data-pencil-name="Отчёт Mobile 375"] [data-pencil-name="Summary Block"] {
-    width: 341.5px !important;
-    max-width: none !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
   }
 }
 

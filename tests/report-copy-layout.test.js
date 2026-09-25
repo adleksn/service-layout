@@ -17,7 +17,11 @@ describe('RUPay mystery shopper report copy layout', () => {
     const penFrame = readFileSync('src/js/pen-frame.js', 'utf8');
     expect(penFrame).toContain("if (page === 'report' && width >= 1200) return variants.desktop;");
     expect(css).toContain('.pen-frame[data-pencil-name="Отчёт Mobile 375"] [data-pencil-name="Summary Block"]');
-    expect(css).toContain('width: 341.5px !important;');
-    expect(css).toContain('max-width: none !important;');
+    expect(css).toContain(`.pen-frame[data-pencil-name="Отчёт Mobile 375"] [data-pencil-name="Summary Block"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }`);
   });
 });
