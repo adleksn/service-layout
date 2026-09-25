@@ -19,4 +19,11 @@ describe('home transitional responsiveness', () => {
     expect(css).toContain('.hero p:not(.eyebrow) { max-width: none; font-size: 16px; line-height: 26px; }');
     expect(css).toContain('.hero__metrics { margin-top: 0; gap: 12px; font-size: 14px; }');
   });
+
+  it('keeps mobile home-card chevrons pinned to their right edges', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name="Главная Mobile 375"] [data-pencil-name^="Service Card "] > [data-pencil-name="Chevron"] {\n    left: auto !important;\n    right: 14px !important;');
+    expect(css).toContain('.pen-frame[data-pencil-name="Главная Mobile 375"] [data-pencil-name="Card Head"] > [data-pencil-name="Chevron"] {\n    left: auto !important;\n    right: -2px !important;');
+  });
 });

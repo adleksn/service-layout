@@ -16,4 +16,10 @@ describe('rating SEO copy', () => {
     expect(app).toContain('на предмет накруток. <br>Каждая карточка сервиса содержит дату последней проверки чтобы вы понимали на сколько <br> акктуальна оценка.');
     expect(app).toContain('даже если формально сайт <br> ещё принимает заявки.');
   });
+
+  it('allows mobile SEO copy to set its own height before the FAQ section', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.layout--catalog .catalog-seo {\n    height: auto;');
+  });
 });

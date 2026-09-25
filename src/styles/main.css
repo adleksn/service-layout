@@ -5687,3 +5687,25 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     text-align: center !important;
   }
 }
+
+/* The rating article exceeds the old fixed mobile track. Let its height follow
+   the wrapped copy so it cannot run underneath the following FAQ section. */
+@media (max-width: 767px) {
+  .layout--catalog .catalog-seo {
+    height: auto;
+  }
+}
+
+/* Pen's home cards use absolute chevrons. Anchor both card variants to their
+   authored right inset so a narrow mobile viewport cannot shift them left. */
+@media (max-width: 767px) {
+  .pen-frame[data-pencil-name="Главная Mobile 375"] [data-pencil-name^="Service Card "] > [data-pencil-name="Chevron"] {
+    left: auto !important;
+    right: 14px !important;
+  }
+
+  .pen-frame[data-pencil-name="Главная Mobile 375"] [data-pencil-name="Card Head"] > [data-pencil-name="Chevron"] {
+    left: auto !important;
+    right: -2px !important;
+  }
+}
