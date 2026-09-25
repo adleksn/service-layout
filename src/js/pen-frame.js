@@ -915,7 +915,7 @@ export async function applyExactPenFrame(root, page, requestUrl = window.locatio
     const match = node.style.backgroundImage.match(/url\(["']?images\/([^"')]+)/);
     if (match) node.style.backgroundImage = `url('${sitePath(`assets/${match[1]}`)}')`;
   });
-  if (page === 'home') {
+  if (page === 'home' && window.innerWidth >= 768) {
     const heroSubtitle = frame.querySelector('[data-pencil-name="Hero Subtitle"]');
     if (heroSubtitle) {
       heroSubtitle.innerHTML = 'К сервисам альтернативной оплаты мы относим и посредников, которые оплачивают <br>зарубежные подписки за вас, и сервисы, выпускающие виртуальные зарубежные карты. <br>Проверяем и те, и другие.';

@@ -34,6 +34,23 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('keeps the home hero subtitle naturally wrapped in the supplied 375px frame', async () => {
+    const source = readFileSync('public/reference/pen-source.html', 'utf8');
+    const dom = new JSDOM('<main id="app"><header class="header"></header></main>', { url: 'http://localhost/' });
+    Object.defineProperty(dom.window, 'innerWidth', { configurable: true, value: 375 });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('DOMParser', dom.window.DOMParser);
+    vi.stubGlobal('location', dom.window.location);
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, text: async () => source }));
+
+    await applyExactPenFrame(dom.window.document.querySelector('#app'), 'home', dom.window.location.href);
+
+    const subtitle = dom.window.document.querySelector('[data-pencil-name="Hero Subtitle"]');
+    expect(subtitle?.querySelectorAll('br')).toHaveLength(0);
+    vi.unstubAllGlobals();
+  });
+
   it('uses two requested header lines, a complete legend, and 20px filter spacing on the rating page', () => {
     const app = readFileSync('src/js/app.js', 'utf8');
     const css = readFileSync('src/styles/main.css', 'utf8');
