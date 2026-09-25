@@ -9,6 +9,8 @@ describe('methodology sign fidelity', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
     expect(app).toContain('methodology-layout');
+    expect(app).toContain('const preserveMethodologyMobileTextWrapping = () =>');
+    expect(app).toContain('if (page !== \'methodology\' || window.innerWidth >= 768) return;');
     expect(app).toContain('class="method-criteria"');
     expect(app).toContain('Для достоверной проверки условий работы сервиса мы используем понятную');
     expect(app).toContain('каждый из сервисов для<br> того, чтобы провести оплату');

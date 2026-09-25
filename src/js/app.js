@@ -239,6 +239,10 @@ const alignMethodologyLayout = () => {
   const article = app.querySelector('.methodology-layout > .methodology');
   if (leadBlock && article && !article.contains(leadBlock)) article.prepend(leadBlock);
 };
+const preserveMethodologyMobileTextWrapping = () => {
+  if (page !== 'methodology' || window.innerWidth >= 768) return;
+  app.querySelectorAll('br').forEach((lineBreak) => lineBreak.remove());
+};
 const alignAgreementLayout = () => {
   if (page !== 'agreement') return;
   const leadBlock = app.querySelector('.lead');
@@ -331,6 +335,7 @@ const applyAdvertisingLeadLayout = () => {
 app.innerHTML = render[page]();
 app.dataset.page = page;
 alignMethodologyLayout();
+preserveMethodologyMobileTextWrapping();
 alignAgreementLayout();
 applyAgreementCopyLayout();
 applyContactAboutCopy();
@@ -481,7 +486,7 @@ if (reviewSort) reviewSort.addEventListener('change', () => {
     .forEach((review) => list.append(review));
 });
 
-applyExactPenFrame(app, page, initialRequestUrl).then(() => { applyHomeCopyBreaks(); if (page === 'agreement') applyAgreementCopyLayout(); applyContactAboutCopy(); applyAdvertisingLeadLayout(); if (page === 'service' || page === 'virtual-card') applyServiceCopyLayout(); if (page === 'report') applyReportCopyLayout(); if (page === 'cards') applyCardsCopyLayout(); if (page === 'reports') applyReportsCtaLayout(); resolveSitePaths(app); }).catch(() => {});
+applyExactPenFrame(app, page, initialRequestUrl).then(() => { preserveMethodologyMobileTextWrapping(); applyHomeCopyBreaks(); if (page === 'agreement') applyAgreementCopyLayout(); applyContactAboutCopy(); applyAdvertisingLeadLayout(); if (page === 'service' || page === 'virtual-card') applyServiceCopyLayout(); if (page === 'report') applyReportCopyLayout(); if (page === 'cards') applyCardsCopyLayout(); if (page === 'reports') applyReportsCtaLayout(); resolveSitePaths(app); }).catch(() => {});
 applyPenMethodologySignSvgs(app).catch(() => {});
 
 // Pen frames are authored at specific control widths, while the semantic
