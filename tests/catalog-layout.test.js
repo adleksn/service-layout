@@ -34,7 +34,7 @@ describe('rating catalog layout', () => {
     expect(css).toContain('padding: 28px 16px 32px !important;');
     expect(css).toContain('[data-pencil-name="Rating Section"]');
     expect(css).toContain('padding: 24px 16px 48px !important;');
-    expect(css).toContain('[data-pencil-name^="Service Card"]');
+    expect(css).toContain('[data-pencil-name^="Service Card "]');
     expect(css).toContain('padding: 11px 16px !important;');
   });
 

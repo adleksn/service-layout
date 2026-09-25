@@ -5578,7 +5578,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     padding: 12px 14px !important;
   }
 
-  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name^="Service Card"] {
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name^="Service Card "] {
     padding: 11px 16px !important;
   }
 
