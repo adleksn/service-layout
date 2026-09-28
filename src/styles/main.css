@@ -5806,3 +5806,10 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 @media (max-width: 767px) {
   .empty-state--catalog .button { width: 100%; }
 }
+
+/* Desktop methodology keeps a single 30px rhythm between the bridge copy and
+   the evaluation section; the mobile composition retains its authored spacing. */
+@media (min-width: 768px) {
+  .methodology-layout .method-bridge { margin: 28px 0 30px; }
+  .methodology-layout .method-text { padding-top: 0; }
+}

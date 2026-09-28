@@ -36,6 +36,7 @@ describe('methodology sign fidelity', () => {
     expect(css).toContain('.method-warning p { font-style: italic; }');
     expect(app).toContain('<article><i aria-hidden="true"></i><div><h3>${name}</h3><p>${text}</p></div></article>');
     expect(css).toContain('.method-cta { border-left: 3px solid #46a827; }');
+    expect(css).toContain('@media (min-width: 768px) {\n  .methodology-layout .method-bridge { margin: 28px 0 30px; }\n  .methodology-layout .method-text { padding-top: 0; }\n}');
   });
 
   it('keeps the exact Pen sign-list rhythm and source colour tokens', () => {
