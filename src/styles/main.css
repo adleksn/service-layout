@@ -6222,7 +6222,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .layout--catalog .catalog__legend--disclosure > .catalog__legends .legend--reports::before {
     position: absolute;
     top: 0;
-    inset-inline: -11px;
+    inset-inline: -1px;
     height: 1px;
     content: '';
     background: #e6e6e6;

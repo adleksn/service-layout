@@ -138,7 +138,7 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.catalog__legend--disclosure > .catalog__legends .legend--reports::before {');
     expect(css).toContain('width: 100% !important;');
     expect(css).toContain('grid-template-columns: minmax(0, 1fr) !important;');
-    expect(css).toContain('inset-inline: -11px;');
+    expect(css).toContain('inset-inline: -1px;');
     expect(css).toContain('.catalog__legend--disclosure > .catalog__legends[hidden] { display: none !important; }');
   });
 
