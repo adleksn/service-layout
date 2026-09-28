@@ -35,6 +35,7 @@ describe('service page supplied copy layout', () => {
     expect(css).toContain('[data-pencil-name="Field Введите сумму 6 + 4"] .pen-review-control { align-self: center; height: 20px; margin: 0; padding: 0; }');
     expect(css).toContain('[data-pencil-name="Textarea"] .pen-review-control { align-self: flex-start; margin: 0; padding: 0; }');
     expect(css).toContain('@media (max-width: 767px) {\n  input,\n  textarea,\n  select,\n  .pen-review-control {\n    font-size: 16px !important;\n  }\n}');
+    expect(css).toContain('.pen-frame [data-pencil-name="Review Form Section"] .pen-review-control:focus,\n.pen-frame [data-pencil-name="Review Form Section"] .pen-review-control:focus-visible { outline: 0; }');
     expect(css).toContain('.pen-frame[data-pencil-name^="Виртуальные карты — Карточка сервиса"] [data-pencil-name="Field Ваше имя"] .pen-review-control:focus,');
     expect(css).toContain('.pen-frame[data-pencil-name^="Виртуальные карты — Карточка сервиса"] [data-pencil-name="Field Ваш e-mail"] .pen-review-control:focus { outline: 0; }');
   });
