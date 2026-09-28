@@ -5903,3 +5903,21 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     transform: translateY(2px) rotate(225deg);
   }
 }
+
+/* The first rating card carries its PROMO marker beside the service name in
+   the supplied 375px layout. Keep this compact badge visible independently of
+   the status row below the report date. */
+@media (max-width: 767px) {
+  .layout--catalog .catalog[data-type="rating"] .service-promo-badge {
+    display: inline-flex !important;
+    align-items: flex-start;
+    margin-left: 8px;
+    padding: 2px 6px;
+    border: 0;
+    border-radius: 8px;
+    background: #5dcf35;
+    color: #ffffff;
+    font: 700 10px/normal Inter, system-ui, sans-serif;
+    letter-spacing: .6px;
+  }
+}

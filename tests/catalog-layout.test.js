@@ -106,6 +106,12 @@ describe('rating catalog layout', () => {
     expect(css).toContain('color: #ffffff;');
   });
 
+  it('matches the 375px rating promo badge with the reference', () => {
+    expect(css).toContain('@media (max-width: 767px) {\n  .layout--catalog .catalog[data-type="rating"] .service-promo-badge {');
+    expect(css).toContain('background: #5dcf35;');
+    expect(css).toContain('font: 700 10px/normal Inter, system-ui, sans-serif;');
+  });
+
   it('aligns the mobile details arrow with the fee percent sign', () => {
     expect(css).toContain('.layout--catalog .catalog[data-type="rating"] td.row-action');
     expect(css).toContain('justify-content: flex-end;');
