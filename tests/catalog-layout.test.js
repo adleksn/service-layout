@@ -119,7 +119,7 @@ describe('rating catalog layout', () => {
 
   it('uses icon-bearing mobile badges and gives the promo chip its own card row', () => {
     expect(app).toContain("const mobileStatus = mobileState.filter((stateName) => stateName !== 'promo');");
-    expect(app).toContain('class="mobile-promo-badge"');
+    expect(app).toContain('mobile-promo-badge--standalone');
     expect(app).toContain('mobile-status-badge__icon');
     expect(css).toContain('background: #f1ebff;');
     expect(css).toContain('color: #8b5cf5;');
@@ -128,7 +128,7 @@ describe('rating catalog layout', () => {
 
   it('keeps the mobile legend on the 375px section rhythm', () => {
     expect(css).toContain('margin: 0 0 16px !important;');
-    expect(css).toContain('margin-top: 16px !important;');
+    expect(css).toContain('margin-top: 20px !important;');
     expect(css).toContain('padding: 12px 14px;');
   });
 
@@ -187,7 +187,14 @@ describe('rating catalog layout', () => {
 
   it('keeps mobile status chips together and places promo-only chips directly below the report row', () => {
     expect(css).toContain('flex-wrap: nowrap;');
-    expect(css).toContain('grid-template-rows: 24px 36px 49px 0 24px;');
+    expect(app).toContain("mobile-promo-badge${mobileStatus.length ? '' : ' mobile-promo-badge--standalone'}");
+    expect(css).toContain('grid-template-rows: 24px 36px 49px 24px;');
+  });
+
+  it('matches the Pen mobile legend control border, panel gap, and rounding', () => {
+    expect(css).toContain('border: 1px solid #e6e6e6 !important;');
+    expect(css).toContain('margin-top: 20px !important;');
+    expect(css).toContain('border-radius: 8px;');
   });
 
   it('gives virtual cards the same mobile disclosure legend as the rating', () => {
@@ -274,9 +281,9 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.layout--catalog .filter-open > b::before,\n  .layout--catalog .catalog__legend--disclosure > button > span::before {');
   });
 
-  it('removes the duplicate glyph from the mobile legend arrow and follows the 16px reference rhythm', () => {
+  it('removes the duplicate glyph from the mobile legend arrow and follows the 20px reference rhythm', () => {
     expect(app).toContain('aria-hidden="true"></span></button><div class="catalog__legends"');
-    expect(css).toContain('.layout--catalog .catalog__legend--disclosure > .catalog__legends {\n    margin-top: 16px !important;');
+    expect(css).toContain('.layout--catalog .catalog__legend--disclosure > .catalog__legends {\n    margin-top: 20px !important;');
   });
 
   it('includes the complete Pen explanation in the mobile rating SEO section', () => {

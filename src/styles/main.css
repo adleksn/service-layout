@@ -5880,12 +5880,15 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     grid-template-columns: 16px 1fr 16px;
     gap: 8px;
     padding: 12px 14px;
+    border: 1px solid #e6e6e6 !important;
+    border-radius: 8px;
     background: #fff !important;
     font: 600 14px/normal Inter, system-ui, sans-serif;
   }
 
   .layout--catalog .catalog__legend--disclosure > .catalog__legends {
-    margin-top: 16px !important;
+    margin-top: 20px !important;
+    border-radius: 8px;
     background: #f5f5f5;
   }
 
@@ -5944,8 +5947,13 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     grid-template-rows: 24px 36px 49px 24px 24px;
   }
 
-  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-status-badges--empty):has(.mobile-promo-badge) {
-    grid-template-rows: 24px 36px 49px 0 24px;
+  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-promo-badge--standalone) {
+    grid-template-rows: 24px 36px 49px 24px;
+  }
+
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(9):has(.mobile-promo-badge--standalone) {
+    grid-area: badges;
+    grid-row: 4;
   }
 
   .layout--catalog .catalog[data-type="rating"] .mobile-status-badges {

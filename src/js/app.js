@@ -469,7 +469,7 @@ function setupCatalog() {
         return `<span class="mobile-status-badge mobile-status-badge--${stateName}">${mobileStatusBadgeIcons[stateName] || ''}${labels[stateName]}</span>`;
       }).join('');
       const mobilePromo = !cardsMode && mobileState.includes('promo')
-        ? `<span class="mobile-promo-badge">${mobileStatusBadgeIcons.promo}<span>Есть промокод</span></span>`
+        ? `<span class="mobile-promo-badge${mobileStatus.length ? '' : ' mobile-promo-badge--standalone'}">${mobileStatusBadgeIcons.promo}<span>Есть промокод</span></span>`
         : '';
       const reportMarkup = reportState === 'none'
         ? '<span class="report-date report-date--none"><span class="report-date__mobile-value">Отчёта нет</span><span class="report-date__desktop-value">—</span></span>'
