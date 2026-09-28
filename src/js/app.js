@@ -419,7 +419,7 @@ function setupReviewCardLinks(root) {
 }
 
 const ratingMobileStates = {
-  1: ['verified', 'mystery'], 2: ['verified', 'mystery'], 3: ['verified'], 4: ['verified', 'mystery'], 5: ['verified'],
+  1: ['verified', 'mystery', 'promo'], 2: ['verified', 'mystery'], 3: ['verified'], 4: ['verified', 'mystery', 'promo'], 5: ['verified'],
   6: ['verified', 'promo'], 7: ['new'], 8: ['verified', 'new'], 9: ['verified', 'promo'], 10: ['new'],
   12: ['verified'], 17: ['verified'], 19: ['verified'], 20: ['new'], 21: ['promo'], 24: ['verified'], 25: ['verified'],
   29: ['verified'], 30: ['verified'], 32: ['verified'], 35: ['verified'], 38: ['verified'], 41: ['verified'], 42: ['verified'],

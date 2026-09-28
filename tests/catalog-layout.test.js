@@ -112,6 +112,17 @@ describe('rating catalog layout', () => {
     expect(css).toContain('font: 700 10px/normal Inter, system-ui, sans-serif;');
   });
 
+  it('shows a mobile promo chip only for the rating cards marked in the reference', () => {
+    expect(app).toContain("1: ['verified', 'mystery', 'promo']");
+    expect(app).toContain("4: ['verified', 'mystery', 'promo']");
+  });
+
+  it('keeps the mobile legend on the 375px section rhythm', () => {
+    expect(css).toContain('margin: 0 0 16px !important;');
+    expect(css).toContain('margin-top: 16px !important;');
+    expect(css).toContain('padding: 12px 14px;');
+  });
+
   it('aligns the mobile details arrow with the fee percent sign', () => {
     expect(css).toContain('.layout--catalog .catalog[data-type="rating"] td.row-action');
     expect(css).toContain('justify-content: flex-end;');
@@ -239,13 +250,14 @@ describe('rating catalog layout', () => {
   });
 
   it('keeps the mobile rating disclosure trigger white and its chevron square', () => {
-    expect(css).toContain('.layout--catalog .catalog__legend--disclosure > button {\n    background: #fff !important;');
+    expect(css).toContain('.layout--catalog .catalog__legend--disclosure > button {\n    min-height: 0;');
+    expect(css).toContain('background: #fff !important;');
     expect(css).toContain('.layout--catalog .filter-open > b::before,\n  .layout--catalog .catalog__legend--disclosure > button > span::before {');
   });
 
-  it('removes the duplicate glyph from the mobile legend arrow and spaces its panel by 20px', () => {
+  it('removes the duplicate glyph from the mobile legend arrow and follows the 16px reference rhythm', () => {
     expect(app).toContain('aria-hidden="true"></span></button><div class="catalog__legends"');
-    expect(css).toContain('.layout--catalog .catalog__legend--disclosure > .catalog__legends {\n    margin-top: 20px !important;');
+    expect(css).toContain('.layout--catalog .catalog__legend--disclosure > .catalog__legends {\n    margin-top: 16px !important;');
   });
 
   it('includes the complete Pen explanation in the mobile rating SEO section', () => {

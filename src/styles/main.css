@@ -5869,12 +5869,21 @@ body small, body label, body legend, body th, body td, body dt, body dd {
    line-height compression in mobile browsers. The disclosure trigger remains
    white, while its opened legend panel keeps the supplied light-gray fill. */
 @media (max-width: 767px) {
+  .layout--catalog .catalog__legend--disclosure {
+    margin: 0 0 16px !important;
+  }
+
   .layout--catalog .catalog__legend--disclosure > button {
+    min-height: 0;
+    grid-template-columns: 16px 1fr 16px;
+    gap: 8px;
+    padding: 12px 14px;
     background: #fff !important;
+    font: 600 14px/normal Inter, system-ui, sans-serif;
   }
 
   .layout--catalog .catalog__legend--disclosure > .catalog__legends {
-    margin-top: 20px !important;
+    margin-top: 16px !important;
     background: #f5f5f5;
   }
 
