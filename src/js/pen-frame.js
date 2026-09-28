@@ -729,6 +729,34 @@ function setupPenMobileCardLinks(frame, page) {
   });
 }
 
+function setupPenLegendDisclosure(frame) {
+  const button = frame.querySelector('[data-pencil-name="Legend Button"]');
+  const panel = frame.querySelector('[data-pencil-name="Legend Panel (expanded)"]');
+  if (!button || !panel) return;
+
+  const visibleDisplay = panel.style.display || 'flex';
+  let open = false;
+  const sync = () => {
+    button.setAttribute('aria-expanded', String(open));
+    panel.hidden = !open;
+    panel.style.setProperty('display', open ? visibleDisplay : 'none', 'important');
+  };
+  const toggle = () => { open = !open; sync(); };
+
+  button.dataset.penBound = 'true';
+  button.setAttribute('role', 'button');
+  button.setAttribute('tabindex', '0');
+  button.setAttribute('aria-controls', 'pen-card-legend');
+  panel.id = 'pen-card-legend';
+  button.addEventListener('click', toggle);
+  button.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    toggle();
+  });
+  sync();
+}
+
 export function enhanceInteractions(frame, page, { onReportTabChange } = {}) {
   frame.querySelectorAll('[data-pencil-name]').forEach((node) => {
     const destination = destinationByLayer[node.getAttribute('data-pencil-name')];
@@ -794,6 +822,7 @@ export function enhanceInteractions(frame, page, { onReportTabChange } = {}) {
     setupPenCardFilterChips(frame);
     setupPenMobileCardFilters(frame);
     setupPenCardSort(frame);
+    setupPenLegendDisclosure(frame);
   }
   setupPenFaq(frame);
   // Keep a final safety net after page-specific bindings: raw Pen controls are

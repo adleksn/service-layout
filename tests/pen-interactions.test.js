@@ -355,6 +355,26 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('collapses and expands the virtual-card mobile legend panel', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/virtual-cards.html' });
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Виртуальные карты Mobile 375')
+      .cloneNode(true);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    enhanceInteractions(frame, 'cards');
+    const button = frame.querySelector('[data-pencil-name="Legend Button"]');
+    const panel = frame.querySelector('[data-pencil-name="Legend Panel (expanded)"]');
+    expect(panel.hidden).toBe(true);
+
+    button.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    expect(panel.hidden).toBe(false);
+    expect(button.getAttribute('aria-expanded')).toBe('true');
+    vi.unstubAllGlobals();
+  });
+
   it('sends each mobile table chevron to the same service page as desktop details', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/' });
     vi.stubGlobal('window', dom.window);
