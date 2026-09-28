@@ -135,7 +135,8 @@ describe('rating catalog layout', () => {
   it('keeps the verified mobile badge icon aligned and stretches the legend report divider', () => {
     expect(app).toContain("verified: '<svg class=\"mobile-status-badge__icon\"");
     expect(css).toContain('.mobile-status-badge--verified {\n    display: inline-flex !important;');
-    expect(css).toContain('.catalog__legend--disclosure > .catalog__legends .legend--reports {\n    width: 100%;');
+    expect(css).toContain('.catalog__legend--disclosure > .catalog__legends .legend--reports::before {');
+    expect(css).toContain('width: 100% !important;');
   });
 
   it('keeps the mobile legend on the 375px section rhythm', () => {

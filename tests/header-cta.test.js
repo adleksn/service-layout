@@ -14,6 +14,7 @@ describe('header CTA fidelity', () => {
     expect(css).toContain('.header.header .menu-button::before {');
     expect(css).toContain('width: 20px;');
     expect(css).toContain('box-shadow: 0 7px 0 #3a3a3a, 0 -7px 0 #3a3a3a;');
+    expect(css).toContain('transform: translate(-50%, -50%);');
   });
 
   it('uses the filled green Pen button treatment instead of an outline', () => {
