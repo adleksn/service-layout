@@ -13,4 +13,13 @@ describe('rating empty state', () => {
     expect(css).toContain('.empty-state--catalog .button {');
     expect(css).toContain('background: #fff;');
   });
+
+  it('keeps the rating empty state hidden until filtering returns no services', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(app).toContain('<section class="empty-state" data-empty hidden>');
+    expect(app).toContain("root.querySelector('[data-empty]').hidden = Boolean(visible.length);");
+    expect(css).toContain('.empty-state--catalog[hidden] { display: none !important; }');
+  });
 });

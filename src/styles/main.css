@@ -5783,6 +5783,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   background: #fff;
   text-align: center;
 }
+.empty-state--catalog[hidden] { display: none !important; }
 .empty-state--catalog h2 {
   margin: 0;
   color: #131313;
