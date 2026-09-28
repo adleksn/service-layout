@@ -232,6 +232,11 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.sort-select__chevron::before {\n  width: 7px;');
   });
 
+  it('keeps the mobile rating disclosure trigger white and its chevron square', () => {
+    expect(css).toContain('.layout--catalog .catalog__legend--disclosure > button {\n    background: #fff !important;');
+    expect(css).toContain('.layout--catalog .filter-open > b::before,\n  .layout--catalog .catalog__legend--disclosure > button > span::before {');
+  });
+
   it('includes the complete Pen explanation in the mobile rating SEO section', () => {
     expect(app).toContain('Виртуальные зарубежные карты');
     expect(app).toContain('Если у компании появляются массовые жалобы, мы понижаем её позицию');

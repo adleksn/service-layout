@@ -5864,3 +5864,37 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .methodology-layout .method-bridge { margin: 28px 0 30px; }
   .methodology-layout .method-text { padding-top: 0; }
 }
+
+/* The rating phone controls use drawn chevrons: a text glyph is susceptible to
+   line-height compression in mobile browsers. The disclosure trigger remains
+   white, while its opened legend panel keeps the supplied light-gray fill. */
+@media (max-width: 767px) {
+  .layout--catalog .catalog__legend--disclosure > button {
+    background: #fff !important;
+  }
+
+  .layout--catalog .filter-open > b,
+  .layout--catalog .catalog__legend--disclosure > button > span {
+    position: relative;
+    font-size: 0;
+    line-height: 1;
+    transition: none;
+    transform: none !important;
+  }
+
+  .layout--catalog .filter-open > b::before,
+  .layout--catalog .catalog__legend--disclosure > button > span::before {
+    width: 7px;
+    height: 7px;
+    content: '';
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform .15s ease;
+  }
+
+  .layout--catalog .filter-open[aria-expanded="true"] > b::before,
+  .layout--catalog .catalog__legend--disclosure > button[aria-expanded="true"] > span::before {
+    transform: translateY(2px) rotate(225deg);
+  }
+}
