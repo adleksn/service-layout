@@ -217,7 +217,7 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item { background: #ffffff; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__column { background: transparent; }');
     expect(css).toContain('.layout--catalog .catalog-faq {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    width: 100vw;');
-    expect(css).toContain('.layout--catalog .catalog + .catalog-discontinued { margin-top: 0; }');
+    expect(css).toContain('.layout--catalog .catalog + .catalog-discontinued { margin-top: 50px; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued { width: 100vw; margin-left: calc(50% - 50vw); padding: 64px 24px; background: #f5f5f5; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued { display: flex; flex-direction: column; width:');
     expect(css).toContain('padding-top: 0; gap: 20px; background: #f5f5f5;');
