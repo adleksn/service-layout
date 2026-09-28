@@ -39,4 +39,16 @@ describe('advertising lead', () => {
     expect(app).toContain('if (window.innerWidth < 768) return;');
     expect(app).toContain("text.innerHTML = finalCtaCopy;");
   });
+
+  it('fits the desktop advertising accent block to the 780px content column with rounded corners', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name="Реклама Desktop 1440"] [data-pencil-name="Accent Block"] {');
+    expect(css).toContain('box-sizing: border-box !important;');
+    expect(css).toContain('width: 780px !important;');
+    expect(css).toContain('max-width: 100% !important;');
+    expect(css).toContain('margin-left: 0 !important;');
+    expect(css).toContain('border-radius: 12px !important;');
+    expect(css).toContain('overflow: hidden !important;');
+  });
 });

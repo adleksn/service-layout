@@ -5511,6 +5511,21 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .pen-frame[data-pencil-name="Реклама Desktop 1440"] [data-pencil-name="Accent Block"] [data-pencil-name="Text"],
 .pen-frame[data-pencil-name="Реклама Mobile 375"] [data-pencil-name="Accent Block"] [data-pencil-name="Text"] { font-weight: 600 !important; }
 
+/* The desktop export sizes this callout with content-box, so its padding makes
+   it extend past the 780px main column. Keep its visual height, but size and
+   clip the panel on the same rail as the other advertising content. */
+@media (min-width: 768px) {
+  .pen-frame[data-pencil-name="Реклама Desktop 1440"] [data-pencil-name="Accent Block"] {
+    box-sizing: border-box !important;
+    width: 780px !important;
+    max-width: 100% !important;
+    height: 138px !important;
+    margin-left: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+}
+
 /* Exact desktop cell content from the Pen rating table. */
 @media (min-width: 768px) {
   .layout--catalog .catalog[data-type="rating"] td:nth-child(3) .score {
