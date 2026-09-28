@@ -2,6 +2,12 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 describe('header CTA fidelity', () => {
+  it('links the payment-services navigation item to the rating on desktop and mobile', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+
+    expect(app).toContain("['Оплата сервисов', '/rating.html']");
+  });
+
   it('draws a centered three-line mobile menu icon instead of relying on the text glyph', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
