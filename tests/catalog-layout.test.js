@@ -132,6 +132,12 @@ describe('rating catalog layout', () => {
     expect(css).toContain('stroke: #8b5df5;');
   });
 
+  it('keeps the verified mobile badge icon aligned and stretches the legend report divider', () => {
+    expect(app).toContain("verified: '<svg class=\"mobile-status-badge__icon\"");
+    expect(css).toContain('.mobile-status-badge--verified {\n    display: inline-flex !important;');
+    expect(css).toContain('.catalog__legend--disclosure > .catalog__legends .legend--reports {\n    width: 100%;');
+  });
+
   it('keeps the mobile legend on the 375px section rhythm', () => {
     expect(css).toContain('margin: 0 0 16px !important;');
     expect(css).toContain('margin-top: 20px !important;');
@@ -204,6 +210,11 @@ describe('rating catalog layout', () => {
     expect(css).toContain('background: #fff !important;');
     expect(css).toContain('border-radius: 8px !important;');
     expect(css).toContain('overflow: visible !important;');
+  });
+
+  it('removes the mobile registry heading dividers from both notice types', () => {
+    expect(css).toContain('.catalog-discontinued .discontinued__title {\n    border-top: 0 !important;');
+    expect(css).toContain('.catalog-discontinued .discontinued__title::before { display: none !important; }');
   });
 
   it('gives virtual cards the same mobile disclosure legend as the rating', () => {

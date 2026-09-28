@@ -2,6 +2,14 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 describe('header CTA fidelity', () => {
+  it('draws a centered three-line mobile menu icon instead of relying on the text glyph', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.header.header .menu-button::before {');
+    expect(css).toContain('width: 20px;');
+    expect(css).toContain('box-shadow: 0 7px 0 #3a3a3a, 0 -7px 0 #3a3a3a;');
+  });
+
   it('uses the filled green Pen button treatment instead of an outline', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 

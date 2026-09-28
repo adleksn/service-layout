@@ -6189,3 +6189,53 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     scroll-snap-align: start;
   }
 }
+
+/* The phone rating frame uses an icon-bearing verified chip and a full-width
+   report divider. Remove legacy title rules that leaked horizontal strokes
+   above both registry notices. */
+@media (max-width: 767px) {
+  .layout--catalog .catalog[data-type="rating"] .mobile-status-badge--verified {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .layout--catalog .catalog__legend--disclosure > .catalog__legends {
+    display: grid !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .layout--catalog .catalog__legend--disclosure > .catalog__legends .legend--reports {
+    width: 100%;
+    box-sizing: border-box;
+    justify-self: stretch;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued__title {
+    border-top: 0 !important;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued__title::before { display: none !important; }
+}
+
+/* The text glyph has inconsistent visual centering across mobile browsers.
+   Draw the three menu bars so every shared header matches the 375px frame. */
+@media (max-width: 767px) {
+  .header.header .menu-button {
+    display: inline-grid;
+    place-items: center;
+    font-size: 0 !important;
+    line-height: 1;
+  }
+
+  .header.header .menu-button::before {
+    width: 20px;
+    height: 2px;
+    content: '';
+    border-radius: 1px;
+    background: #3a3a3a;
+    box-shadow: 0 7px 0 #3a3a3a, 0 -7px 0 #3a3a3a;
+  }
+}

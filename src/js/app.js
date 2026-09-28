@@ -439,6 +439,7 @@ const ratingMobileStates = {
   43: ['verified'], 45: ['verified'], 47: ['new'], 48: ['verified'], 51: ['verified'],
 };
 const mobileStatusBadgeIcons = {
+  verified: '<svg class="mobile-status-badge__icon" aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.8"/><path d="m4.4 7.1 1.6 1.6 3.6-3.6"/></svg>',
   new: '<svg class="mobile-status-badge__icon" aria-hidden="true" viewBox="0 0 14 14"><path d="m7 1.5.75 3.75L11.5 6l-3.75.75L7 10.5l-.75-3.75L2.5 6l3.75-.75L7 1.5ZM11 9l.4 1.6L13 11l-1.6.4L11 13l-.4-1.6L9 11l1.6-.4L11 9Z"/></svg>',
   promo: '<svg class="mobile-status-badge__icon" aria-hidden="true" viewBox="0 0 14 14"><path d="M2.5 3.25A1.25 1.25 0 0 1 3.75 2h6.5a1.25 1.25 0 0 1 1.25 1.25v1.4a1.65 1.65 0 0 0 0 3.3v1.4a1.25 1.25 0 0 1-1.25 1.25h-6.5A1.25 1.25 0 0 1 2.5 9.35v-1.4a1.65 1.65 0 0 0 0-3.3v-1.4Z"/><path d="m5.2 8.8 3.6-3.6M5.2 5.2h.01M8.8 8.8h.01"/></svg>',
 };
