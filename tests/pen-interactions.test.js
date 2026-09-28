@@ -65,6 +65,15 @@ describe('unmapped Pen controls', () => {
     expect(css).toContain('.catalog--rating .catalog__legend--disclosure { margin: 20px; }');
   });
 
+  it('uses the supplied single-paragraph introduction and metric dots on the 375px rating header', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(app).toContain('class="catalog-page-header__description catalog-page-header__description--mobile">Все сервисы, которые мы проверяли за последние два года — включая те, что перестали работать. Фильтруйте по комиссии, рейтингу и статусу проверки.</p>');
+    expect(css).toContain('.catalog-page-header--rating .catalog-page-header__description:not(.catalog-page-header__description--mobile) { display: none; }');
+    expect(css).toContain('.catalog-page-header--rating .catalog-page-metrics b::before {');
+  });
+
   it('keeps the home table inside the same 1200px rail as “Весь рейтинг”', async () => {
     const source = readFileSync('public/reference/pen-source.html', 'utf8');
     const dom = new JSDOM('<main id="app"><header class="header"></header></main>', { url: 'http://localhost/' });
