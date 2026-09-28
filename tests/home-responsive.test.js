@@ -31,7 +31,7 @@ describe('home transitional responsiveness', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
     expect(css).toContain('.pen-frame[data-pencil-name="Главная Mobile 375"] [data-pencil-name="Service Cards"] [data-pencil-name="Details Block"] {');
-    expect(css).toContain('box-sizing: border-box !important;');
-    expect(css).toContain('width: 100% !important;');
+    expect(css).toContain('box-sizing: content-box !important;');
+    expect(css).toContain('width: calc(100% + 2px) !important;');
   });
 });
