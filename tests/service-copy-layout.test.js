@@ -61,6 +61,12 @@ describe('service page supplied copy layout', () => {
     expect(css).toContain('.pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name^="Mystery Shopper Report"] [data-pencil-name="Metric Value"] {\n    text-align: right !important;');
   });
 
+  it('keeps mobile service mystery-shopper cards within the viewport', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name="Mystery Shopper Report (fresh)"],\n  .pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name="Mystery Shopper Report (stale)"] {\n    box-sizing: border-box !important;\n    width: 100% !important;');
+  });
+
   it('removes fixed blank space between mobile review items', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 

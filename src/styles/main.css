@@ -6102,6 +6102,12 @@ body small, body label, body legend, body th, body td, body dt, body dd {
    The exported first two rows have a narrower fixed width, which leaves their
    values visibly shifted left compared with the rest of the card. */
 @media (max-width: 767px) {
+  .pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name="Mystery Shopper Report (fresh)"],
+  .pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name="Mystery Shopper Report (stale)"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
   .pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name^="Mystery Shopper Report"] [data-pencil-name="Metrics Row"] {
     width: 100% !important;
   }
