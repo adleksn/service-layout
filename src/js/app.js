@@ -346,6 +346,15 @@ const applyAdvertisingLeadLayout = () => {
 };
 app.innerHTML = render[page]();
 app.dataset.page = page;
+if (page === 'rating') {
+  const emptyState = app.querySelector('[data-catalog][data-type="rating"] [data-empty]');
+  if (emptyState) {
+    emptyState.classList.add('empty-state--catalog');
+    emptyState.querySelector('.empty-state__icon')?.remove();
+    const message = emptyState.querySelector('p');
+    if (message) message.textContent = 'Под выбранные условия не подошёл ни один сервис. Попробуйте убрать часть фильтров или сбросить их полностью.';
+  }
+}
 alignMethodologyLayout();
 preserveMethodologyMobileTextWrapping();
 preserveRatingMobileTextWrapping();
