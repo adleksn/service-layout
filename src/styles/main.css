@@ -6084,3 +6084,16 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     display: none !important;
   }
 }
+
+/* The mobile rating article ends close to the FAQ band. The Pen export has a
+   fixed track, so reset it as well as the semantic page to retain a 30px gap. */
+@media (max-width: 767px) {
+  #app[data-page="rating"] .layout--catalog .catalog-seo {
+    padding-bottom: 30px;
+  }
+
+  .pen-frame[data-pencil-name="Рейтинг Mobile 375"] [data-pencil-name="SEO Section"] {
+    height: auto !important;
+    padding-bottom: 30px !important;
+  }
+}

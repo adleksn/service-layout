@@ -81,6 +81,11 @@ describe('rating catalog layout', () => {
     expect(dom.window.getComputedStyle(dom.window.document.querySelector('.seo-copy')).paddingBottom).toBe('40px');
   });
 
+  it('keeps only 30px below the mobile rating SEO copy before the FAQ', () => {
+    expect(css).toContain('#app[data-page="rating"] .layout--catalog .catalog-seo {\n    padding-bottom: 30px;');
+    expect(css).toContain('.pen-frame[data-pencil-name="Рейтинг Mobile 375"] [data-pencil-name="SEO Section"] {\n    height: auto !important;\n    padding-bottom: 30px !important;');
+  });
+
   it('includes the extended rating introduction copy', () => {
     expect(app).toContain('Фильтруйте по комиссии, рейтингу и статусу проверки, чтобы найти подходящий вариант.');
   });
