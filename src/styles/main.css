@@ -5873,6 +5873,9 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 @media (max-width: 767px) {
   .layout--catalog .catalog__legend--disclosure {
     margin: 0 0 16px !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    overflow: visible !important;
   }
 
   .layout--catalog .catalog__legend--disclosure > button {
@@ -5888,7 +5891,8 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 
   .layout--catalog .catalog__legend--disclosure > .catalog__legends {
     margin-top: 20px !important;
-    border-radius: 8px;
+    border-radius: 8px !important;
+    overflow: hidden;
     background: #f5f5f5;
   }
 

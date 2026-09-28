@@ -194,7 +194,9 @@ describe('rating catalog layout', () => {
   it('matches the Pen mobile legend control border, panel gap, and rounding', () => {
     expect(css).toContain('border: 1px solid #e6e6e6 !important;');
     expect(css).toContain('margin-top: 20px !important;');
-    expect(css).toContain('border-radius: 8px;');
+    expect(css).toContain('background: #fff !important;');
+    expect(css).toContain('border-radius: 8px !important;');
+    expect(css).toContain('overflow: visible !important;');
   });
 
   it('gives virtual cards the same mobile disclosure legend as the rating', () => {
