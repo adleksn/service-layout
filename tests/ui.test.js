@@ -137,6 +137,27 @@ describe('semantic page interactions', () => {
     expect(panel.hidden).toBe(false);
   });
 
+  it('uses each legend trigger aria-controls target for the virtual-card legend', () => {
+    const dom = new JSDOM(`
+      <section class="catalog">
+        <div class="catalog__legend catalog__legend--disclosure">
+          <button data-catalog-legend-toggle aria-controls="catalog-card-legend">Обозначения</button>
+          <div class="legend" id="catalog-card-legend">Был тайный покупатель Есть промокод</div>
+        </div>
+      </section>`);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('matchMedia', () => ({ matches: true, addEventListener: vi.fn() }));
+
+    setupCatalogLegend(dom.window.document);
+    const button = dom.window.document.querySelector('[data-catalog-legend-toggle]');
+    const panel = dom.window.document.querySelector('#catalog-card-legend');
+    expect(panel.hidden).toBe(true);
+
+    button.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    expect(panel.hidden).toBe(false);
+  });
+
   it('validates the review amount and accepts a complete local review', () => {
     const dom = new JSDOM(`
       <form data-review-form><input name="name" required><input name="email" type="email" required><input name="amount" type="number" min="1" required><textarea name="text" required></textarea><button>Отправить</button><p data-form-status></p></form>`);

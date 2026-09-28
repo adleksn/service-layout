@@ -49,7 +49,8 @@ export function setupMobileMenu(root = document) {
 
 export function setupCatalogLegend(root = document) {
   const toggle = root.querySelector('[data-catalog-legend-toggle]');
-  const panel = root.querySelector('#catalog-status-legend');
+  const panelId = toggle?.getAttribute('aria-controls');
+  const panel = panelId ? root.querySelector(`#${panelId}`) : null;
   if (!toggle || !panel) return;
 
   const mobileQuery = globalThis.matchMedia?.('(max-width: 767px)');

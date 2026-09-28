@@ -185,6 +185,16 @@ describe('rating catalog layout', () => {
     expect(app).toContain('mobile-status-badges--empty');
   });
 
+  it('keeps mobile status chips together and places promo-only chips directly below the report row', () => {
+    expect(css).toContain('flex-wrap: nowrap;');
+    expect(css).toContain('grid-template-rows: 24px 36px 49px 0 24px;');
+  });
+
+  it('gives virtual cards the same mobile disclosure legend as the rating', () => {
+    expect(app).toContain('aria-controls="catalog-card-legend"');
+    expect(app).toContain('catalog__legend--cards-static');
+  });
+
   it('keeps mobile review counts clear of scores', () => {
     expect(css).toContain('padding-left: 29px;');
   });

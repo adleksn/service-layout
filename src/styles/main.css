@@ -1445,6 +1445,8 @@ form textarea {
 .legend__trigger-icon { display: none; }
 
 @media (max-width: 767px) {
+  .layout--catalog .catalog[data-type="cards"] .catalog__legend--cards-static { display: none; }
+
   .layout--catalog .catalog__legend--disclosure {
     display: block;
     margin: 0 0 16px;
@@ -5942,6 +5944,14 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     grid-template-rows: 24px 36px 49px 24px 24px;
   }
 
+  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-status-badges--empty):has(.mobile-promo-badge) {
+    grid-template-rows: 24px 36px 49px 0 24px;
+  }
+
+  .layout--catalog .catalog[data-type="rating"] .mobile-status-badges {
+    flex-wrap: nowrap;
+  }
+
   .layout--catalog .catalog[data-type="rating"] .mobile-status-badge--new,
   .layout--catalog .catalog[data-type="rating"] .mobile-promo-badge {
     display: inline-flex !important;
@@ -5982,4 +5992,8 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .layout--catalog .catalog[data-type="rating"] .mobile-promo-badge .mobile-status-badge__icon {
     stroke: #8b5df5;
   }
+}
+
+@media (min-width: 768px) {
+  .layout--catalog .catalog[data-type="cards"] .catalog__legend--cards-disclosure { display: none; }
 }
