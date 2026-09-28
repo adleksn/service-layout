@@ -237,6 +237,11 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.layout--catalog .filter-open > b::before,\n  .layout--catalog .catalog__legend--disclosure > button > span::before {');
   });
 
+  it('removes the duplicate glyph from the mobile legend arrow and spaces its panel by 20px', () => {
+    expect(app).toContain('aria-hidden="true"></span></button><div class="catalog__legends"');
+    expect(css).toContain('.layout--catalog .catalog__legend--disclosure > .catalog__legends {\n    margin-top: 20px !important;');
+  });
+
   it('includes the complete Pen explanation in the mobile rating SEO section', () => {
     expect(app).toContain('Виртуальные зарубежные карты');
     expect(app).toContain('Если у компании появляются массовые жалобы, мы понижаем её позицию');
