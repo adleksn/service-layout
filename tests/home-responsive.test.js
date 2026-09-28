@@ -26,4 +26,12 @@ describe('home transitional responsiveness', () => {
     expect(css).toContain('.pen-frame[data-pencil-name="Главная Mobile 375"] [data-pencil-name^="Service Card "] > [data-pencil-name="Chevron"] {\n    left: auto !important;\n    right: 14px !important;');
     expect(css).toContain('.pen-frame[data-pencil-name="Главная Mobile 375"] [data-pencil-name="Card Head"] > [data-pencil-name="Chevron"] {\n    left: auto !important;\n    right: -2px !important;');
   });
+
+  it('aligns mobile virtual-card payment badges with the details divider', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name="Главная Mobile 375"] [data-pencil-name="Service Cards"] [data-pencil-name="Details Block"] {');
+    expect(css).toContain('box-sizing: border-box !important;');
+    expect(css).toContain('width: 100% !important;');
+  });
 });

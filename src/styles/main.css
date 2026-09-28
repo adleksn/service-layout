@@ -5744,6 +5744,11 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     left: auto !important;
     right: -2px !important;
   }
+
+  .pen-frame[data-pencil-name="Главная Mobile 375"] [data-pencil-name="Service Cards"] [data-pencil-name="Details Block"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
 }
 
 /* On the mobile rating page, an expanded FAQ consists of a gray trigger and a
