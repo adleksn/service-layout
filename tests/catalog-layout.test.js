@@ -211,6 +211,13 @@ describe('rating catalog layout', () => {
     expect(app).toContain('catalog__legend--cards-static');
   });
 
+  it('keeps each virtual-card mobile chevron in the direction authored by the 375px frame', () => {
+    expect(css).toContain('.pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Sort Select"] [data-pencil-name="Chevron"]');
+    expect(css).toContain('.pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Filters Button"] [data-pencil-name="Chevron Right"]');
+    expect(css).toContain('.pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Legend Button"][aria-expanded="true"] [data-pencil-name="Chevron"]');
+    expect(css).toContain('transform: rotate(180deg) !important;');
+  });
+
   it('keeps mobile review counts clear of scores', () => {
     expect(css).toContain('padding-left: 29px;');
   });

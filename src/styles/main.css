@@ -5677,6 +5677,24 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   }
 }
 
+/* Virtual cards Mobile 375 uses four deliberate chevron states from the Pen
+   frame. Pin them explicitly so an interaction cannot inherit a transform
+   from a different mobile control. */
+@media (max-width: 767px) {
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Sort Select"] [data-pencil-name="Chevron"],
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Legend Button"] [data-pencil-name="Chevron"],
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Filters Button"] [data-pencil-name="Chevron Right"],
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name^="Service Card "] [data-pencil-name="Chevron"] {
+    display: block !important;
+    transform: rotate(0deg) !important;
+    transform-origin: center;
+  }
+
+  .pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name="Legend Button"][aria-expanded="true"] [data-pencil-name="Chevron"] {
+    transform: rotate(180deg) !important;
+  }
+}
+
 /* Keep the exported summary within the 375px rail and let the card end
    directly after its copy instead of retaining its desktop-sized height. */
 @media (max-width: 767px) {
