@@ -53,4 +53,11 @@ describe('service page supplied copy layout', () => {
     expect(css).toContain('height: 461px !important;');
     expect(css).toContain('[data-pencil-name="Metrics Row"] > [data-pencil-name="Metric Row"]');
   });
+
+  it('aligns every mobile service-report metric to the same card width', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name^="Mystery Shopper Report"] [data-pencil-name="Metric Row"] {\n    box-sizing: border-box !important;\n    width: 100% !important;');
+    expect(css).toContain('.pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name^="Mystery Shopper Report"] [data-pencil-name="Metric Value"] {\n    text-align: right !important;');
+  });
 });
