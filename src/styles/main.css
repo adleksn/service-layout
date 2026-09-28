@@ -6008,3 +6008,79 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 @media (min-width: 768px) {
   .layout--catalog .catalog[data-type="cards"] .catalog__legend--cards-disclosure { display: none; }
 }
+
+/* Rating Mobile 375 registry notices. These values come from the Pen frame:
+   compact 19px headings and quiet, regular-weight 14px registry rows. */
+@media (max-width: 767px) {
+  .layout--catalog .catalog-discontinued {
+    padding: 40px 16px 48px;
+    gap: 36px;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued {
+    width: 100%;
+    max-width: 343px;
+    margin: 0 auto;
+    padding: 0;
+    gap: 14px;
+    background: transparent;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued__title {
+    height: 25px;
+    min-height: 25px;
+    gap: 8px;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued__title h2 {
+    color: #131313;
+    font: 700 19px/25px Inter, system-ui, sans-serif;
+    letter-spacing: -.2px;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued > p {
+    margin: 0;
+    color: #3a3a3a;
+    font: 400 14px/22px Inter, system-ui, sans-serif;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued__grid {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    margin: 0;
+    background: transparent;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued__column {
+    width: 100%;
+    background: transparent;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued__item {
+    box-sizing: content-box;
+    height: 35.5px;
+    min-height: 35.5px;
+    margin: 0 0 -.5px;
+    padding: 0 4px;
+    gap: 8px;
+    background: #ffffff;
+    border-color: #e6e6e6;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued__item b {
+    color: #3a3a3a;
+    font: 500 14px/18px Inter, system-ui, sans-serif;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued__item small {
+    width: 90px;
+    color: #7a7a7a;
+    font: 400 12px/18px Inter, system-ui, sans-serif;
+    text-align: right;
+  }
+
+  .layout--catalog .catalog-discontinued .discontinued__item span {
+    display: none !important;
+  }
+}

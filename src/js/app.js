@@ -251,9 +251,11 @@ const preserveRatingMobileTextWrapping = () => {
 };
 
 const normalizeRatingRegistryCopy = () => {
-  if (page !== 'rating') return;
+  if (page !== 'rating' || window.innerWidth >= 768) return;
+  const closedDescription = app.querySelector('.catalog-discontinued .discontinued:not(.discontinued--danger) > p');
+  if (closedDescription) closedDescription.textContent = 'Больше не принимают платежи или перестали отвечать на обращения. Держим в реестре для справки.';
   const fraudDescription = app.querySelector('.discontinued--danger > p');
-  if (fraudDescription) fraudDescription.textContent = 'По этим сервисам поступали жалобы на невыполненные платежи или подозрительное поведение поддержки. Будьте осторожны, если всё же решите ими воспользоваться.';
+  if (fraudDescription) fraudDescription.textContent = 'Поступали жалобы на невыполненные платежи или подозрительное поведение поддержки.';
 };
 
 const alignAgreementLayout = () => {

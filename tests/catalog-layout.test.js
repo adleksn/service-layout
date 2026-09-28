@@ -255,7 +255,7 @@ describe('rating catalog layout', () => {
 
   it('uses the requested neutral copy and stable accordion frame in rating lower sections', () => {
     expect(app).toContain('Эти сервисы больше не принимают платежи или перестали отвечать на обращения пользователей. Мы держим в реестре, чтоб вы могли<br>сверится перед оплатой.');
-    expect(app).toContain('По этим сервисам поступали жалобы на невыполненные платежи или подозрительное поведение поддержки. Будьте осторожны, если всё же решите ими воспользоваться.');
+    expect(app).toContain('Поступали жалобы на невыполненные платежи или подозрительное поведение поддержки.');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title h2 { margin: 0; color: #131313; font-weight: 700; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued > p { margin: 0; color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }');
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item b { color: #3a3a3a; font-weight: 400; }');
@@ -271,6 +271,15 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title { border-top: 0; margin-top: 0; }');
     expect(css).toContain('.layout--catalog .catalog-faq .faq {\n    box-sizing: border-box;\n    width: 800px;');
     expect(css).toContain('background-color: #f5f5f5 !important;');
+  });
+
+  it('matches the Pen 375 registry notices without bold service names', () => {
+    expect(app).toContain("'Больше не принимают платежи или перестали отвечать на обращения. Держим в реестре для справки.'");
+    expect(app).toContain("'Поступали жалобы на невыполненные платежи или подозрительное поведение поддержки.'");
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__title h2 {\n    color: #131313;\n    font: 700 19px/25px Inter, system-ui, sans-serif;');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item {\n    box-sizing: content-box;\n    height: 35.5px;');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item b {\n    color: #3a3a3a;\n    font: 500 14px/18px Inter, system-ui, sans-serif;');
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item small {\n    width: 90px;\n    color: #7a7a7a;\n    font: 400 12px/18px Inter, system-ui, sans-serif;');
   });
 
   it('uses a fixed chevron so the catalog sort control rotates without shifting', () => {
