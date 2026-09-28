@@ -62,7 +62,7 @@ describe('rating catalog layout', () => {
     expect(css).not.toContain('.layout--catalog .catalog-faq .faq { width: 430px; max-width: 100%; }');
   });
 
-  it('keeps the rating SEO white and gives the FAQ exactly 50px of gray space above it', () => {
+  it('keeps the rating SEO white and gives the FAQ 25px of gray space above it', () => {
     const dom = new JSDOM('<!doctype html><style></style><div id="app" data-page="rating"><div class="layout layout--catalog"><section class="catalog-seo"></section><section class="catalog-faq"></section></div></div>');
     dom.window.document.querySelector('style').textContent = css.replace(/^@import.*$/m, '');
     const layoutStyle = dom.window.getComputedStyle(dom.window.document.querySelector('.layout--catalog'));
@@ -70,7 +70,7 @@ describe('rating catalog layout', () => {
 
     expect(layoutStyle.paddingBottom).toBe('0px');
     expect(faqStyle.marginTop).toBe('0px');
-    expect(faqStyle.paddingTop).toBe('50px');
+    expect(faqStyle.paddingTop).toBe('25px');
     expect(faqStyle.backgroundColor).toBe('rgb(245, 245, 245)');
   });
 

@@ -60,4 +60,10 @@ describe('service page supplied copy layout', () => {
     expect(css).toContain('.pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name^="Mystery Shopper Report"] [data-pencil-name="Metric Row"] {\n    box-sizing: border-box !important;\n    width: 100% !important;');
     expect(css).toContain('.pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name^="Mystery Shopper Report"] [data-pencil-name="Metric Value"] {\n    text-align: right !important;');
   });
+
+  it('removes fixed blank space between mobile review items', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Mobile 375"] [data-pencil-name="Reviews List"] > [data-pencil-name^="Review Item"] {\n    height: auto !important;\n    min-height: 0 !important;\n    padding: 12px 0 !important;');
+  });
 });

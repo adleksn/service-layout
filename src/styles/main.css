@@ -5467,7 +5467,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 }
 
 #app[data-page="rating"] .layout--catalog { padding-bottom: 0; }
-#app[data-page="rating"] .layout--catalog .catalog-faq { margin-top: 0; padding-top: 50px; background-color: #f5f5f5; }
+#app[data-page="rating"] .layout--catalog .catalog-faq { margin-top: 0; padding-top: 25px; background-color: #f5f5f5; }
 
 /* Rating FAQ: the same desktop structure as the virtual-cards Pen frame. */
 @media (min-width: 768px) {
@@ -6113,5 +6113,34 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 
   .pen-frame[data-pencil-name="Карточка сервиса Mobile 375"] [data-pencil-name^="Mystery Shopper Report"] [data-pencil-name="Metric Value"] {
     text-align: right !important;
+  }
+}
+
+/* Mobile review exports reserve a fixed height for every entry. Let each
+   entry end after its date so the next review starts without a blank band. */
+@media (max-width: 767px) {
+  .pen-frame[data-pencil-name$="Карточка сервиса Mobile 375"] [data-pencil-name="Reviews List"] > [data-pencil-name^="Review Item"] {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 12px 0 !important;
+  }
+
+  /* The report cards intentionally extend beyond a 375px frame; make the
+     strip directly swipeable instead of leaving the following card clipped. */
+  .pen-frame[data-pencil-name="Отчёт Mobile 375"] [data-pencil-name="Cards Slider"] {
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    scrollbar-width: none;
+  }
+
+  .pen-frame[data-pencil-name="Отчёт Mobile 375"] [data-pencil-name="Cards Slider"]::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pen-frame[data-pencil-name="Отчёт Mobile 375"] [data-pencil-name="Cards Slider"] > [data-pencil-name="Report Card"] {
+    scroll-snap-align: start;
   }
 }
