@@ -51,4 +51,14 @@ describe('advertising lead', () => {
     expect(css).toContain('border-radius: 12px !important;');
     expect(css).toContain('overflow: hidden !important;');
   });
+
+  it('keeps the desktop banner warning and booking CTA on that same content rail', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name="Реклама Desktop 1440"] [data-pencil-name="Option Banner"] [data-pencil-name="Warning"],');
+    expect(css).toContain('.pen-frame[data-pencil-name="Реклама Desktop 1440"] [data-pencil-name="Final CTA"] {');
+    expect(css).toContain('width: 780px !important;');
+    expect(css).toContain('height: 57px !important;');
+    expect(css).toContain('height: 234px !important;');
+  });
 });

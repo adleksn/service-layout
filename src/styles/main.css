@@ -5524,6 +5524,25 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     border-radius: 12px !important;
     overflow: hidden !important;
   }
+
+  .pen-frame[data-pencil-name="Реклама Desktop 1440"] [data-pencil-name="Option Banner"] [data-pencil-name="Warning"],
+  .pen-frame[data-pencil-name="Реклама Desktop 1440"] [data-pencil-name="Final CTA"] {
+    box-sizing: border-box !important;
+    width: 780px !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .pen-frame[data-pencil-name="Реклама Desktop 1440"] [data-pencil-name="Option Banner"] [data-pencil-name="Warning"] {
+    height: 57px !important;
+    border-radius: 10px !important;
+  }
+
+  .pen-frame[data-pencil-name="Реклама Desktop 1440"] [data-pencil-name="Final CTA"] {
+    height: 234px !important;
+    border-radius: 12px !important;
+  }
 }
 
 /* Exact desktop cell content from the Pen rating table. */
