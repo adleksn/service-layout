@@ -5947,17 +5947,16 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 }
 
 @media (max-width: 767px) {
-  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-promo-badge) {
+  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-promo-badge:not(.mobile-promo-badge--inline)) {
     grid-template-rows: 24px 36px 49px 24px 24px;
   }
 
-  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-promo-badge--standalone) {
+  .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-promo-badge--inline) {
     grid-template-rows: 24px 36px 49px 24px;
   }
 
-  .layout--catalog .catalog[data-type="rating"] td:nth-child(9):has(.mobile-promo-badge--standalone) {
-    grid-area: badges;
-    grid-row: 4;
+  .layout--catalog .catalog[data-type="rating"] .mobile-status-badges .mobile-promo-badge--inline {
+    flex: 0 0 auto;
   }
 
   .layout--catalog .catalog[data-type="rating"] .mobile-status-badges {

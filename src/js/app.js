@@ -464,13 +464,14 @@ function setupCatalog() {
       const reportState = item.tags.includes('fresh') ? 'fresh' : item.tags.includes('old') ? 'old' : 'none';
       const mobileState = cardsMode ? [] : (ratingMobileStates[item.rank] || []);
       const mobileStatus = mobileState.filter((stateName) => stateName !== 'promo');
+      const promoSharesStatusRow = mobileStatus.length < 2;
+      const mobilePromoMarkup = `<span class="mobile-promo-badge${promoSharesStatusRow ? ' mobile-promo-badge--inline' : ''}">${mobileStatusBadgeIcons.promo}<span>Есть промокод</span></span>`;
       const mobileBadges = mobileStatus.map((stateName) => {
         const labels = { verified: 'Подтверждён', mystery: 'Был тайный покупатель', new: 'Новый', promo: 'Есть промокод' };
         return `<span class="mobile-status-badge mobile-status-badge--${stateName}">${mobileStatusBadgeIcons[stateName] || ''}${labels[stateName]}</span>`;
-      }).join('');
+      }).join('') + (!cardsMode && mobileState.includes('promo') && promoSharesStatusRow ? mobilePromoMarkup : '');
       const mobilePromo = !cardsMode && mobileState.includes('promo')
-        ? `<span class="mobile-promo-badge${mobileStatus.length ? '' : ' mobile-promo-badge--standalone'}">${mobileStatusBadgeIcons.promo}<span>Есть промокод</span></span>`
-        : '';
+        && !promoSharesStatusRow ? mobilePromoMarkup : '';
       const reportMarkup = reportState === 'none'
         ? '<span class="report-date report-date--none"><span class="report-date__mobile-value">Отчёта нет</span><span class="report-date__desktop-value">—</span></span>'
         : `<span class="report-dot report-dot--${reportState}"></span><span class="report-date"><span class="report-date__mobile-label">Отчёт </span>${item.reportDate}</span>`;

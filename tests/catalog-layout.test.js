@@ -117,9 +117,9 @@ describe('rating catalog layout', () => {
     expect(app).toContain("4: ['verified', 'mystery', 'promo']");
   });
 
-  it('uses icon-bearing mobile badges and gives the promo chip its own card row', () => {
+  it('uses icon-bearing mobile badges and places the promo chip in its authored status row', () => {
     expect(app).toContain("const mobileStatus = mobileState.filter((stateName) => stateName !== 'promo');");
-    expect(app).toContain('mobile-promo-badge--standalone');
+    expect(app).toContain('mobile-promo-badge--inline');
     expect(app).toContain('mobile-status-badge__icon');
     expect(css).toContain('background: #f1ebff;');
     expect(css).toContain('color: #8b5cf5;');
@@ -185,10 +185,11 @@ describe('rating catalog layout', () => {
     expect(app).toContain('mobile-status-badges--empty');
   });
 
-  it('keeps mobile status chips together and places promo-only chips directly below the report row', () => {
+  it('keeps a promo with one-or-fewer status chips in the same mobile status row', () => {
     expect(css).toContain('flex-wrap: nowrap;');
-    expect(app).toContain("mobile-promo-badge${mobileStatus.length ? '' : ' mobile-promo-badge--standalone'}");
-    expect(css).toContain('grid-template-rows: 24px 36px 49px 24px;');
+    expect(app).toContain('const promoSharesStatusRow = mobileStatus.length < 2;');
+    expect(app).toContain('mobile-promo-badge--inline');
+    expect(css).toContain('.mobile-status-badges .mobile-promo-badge--inline');
   });
 
   it('matches the Pen mobile legend control border, panel gap, and rounding', () => {
