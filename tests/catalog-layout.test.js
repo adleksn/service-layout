@@ -117,6 +117,15 @@ describe('rating catalog layout', () => {
     expect(app).toContain("4: ['verified', 'mystery', 'promo']");
   });
 
+  it('uses icon-bearing mobile badges and gives the promo chip its own card row', () => {
+    expect(app).toContain("const mobileStatus = mobileState.filter((stateName) => stateName !== 'promo');");
+    expect(app).toContain('class="mobile-promo-badge"');
+    expect(app).toContain('mobile-status-badge__icon');
+    expect(css).toContain('background: #f1ebff;');
+    expect(css).toContain('color: #8b5cf5;');
+    expect(css).toContain('stroke: #8b5df5;');
+  });
+
   it('keeps the mobile legend on the 375px section rhythm', () => {
     expect(css).toContain('margin: 0 0 16px !important;');
     expect(css).toContain('margin-top: 16px !important;');

@@ -425,6 +425,10 @@ const ratingMobileStates = {
   29: ['verified'], 30: ['verified'], 32: ['verified'], 35: ['verified'], 38: ['verified'], 41: ['verified'], 42: ['verified'],
   43: ['verified'], 45: ['verified'], 47: ['new'], 48: ['verified'], 51: ['verified'],
 };
+const mobileStatusBadgeIcons = {
+  new: '<svg class="mobile-status-badge__icon" aria-hidden="true" viewBox="0 0 14 14"><path d="m7 1.5.75 3.75L11.5 6l-3.75.75L7 10.5l-.75-3.75L2.5 6l3.75-.75L7 1.5ZM11 9l.4 1.6L13 11l-1.6.4L11 13l-.4-1.6L9 11l1.6-.4L11 9Z"/></svg>',
+  promo: '<svg class="mobile-status-badge__icon" aria-hidden="true" viewBox="0 0 14 14"><path d="M2.5 3.25A1.25 1.25 0 0 1 3.75 2h6.5a1.25 1.25 0 0 1 1.25 1.25v1.4a1.65 1.65 0 0 0 0 3.3v1.4a1.25 1.25 0 0 1-1.25 1.25h-6.5A1.25 1.25 0 0 1 2.5 9.35v-1.4a1.65 1.65 0 0 0 0-3.3v-1.4Z"/><path d="m5.2 8.8 3.6-3.6M5.2 5.2h.01M8.8 8.8h.01"/></svg>',
+};
 function setupCatalog() {
   const root = app.querySelector('[data-catalog]'); if (!root) return;
   const data = root.dataset.type === 'cards' ? cards : services;
@@ -458,10 +462,14 @@ function setupCatalog() {
     rows.innerHTML = visible.map((item) => {
       const reportState = item.tags.includes('fresh') ? 'fresh' : item.tags.includes('old') ? 'old' : 'none';
       const mobileState = cardsMode ? [] : (ratingMobileStates[item.rank] || []);
-      const mobileBadges = mobileState.map((stateName) => {
+      const mobileStatus = mobileState.filter((stateName) => stateName !== 'promo');
+      const mobileBadges = mobileStatus.map((stateName) => {
         const labels = { verified: 'Подтверждён', mystery: 'Был тайный покупатель', new: 'Новый', promo: 'Есть промокод' };
-        return `<span class="mobile-status-badge mobile-status-badge--${stateName}">${labels[stateName]}</span>`;
+        return `<span class="mobile-status-badge mobile-status-badge--${stateName}">${mobileStatusBadgeIcons[stateName] || ''}${labels[stateName]}</span>`;
       }).join('');
+      const mobilePromo = !cardsMode && mobileState.includes('promo')
+        ? `<span class="mobile-promo-badge">${mobileStatusBadgeIcons.promo}<span>Есть промокод</span></span>`
+        : '';
       const reportMarkup = reportState === 'none'
         ? '<span class="report-date report-date--none"><span class="report-date__mobile-value">Отчёта нет</span><span class="report-date__desktop-value">—</span></span>'
         : `<span class="report-dot report-dot--${reportState}"></span><span class="report-date"><span class="report-date__mobile-label">Отчёт </span>${item.reportDate}</span>`;
@@ -472,7 +480,7 @@ function setupCatalog() {
       const serviceMarkMarkup = cardsMode ? `<span class="service-mark service-mark--small">${item.name[0]}</span>` : '';
       const ratingCells = cardsMode
         ? `<td data-label="Выпуск">${item.priceLabel}</td><td data-label="Платёжная система">${item.system}</td><td data-label="Валюта">${item.currency}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Тайный покупатель">${item.tags.includes('fresh') ? '<i class="check-icon">✓</i>' : item.tags.includes('old') ? '<i class="stale-icon">◷</i>' : '—'}</td><td data-label="Промокод">${item.tags.includes('promo') ? '<i class="promo-icon">%</i>' : '—'}</td>`
-        : `<td data-label="Комиссия">${item.feeLabel}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Отчёт">${reportMarkup}</td><td data-label="Статус"><span class="desktop-status">${statusMarkup}</span><span class="mobile-status-badges${mobileBadges ? '' : ' mobile-status-badges--empty'}${mobileState.length === 1 && mobileState[0] === 'promo' ? ' mobile-status-badges--promo-only' : ''}">${mobileBadges}</span></td><td data-label="Тайный покупатель">${mysteryMarkup}</td><td data-label="Промокод"><span class="desktop-status">${promoMarkup}</span></td>`;
+        : `<td data-label="Комиссия">${item.feeLabel}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Отчёт">${reportMarkup}</td><td data-label="Статус"><span class="desktop-status">${statusMarkup}</span><span class="mobile-status-badges${mobileBadges ? '' : ' mobile-status-badges--empty'}${mobileState.length === 1 && mobileState[0] === 'promo' ? ' mobile-status-badges--promo-only' : ''}">${mobileBadges}</span></td><td data-label="Тайный покупатель">${mysteryMarkup}</td><td data-label="Промокод"><span class="desktop-status">${promoMarkup}</span>${mobilePromo}</td>`;
       const actionMarkup = cardsMode ? 'Подробнее' : '<svg class="details-button__icon" aria-hidden="true" viewBox="0 0 14 14"><path d="M2 7h9M8 3.5 11.5 7 8 10.5"/></svg>';
       return `<tr class="catalog-row catalog-row--${reportState}"><td data-label="Место">${item.rank}</td><td data-label="Сервис"><a href="${destination}">${serviceMarkMarkup}<span><b>${item.name}</b>${namePromoMarkup}<small>${item.domain}</small></span></a></td><td data-label="Оценка">${score(item.rating)}</td>${ratingCells}<td class="row-action"><a class="details-button" href="${destination}" aria-label="Подробнее о ${item.name}">${actionMarkup}</a></td></tr>`;
     }).join('');
