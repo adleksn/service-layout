@@ -16,6 +16,7 @@ describe('methodology sign fidelity', () => {
     expect(app).toContain('каждый из сервисов для<br> того, чтобы провести оплату');
     expect(app).toContain('ответы на дополнительные <br>вопросы по работе сервиса.');
     expect(app).toContain('часть из которой попадает вам<br> в обзор сервиса');
+    expect(app).toContain('Для простоты идентификации сервисов в списке мы ввели несколько знаков отличия.');
     expect(app).toContain('Все результаты попадают в карточку сервиса и в отчёт тайного покупателя');
     expect(app).toContain('технология проверки позволяет минимизировать риски');
     expect(app).toContain('наценку к курсу — итоговую сумму, которую вы отдадите за год.');
@@ -37,6 +38,7 @@ describe('methodology sign fidelity', () => {
     expect(app).toContain('<article><i aria-hidden="true"></i><div><h3>${name}</h3><p>${text}</p></div></article>');
     expect(css).toContain('.method-cta { border-left: 3px solid #46a827; }');
     expect(css).toContain('@media (min-width: 768px) {\n  .methodology-layout .method-bridge { margin: 28px 0 30px; }\n  .methodology-layout .method-text { padding-top: 0; }\n}');
+    expect(css).toContain('@media (max-width: 767px) {\n  .methodology-layout .method-bridge { margin-bottom: 30px; }\n  .methodology-layout .method-text { padding-top: 0; }\n}');
   });
 
   it('keeps the exact Pen sign-list rhythm and source colour tokens', () => {

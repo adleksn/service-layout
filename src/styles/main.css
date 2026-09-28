@@ -1394,7 +1394,7 @@ form textarea {
 .catalog-page-header--rating .catalog-page-header__description { max-width: none; white-space: nowrap; }
 .catalog-page-header__description + .catalog-page-header__description { margin-top: 0; }
 .catalog-page-header__description--mobile { display: none; }
-.catalog-page-header--rating + .layout--catalog { padding-top: 30px; }
+.catalog-page-header--rating + .layout--catalog { padding-top: 20px; }
 .catalog--rating .catalog__legend--disclosure { margin: 20px; }
 
 @media (max-width: 767px) {
@@ -1420,6 +1420,7 @@ form textarea {
   .layout--catalog { gap: 0; padding-bottom: 48px; }
   .layout--catalog > div:first-child { width: 100%; }
   .layout--catalog .catalog { padding-top: 24px; }
+  .catalog-page-header--rating + .layout--catalog .catalog { padding-top: 0; }
 }
 
 /* Rating catalogue — direct semantic counterpart of the supplied Pen frames. */
@@ -2241,6 +2242,17 @@ form textarea {
 .pen-review-control:focus-visible { outline: 2px solid #45a828; outline-offset: 3px; border-radius: 4px; }
 .pen-review-control--textarea { align-self: stretch; resize: vertical; min-height: 144px; }
 .pen-review-status { margin: 0; color: #2f8a16; font: 14px/20px Inter, system-ui, sans-serif; }
+
+/* Safari enlarges a page when an editable control is under 16px. Apply the
+   iOS-safe size to every mobile form control, including Pen-exported fields. */
+@media (max-width: 767px) {
+  input,
+  textarea,
+  select,
+  .pen-review-control {
+    font-size: 16px !important;
+  }
+}
 .pen-frame [data-pencil-name="Submit Button"],.pen-frame [data-pencil-name="Button Primary"],.pen-frame [data-pencil-name="Button Outline"],.pen-frame [data-pencil-name="Load More Button"] { cursor: pointer; transition: filter .15s ease, transform .15s ease, box-shadow .15s ease; }
 .pen-frame [data-pencil-name="Submit Button"]:hover,.pen-frame [data-pencil-name="Button Primary"]:hover { filter: brightness(.94); box-shadow: 0 4px 12px rgb(69 168 40 / .18); }
 .pen-frame [data-pencil-name="Button Outline"]:hover,.pen-frame [data-pencil-name="Load More Button"]:hover { box-shadow: inset 0 0 0 1px #45a828; }
@@ -5864,6 +5876,13 @@ body small, body label, body legend, body th, body td, body dt, body dd {
    the evaluation section; the mobile composition retains its authored spacing. */
 @media (min-width: 768px) {
   .methodology-layout .method-bridge { margin: 28px 0 30px; }
+  .methodology-layout .method-text { padding-top: 0; }
+}
+
+/* On the 375px methodology composition the bridge is followed by one 30px
+   interval, rather than its former margin plus the article's desktop padding. */
+@media (max-width: 767px) {
+  .methodology-layout .method-bridge { margin-bottom: 30px; }
   .methodology-layout .method-text { padding-top: 0; }
 }
 

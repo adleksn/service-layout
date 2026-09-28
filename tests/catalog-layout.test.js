@@ -49,8 +49,9 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.catalog-page-header');
   });
 
-  it('leaves 30px between the rating metrics and the filter block', () => {
-    expect(css).toContain('.catalog-page-header--rating + .layout--catalog { padding-top: 30px; }');
+  it('leaves a compact 20px mobile gap between the rating metrics and filter block', () => {
+    expect(css).toContain('.catalog-page-header--rating + .layout--catalog { padding-top: 20px; }');
+    expect(css).toContain('.catalog-page-header--rating + .layout--catalog .catalog { padding-top: 0; }');
   });
 
   it('centers the rating SEO copy block in the catalog column', () => {
