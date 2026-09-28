@@ -137,6 +137,7 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.mobile-status-badge--verified {\n    display: inline-flex !important;');
     expect(css).toContain('.catalog__legend--disclosure > .catalog__legends .legend--reports::before {');
     expect(css).toContain('width: 100% !important;');
+    expect(css).toContain('.catalog__legend--disclosure > .catalog__legends[hidden] { display: none !important; }');
   });
 
   it('keeps the mobile legend on the 375px section rhythm', () => {

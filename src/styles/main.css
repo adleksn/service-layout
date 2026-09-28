@@ -6207,6 +6207,8 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     box-sizing: border-box;
   }
 
+  .layout--catalog .catalog__legend--disclosure > .catalog__legends[hidden] { display: none !important; }
+
   .layout--catalog .catalog__legend--disclosure > .catalog__legends .legend--reports {
     position: relative;
     width: 100% !important;
@@ -6236,6 +6238,32 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 /* The text glyph has inconsistent visual centering across mobile browsers.
    Draw the three menu bars so every shared header matches the 375px frame. */
 @media (max-width: 767px) {
+  .header.header .header__row {
+    width: calc(100% - 32px);
+    min-height: 56px;
+    margin-inline: auto;
+  }
+
+  .header.header .brand {
+    gap: 9px;
+  }
+
+  .header.header .brand__mark {
+    width: 32px;
+    height: 32px;
+  }
+
+  .header.header .brand__text {
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .header.header .dzen {
+    width: 28px;
+    height: 28px;
+    margin-left: auto;
+  }
+
   .header.header .menu-button {
     position: relative;
     display: inline-grid;
