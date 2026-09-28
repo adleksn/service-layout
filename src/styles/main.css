@@ -6203,6 +6203,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 
   .layout--catalog .catalog__legend--disclosure > .catalog__legends {
     display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     width: 100%;
     box-sizing: border-box;
   }
@@ -6221,8 +6222,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .layout--catalog .catalog__legend--disclosure > .catalog__legends .legend--reports::before {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    inset-inline: -11px;
     height: 1px;
     content: '';
     background: #e6e6e6;
