@@ -468,6 +468,28 @@ function setupCatalog() {
     syncFilterPanel();
   });
   const search = root.querySelector('[data-search]'); const clear = root.querySelector('[data-clear-search]'); let timer;
+  const table = root.querySelector('table');
+  let columnGeometryFrame;
+  const releaseColumnGeometry = () => {
+    table.classList.remove('catalog__table--geometry-locked');
+    table.querySelector('[data-catalog-column-lock]')?.remove();
+  };
+  const freezeColumnGeometry = () => {
+    releaseColumnGeometry();
+    if (!matchMedia('(min-width: 768px)').matches) return;
+    const widths = [...table.querySelectorAll('thead th')].map((cell) => Math.round(cell.getBoundingClientRect().width));
+    if (!widths.length || widths.some((width) => width === 0)) return;
+    const columnLock = document.createElement('colgroup');
+    columnLock.dataset.catalogColumnLock = 'true';
+    columnLock.innerHTML = widths.map((width) => `<col style="width:${width}px">`).join('');
+    table.prepend(columnLock);
+    table.classList.add('catalog__table--geometry-locked');
+  };
+  const scheduleColumnGeometry = () => {
+    cancelAnimationFrame(columnGeometryFrame);
+    columnGeometryFrame = requestAnimationFrame(freezeColumnGeometry);
+  };
+  window.addEventListener('resize', scheduleColumnGeometry);
   const draw = () => {
     const visible = sortCatalog(filterCatalog(data, state), state.sort);
     const rows = root.querySelector('[data-rows]');
@@ -506,6 +528,7 @@ function setupCatalog() {
     root.querySelector('[data-active-count]').textContent = Object.values(state.filters).flat().filter((v) => v !== 'any').length;
     const query = serializeFilterState(state.filters);
     history.replaceState(null, '', `${location.pathname}${query ? `?${query}` : ''}`);
+    if (!table.classList.contains('catalog__table--geometry-locked')) scheduleColumnGeometry();
   };
   const syncChips = () => root.querySelectorAll('.chip').forEach((chip) => { const selected = (state.filters[chip.dataset.group] || (chip.dataset.group === 'rating' ? ['any'] : [])).includes(chip.dataset.value); chip.classList.toggle('chip--active', selected); chip.setAttribute('aria-pressed', selected); });
   root.querySelectorAll('.chip').forEach((chip) => chip.addEventListener('click', () => { const group = chip.dataset.group; const value = chip.dataset.value; const current = state.filters[group] || (group === 'rating' ? ['any'] : []); state.filters[group] = group === 'rating' ? [value] : current.includes(value) ? current.filter((v) => v !== value) : [...current, value]; syncChips(); draw(); }));

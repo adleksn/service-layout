@@ -6285,8 +6285,11 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   }
 }
 
-/* Keep interaction geometry independent from the changing result set. */
-.layout--catalog .catalog table { table-layout: fixed; }
+/* Keep the original auto-sized Pen table on first paint. JavaScript freezes
+   those measured tracks afterwards, so filtering cannot resize the columns. */
+@media (min-width: 768px) {
+  .layout--catalog .catalog__table--geometry-locked { table-layout: fixed; }
+}
 .layout--catalog .catalog-row[data-row-link] { cursor: pointer; }
 .layout--catalog .catalog-row[data-row-link]:focus-visible {
   position: relative;
@@ -6301,21 +6304,4 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .layout--catalog .catalog-discontinued .discontinued__item:hover,
 .layout--catalog .catalog-discontinued .discontinued__item:focus-visible {
   background-color: #e3e3e3 !important;
-}
-
-/* Rating FAQ rows must own the complete hover area. Legacy open-state padding
-   previously narrowed the button after an accordion item had been closed. */
-#app[data-page="rating"] .catalog-faq .faq > div { padding: 0 !important; }
-#app[data-page="rating"] .catalog-faq .faq > div > button { box-sizing: border-box; width: 100%; }
-#app[data-page="rating"] .catalog-faq .faq > div.is-open > button { padding: 18px 16px; }
-#app[data-page="rating"] .catalog-faq .faq > div.is-open > div {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-  padding: 14px 16px;
-}
-@media (max-width: 767px) {
-  #app[data-page="rating"] .catalog-faq .faq > div > button,
-  #app[data-page="rating"] .catalog-faq .faq > div.is-open > button { padding: 16px 14px; }
-  #app[data-page="rating"] .catalog-faq .faq > div.is-open > div { padding: 12px 14px; }
 }
