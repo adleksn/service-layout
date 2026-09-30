@@ -5984,6 +5984,25 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .layout--catalog .catalog[data-type="rating"] .mobile-promo-badge { display: none; }
 }
 
+/* Keep report text on the same table baseline as the neighbouring review
+   count. A flex table cell centres a separate line box too high in Chromium. */
+@media (min-width: 768px) {
+  .layout--catalog .catalog[data-type="rating"] td:nth-child(6) {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .layout--catalog .catalog[data-type="rating"] .report-dot {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .layout--catalog .catalog[data-type="rating"] .report-date {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
 @media (max-width: 767px) {
   .layout--catalog .catalog[data-type="rating"] tbody tr:has(.mobile-promo-badge:not(.mobile-promo-badge--inline)) {
     grid-template-rows: 24px 36px 49px 24px 24px;

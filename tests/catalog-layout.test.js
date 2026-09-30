@@ -36,6 +36,11 @@ describe('rating catalog layout', () => {
     expect(css).not.toContain('td:nth-child(6) {\n    box-sizing: border-box;\n    height: 49px;\n    min-height: 49px;\n    transform: translateY(-.5px);');
   });
 
+  it('aligns desktop report dates with review counts on the shared table baseline', () => {
+    expect(css).toContain('.layout--catalog .catalog[data-type="rating"] td:nth-child(6) {\n    display: table-cell;\n    vertical-align: middle;');
+    expect(css).toContain('.layout--catalog .catalog[data-type="rating"] .report-date {\n    display: inline-block;\n    vertical-align: middle;');
+  });
+
   it('keeps the Pen-sized FAQ cards instead of flattening their inner padding', () => {
     expect(css).toContain('.layout--catalog .catalog-faq .faq > div { width: 100%; }');
     expect(css).not.toContain('#app[data-page="rating"] .catalog-faq .faq > div { padding: 0 !important; }');
