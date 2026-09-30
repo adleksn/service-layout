@@ -78,9 +78,17 @@ describe('service page supplied copy layout', () => {
   it('keeps the virtual-card sidebar sticky and shopper reports inside the content rail', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
-    expect(css).toContain('.pen-frame[data-pencil-name="Виртуальные карты — Карточка сервиса Desktop 1440"] [data-pencil-name="Side Column (sticky)"] {\n    position: fixed !important;');
-    expect(css).toContain('.pen-frame[data-pencil-name="Виртуальные карты — Карточка сервиса Desktop 1440"] [data-pencil-name^="Mystery Shopper Report"] {\n    box-sizing: border-box !important;\n    width: 100% !important;\n    max-width: 100% !important;\n    margin: 0 !important;');
+    expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name="Side Column (sticky)"] {\n    position: fixed !important;');
+    expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name^="Mystery Shopper Report"] {\n    box-sizing: border-box !important;\n    width: 100% !important;\n    max-width: 100% !important;\n    margin: 0 !important;');
     expect(css).toContain('[data-pencil-name="Button Get Code"]:hover');
     expect(css).toContain('[data-pencil-name="Button Get Code"]:active');
+  });
+
+  it('keeps the regular service report cards clear of its fixed advert rail', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name="Side Column (sticky)"]');
+    expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name^="Mystery Shopper Report"]');
+    expect(css).toContain('.pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:hover');
   });
 });

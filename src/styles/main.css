@@ -6212,7 +6212,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
    border and padding inside the article rail, leaving the right rail clear
    for the advert that follows the viewport on scroll. */
 @media (min-width: 1440px) {
-  .pen-frame[data-pencil-name="Виртуальные карты — Карточка сервиса Desktop 1440"] [data-pencil-name="Side Column (sticky)"] {
+  .pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name="Side Column (sticky)"] {
     position: fixed !important;
     top: 100px !important;
     right: max(24px, calc((100vw - 1170px) / 2)) !important;
@@ -6220,7 +6220,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     z-index: 2;
   }
 
-  .pen-frame[data-pencil-name="Виртуальные карты — Карточка сервиса Desktop 1440"] [data-pencil-name^="Mystery Shopper Report"] {
+  .pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name^="Mystery Shopper Report"] {
     box-sizing: border-box !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -6230,23 +6230,23 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 
 /* The Pen buttons are div layers, so give the promo action its own tangible
    hover, pressed and keyboard-focus states rather than relying on .button. */
-.pen-frame[data-pencil-name^="Виртуальные карты — Карточка сервиса"] [data-pencil-name="Button Get Code"] {
+.pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"] {
   cursor: pointer;
   transition: background-color .15s ease, box-shadow .15s ease, transform .15s ease;
 }
 
-.pen-frame[data-pencil-name^="Виртуальные карты — Карточка сервиса"] [data-pencil-name="Button Get Code"]:hover {
+.pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:hover {
   background-color: #2f8a16 !important;
   box-shadow: 0 4px 10px rgb(47 138 22 / 22%);
 }
 
-.pen-frame[data-pencil-name^="Виртуальные карты — Карточка сервиса"] [data-pencil-name="Button Get Code"]:active {
+.pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:active {
   background-color: #236b10 !important;
   box-shadow: none;
   transform: translateY(1px);
 }
 
-.pen-frame[data-pencil-name^="Виртуальные карты — Карточка сервиса"] [data-pencil-name="Button Get Code"]:focus-visible {
+.pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:focus-visible {
   outline: 2px solid #2f8a16;
   outline-offset: 3px;
 }
