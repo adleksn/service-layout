@@ -4307,7 +4307,10 @@ body {
 }
 .catalog tbody tr { transition: background-color .15s ease; }
 .catalog tbody tr:hover { background-color: #f9fbf8; }
-.pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "] { transition: background-color .15s ease; }
+.pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "] {
+  background-color: #ffffff !important;
+  transition: background-color .15s ease;
+}
 .pen-frame [data-pencil-name="Table"] [data-pencil-name^="Row "]:hover { background-color: #f9fbf8 !important; }
 .pen-frame [data-pencil-name="Button Primary"],
 .pen-frame [data-pencil-name="Button Dzen"] { cursor: pointer; transition: background-color .15s ease, transform .15s ease; }
