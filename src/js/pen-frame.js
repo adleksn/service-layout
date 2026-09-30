@@ -726,7 +726,8 @@ function setupPenReportTabs(frame, onSelect) {
 }
 
 function setupPenReportState(frame, stateSource, initialHash) {
-  const mainColumn = frame.querySelector('[data-pencil-name="Main Column"]');
+  const mainColumn = frame.querySelector('[data-pencil-name="Main Column"]')
+    || frame.querySelector('[data-pencil-name="Page Content"]');
   const serviceCard = mainColumn && [...mainColumn.children]
     .find((node) => node.getAttribute('data-pencil-name') === 'Checked Service Card');
   const oldDemo = stateSource?.querySelector('[data-pencil-name="Old Check Demo"]');
@@ -734,7 +735,7 @@ function setupPenReportState(frame, stateSource, initialHash) {
 
   const children = [...mainColumn.children];
   const staticChildren = children.slice(0, children.indexOf(serviceCard) + 1);
-  const persistentStart = children.findIndex((node) => node.getAttribute('data-pencil-name') === 'Button Row');
+  const persistentStart = children.findIndex((node) => ['Button Row', 'Button Column'].includes(node.getAttribute('data-pencil-name')));
   if (persistentStart === -1) return null;
   const normalContent = children.slice(staticChildren.length, persistentStart).map((node) => node.cloneNode(true));
   const persistentContent = children.slice(persistentStart);

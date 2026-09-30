@@ -290,6 +290,32 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('switches the mobile report content to the old selected check', async () => {
+    const source = readFileSync('public/reference/pen-source.html', 'utf8');
+    const states = readFileSync('public/reference/pen-states.html', 'utf8');
+    const dom = new JSDOM('<main id="app"><header class="header"></header></main>', { url: 'http://localhost/report.html' });
+    Object.defineProperty(dom.window, 'innerWidth', { configurable: true, value: 375 });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('DOMParser', dom.window.DOMParser);
+    vi.stubGlobal('location', dom.window.location);
+    vi.stubGlobal('fetch', vi.fn().mockImplementation(async (url) => ({
+      ok: true,
+      text: async () => String(url).includes('pen-states') ? states : source
+    })));
+    const root = dom.window.document.querySelector('#app');
+
+    await applyExactPenFrame(root, 'report', dom.window.location.href);
+    root.querySelector('[data-pencil-name="Tab 03.09.2023"]')?.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    await new Promise((resolve) => dom.window.setTimeout(resolve, 0));
+
+    expect(root.dataset.penExact).toBe('Отчёт Mobile 375');
+    expect(root.querySelector('[data-pencil-name="Warning Banner"]')?.textContent).toContain('Вы смотрите проверку от 03.09.2023');
+    expect(root.querySelector('[data-pencil-name="Article Card (old, condensed)"]')).not.toBeNull();
+    expect(root.querySelector('[data-pencil-name="Tab 03.09.2023"]')?.style.outline).toBe('1px solid #45A828');
+    vi.unstubAllGlobals();
+  });
+
   it('uses the old report state without its exported state-label layer', () => {
     const states = readFileSync('public/reference/pen-states.html', 'utf8');
     const dom = new JSDOM('', { url: 'https://example.test/report.html#check-2023' });
