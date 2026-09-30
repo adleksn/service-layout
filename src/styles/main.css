@@ -6364,6 +6364,15 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   font-weight: 500 !important;
 }
 
+/* The mobile report already clips the dates row. Its exported fade layer is a
+   vertical white gradient, so it reads as a solid white block over the last
+   date instead of a horizontal edge fade. */
+@media (max-width: 767px) {
+  .pen-frame[data-pencil-name="Отчёт Mobile 375"] [data-pencil-name="Fade Overlay"] {
+    display: none !important;
+  }
+}
+
 .pen-frame[data-pencil-name^="Отчёт"] [data-pencil-name="Link Row"] [data-pencil-name="Link"] {
   cursor: pointer;
   text-decoration: underline;
