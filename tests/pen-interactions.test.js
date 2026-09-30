@@ -462,6 +462,49 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('binds contact addresses and advertising option anchors in every supplied frame', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/contacts.html' });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    for (const frameName of ['Контакты Desktop 1440', 'Контакты Mobile 375']) {
+      const source = [...dom.window.document.querySelectorAll('[data-pencil-name]')].find((node) => node.dataset.pencilName === frameName);
+      const frame = source.cloneNode(true);
+      enhanceInteractions(frame, 'contacts');
+      expect(frame.querySelector('[data-pencil-name="Contact Card Telegram"] [data-pencil-name="Value"]')?.dataset.penLink).toBe('https://t.me/saorating_bot');
+      expect(frame.querySelector('[data-pencil-name="Contact Card Email"] [data-pencil-name="Value"]')?.dataset.penLink).toBe('mailto:info@sao-rating.ru');
+    }
+
+    for (const frameName of ['Реклама Desktop 1440', 'Реклама Mobile 375']) {
+      const source = [...dom.window.document.querySelectorAll('[data-pencil-name]')].find((node) => node.dataset.pencilName === frameName);
+      const frame = source.cloneNode(true);
+      enhanceInteractions(frame, 'advertising');
+      expect(frame.querySelector('[data-pencil-name="Chip Пометка PROMO"]')?.dataset.penLink).toBe('#promo');
+      expect(frame.querySelector('[data-pencil-name="Option Promo"]')?.id).toBe('promo');
+    }
+    vi.unstubAllGlobals();
+  });
+
+  it('makes report dates selected and links the methodology note on mobile', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/report.html' });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+    const source = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.dataset.pencilName === 'Отчёт Mobile 375');
+    const frame = source.cloneNode(true);
+
+    enhanceInteractions(frame, 'report');
+    const tabs = frame.querySelectorAll('[data-pencil-name^="Tab "]');
+    tabs[1].dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+
+    expect(tabs[1].getAttribute('aria-selected')).toBe('true');
+    expect(tabs[0].getAttribute('aria-selected')).toBe('false');
+    expect(frame.querySelector('[data-pencil-name="Link Row"] [data-pencil-name="Link"]')?.dataset.penLink).toBe('/methodology.html');
+    vi.unstubAllGlobals();
+  });
+
   it('opens the service promo code instead of falling through to a placeholder link', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/service.html' });
     const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]

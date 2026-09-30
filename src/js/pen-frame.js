@@ -164,6 +164,28 @@ function setupPenServiceStickyAd(frame) {
   });
 }
 
+function setupPenAdvertisingAnchors(frame) {
+  const anchors = {
+    'Chip Пометка PROMO': 'promo',
+    'Chip Строчка в рейтинге': 'row',
+    'Chip Рекламный баннер': 'banner',
+    'Chip Отключение баннеров': 'off',
+  };
+  const options = {
+    promo: 'Option Promo',
+    row: 'Option Stroka',
+    banner: 'Option Banner',
+    off: 'Option Без рекламы',
+  };
+
+  Object.entries(options).forEach(([id, name]) => {
+    frame.querySelectorAll(`[data-pencil-name="${name}"]`).forEach((option) => { option.id = id; });
+  });
+  Object.entries(anchors).forEach(([name, id]) => {
+    frame.querySelectorAll(`[data-pencil-name="${name}"]`).forEach((chip) => makeInteractive(chip, `#${id}`));
+  });
+}
+
 function removePenDemoLabels(frame) {
   frame.querySelectorAll('[data-pencil-name="Demo Label"]').forEach((label) => {
     if (/^(Состояние:|Пример:)/.test(label.textContent.trim())) label.remove();
@@ -679,11 +701,15 @@ function setupPenReportTabs(frame, onSelect) {
   if (!tabs.length) return;
   const targets = ['#check-2024', '#check-2023', '#check-2023'];
   tabs.forEach((tab, index) => {
-    const selected = index === 0;
     tab.setAttribute('role', 'tab');
-    tab.setAttribute('aria-selected', String(selected));
-    tab.tabIndex = selected ? 0 : -1;
+    tab.setAttribute('aria-selected', String(index === 0));
+    tab.tabIndex = index === 0 ? 0 : -1;
     const activate = () => {
+      tabs.forEach((other, otherIndex) => {
+        const selected = otherIndex === index;
+        other.setAttribute('aria-selected', String(selected));
+        other.tabIndex = selected ? 0 : -1;
+      });
       const target = targets[index] || '#check-2023';
       if (onSelect) {
         window.history.pushState(null, '', target);
@@ -868,6 +894,9 @@ export function enhanceInteractions(frame, page, { onReportTabChange } = {}) {
     setupPenReportPagination(frame);
   }
   if (page === 'report') setupPenReportTabs(frame, onReportTabChange);
+  if (page === 'report') {
+    frame.querySelectorAll('[data-pencil-name="Link Row"] [data-pencil-name="Link"]').forEach((node) => makeInteractive(node, '/methodology.html'));
+  }
   if (page === 'reports' || page === 'advertising') {
     frame.querySelectorAll('[data-pencil-name="Button"]').forEach((node) => {
       if (node.textContent.trim() === 'Написать в Telegram ↗') makeInteractive(node, '#');
@@ -875,7 +904,10 @@ export function enhanceInteractions(frame, page, { onReportTabChange } = {}) {
   }
   if (page === 'contacts') {
     frame.querySelectorAll('[data-pencil-name="Button Dzen"], [data-pencil-name="Faq Card"]').forEach((node) => makeInteractive(node, '#'));
+    frame.querySelectorAll('[data-pencil-name="Contact Card Telegram"] [data-pencil-name="Value"]').forEach((node) => makeInteractive(node, 'https://t.me/saorating_bot'));
+    frame.querySelectorAll('[data-pencil-name="Contact Card Email"] [data-pencil-name="Value"]').forEach((node) => makeInteractive(node, 'mailto:info@sao-rating.ru'));
   }
+  if (page === 'advertising') setupPenAdvertisingAnchors(frame);
   if (page === 'agreement') {
     frame.querySelectorAll('[data-pencil-name="Link"]').forEach((node) => {
       if (node.textContent.trim() === 'Методика проверки') makeInteractive(node, '/methodology.html');
@@ -884,13 +916,13 @@ export function enhanceInteractions(frame, page, { onReportTabChange } = {}) {
   if (page === 'service' || page === 'virtual-card') {
     setupPenPromo(frame);
     setupPenServiceExternalLinks(frame);
-    setupPenServiceStickyAd(frame);
     removePenDemoLabels(frame);
     setupPenLoadMore(frame);
     setupPenReviewForm(frame);
     setupPenReviewSort(frame);
     frame.querySelectorAll('[data-pencil-name="Button Primary"], [data-pencil-name="Button Outline"], [data-pencil-name^="Mystery Shopper Report"] [data-pencil-name="Button"]').forEach((node) => makeInteractive(node, '#'));
   }
+  if (['service', 'virtual-card', 'reports', 'report'].includes(page)) setupPenServiceStickyAd(frame);
   if (page === 'cards') {
     setupPenCardFilterChips(frame);
     setupPenMobileCardFilters(frame);

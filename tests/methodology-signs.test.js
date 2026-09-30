@@ -32,7 +32,7 @@ describe('methodology sign fidelity', () => {
     expect(css).toContain('.methodology-layout .methodology .lead .eyebrow:empty { display: none; }');
     expect(css).toContain('.methodology-layout .methodology .lead p { font-size: 16px; line-height: 26px; }');
     expect(css).toContain('.methodology-layout .methodology > p { color: #9b9b9b; }');
-    expect(css).toContain('.methodology-layout > .ad { position: static; top: auto; background: transparent; text-align: right; }');
+    expect(css).toContain('.methodology-layout > .ad { position: sticky; top: 100px; background: transparent; text-align: right; }');
     expect(css).toContain('.method-warning { background: #f5f5f5; border-left-color: #46a827;');
     expect(css).toContain('.method-warning p { font-style: italic; }');
     expect(app).toContain('<article><i aria-hidden="true"></i><div><h3>${name}</h3><p>${text}</p></div></article>');

@@ -108,4 +108,16 @@ describe('service page supplied copy layout', () => {
     expect(css).toContain('[data-pencil-name="Promo Code Block (closed)"] [data-pencil-name="Button Get Code"]:hover');
     expect(css).not.toContain('.pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:hover');
   });
+
+  it('keeps report tab, method link, advert and advertising-chip interaction states visible', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+    const penFrame = readFileSync('src/js/pen-frame.js', 'utf8');
+
+    expect(css).toContain('[data-pencil-name^="Tab "][role="tab"]:hover');
+    expect(css).toContain('[data-pencil-name="Link Row"] [data-pencil-name="Link"]:hover');
+    expect(css).toContain('[data-pencil-name="Options Nav"] [data-pencil-name^="Chip "]:hover');
+    expect(css).toContain('background-color: #eaeaea !important;');
+    expect(css).toContain('.methodology-layout > .ad { position: sticky; top: 100px;');
+    expect(penFrame).toContain("if (['service', 'virtual-card', 'reports', 'report'].includes(page)) setupPenServiceStickyAd(frame);");
+  });
 });
