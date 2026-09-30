@@ -16,4 +16,16 @@ describe('mobile FAQ layout', () => {
     expect(css).toContain('.layout--catalog .catalog-faq .faq > div.is-open {\n    gap: 0;\n    padding: 0;\n    background: #e4e4e4;');
     expect(css).toContain('.layout--catalog .catalog-faq .faq > div.is-open > div {\n    box-sizing: border-box;\n    width: 100%;\n    margin: 0;\n    padding: 12px 14px;\n    border: 0;\n    border-radius: 0 0 8px 8px;\n    background: #f5f5f5 !important;');
   });
+
+  it('makes the service-rating question hover fill its whole row', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('#app[data-page="rating"] .layout--catalog .catalog-faq .faq > div:hover {\n    background-color: #dedede;\n  }');
+  });
+
+  it('does not retain a touch hover color after a rating FAQ is closed', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('#app[data-page="rating"] .layout--catalog .catalog-faq .faq > div:hover:not(.is-open) > button {\n    background-color: transparent;\n    color: var(--ink);\n  }');
+  });
 });

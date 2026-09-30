@@ -5852,6 +5852,37 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   }
 }
 
+/* Service-rating FAQ uses a row-level hover on desktop. The base accordion
+   style colours the button itself, which leaves the surrounding row untouched
+   in this 800px catalogue composition. */
+@media (min-width: 768px) {
+  #app[data-page="rating"] .layout--catalog .catalog-faq .faq > div:hover {
+    background-color: #dedede;
+  }
+
+  #app[data-page="rating"] .layout--catalog .catalog-faq .faq > div:hover > button {
+    background-color: transparent;
+    color: #2f8a16;
+  }
+}
+
+/* Touch browsers can preserve :hover after a tap. Rating questions should
+   return to their neutral appearance as soon as their disclosure is closed. */
+@media (max-width: 767px) {
+  #app[data-page="rating"] .layout--catalog .catalog-faq .faq > div:hover:not(.is-open) {
+    background-color: #e4e4e4;
+  }
+
+  #app[data-page="rating"] .layout--catalog .catalog-faq .faq > div:hover:not(.is-open) > button {
+    background-color: transparent;
+    color: var(--ink);
+  }
+
+  #app[data-page="rating"] .layout--catalog .catalog-faq .faq > div.is-open:hover > button {
+    background-color: #e4e4e4;
+  }
+}
+
 /* Match the virtual-cards empty result in the semantic rating catalogue. */
 .empty-state--catalog {
   display: flex;
