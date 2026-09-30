@@ -61,4 +61,10 @@ describe('advertising lead', () => {
     expect(css).toContain('height: 57px !important;');
     expect(css).toContain('height: 234px !important;');
   });
+
+  it('does not append the semantic banner notice to the authored Pen option', () => {
+    const app = readFileSync('src/js/app.js', 'utf8');
+
+    expect(app).toContain("const fallbackBanner = app.querySelector('#banner:not([data-pencil-name])');");
+  });
 });

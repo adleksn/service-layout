@@ -320,7 +320,7 @@ const applyAdvertisingLeadLayout = () => {
   app.querySelectorAll('.ad-order p, [data-pencil-name="Final CTA"] [data-pencil-name="Paragraph"]').forEach((text) => {
     text.innerHTML = finalCtaCopy;
   });
-  const fallbackBanner = app.querySelector('#banner');
+  const fallbackBanner = app.querySelector('#banner:not([data-pencil-name])');
   if (fallbackBanner && !fallbackBanner.querySelector('.ad-banner-warning')) {
     const warning = document.createElement('aside');
     warning.className = 'ad-banner-warning';
