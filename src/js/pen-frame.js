@@ -157,7 +157,7 @@ function setupPenServiceStickyAd(frame) {
     // Pen finishes sizing its imported layers after the frame is mounted.
     // Recheck on the next paint so an initial zero-sized footer cannot leave
     // the advert parked at the bottom of the page on first load.
-    window.requestAnimationFrame(syncAdPosition);
+    if (typeof window.requestAnimationFrame === 'function') window.requestAnimationFrame(syncAdPosition);
     window.addEventListener('load', syncAdPosition, { once: true });
     window.addEventListener('scroll', syncAdPosition, { passive: true });
     window.addEventListener('resize', syncAdPosition);
@@ -784,7 +784,11 @@ function setupPenMobileCardLinks(frame, page) {
 }
 
 function setupPenDesktopRatingRowLinks(frame, page) {
-  frame.querySelectorAll('[data-pencil-name="Top 10 Section"] [data-pencil-name="Table"] [data-pencil-name^="Row "]').forEach((row) => {
+  const rows = page === 'cards'
+    ? frame.querySelectorAll('[data-pencil-name="Table"] [data-pencil-name^="Row "]')
+    : frame.querySelectorAll('[data-pencil-name="Top 10 Section"] [data-pencil-name="Table"] [data-pencil-name^="Row "]');
+
+  rows.forEach((row) => {
     const section = row.closest('[data-pencil-name="Top 10 Section"]');
     const isVirtualCard = page === 'cards'
       || (page === 'home' && /виртуальн\S*\s+карт/i.test(section?.textContent || ''));

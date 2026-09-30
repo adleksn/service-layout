@@ -89,7 +89,7 @@ describe('service page supplied copy layout', () => {
 
     expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name="Side Column (sticky)"]');
     expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name^="Mystery Shopper Report"]');
-    expect(css).toContain('.pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:hover');
+    expect(css).toContain('.pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Promo Code Block (closed)"] [data-pencil-name="Button Get Code"]:hover');
   });
 
   it('keeps service report actions inside their cards and stops the advert before the footer', () => {
@@ -100,5 +100,12 @@ describe('service page supplied copy layout', () => {
     expect(css).toContain('background-color: #7d4fe0 !important;');
     expect(penFrame).toContain('const syncAdPosition = () =>');
     expect(penFrame).toContain('footer.getBoundingClientRect()');
+  });
+
+  it('does not retain a promo hover state after the code is copied', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('[data-pencil-name="Promo Code Block (closed)"] [data-pencil-name="Button Get Code"]:hover');
+    expect(css).not.toContain('.pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:hover');
   });
 });

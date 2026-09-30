@@ -441,6 +441,27 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('makes every virtual-card catalogue row a link on desktop and mobile', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/virtual-cards.html' });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    for (const frameName of ['Виртуальные карты Desktop 1440', 'Виртуальные карты Mobile 375']) {
+      const source = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+        .find((node) => node.getAttribute('data-pencil-name') === frameName);
+      const frame = source.cloneNode(true);
+      enhanceInteractions(frame, 'cards');
+      const rows = frameName.includes('Desktop')
+        ? frame.querySelectorAll('[data-pencil-name="Table"] [data-pencil-name^="Row "]')
+        : frame.querySelectorAll('[data-pencil-name^="Service Card "]');
+
+      expect(rows.length).toBeGreaterThan(0);
+      expect([...rows].every((row) => row.dataset.penLink === '/virtual-card.html' && row.getAttribute('role') === 'link')).toBe(true);
+    }
+    vi.unstubAllGlobals();
+  });
+
   it('opens the service promo code instead of falling through to a placeholder link', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/service.html' });
     const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
