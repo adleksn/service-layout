@@ -104,6 +104,33 @@ function setupPenPromo(frame) {
   });
 }
 
+function setupPenServiceExternalLinks(frame) {
+  const destinations = {
+    'Domain Link': 'https://pay-saas.ru/',
+    'Chip Яндекс Карты': 'https://yandex.ru/profile/42393192868',
+    'Chip Baxov.Net': 'https://www.baxov.net/',
+    'Chip Думай.Нет': 'https://dymai.net/',
+    'Chip Telegram': 'https://t.me/paysaas',
+    'Chip Дзен': 'https://dzen.ru/media/world_top_business/-kak-oplachivat-zarubejnye-servisy-iz-rossii-rabotaiuscii-variant--624930bd4d78e042cacd2279'
+  };
+  Object.entries(destinations).forEach(([name, destination]) => {
+    frame.querySelectorAll(`[data-pencil-name="${name}"]`).forEach((node) => makeInteractive(node, destination));
+  });
+}
+
+function setupPenServiceStickyAd(frame) {
+  frame.querySelectorAll('[data-pencil-name="Side Column (sticky)"]').forEach((column) => {
+    // The exported side column sits in an overflow clipping layer, so native
+    // sticky stops as soon as that layer scrolls away. Pin it to the desktop
+    // rail instead, which keeps the advert visible through the whole card.
+    column.style.position = 'fixed';
+    column.style.top = '100px';
+    column.style.right = 'max(24px, calc((100vw - 1170px) / 2))';
+    column.style.alignSelf = 'flex-start';
+    column.style.zIndex = '2';
+  });
+}
+
 function removePenDemoLabels(frame) {
   frame.querySelectorAll('[data-pencil-name="Demo Label"]').forEach((label) => {
     if (/^(Состояние:|Пример:)/.test(label.textContent.trim())) label.remove();
@@ -819,6 +846,8 @@ export function enhanceInteractions(frame, page, { onReportTabChange } = {}) {
   }
   if (page === 'service' || page === 'virtual-card') {
     setupPenPromo(frame);
+    setupPenServiceExternalLinks(frame);
+    setupPenServiceStickyAd(frame);
     removePenDemoLabels(frame);
     setupPenLoadMore(frame);
     setupPenReviewForm(frame);

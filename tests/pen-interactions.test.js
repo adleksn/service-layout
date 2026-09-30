@@ -459,6 +459,23 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('turns virtual-card external service references into real outbound links', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/virtual-card.html' });
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Виртуальные карты — Карточка сервиса Desktop 1440')
+      .cloneNode(true);
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+
+    enhanceInteractions(frame, 'virtual-card');
+
+    expect(frame.querySelector('[data-pencil-name="Domain Link"]')?.dataset.penLink).toBe('https://pay-saas.ru/');
+    expect(frame.querySelector('[data-pencil-name="Chip Яндекс Карты"]')?.dataset.penLink).toBe('https://yandex.ru/profile/42393192868');
+    expect(frame.querySelector('[data-pencil-name="Chip Дзен"]')?.dataset.penLink).toContain('https://dzen.ru/media/');
+    vi.unstubAllGlobals();
+  });
+
   it('marks the requested reports page active and gives every pager a reload destination', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/reports.html?page=2' });
     const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
