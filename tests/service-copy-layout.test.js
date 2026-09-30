@@ -79,7 +79,7 @@ describe('service page supplied copy layout', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
     expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name="Side Column (sticky)"] {\n    position: fixed !important;');
-    expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name^="Mystery Shopper Report"] {\n    box-sizing: border-box !important;\n    width: 100% !important;\n    max-width: 100% !important;\n    margin: 0 !important;');
+    expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name^="Mystery Shopper Report"] {\n    box-sizing: border-box !important;\n    width: 100% !important;\n    max-width: 100% !important;');
     expect(css).toContain('[data-pencil-name="Button Get Code"]:hover');
     expect(css).toContain('[data-pencil-name="Button Get Code"]:active');
   });
@@ -90,5 +90,15 @@ describe('service page supplied copy layout', () => {
     expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name="Side Column (sticky)"]');
     expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name^="Mystery Shopper Report"]');
     expect(css).toContain('.pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:hover');
+  });
+
+  it('keeps service report actions inside their cards and stops the advert before the footer', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+    const penFrame = readFileSync('src/js/pen-frame.js', 'utf8');
+
+    expect(css).toContain('.pen-frame[data-pencil-name$="Карточка сервиса Desktop 1440"] [data-pencil-name^="Mystery Shopper Report"] {\n    box-sizing: border-box !important;\n    width: 100% !important;\n    max-width: 100% !important;\n    height: auto !important;');
+    expect(css).toContain('background-color: #7d4fe0 !important;');
+    expect(penFrame).toContain('const syncAdPosition = () =>');
+    expect(penFrame).toContain('footer.getBoundingClientRect()');
   });
 });

@@ -119,15 +119,48 @@ function setupPenServiceExternalLinks(frame) {
 }
 
 function setupPenServiceStickyAd(frame) {
+  const footer = frame.querySelector('[data-pencil-name="Footer"]');
+  const topOffset = 100;
+  const footerGap = 24;
+  const railRight = 'max(24px, calc((100vw - 1170px) / 2))';
+
   frame.querySelectorAll('[data-pencil-name="Side Column (sticky)"]').forEach((column) => {
-    // The exported side column sits in an overflow clipping layer, so native
-    // sticky stops as soon as that layer scrolls away. Pin it to the desktop
-    // rail instead, which keeps the advert visible through the whole card.
-    column.style.position = 'fixed';
-    column.style.top = '100px';
-    column.style.right = 'max(24px, calc((100vw - 1170px) / 2))';
-    column.style.alignSelf = 'flex-start';
-    column.style.zIndex = '2';
+    // The export places the rail inside an overflow clipping layer, so native
+    // sticky cannot work here. Pin it below the header, then switch to an
+    // absolute position just before the footer instead of scrolling over it.
+    const syncAdPosition = () => {
+      const footerRect = footer ? footer.getBoundingClientRect() : null;
+      const columnHeight = column.getBoundingClientRect().height;
+      const stopBeforeFooter = Boolean(
+        footerRect && footerRect.top <= topOffset + columnHeight + footerGap,
+      );
+
+      if (stopBeforeFooter) {
+        const frameRect = frame.getBoundingClientRect();
+        const top = Math.max(0, footerRect.top - frameRect.top - columnHeight - footerGap);
+
+        column.classList.add('pen-ad--stopped');
+        column.style.setProperty('position', 'absolute', 'important');
+        column.style.setProperty('top', `${top}px`, 'important');
+      } else {
+        column.classList.remove('pen-ad--stopped');
+        column.style.setProperty('position', 'fixed', 'important');
+        column.style.setProperty('top', `${topOffset}px`, 'important');
+      }
+
+      column.style.setProperty('right', railRight, 'important');
+      column.style.setProperty('align-self', 'flex-start', 'important');
+      column.style.setProperty('z-index', '2', 'important');
+    };
+
+    syncAdPosition();
+    // Pen finishes sizing its imported layers after the frame is mounted.
+    // Recheck on the next paint so an initial zero-sized footer cannot leave
+    // the advert parked at the bottom of the page on first load.
+    window.requestAnimationFrame(syncAdPosition);
+    window.addEventListener('load', syncAdPosition, { once: true });
+    window.addEventListener('scroll', syncAdPosition, { passive: true });
+    window.addEventListener('resize', syncAdPosition);
   });
 }
 

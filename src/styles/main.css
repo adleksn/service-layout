@@ -6224,6 +6224,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     box-sizing: border-box !important;
     width: 100% !important;
     max-width: 100% !important;
+    height: auto !important;
     margin: 0 !important;
   }
 }
@@ -6236,19 +6237,24 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 }
 
 .pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:hover {
-  background-color: #2f8a16 !important;
-  box-shadow: 0 4px 10px rgb(47 138 22 / 22%);
+  background-color: #7d4fe0 !important;
+  box-shadow: 0 4px 10px rgb(125 79 224 / 22%);
 }
 
 .pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:active {
-  background-color: #236b10 !important;
+  background-color: #7d4fe0 !important;
   box-shadow: none;
   transform: translateY(1px);
 }
 
 .pen-frame[data-pencil-name*="Карточка сервиса"] [data-pencil-name="Button Get Code"]:focus-visible {
-  outline: 2px solid #2f8a16;
+  outline: 2px solid #7d4fe0;
   outline-offset: 3px;
+}
+
+.promo--service .button:hover,
+.promo--service .button:active {
+  background-color: #7d4fe0;
 }
 
 /* The phone rating frame uses an icon-bearing verified chip and a full-width
