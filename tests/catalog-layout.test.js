@@ -17,6 +17,32 @@ describe('rating catalog layout', () => {
     expect(css).toContain('.layout--catalog .filters { position: static; }');
   });
 
+  it('keeps rating filter chips and result columns stable while filters change', () => {
+    expect(css).toContain('.layout--catalog .chip--active,\n.layout--catalog .chip--active:hover {\n  border-color: var(--green);\n  background: rgb(93 207 53 / .12);\n  color: var(--green-dark);\n  font-weight: 400;');
+    expect(css).toContain('.layout--catalog .catalog table { table-layout: fixed; }');
+  });
+
+  it('turns every semantic rating row into one keyboard-accessible card link', () => {
+    expect(app).toContain('data-row-link="${destination}"');
+    expect(app).toContain("root.querySelector('[data-rows]').addEventListener('click', (event) => {");
+    expect(app).toContain("if (event.key !== 'Enter' && event.key !== ' ') return;");
+    expect(app).toContain('window.location.href = sitePath(row.dataset.rowLink)');
+    expect(css).toContain('.layout--catalog .catalog-row[data-row-link] { cursor: pointer; }');
+  });
+
+  it('keeps the report date on its baseline in mobile rating cards', () => {
+    expect(css).not.toContain('td:nth-child(6) {\n    box-sizing: border-box;\n    height: 49px;\n    min-height: 49px;\n    transform: translateY(-.5px);');
+  });
+
+  it('makes the full rating FAQ row the hover target in both closed and open states', () => {
+    expect(css).toContain('#app[data-page="rating"] .catalog-faq .faq > div { padding: 0 !important; }');
+    expect(css).toContain('#app[data-page="rating"] .catalog-faq .faq > div > button { box-sizing: border-box; width: 100%; }');
+  });
+
+  it('restores a coloured hover state to closed and suspicious registry items', () => {
+    expect(css).toContain('.layout--catalog .catalog-discontinued .discontinued__item:hover,\n.layout--catalog .catalog-discontinued .discontinued__item:focus-visible {\n  background-color: #e3e3e3 !important;');
+  });
+
   it('restores the filter panel when the viewport grows beyond mobile', () => {
     expect(app).toContain("window.addEventListener('resize', syncFilterPanel)");
   });

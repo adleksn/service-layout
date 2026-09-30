@@ -366,7 +366,9 @@ function setupPenCardFilterChips(frame) {
     const label = node.querySelector('[data-pencil-name="Label"]');
     if (label) {
       label.style.color = selected ? '#2F8A16' : '#3A3A3A';
-      label.style.fontWeight = selected ? '600' : '400';
+      // Keep an active chip visually distinct without changing its intrinsic
+      // width and shifting the surrounding filter controls.
+      label.style.fontWeight = '400';
     }
     node.setAttribute('aria-pressed', String(selected));
   };
@@ -716,16 +718,19 @@ function setupPenMobileCardLinks(frame, page) {
       || (page === 'home' && /виртуальн\S*\s+карт/i.test(section?.textContent || ''));
     const serviceName = head.querySelector('[data-pencil-name="Service Name"]')?.textContent.trim();
     const destination = isVirtualCard ? '/virtual-card.html' : '/service.html';
-    makeInteractive(head, destination);
-    if (serviceName) head.setAttribute('aria-label', `Подробнее о ${serviceName}`);
-    // In one Pen mobile composition the chevron is a sibling of Card Head;
-    // in another it is nested inside it. Only bind the separate arrow so the
-    // output never has an invalid interactive element inside another one.
-    card.querySelectorAll('[data-pencil-name="Chevron"]').forEach((chevron) => {
-      if (head.contains(chevron)) return;
-      makeInteractive(chevron, destination);
-      if (serviceName) chevron.setAttribute('aria-label', `Подробнее о ${serviceName}`);
-    });
+    makeInteractive(card, destination);
+    if (serviceName) card.setAttribute('aria-label', `Подробнее о ${serviceName}`);
+  });
+}
+
+function setupPenDesktopRatingRowLinks(frame, page) {
+  frame.querySelectorAll('[data-pencil-name="Top 10 Section"] [data-pencil-name="Table"] [data-pencil-name^="Row "]').forEach((row) => {
+    const section = row.closest('[data-pencil-name="Top 10 Section"]');
+    const isVirtualCard = page === 'cards'
+      || (page === 'home' && /виртуальн\S*\s+карт/i.test(section?.textContent || ''));
+    makeInteractive(row, isVirtualCard ? '/virtual-card.html' : '/service.html');
+    const name = row.querySelector('[data-pencil-name="Service Name"], [data-pencil-name="Service"]')?.textContent.trim();
+    if (name) row.setAttribute('aria-label', `Подробнее о ${name}`);
   });
 }
 
@@ -783,12 +788,14 @@ export function enhanceInteractions(frame, page, { onReportTabChange } = {}) {
     // Desktop Pen rows contain Button Details inside an Action cell. The cell
     // is the one real tap target; binding both would create nested links and
     // is not present in the supplied interaction geometry.
+    if (node.closest('[data-pencil-name="Top 10 Section"] [data-pencil-name^="Row "]')) return;
     if (node.getAttribute('data-pencil-name') === 'Button Details' && node.closest('[data-pencil-name="Action"]')) return;
     const section = node.closest('[data-pencil-name="Top 10 Section"]');
     const virtualCardAction = page === 'cards'
       || (page === 'home' && /виртуальн\S*\s+карт/i.test(section?.textContent || ''));
     makeInteractive(node, virtualCardAction ? '/virtual-card.html' : '/service.html');
   });
+  if (page === 'home' || page === 'cards') setupPenDesktopRatingRowLinks(frame, page);
   if (page === 'home' || page === 'rating' || page === 'cards') setupPenMobileCardLinks(frame, page);
   frame.querySelectorAll('[data-pencil-name="Button Full Rating"]').forEach((node) => makeInteractive(node, page === 'home' && node.closest('[data-pencil-name="Top 10 Section"]')?.textContent.includes('виртуальных карт') ? '/virtual-cards.html' : '/rating.html'));
   frame.querySelectorAll('[data-pencil-name="Back Link"]').forEach((node) => makeInteractive(node, page === 'virtual-card' ? '/virtual-cards.html' : '/rating.html'));

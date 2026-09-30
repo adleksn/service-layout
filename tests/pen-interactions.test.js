@@ -94,6 +94,20 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
+  it('makes the whole exported rating row a single service-card link', () => {
+    const dom = new JSDOM('<div id="frame"><div data-pencil-name="Top 10 Section"><div data-pencil-name="Table"><div data-pencil-name="Row 1"><div data-pencil-name="Action">Подробнее</div></div></div></div></div>');
+    const frame = dom.window.document.querySelector('#frame');
+
+    enhanceInteractions(frame, 'home');
+
+    const row = frame.querySelector('[data-pencil-name="Row 1"]');
+    const action = frame.querySelector('[data-pencil-name="Action"]');
+    expect(row.getAttribute('role')).toBe('link');
+    expect(row.dataset.penLink).toBe('/service.html');
+    expect(row.tabIndex).toBe(0);
+    expect(action.getAttribute('role')).toBeNull();
+  });
+
   it('keeps the desktop report advert in a separate right-side grid column', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 
@@ -375,7 +389,7 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
-  it('sends each mobile table chevron to the same service page as desktop details', () => {
+  it('sends every mobile rating card to the corresponding service page', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/' });
     vi.stubGlobal('window', dom.window);
     vi.stubGlobal('document', dom.window.document);
@@ -389,9 +403,9 @@ describe('unmapped Pen controls', () => {
         .find((node) => node.getAttribute('data-pencil-name') === frameName);
       const frame = source.cloneNode(true);
       enhanceInteractions(frame, page);
-      const heads = [...frame.querySelectorAll('[data-pencil-name^="Service Card "] [data-pencil-name="Card Head"]')];
-      expect(heads.length).toBeGreaterThan(0);
-      expect(heads.every((head) => head.dataset.penLink === destination && head.getAttribute('role') === 'link')).toBe(true);
+      const cards = [...frame.querySelectorAll('[data-pencil-name^="Service Card "]')];
+      expect(cards.length).toBeGreaterThan(0);
+      expect(cards.every((card) => card.dataset.penLink === destination && card.getAttribute('role') === 'link')).toBe(true);
     }
 
     const homeSource = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
@@ -399,14 +413,14 @@ describe('unmapped Pen controls', () => {
     const homeFrame = homeSource.cloneNode(true);
     enhanceInteractions(homeFrame, 'home');
     const homeSections = [...homeFrame.querySelectorAll('[data-pencil-name="Top 10 Section"]')];
-    expect(homeSections[0].querySelector('[data-pencil-name="Card Head"]')?.dataset.penLink).toBe('/service.html');
-    expect(homeSections[1].querySelector('[data-pencil-name="Card Head"]')?.dataset.penLink).toBe('/virtual-card.html');
+    expect(homeSections[0].querySelector('[data-pencil-name="Service Card 1"]')?.dataset.penLink).toBe('/service.html');
+    expect(homeSections[1].querySelector('[data-pencil-name="Service Card 1"]')?.dataset.penLink).toBe('/virtual-card.html');
     expect(homeSections[0].querySelector('[data-pencil-name="Service Card 1"] [data-pencil-name="Chevron"]')?.closest('[role="link"]')?.dataset.penLink).toBe('/service.html');
     expect(homeSections[1].querySelector('[data-pencil-name="Service Card 1"] [data-pencil-name="Chevron"]')?.closest('[role="link"]')?.dataset.penLink).toBe('/virtual-card.html');
     vi.unstubAllGlobals();
   });
 
-  it('keeps desktop and tablet details actions aligned with their home table', () => {
+  it('keeps desktop and tablet home rows linked to their matching cards', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/' });
     vi.stubGlobal('window', dom.window);
     vi.stubGlobal('document', dom.window.document);
@@ -418,15 +432,11 @@ describe('unmapped Pen controls', () => {
       const frame = source.cloneNode(true);
       enhanceInteractions(frame, 'home');
       const sections = [...frame.querySelectorAll('[data-pencil-name="Top 10 Section"]')];
-      const firstActions = sections[0].querySelectorAll('[data-pencil-name="Action"]');
-      const secondActions = sections[1].querySelectorAll('[data-pencil-name="Action"]');
-      expect([...firstActions].every((node) => node.dataset.penLink === '/service.html')).toBe(true);
-      expect([...secondActions].every((node) => node.dataset.penLink === '/virtual-card.html')).toBe(true);
-      const nestedDetails = sections[1].querySelector('[data-pencil-name="Button Details"]');
-      if (nestedDetails) {
-        expect(nestedDetails.getAttribute('role')).toBeNull();
-        expect(nestedDetails.closest('[role="link"]')).toBe(secondActions[0]);
-      }
+      const firstRows = sections[0].querySelectorAll('[data-pencil-name^="Row "]');
+      const secondRows = sections[1].querySelectorAll('[data-pencil-name^="Row "]');
+      expect([...firstRows].every((node) => node.dataset.penLink === '/service.html' && node.getAttribute('role') === 'link')).toBe(true);
+      expect([...secondRows].every((node) => node.dataset.penLink === '/virtual-card.html' && node.getAttribute('role') === 'link')).toBe(true);
+      expect([...sections[1].querySelectorAll('[data-pencil-name="Action"]')].every((node) => node.getAttribute('role') === null)).toBe(true);
     }
     vi.unstubAllGlobals();
   });

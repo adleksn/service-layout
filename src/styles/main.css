@@ -1357,7 +1357,6 @@ form textarea {
     box-sizing: border-box;
     height: 49px;
     min-height: 49px;
-    transform: translateY(-.5px);
   }
   .layout--catalog .catalog[data-type="rating"] td:nth-child(7),
   .layout--catalog .catalog[data-type="rating"] td:nth-child(9) { transform: translateY(-1px); }
@@ -4594,7 +4593,7 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   border-color: var(--green);
   background: rgb(93 207 53 / .12);
   color: var(--green-dark);
-  font-weight: 600;
+  font-weight: 400;
 }
 .layout--catalog .filters__bottom {
   display: flex;
@@ -6284,4 +6283,39 @@ body small, body label, body legend, body th, body td, body dt, body dd {
     box-shadow: 0 7px 0 #3a3a3a, 0 -7px 0 #3a3a3a;
     transform: translate(-50%, -50%);
   }
+}
+
+/* Keep interaction geometry independent from the changing result set. */
+.layout--catalog .catalog table { table-layout: fixed; }
+.layout--catalog .catalog-row[data-row-link] { cursor: pointer; }
+.layout--catalog .catalog-row[data-row-link]:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--green);
+  outline-offset: -2px;
+}
+.layout--catalog .catalog-row[data-row-link]:hover { background-color: #f9fbf8; }
+
+/* Both registry lists use the same fully coloured row state as the Pen
+   reference, including when the keyboard focus reveals “Подробнее”. */
+.layout--catalog .catalog-discontinued .discontinued__item:hover,
+.layout--catalog .catalog-discontinued .discontinued__item:focus-visible {
+  background-color: #e3e3e3 !important;
+}
+
+/* Rating FAQ rows must own the complete hover area. Legacy open-state padding
+   previously narrowed the button after an accordion item had been closed. */
+#app[data-page="rating"] .catalog-faq .faq > div { padding: 0 !important; }
+#app[data-page="rating"] .catalog-faq .faq > div > button { box-sizing: border-box; width: 100%; }
+#app[data-page="rating"] .catalog-faq .faq > div.is-open > button { padding: 18px 16px; }
+#app[data-page="rating"] .catalog-faq .faq > div.is-open > div {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 14px 16px;
+}
+@media (max-width: 767px) {
+  #app[data-page="rating"] .catalog-faq .faq > div > button,
+  #app[data-page="rating"] .catalog-faq .faq > div.is-open > button { padding: 16px 14px; }
+  #app[data-page="rating"] .catalog-faq .faq > div.is-open > div { padding: 12px 14px; }
 }

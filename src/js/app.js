@@ -497,7 +497,7 @@ function setupCatalog() {
         ? `<td data-label="Выпуск">${item.priceLabel}</td><td data-label="Платёжная система">${item.system}</td><td data-label="Валюта">${item.currency}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Тайный покупатель">${item.tags.includes('fresh') ? '<i class="check-icon">✓</i>' : item.tags.includes('old') ? '<i class="stale-icon">◷</i>' : '—'}</td><td data-label="Промокод">${item.tags.includes('promo') ? '<i class="promo-icon">%</i>' : '—'}</td>`
         : `<td data-label="Комиссия">${item.feeLabel}</td><td data-label="Отзывы">${item.reviews}</td><td data-label="Отчёт">${reportMarkup}</td><td data-label="Статус"><span class="desktop-status">${statusMarkup}</span><span class="mobile-status-badges${mobileBadges ? '' : ' mobile-status-badges--empty'}">${mobileBadges}</span></td><td data-label="Тайный покупатель">${mysteryMarkup}</td><td data-label="Промокод"><span class="desktop-status">${promoMarkup}</span>${mobilePromo}</td>`;
       const actionMarkup = cardsMode ? 'Подробнее' : '<svg class="details-button__icon" aria-hidden="true" viewBox="0 0 14 14"><path d="M2 7h9M8 3.5 11.5 7 8 10.5"/></svg>';
-      return `<tr class="catalog-row catalog-row--${reportState}"><td data-label="Место">${item.rank}</td><td data-label="Сервис"><a href="${destination}">${serviceMarkMarkup}<span><b>${item.name}</b>${namePromoMarkup}<small>${item.domain}</small></span></a></td><td data-label="Оценка">${score(item.rating)}</td>${ratingCells}<td class="row-action"><a class="details-button" href="${destination}" aria-label="Подробнее о ${item.name}">${actionMarkup}</a></td></tr>`;
+      return `<tr class="catalog-row catalog-row--${reportState}" data-row-link="${destination}" tabindex="0" aria-label="Подробнее о ${item.name}"><td data-label="Место">${item.rank}</td><td data-label="Сервис"><a href="${destination}">${serviceMarkMarkup}<span><b>${item.name}</b>${namePromoMarkup}<small>${item.domain}</small></span></a></td><td data-label="Оценка">${score(item.rating)}</td>${ratingCells}<td class="row-action"><a class="details-button" href="${destination}" aria-label="Подробнее о ${item.name}">${actionMarkup}</a></td></tr>`;
     }).join('');
     resolveSitePaths(root);
     root.querySelector('[data-count]').textContent = `Найдено: ${visible.length} ${visible.length === 1 ? 'сервис' : 'сервисов'}`;
@@ -515,6 +515,19 @@ function setupCatalog() {
   sortTrigger.addEventListener('click', () => { const open = sortTrigger.getAttribute('aria-expanded') !== 'true'; sortTrigger.setAttribute('aria-expanded', String(open)); sortOptionsPanel.hidden = !open; });
   root.querySelectorAll('[data-sort-option]').forEach((option) => option.addEventListener('click', () => { state.sort = option.dataset.value; sortLabel.textContent = option.textContent; root.querySelectorAll('[data-sort-option]').forEach((item) => item.setAttribute('aria-selected', String(item === option))); closeSort(); draw(); sortTrigger.focus(); }));
   root.querySelectorAll('[data-table-sort]').forEach((button) => button.addEventListener('click', () => { state.sort = button.dataset.tableSort; sortLabel.textContent = button.textContent.trim(); draw(); }));
+  const openRow = (row) => { window.location.href = sitePath(row.dataset.rowLink); };
+  root.querySelector('[data-rows]').addEventListener('click', (event) => {
+    if (event.target.closest('a, button, input')) return;
+    const row = event.target.closest('[data-row-link]');
+    if (row) openRow(row);
+  });
+  root.querySelector('[data-rows]').addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    const row = event.target.closest('[data-row-link]');
+    if (!row) return;
+    event.preventDefault();
+    openRow(row);
+  });
   document.addEventListener('click', (event) => { if (!root.querySelector('[data-sort-select]').contains(event.target)) closeSort(); });
   sortTrigger.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeSort(); });
   root.querySelectorAll('[data-reset]').forEach((button) => button.addEventListener('click', () => { state.filters = {}; state.query = ''; search.value = ''; clear.hidden = true; syncChips(); draw(); })); syncChips(); draw();
