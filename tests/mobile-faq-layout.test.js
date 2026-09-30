@@ -23,6 +23,12 @@ describe('mobile FAQ layout', () => {
     expect(css).toContain('#app[data-page="rating"] .layout--catalog .catalog-faq .faq > div:hover {\n    background-color: #dedede;\n  }');
   });
 
+  it('keeps the desktop rating FAQ answer inside the question card', () => {
+    const css = readFileSync('src/styles/main.css', 'utf8');
+
+    expect(css).toContain('.layout--catalog .catalog-faq .faq > div.is-open > div {\n    box-sizing: border-box;\n    width: 100%;\n    margin: 0;\n    padding: 14px 16px;');
+  });
+
   it('does not retain a touch hover color after a rating FAQ is closed', () => {
     const css = readFileSync('src/styles/main.css', 'utf8');
 

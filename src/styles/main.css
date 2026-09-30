@@ -5537,9 +5537,9 @@ body small, body label, body legend, body th, body td, body dt, body dd {
   .layout--catalog .catalog-faq .faq > div.is-open { padding: 18px 0 0; }
   .layout--catalog .catalog-faq .faq > div.is-open > button { padding-inline: 16px; }
   .layout--catalog .catalog-faq .faq > div.is-open > div {
-    box-sizing: content-box;
+    box-sizing: border-box;
     width: 100%;
-    margin: 0 -0.5px -0.5px;
+    margin: 0;
     padding: 14px 16px;
     border: solid #e6e6e6;
     border-width: 0 1px 1px;
