@@ -2190,9 +2190,12 @@ form textarea {
 @media(max-width:767px){.header__row{min-height:56px}.logo--stack{font-size:9px;width:85px}.hero{padding:34px 0 35px}.hero h1{font-size:30px}.hero__art{display:none}.hero__metrics{font-size:10px}.top-table{border-radius:0;border-inline:0}.mystery__card{padding:26px 20px}.mystery__card:before{top:16px;bottom:16px}.rating-block .button--wide{height:42px}.rating-block h2,.mystery h2,.about h2,.happening h2{font-size:24px}}
 
 .pen-frame [data-pen-link],.pen-frame [data-pencil-name="Burger"]{cursor:pointer}.pen-frame [data-pen-link]{transition:opacity .15s ease,transform .15s ease}.pen-frame [data-pen-link]:hover{opacity:.78}.pen-frame [data-pen-link]:active{transform:translateY(1px)}.pen-frame [data-pen-link]:focus-visible,.pen-frame [data-pencil-name="Burger"]:focus-visible{outline:2px solid #45A828;outline-offset:3px}
-.pen-frame[data-pencil-name^="Виртуальные карты"] [data-pencil-name^="Chip "] { cursor: pointer; transition: border-color .15s ease, background-color .15s ease, transform .15s ease; }
-.pen-frame[data-pencil-name^="Виртуальные карты"] [data-pencil-name^="Chip "]:hover { outline: 1px solid #45a828 !important; background-color: #f3faef !important; transform: translateY(-1px); }
-.pen-frame[data-pencil-name^="Виртуальные карты"] [data-pencil-name^="Chip "]:focus-visible { outline: 2px solid #45a828 !important; outline-offset: 2px; }
+.pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Chip "],
+.pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name^="Chip "] { cursor: pointer; transition: border-color .15s ease, background-color .15s ease, transform .15s ease; }
+.pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Chip "]:hover,
+.pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name^="Chip "]:hover { outline: 1px solid #45a828 !important; background-color: #f3faef !important; transform: translateY(-1px); }
+.pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name^="Chip "]:focus-visible,
+.pen-frame[data-pencil-name="Виртуальные карты Mobile 375"] [data-pencil-name^="Chip "]:focus-visible { outline: 2px solid #45a828 !important; outline-offset: 2px; }
 .pen-card-search { min-width: 0; width: 100%; border: 0; outline: 0; background: transparent; color: #3a3a3a; font: 400 15px/20px Inter, system-ui, sans-serif; }
 .pen-card-search::placeholder { color: #7a7a7a; opacity: 1; }
 .pen-card-search:focus-visible { outline: 2px solid #45a828; outline-offset: 4px; border-radius: 4px; }
@@ -2237,7 +2240,30 @@ form textarea {
 .pen-frame .pen-faq-item [data-pencil-name="Question Row"][aria-expanded="true"]::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='m4.5 11.25 4.5-4.5 4.5 4.5' stroke='%237A7A7A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
 .pen-frame .pen-faq-item [data-pencil-name="Chevron"] { display: none; }
 .pen-frame .pen-faq-item [data-pencil-name="Answer Wrap"] { box-sizing: border-box !important; width: 100% !important; height: auto !important; min-height: 0; margin: 0 !important; padding: 14px 16px !important; }
+.pen-frame .pen-faq-item [data-pencil-name="Answer"] { min-width: 0; width: 100%; overflow-wrap: anywhere; }
 .pen-frame .pen-faq-item .pen-faq-generated-answer { box-sizing: border-box; display: flex; width: calc(100% + 32px); margin: 0 -16px -18px; padding: 14px 16px; border: 1px solid #e6e6e6; border-top: 0; border-radius: 0 0 8px 8px; background: #f5f5f5; color: #3a3a3a; font: 400 15px/24px Inter, system-ui, sans-serif; }
+/* Review-source chips are outbound links on both service-card variants. */
+.pen-frame[data-pencil-name*="Карточка сервиса"] :is(
+  [data-pencil-name="Chip Яндекс Карты"],
+  [data-pencil-name="Chip Baxov.Net"],
+  [data-pencil-name="Chip Думай.Нет"],
+  [data-pencil-name="Chip Telegram"],
+  [data-pencil-name="Chip Дзен"]
+) {
+  cursor: pointer;
+  transition: outline-color .15s ease, background-color .15s ease, transform .15s ease;
+}
+.pen-frame[data-pencil-name*="Карточка сервиса"] :is(
+  [data-pencil-name="Chip Яндекс Карты"],
+  [data-pencil-name="Chip Baxov.Net"],
+  [data-pencil-name="Chip Думай.Нет"],
+  [data-pencil-name="Chip Telegram"],
+  [data-pencil-name="Chip Дзен"]
+):hover {
+  outline: 1px solid #45a828 !important;
+  background-color: #f3faef !important;
+  transform: translateY(-1px);
+}
 .pen-frame [data-pencil-name="Review Form Section"] [data-pencil-name^="Field "],.pen-frame [data-pencil-name="Review Form Section"] [data-pencil-name="Textarea"] { cursor: text; }
 .pen-review-control { display: block; flex: 1 1 auto; min-width: 0; width: 100%; border: 0; outline: 0; background: transparent; color: #3a3a3a; font: 400 15px/20px Inter, system-ui, sans-serif; }
 .pen-review-control::placeholder { color: #7a7a7a; opacity: 1; }
@@ -6326,6 +6352,16 @@ body small, body label, body legend, body th, body td, body dt, body dd {
 .pen-frame[data-pencil-name^="Отчёт"] [data-pencil-name^="Tab "][role="tab"][aria-selected="true"] {
   background-color: #ffffff !important;
   outline: 1px solid #45a828 !important;
+}
+
+.pen-frame[data-pencil-name^="Отчёт"] [data-pencil-name^="Tab "][role="tab"][aria-selected="false"] {
+  background-color: #f5f5f5 !important;
+  outline: 0 !important;
+}
+
+.pen-frame[data-pencil-name^="Отчёт"] [data-pencil-name^="Tab "][role="tab"][aria-selected="false"] [data-pencil-name="Date"] {
+  color: #3a3a3a !important;
+  font-weight: 500 !important;
 }
 
 .pen-frame[data-pencil-name^="Отчёт"] [data-pencil-name="Link Row"] [data-pencil-name="Link"] {

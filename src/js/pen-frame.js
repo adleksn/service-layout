@@ -414,7 +414,9 @@ function setupPenCardFilterChips(frame) {
   if (searchBox && placeholder) {
     searchInput = document.createElement('input');
     searchInput.className = 'pen-card-search';
-    searchInput.type = 'search';
+    // The Pen layout already provides its own clear icon. A native search
+    // control adds a second browser-drawn one on focus, so use a text input.
+    searchInput.type = 'text';
     searchInput.placeholder = placeholder.textContent.trim();
     searchInput.setAttribute('aria-label', searchInput.placeholder);
     placeholder.replaceWith(searchInput);
@@ -672,7 +674,7 @@ function setupPenFaq(frame) {
       item.append(answer);
     }
     if (!question || !answer) return;
-    if (index === 0) {
+    if (question.querySelector('[data-pencil-name="Question"]')?.textContent.trim() === 'Как часто обновляется рейтинг?') {
       const answerCopy = answer.querySelector('[data-pencil-name="Answer"]') || answer;
       answerCopy.textContent = 'Позиции пересчитываются каждую неделю, а полная контрольная проверка проходит не реже раза в год.';
     }
@@ -695,15 +697,15 @@ function setupPenFaq(frame) {
   });
 }
 
-function setupPenReportTabs(frame, onSelect) {
+function setupPenReportTabs(frame, onSelect, selectedIndex = 0) {
   const tabs = [...frame.querySelectorAll('[data-pencil-name^="Tab "]')]
     .filter((tab) => /^Tab \d{2}\.\d{2}\.\d{4}$/.test(tab.getAttribute('data-pencil-name') || ''));
   if (!tabs.length) return;
   const targets = ['#check-2024', '#check-2023', '#check-2023'];
   tabs.forEach((tab, index) => {
     tab.setAttribute('role', 'tab');
-    tab.setAttribute('aria-selected', String(index === 0));
-    tab.tabIndex = index === 0 ? 0 : -1;
+    tab.setAttribute('aria-selected', String(index === selectedIndex));
+    tab.tabIndex = index === selectedIndex ? 0 : -1;
     const activate = () => {
       tabs.forEach((other, otherIndex) => {
         const selected = otherIndex === index;
@@ -785,7 +787,7 @@ function setupPenReportState(frame, stateSource, initialHash) {
         });
       });
     }
-    if (ready) setupPenReportTabs(mainColumn, show);
+    if (ready) setupPenReportTabs(mainColumn, show, selectedIndex);
     ready = true;
   };
   show(initialHash);
@@ -894,7 +896,7 @@ export function enhanceInteractions(frame, page, { onReportTabChange } = {}) {
   if (page === 'reports') {
     setupPenReportPagination(frame);
   }
-  if (page === 'report') setupPenReportTabs(frame, onReportTabChange);
+  if (page === 'report') setupPenReportTabs(frame, onReportTabChange, window.location.hash === '#check-2023' ? 1 : 0);
   if (page === 'report') {
     frame.querySelectorAll('[data-pencil-name="Link Row"] [data-pencil-name="Link"]').forEach((node) => makeInteractive(node, '/methodology.html'));
   }

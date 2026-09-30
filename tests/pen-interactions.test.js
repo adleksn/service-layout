@@ -549,7 +549,7 @@ describe('unmapped Pen controls', () => {
     vi.unstubAllGlobals();
   });
 
-  it('turns virtual-card external service references into real outbound links', () => {
+  it('turns service-card external service references into real outbound links', () => {
     const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/virtual-card.html' });
     const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
       .find((node) => node.getAttribute('data-pencil-name') === 'Виртуальные карты — Карточка сервиса Desktop 1440')
@@ -563,6 +563,26 @@ describe('unmapped Pen controls', () => {
     expect(frame.querySelector('[data-pencil-name="Domain Link"]')?.dataset.penLink).toBe('https://pay-saas.ru/');
     expect(frame.querySelector('[data-pencil-name="Chip Яндекс Карты"]')?.dataset.penLink).toBe('https://yandex.ru/profile/42393192868');
     expect(frame.querySelector('[data-pencil-name="Chip Дзен"]')?.dataset.penLink).toContain('https://dzen.ru/media/');
+    vi.unstubAllGlobals();
+  });
+
+  it('keeps each rating FAQ answer paired with its own question', () => {
+    const dom = new JSDOM(readFileSync('public/reference/pen-source.html', 'utf8'), { url: 'http://localhost/rating.html' });
+    vi.stubGlobal('window', dom.window);
+    vi.stubGlobal('document', dom.window.document);
+    vi.stubGlobal('location', dom.window.location);
+    const frame = [...dom.window.document.querySelectorAll('[data-pencil-name]')]
+      .find((node) => node.getAttribute('data-pencil-name') === 'Рейтинг Desktop 1440')
+      .cloneNode(true);
+
+    enhanceInteractions(frame, 'rating');
+    const questions = frame.querySelectorAll('[data-pencil-name="Question Row"]');
+    questions[1].dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+
+    const openedItem = questions[1].closest('[data-pencil-name^="FAQ Item"]');
+    expect(openedItem?.textContent).toContain('Платное размещение не влияет на оценку.');
+    expect(questions[0].getAttribute('aria-expanded')).toBe('false');
+    expect(questions[1].getAttribute('aria-expanded')).toBe('true');
     vi.unstubAllGlobals();
   });
 
