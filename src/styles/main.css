@@ -2221,6 +2221,16 @@ form textarea {
   width: 64px !important;
   padding-right: 16px;
 }
+
+/* Keep the row dividers from the supplied desktop tables after normalising
+   their exported content-box widths. */
+@media (min-width: 768px) {
+  .pen-frame[data-pencil-name="Главная Desktop 1440"] [data-pencil-name="Table"] > [data-pencil-name^="Row "],
+  .pen-frame[data-pencil-name="Виртуальные карты Desktop 1440"] [data-pencil-name="Table"] > [data-pencil-name^="Row "] {
+    border-bottom: 1px solid #e6e6e6 !important;
+  }
+}
+
 .pen-sort-select { position: relative !important; cursor: pointer; transition: border-color .15s ease, background-color .15s ease, box-shadow .15s ease; }
 .pen-sort-select:hover { outline: 1px solid #45a828 !important; background-color: #f3faef !important; }
 .pen-sort-select:focus-visible { outline: 2px solid #45a828 !important; outline-offset: 2px; }
